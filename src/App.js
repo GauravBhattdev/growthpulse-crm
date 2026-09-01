@@ -1,24 +1,179 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate
+} from "react-router-dom";
+
+// Pages
+import Dashboard from "./pages/Dashboard/Dashboard";
+import Teams from "./pages/Teams/Teams";
+import TeamMember from "./pages/TeamMember/TeamMember";
+import Leads from "./pages/Leads/Leads";
+import Invoice from "./pages/Invoice/Invoice";
+import Billing from "./pages/Billing/Billing";
+import SupportTickets from "./pages/SupportTickets/SupportTickets";
+import Calling from "./pages/Calling/Calling";
+import Organisation from "./pages/Organisation/Organisation";
+import Settings from "./pages/Settings/Settings";
+import HelpSupport from "./pages/HelpSupport/HelpSupport";
+// import Hello from "./Hello";
+
+// Layout
+import MainLayout from "./components/MainLayout/MainLayout";
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+
+      <Routes>
+
+        {/* ================= DEFAULT ================= */}
+
+        <Route
+          path="/"
+          element={
+            <Navigate
+              to="/dashboard"
+              replace
+            />
+          }
+        />
+
+
+        {/* ================= DASHBOARD ================= */}
+
+        <Route
+          path="/dashboard"
+          element={
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= TEAMS ================= */}
+
+        <Route
+          path="/teams"
+          element={
+            <MainLayout>
+              <Teams />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= TEAM MEMBERS ================= */}
+
+        <Route
+          path="/team-member"
+          element={
+            <MainLayout>
+              <TeamMember />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= LEADS ================= */}
+
+        <Route
+          path="/leads"
+          element={
+            <MainLayout>
+              <Leads />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= INVOICES ================= */}
+
+        <Route
+          path="/invoice"
+          element={
+            <MainLayout>
+              <Invoice />
+            </MainLayout>
+          }
+        />
+
+        {/* ================= Billing ================= */}
+
+        <Route
+          path="/billing"
+          element={
+            <MainLayout>
+              <Billing />
+            </MainLayout>
+          }
+        />
+
+        {/* ================= SupportTickets ================= */}
+
+
+        <Route
+          path="/support-tickets"
+          element={
+            <MainLayout>
+              <SupportTickets />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= Calling ================= */}
+
+        <Route
+          path="/calling"
+          element={
+            <MainLayout>
+              <Calling />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= Organisation ================= */}
+
+        <Route
+          path="/organisation"
+          element={
+            <MainLayout>
+              <Organisation />
+            </MainLayout>
+          }
+        />
+
+        {/* ================= Settings ================= */}
+        <Route
+          path="/settings"
+          element={
+            <MainLayout>
+              <Settings />
+            </MainLayout>
+          }
+        />
+        {/* ================= HelpSupport ================= */}
+
+        <Route
+          path="/help-support"
+          element={
+            <MainLayout>
+              <HelpSupport />
+            </MainLayout>
+          }
+        />
+
+
+      </Routes>
+
+    </BrowserRouter>
   );
 }
 
