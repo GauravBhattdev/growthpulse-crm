@@ -78,7 +78,7 @@ function TeamMember() {
 
     return (
 
-        <div className="w-full min-h-[calc(100vh-66px)] bg-white">
+        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
 
             {/* =================================
                 PAGE HEADER

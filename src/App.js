@@ -13,23 +13,28 @@ import Teams from "./pages/Teams/Teams";
 import TeamMember from "./pages/TeamMember/TeamMember";
 import Leads from "./pages/Leads/Leads";
 import Invoice from "./pages/Invoice/Invoice";
+import CreateInvoice from "./pages/createInvoice/createInvoice";
 import Billing from "./pages/Billing/Billing";
 import SupportTickets from "./pages/SupportTickets/SupportTickets";
 import Calling from "./pages/Calling/Calling";
 import Organisation from "./pages/Organisation/Organisation";
 import Settings from "./pages/Settings/Settings";
 import HelpSupport from "./pages/HelpSupport/HelpSupport";
-// import Hello from "./Hello";
+import CreateLead from "./pages/CreateLead/createLead";
+import NotFound from "./pages/NotFound/NotFound";
 
 // Layout
 import MainLayout from "./components/MainLayout/MainLayout";
 
 
 function App() {
+
   return (
+
     <BrowserRouter>
 
       <Routes>
+
 
         {/* ================= DEFAULT ================= */}
 
@@ -103,7 +108,20 @@ function App() {
           }
         />
 
-        {/* ================= Billing ================= */}
+
+        {/* ================= CREATE INVOICE ================= */}
+
+        <Route
+          path="/create-invoice"
+          element={
+            <MainLayout>
+              <CreateInvoice />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= BILLING ================= */}
 
         <Route
           path="/billing"
@@ -114,8 +132,8 @@ function App() {
           }
         />
 
-        {/* ================= SupportTickets ================= */}
 
+        {/* ================= SUPPORT TICKETS ================= */}
 
         <Route
           path="/support-tickets"
@@ -127,7 +145,7 @@ function App() {
         />
 
 
-        {/* ================= Calling ================= */}
+        {/* ================= CALLING ================= */}
 
         <Route
           path="/calling"
@@ -139,7 +157,7 @@ function App() {
         />
 
 
-        {/* ================= Organisation ================= */}
+        {/* ================= ORGANISATION ================= */}
 
         <Route
           path="/organisation"
@@ -150,7 +168,9 @@ function App() {
           }
         />
 
-        {/* ================= Settings ================= */}
+
+        {/* ================= SETTINGS ================= */}
+
         <Route
           path="/settings"
           element={
@@ -159,7 +179,9 @@ function App() {
             </MainLayout>
           }
         />
-        {/* ================= HelpSupport ================= */}
+
+
+        {/* ================= HELP SUPPORT ================= */}
 
         <Route
           path="/help-support"
@@ -171,10 +193,35 @@ function App() {
         />
 
 
+        {/* ================= CREATE LEAD ================= */}
+
+        <Route
+          path="/create-lead"
+          element={
+            <MainLayout>
+              <CreateLead />
+            </MainLayout>
+          }
+        />
+
+
+        {/* ================= 404 PAGE ================= */}
+
+        <Route
+          path="*"
+          element={
+            <NotFound />
+          }
+        />
+
+
       </Routes>
 
     </BrowserRouter>
+
   );
+
 }
+
 
 export default App;

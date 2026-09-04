@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     Users,
@@ -16,8 +16,51 @@ import RevenueChart from "../../components/RevenueChart/RevenueChart";
 import RecentLeads from "../../components/RecentLeads/RecentLeads";
 import RecentActivity from "../../components/RecentActivity/RecentActivity";
 
+import Loader from "../../components/Loader/Loader";
+
+
 function Dashboard() {
+
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+
+            setLoading(false);
+
+        }, 1500);
+
+
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    if (loading) {
+
+        return (
+
+            <div className="
+                min-h-screen
+                bg-[#120d20]
+                flex
+                items-center
+                justify-center
+            ">
+
+                <Loader text="Loading dashboard..." />
+
+            </div>
+
+        );
+
+    }
+
+
     return (
+
         <div className="px-2 py-[18px] bg-[#120d20] min-h-screen">
 
             {/* Dashboard Heading */}
@@ -133,7 +176,9 @@ function Dashboard() {
             </div>
 
         </div>
+
     );
+
 }
 
 export default Dashboard;

@@ -1,74 +1,34 @@
 import React from "react";
+
 import {
-  Search,
   Bell,
   UserRound,
   ChevronDown,
   Plus
 } from "lucide-react";
 
+
 function Header() {
+
   return (
+
     <header
-      className="
-        min-h-[66px]
-        bg-[#171126]
-        flex
-        items-center
-        justify-between
-        px-3
-        sm:px-4
-        md:px-5
-        box-border
-        gap-3
-      "
-    >
-
-      {/* Search Bar */}
-
-      <div
-        className="
-          w-[150px]
-          sm:w-[190px]
-          md:w-[238px]
-          h-[38px]
-          sm:h-[43px]
-          bg-[#4b397b]
-          rounded
-          flex
-          items-center
-          px-2
-          sm:px-[14px]
-          text-white
-          shrink-0
-        "
-      >
-
-        <Search
-          size={18}
-          className="sm:w-5 sm:h-5"
-        />
-
-        <input
-          type="text"
-          placeholder="Search"
-          className="
-            w-full
-            border-none
-            outline-none
-            bg-transparent
-            text-white
-            text-[13px]
-            sm:text-[15px]
-            md:text-[17px]
-            ml-2
-            sm:ml-[10px]
-            placeholder:text-[#ded9e8]
-          "
-        />
-
-      </div>
-
+  className="
+    min-h-[66px]
+    bg-[#171126]
+    flex
+    items-center
+    justify-between
+    px-3
+    sm:px-4
+    md:px-5
+    box-border
+    gap-3
+    sticky
+    top-0
+    z-50
+  "
+>
 
       {/* Right Side */}
 
@@ -81,6 +41,7 @@ function Header() {
           md:gap-6
           text-white
           min-w-0
+          ml-auto
         "
       >
 
@@ -88,7 +49,12 @@ function Header() {
 
         <Bell
           size={20}
-          className="cursor-pointer shrink-0 sm:w-[23px] sm:h-[23px]"
+          className="
+            cursor-pointer
+            shrink-0
+            sm:w-[23px]
+            sm:h-[23px]
+          "
         />
 
 
@@ -193,9 +159,14 @@ function Header() {
           </div>
 
 
+          {/* Admin Name */}
+
           <span className="hidden sm:inline">
             Admin
           </span>
+
+
+          {/* Dropdown */}
 
           <ChevronDown
             size={17}
@@ -207,7 +178,10 @@ function Header() {
       </div>
 
     </header>
+
   );
+
 }
+
 
 export default Header;
