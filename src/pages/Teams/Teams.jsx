@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -10,6 +10,8 @@ import {
     MoreVertical,
     Plus
 } from "lucide-react";
+
+import CreateTeam from "../../components/CreateTeam/CreateTeam";
 
 
 const teams = [
@@ -65,6 +67,8 @@ function Teams() {
 
     const navigate = useNavigate();
 
+    const [showCreateTeam, setShowCreateTeam] = useState(false);
+
 
     return (
 
@@ -74,16 +78,18 @@ function Teams() {
                 PAGE HEADER
             ========================== */}
 
-            <div className="
-                flex
-                flex-col
-                sm:flex-row
-                items-start
-                sm:items-center
-                justify-between
-                gap-4
-                pt-3
-            ">
+            <div
+                className="
+                    flex
+                    flex-col
+                    sm:flex-row
+                    items-start
+                    sm:items-center
+                    justify-between
+                    gap-4
+                    pt-3
+                "
+            >
 
                 <div>
 
@@ -101,6 +107,8 @@ function Teams() {
                 {/* Create Team */}
 
                 <button
+                    type="button"
+                    onClick={() => setShowCreateTeam(true)}
                     className="
                         flex
                         items-center
@@ -118,6 +126,7 @@ function Teams() {
                         duration-200
                         w-full
                         sm:w-auto
+                        cursor-pointer
                     "
                 >
 
@@ -137,6 +146,7 @@ function Teams() {
             <div className="mt-6">
 
                 <button
+                    type="button"
                     className="
                         flex
                         items-center
@@ -213,12 +223,14 @@ function Teams() {
 
                             {/* Team Information */}
 
-                            <div className="
-                                flex
-                                items-center
-                                gap-4
-                                min-w-0
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-4
+                                    min-w-0
+                                "
+                            >
 
                                 {/* Icon */}
 
@@ -247,12 +259,14 @@ function Teams() {
 
                                 <div className="min-w-0">
 
-                                    <h2 className="
-                                        text-[18px]
-                                        font-medium
-                                        text-[#222]
-                                        break-words
-                                    ">
+                                    <h2
+                                        className="
+                                            text-[18px]
+                                            font-medium
+                                            text-[#222]
+                                            break-words
+                                        "
+                                    >
                                         {team.name}
                                     </h2>
 
@@ -271,23 +285,90 @@ function Teams() {
 
                                 <div className="flex -space-x-1">
 
-                                    <div className="w-7 h-7 rounded-full bg-[#e8b08c] border-2 border-white flex items-center justify-center text-[8px]">
+                                    <div
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-[#e8b08c]
+                                            border-2
+                                            border-white
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-[8px]
+                                        "
+                                    >
                                         A
                                     </div>
 
-                                    <div className="w-7 h-7 rounded-full bg-[#d8b090] border-2 border-white flex items-center justify-center text-[8px]">
+                                    <div
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-[#d8b090]
+                                            border-2
+                                            border-white
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-[8px]
+                                        "
+                                    >
                                         R
                                     </div>
 
-                                    <div className="w-7 h-7 rounded-full bg-[#8d8d8d] border-2 border-white flex items-center justify-center text-[8px] text-white">
+                                    <div
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-[#8d8d8d]
+                                            border-2
+                                            border-white
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-[8px]
+                                            text-white
+                                        "
+                                    >
                                         K
                                     </div>
 
-                                    <div className="w-7 h-7 rounded-full bg-[#e6b4c0] border-2 border-white flex items-center justify-center text-[8px]">
+                                    <div
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-[#e6b4c0]
+                                            border-2
+                                            border-white
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-[8px]
+                                        "
+                                    >
                                         P
                                     </div>
 
-                                    <div className="w-7 h-7 rounded-full bg-[#777] border-2 border-white flex items-center justify-center text-[8px] text-white">
+                                    <div
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-[#777]
+                                            border-2
+                                            border-white
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-[8px]
+                                            text-white
+                                        "
+                                    >
                                         N
                                     </div>
 
@@ -322,14 +403,16 @@ function Teams() {
 
                             {/* Projects and Performance */}
 
-                            <div className="
-                                flex
-                                flex-wrap
-                                items-center
-                                gap-y-2
-                                mt-3
-                                text-[12px]
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    flex-wrap
+                                    items-center
+                                    gap-y-2
+                                    mt-3
+                                    text-[12px]
+                                "
+                            >
 
                                 <span className="text-[18px] text-[#333]">
                                     {team.activeProjects}
@@ -340,17 +423,25 @@ function Teams() {
                                 </span>
 
 
-                                <span className="
-                                    mx-3
-                                    text-gray-300
-                                    hidden
-                                    sm:inline
-                                ">
+                                <span
+                                    className="
+                                        mx-3
+                                        text-gray-300
+                                        hidden
+                                        sm:inline
+                                    "
+                                >
                                     |
                                 </span>
 
 
-                                <span className="text-[16px] text-green-600 font-medium">
+                                <span
+                                    className="
+                                        text-[16px]
+                                        text-green-600
+                                        font-medium
+                                    "
+                                >
                                     {team.performance}%
                                 </span>
 
@@ -363,29 +454,34 @@ function Teams() {
 
                             {/* Bottom Buttons */}
 
-                            <div className="
-                                flex
-                                flex-col
-                                sm:flex-row
-                                sm:items-center
-                                sm:justify-between
-                                gap-3
-                                mt-4
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    flex-col
+                                    sm:flex-row
+                                    sm:items-center
+                                    sm:justify-between
+                                    gap-3
+                                    mt-4
+                                "
+                            >
 
                                 {/* View Team and Team Members */}
 
-                                <div className="
-                                    flex
-                                    items-center
-                                    gap-2
-                                    w-full
-                                    sm:w-auto
-                                ">
+                                <div
+                                    className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                        w-full
+                                        sm:w-auto
+                                    "
+                                >
 
                                     {/* View Team */}
 
                                     <button
+                                        type="button"
                                         className="
                                             border
                                             border-gray-300
@@ -409,6 +505,7 @@ function Teams() {
                                     {/* Team Members */}
 
                                     <button
+                                        type="button"
                                         onClick={() => navigate("/team-member")}
                                         className="
                                             border
@@ -435,6 +532,7 @@ function Teams() {
                                 {/* More Options */}
 
                                 <button
+                                    type="button"
                                     className="
                                         text-gray-700
                                         hover:text-black
@@ -458,9 +556,23 @@ function Teams() {
 
             </div>
 
+
+            {/* =========================
+                CREATE TEAM POPUP
+            ========================== */}
+
+            {showCreateTeam && (
+
+                <CreateTeam
+                    onClose={() => setShowCreateTeam(false)}
+                />
+
+            )}
+
         </div>
 
     );
+
 }
 
 

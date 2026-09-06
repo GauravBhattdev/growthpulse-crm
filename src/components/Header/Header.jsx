@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
   Bell,
@@ -7,28 +7,33 @@ import {
   Plus
 } from "lucide-react";
 
+import CreditsPopup from "../CreditsPopup/CreditsPopup";
+import TopUpCredits from "../TopUpCredits/TopUpCredits";
+
 
 function Header() {
+
+  const [showPopup, setShowPopup] = useState(null);
 
   return (
 
     <header
-  className="
-    min-h-[66px]
-    bg-[#171126]
-    flex
-    items-center
-    justify-between
-    px-3
-    sm:px-4
-    md:px-5
-    box-border
-    gap-3
-    sticky
-    top-0
-    z-50
-  "
->
+      className="
+        min-h-[66px]
+        bg-[#171126]
+        flex
+        items-center
+        justify-between
+        px-3
+        sm:px-4
+        md:px-5
+        box-border
+        gap-3
+        sticky
+        top-0
+        z-50
+      "
+    >
 
       {/* Right Side */}
 
@@ -61,6 +66,8 @@ function Header() {
         {/* Add Credits */}
 
         <button
+          type="button"
+          onClick={() => setShowPopup("topup")}
           className="
             flex
             items-center
@@ -82,6 +89,7 @@ function Header() {
             hover:bg-[#5a468d]
             transition
             whitespace-nowrap
+            cursor-pointer
           "
         >
 
@@ -97,14 +105,20 @@ function Header() {
         </button>
 
 
-        {/* Credits */}
+        {/* Credits Button */}
 
-        <div
+        <button
+          type="button"
+          onClick={() => setShowPopup("credits")}
           className="
             text-[11px]
             sm:text-sm
             font-medium
             whitespace-nowrap
+            text-white
+            hover:text-purple-300
+            transition
+            cursor-pointer
           "
         >
 
@@ -114,7 +128,7 @@ function Header() {
             234
           </span>
 
-        </div>
+        </button>
 
 
         {/* Admin Profile */}
@@ -176,6 +190,24 @@ function Header() {
         </div>
 
       </div>
+
+
+      {/* Current Credits Popup */}
+
+      {showPopup === "credits" && (
+        <CreditsPopup
+          onClose={() => setShowPopup(null)}
+        />
+      )}
+
+
+      {/* Add Credits Popup */}
+
+      {showPopup === "topup" && (
+        <TopUpCredits
+          onClose={() => setShowPopup(null)}
+        />
+      )}
 
     </header>
 

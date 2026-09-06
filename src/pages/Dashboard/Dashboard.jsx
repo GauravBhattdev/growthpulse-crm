@@ -148,7 +148,7 @@ function Dashboard() {
                     <LeadsBySource />
                 </DashboardBox>
 
-                <DashboardBox title="RevenueChart">
+                <DashboardBox title="Revenue Overview">
                     <RevenueChart />
                 </DashboardBox>
 

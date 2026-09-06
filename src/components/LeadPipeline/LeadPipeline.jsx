@@ -1,42 +1,36 @@
 import React from "react";
 
-import {
-    BarChart,
-    Bar,
-    XAxis,
-    YAxis,
-    Tooltip,
-    ResponsiveContainer,
-    Cell,
-    LabelList
-} from "recharts";
-
 
 const data = [
     {
         stage: "New",
         leads: 320,
-        color: "#8B3DFF"
+        color: "#8B3DFF",
+        width: "100%"
     },
     {
         stage: "Contacted",
         leads: 280,
-        color: "#0099FF"
+        color: "#0099FF",
+        width: "88%"
     },
     {
         stage: "Qualified",
         leads: 384,
-        color: "#2DBB55"
+        color: "#2DBB55",
+        width: "76%"
     },
     {
         stage: "Proposal",
         leads: 264,
-        color: "#FF7043"
+        color: "#FF7043",
+        width: "64%"
     },
     {
         stage: "Closed",
         leads: 200,
-        color: "#276B35"
+        color: "#276B35",
+        width: "52%"
     }
 ];
 
@@ -47,105 +41,92 @@ function LeadPipeline() {
 
         <div className="w-full min-w-0">
 
-            <div className="
-                w-full
-                min-w-0
-                h-[235px]
-                sm:h-[235px]
-            ">
+            <div
+                className="
+                    w-full
+                    h-[235px]
+                    flex
+                    items-center
+                    justify-center
+                "
+            >
 
-                <ResponsiveContainer
-                    width="100%"
-                    height="100%"
+                <div
+                    className="
+                        w-full
+                        max-w-[330px]
+                        flex
+                        flex-col
+                        items-center
+                        gap-[8px]
+                    "
                 >
 
-                    <BarChart
-                        data={data}
-                        layout="vertical"
-                        margin={{
-                            top: 5,
-                            right: 20,
-                            left: 10,
-                            bottom: 5
-                        }}
-                    >
+                    {data.map((item) => (
 
-                        {/* X Axis */}
-
-                        <XAxis
-                            type="number"
-                            hide
-                        />
-
-
-                        {/* Stage Names */}
-
-                        <YAxis
-                            type="category"
-                            dataKey="stage"
-                            width={75}
-                            axisLine={false}
-                            tickLine={false}
-                            tick={{
-                                fill: "#FFFFFF",
-                                fontSize: 11
-                            }}
-                        />
-
-
-                        {/* Tooltip */}
-
-                        <Tooltip
-                            contentStyle={{
-                                backgroundColor: "#292438",
-                                border: "1px solid #514b62",
-                                borderRadius: "6px",
-                                color: "#FFFFFF"
-                            }}
-                        />
-
-
-                        {/* Bars */}
-
-                        <Bar
-                            dataKey="leads"
-                            barSize={22}
-                            radius={[0, 5, 5, 0]}
+                        <div
+                            key={item.stage}
+                            className="
+                                w-full
+                                flex
+                                items-center
+                                justify-center
+                            "
                         >
 
-                            {/* Numbers */}
+                            {/* Funnel Box */}
 
-                            <LabelList
-                                dataKey="leads"
-                                position="right"
-                                fill="#FFFFFF"
-                                fontSize={11}
-                                fontWeight={600}
-                            />
+                            <div
+                                className="
+                                    h-[34px]
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-white
+                                    text-[12px]
+                                    font-semibold
+                                    shrink-0
+                                "
+                                style={{
+                                    width: item.width,
+                                    backgroundColor: item.color,
+                                    clipPath:
+                                        "polygon(0 0, 100% 0, 92% 100%, 8% 100%)"
+                                }}
+                            >
+                                {item.stage}
+                            </div>
 
 
-                            {/* Different Color For Each Stage */}
+                            {/* Lead Number */}
 
-                            {data.map((entry) => (
+                            <span
+                                className="
+                                    w-[42px]
+                                    ml-3
+                                    text-[12px]
+                                    font-medium
+                                    shrink-0
+                                "
+                                style={{
+                                    color: item.color
+                                }}
+                            >
+                                {item.leads}
+                            </span>
 
-                                <Cell
-                                    key={entry.stage}
-                                    fill={entry.color}
-                                />
+                        </div>
 
-                            ))}
+                    ))}
 
-                        </Bar>
-
-                    </BarChart>
-
-                </ResponsiveContainer>
+                </div>
 
             </div>
 
         </div>
 
     );
+
 }
 
 
