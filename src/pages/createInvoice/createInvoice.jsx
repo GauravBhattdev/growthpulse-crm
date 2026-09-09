@@ -242,7 +242,16 @@ function CreateInvoice() {
 
     return (
 
-        <div className="w-full bg-white min-h-screen px-4 sm:px-6 lg:px-8 py-5 sm:py-7">
+        <div className="
+            w-full
+            bg-background
+            min-h-screen
+            px-4
+            sm:px-6
+            lg:px-8
+            py-5
+            sm:py-7
+        ">
 
 
             {/* ================================================= */}
@@ -264,8 +273,8 @@ function CreateInvoice() {
                             h-9
                             rounded-md
                             border
-                            border-gray-300
-                            text-gray-600
+                            border-borderLight
+                            text-textSecondary
                             hover:bg-gray-100
                             transition
                             disabled:opacity-50
@@ -280,20 +289,31 @@ function CreateInvoice() {
 
                     <div>
 
-                        <h1 className="text-2xl sm:text-[27px] font-semibold text-[#111]">
+                        <h1 className="
+                            text-2xl
+                            sm:text-[27px]
+                            font-semibold
+                            text-textPrimary
+                        ">
                             Create Invoice
                         </h1>
 
 
                         {/* Breadcrumb */}
 
-                        <div className="flex items-center gap-2 mt-1 text-sm">
+                        <div className="
+                            flex
+                            items-center
+                            gap-2
+                            mt-1
+                            text-sm
+                        ">
 
                             <button
                                 onClick={() => navigate("/invoice")}
                                 disabled={loadingAction !== null}
                                 className="
-                                    text-[#8b3dff]
+                                    text-primary
                                     hover:underline
                                     disabled:opacity-50
                                     disabled:cursor-not-allowed
@@ -302,11 +322,11 @@ function CreateInvoice() {
                                 Invoice
                             </button>
 
-                            <span className="text-gray-500">
+                            <span className="text-textSecondary">
                                 ›
                             </span>
 
-                            <span className="text-gray-500">
+                            <span className="text-textSecondary">
                                 Create Invoice
                             </span>
 
@@ -326,7 +346,7 @@ function CreateInvoice() {
             <div
                 className="
                     border
-                    border-gray-400
+                    border-borderLight
                     rounded-xl
                     p-4
                     sm:p-5
@@ -356,19 +376,35 @@ function CreateInvoice() {
                         {/* INVOICE DETAILS */}
                         {/* ================================================= */}
 
-                        <h2 className="text-xl font-semibold text-[#8b3dff] mb-5">
+                        <h2 className="
+                            text-xl
+                            font-semibold
+                            text-primary
+                            mb-5
+                        ">
                             Invoice Details
                         </h2>
 
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div className="
+                            grid
+                            grid-cols-1
+                            md:grid-cols-3
+                            gap-5
+                        ">
 
 
                             {/* First Name */}
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     First Name
                                 </label>
 
@@ -383,13 +419,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         transition
                                         disabled:bg-gray-100
                                     "
@@ -402,7 +438,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Last Name
                                 </label>
 
@@ -417,13 +459,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         transition
                                         disabled:bg-gray-100
                                     "
@@ -436,7 +478,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Email
                                 </label>
 
@@ -451,13 +499,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         transition
                                         disabled:bg-gray-100
                                     "
@@ -470,7 +518,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Phone Number
                                 </label>
 
@@ -485,13 +539,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         transition
                                         disabled:bg-gray-100
                                     "
@@ -506,19 +560,36 @@ function CreateInvoice() {
                         {/* CLIENT DETAILS */}
                         {/* ================================================= */}
 
-                        <h2 className="text-xl font-semibold text-[#8b3dff] mt-8 mb-5">
+                        <h2 className="
+                            text-xl
+                            font-semibold
+                            text-primary
+                            mt-8
+                            mb-5
+                        ">
                             Client Details
                         </h2>
 
 
-                        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+                        <div className="
+                            grid
+                            grid-cols-1
+                            md:grid-cols-3
+                            gap-5
+                        ">
 
 
                             {/* First Name */}
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     First Name
                                 </label>
 
@@ -533,13 +604,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         disabled:bg-gray-100
                                     "
                                 />
@@ -551,7 +622,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Last Name
                                 </label>
 
@@ -566,13 +643,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         disabled:bg-gray-100
                                     "
                                 />
@@ -584,7 +661,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Email
                                 </label>
 
@@ -599,13 +682,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         disabled:bg-gray-100
                                     "
                                 />
@@ -617,7 +700,13 @@ function CreateInvoice() {
 
                             <div>
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Phone Number
                                 </label>
 
@@ -632,13 +721,13 @@ function CreateInvoice() {
                                         w-full
                                         h-10
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         px-3
                                         text-xs
                                         outline-none
-                                        focus:border-[#8b3dff]
+                                        focus:border-primary
                                         focus:ring-1
-                                        focus:ring-[#8b3dff]
+                                        focus:ring-primary
                                         disabled:bg-gray-100
                                     "
                                 />
@@ -652,14 +741,26 @@ function CreateInvoice() {
                         {/* INVOICE ITEMS */}
                         {/* ================================================= */}
 
-                        <h2 className="text-xl font-semibold text-[#8b3dff] mt-8 mb-4">
+                        <h2 className="
+                            text-xl
+                            font-semibold
+                            text-primary
+                            mt-8
+                            mb-4
+                        ">
                             Invoice Items
                         </h2>
 
 
                         <div className="w-full overflow-x-auto">
 
-                            <div className="min-w-[760px] border border-gray-300 rounded-md overflow-hidden">
+                            <div className="
+                                min-w-[760px]
+                                border
+                                border-borderLight
+                                rounded-md
+                                overflow-hidden
+                            ">
 
                                 <div
                                     className="
@@ -667,27 +768,57 @@ function CreateInvoice() {
                                         grid-cols-[2fr_1fr_1.2fr_1fr_1fr_45px]
                                         bg-purple-100
                                         border-b
-                                        border-gray-300
+                                        border-borderLight
                                     "
                                 >
 
-                                    <div className="px-4 py-3 text-xs font-medium text-gray-800">
+                                    <div className="
+                                        px-4
+                                        py-3
+                                        text-xs
+                                        font-medium
+                                        text-textPrimary
+                                    ">
                                         Item/Description
                                     </div>
 
-                                    <div className="px-3 py-3 text-xs font-medium text-gray-800">
+                                    <div className="
+                                        px-3
+                                        py-3
+                                        text-xs
+                                        font-medium
+                                        text-textPrimary
+                                    ">
                                         Quantity
                                     </div>
 
-                                    <div className="px-3 py-3 text-xs font-medium text-gray-800">
+                                    <div className="
+                                        px-3
+                                        py-3
+                                        text-xs
+                                        font-medium
+                                        text-textPrimary
+                                    ">
                                         Unit Price (₹)
                                     </div>
 
-                                    <div className="px-3 py-3 text-xs font-medium text-gray-800">
+                                    <div className="
+                                        px-3
+                                        py-3
+                                        text-xs
+                                        font-medium
+                                        text-textPrimary
+                                    ">
                                         Tax (%)
                                     </div>
 
-                                    <div className="px-3 py-3 text-xs font-medium text-gray-800">
+                                    <div className="
+                                        px-3
+                                        py-3
+                                        text-xs
+                                        font-medium
+                                        text-textPrimary
+                                    ">
                                         Amount (₹)
                                     </div>
 
@@ -734,11 +865,11 @@ function CreateInvoice() {
                                                         w-full
                                                         h-9
                                                         border
-                                                        border-gray-300
+                                                        border-borderLight
                                                         px-2
                                                         text-xs
                                                         outline-none
-                                                        focus:border-[#8b3dff]
+                                                        focus:border-primary
                                                         disabled:bg-gray-100
                                                     "
                                                 />
@@ -764,11 +895,11 @@ function CreateInvoice() {
                                                         w-full
                                                         h-9
                                                         border
-                                                        border-gray-300
+                                                        border-borderLight
                                                         px-2
                                                         text-xs
                                                         outline-none
-                                                        focus:border-[#8b3dff]
+                                                        focus:border-primary
                                                         disabled:bg-gray-100
                                                     "
                                                 />
@@ -794,11 +925,11 @@ function CreateInvoice() {
                                                         w-full
                                                         h-9
                                                         border
-                                                        border-gray-300
+                                                        border-borderLight
                                                         px-2
                                                         text-xs
                                                         outline-none
-                                                        focus:border-[#8b3dff]
+                                                        focus:border-primary
                                                         disabled:bg-gray-100
                                                     "
                                                 />
@@ -822,12 +953,12 @@ function CreateInvoice() {
                                                         w-full
                                                         h-9
                                                         border
-                                                        border-gray-300
+                                                        border-borderLight
                                                         px-2
                                                         text-xs
                                                         outline-none
-                                                        bg-white
-                                                        focus:border-[#8b3dff]
+                                                        bg-background
+                                                        focus:border-primary
                                                         disabled:bg-gray-100
                                                     "
                                                 >
@@ -857,7 +988,11 @@ function CreateInvoice() {
                                             </div>
 
 
-                                            <div className="px-3 text-xs text-gray-500">
+                                            <div className="
+                                                px-3
+                                                text-xs
+                                                text-textSecondary
+                                            ">
 
                                                 ₹ {amount.toFixed(2)}
 
@@ -914,8 +1049,8 @@ function CreateInvoice() {
                                 px-3
                                 py-1.5
                                 border
-                                border-[#8b3dff]
-                                text-[#8b3dff]
+                                border-primary
+                                text-primary
                                 text-xs
                                 rounded-sm
                                 hover:bg-purple-50
@@ -939,18 +1074,36 @@ function CreateInvoice() {
                     {/* RIGHT SIDE */}
                     {/* ================================================= */}
 
-                    <div className="xl:border-l xl:border-gray-300 xl:pl-5">
+                    <div className="
+                        xl:border-l
+                        xl:border-borderLight
+                        xl:pl-5
+                    ">
 
-                        <div className="border border-gray-300 shadow-sm">
+                        <div className="
+                            border
+                            border-borderLight
+                            shadow-sm
+                        ">
 
                             <div className="p-3">
 
-                                <h2 className="text-xl font-semibold text-[#8b3dff] mb-4">
+                                <h2 className="
+                                    text-xl
+                                    font-semibold
+                                    text-primary
+                                    mb-4
+                                ">
                                     Summary
                                 </h2>
 
 
-                                <div className="flex justify-between text-xs mb-4">
+                                <div className="
+                                    flex
+                                    justify-between
+                                    text-xs
+                                    mb-4
+                                ">
 
                                     <span>
                                         Sub Total
@@ -963,13 +1116,23 @@ function CreateInvoice() {
                                 </div>
 
 
-                                <div className="flex items-center justify-between text-xs mb-4">
+                                <div className="
+                                    flex
+                                    items-center
+                                    justify-between
+                                    text-xs
+                                    mb-4
+                                ">
 
                                     <span>
                                         Discount
                                     </span>
 
-                                    <div className="flex items-center gap-2">
+                                    <div className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                    ">
 
                                         <input
                                             type="number"
@@ -985,11 +1148,11 @@ function CreateInvoice() {
                                                 w-20
                                                 h-7
                                                 border
-                                                border-gray-300
+                                                border-borderLight
                                                 px-2
                                                 text-xs
                                                 outline-none
-                                                focus:border-[#8b3dff]
+                                                focus:border-primary
                                                 disabled:bg-gray-100
                                             "
                                         />
@@ -1003,7 +1166,12 @@ function CreateInvoice() {
                                 </div>
 
 
-                                <div className="flex justify-between text-xs mb-5">
+                                <div className="
+                                    flex
+                                    justify-between
+                                    text-xs
+                                    mb-5
+                                ">
 
                                     <span>
                                         Tax
@@ -1016,15 +1184,30 @@ function CreateInvoice() {
                                 </div>
 
 
-                                <div className="border-t border-gray-400 pt-3">
+                                <div className="
+                                    border-t
+                                    border-borderLight
+                                    pt-3
+                                ">
 
-                                    <div className="flex justify-between items-center">
+                                    <div className="
+                                        flex
+                                        justify-between
+                                        items-center
+                                    ">
 
-                                        <span className="font-semibold text-sm">
+                                        <span className="
+                                            font-semibold
+                                            text-sm
+                                        ">
                                             Total Amount
                                         </span>
 
-                                        <span className="text-lg font-semibold text-[#8b3dff]">
+                                        <span className="
+                                            text-lg
+                                            font-semibold
+                                            text-primary
+                                        ">
                                             ₹ {totalAmount.toFixed(2)}
                                         </span>
 
@@ -1039,14 +1222,29 @@ function CreateInvoice() {
                             {/* ADDITIONAL OPTIONS */}
                             {/* ================================================= */}
 
-                            <div className="border-t border-gray-300 p-3">
+                            <div className="
+                                border-t
+                                border-borderLight
+                                p-3
+                            ">
 
-                                <h2 className="text-xl font-semibold text-[#8b3dff] mb-5">
+                                <h2 className="
+                                    text-xl
+                                    font-semibold
+                                    text-primary
+                                    mb-5
+                                ">
                                     Additional Options
                                 </h2>
 
 
-                                <label className="block text-xs font-medium text-gray-700 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mb-2
+                                ">
                                     Notes (optional)
                                 </label>
 
@@ -1064,24 +1262,37 @@ function CreateInvoice() {
                                         className="
                                             w-full
                                             border
-                                            border-gray-300
+                                            border-borderLight
                                             p-2
                                             text-xs
                                             resize-none
                                             outline-none
-                                            focus:border-[#8b3dff]
+                                            focus:border-primary
                                             disabled:bg-gray-100
                                         "
                                     />
 
-                                    <span className="absolute bottom-2 right-2 text-[10px] text-gray-400">
+                                    <span className="
+                                        absolute
+                                        bottom-2
+                                        right-2
+                                        text-[10px]
+                                        text-textMuted
+                                    ">
                                         {notes.length}/300
                                     </span>
 
                                 </div>
 
 
-                                <label className="block text-xs font-medium text-gray-700 mt-5 mb-2">
+                                <label className="
+                                    block
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mt-5
+                                    mb-2
+                                ">
                                     Attach Document (optional)
                                 </label>
 
@@ -1094,7 +1305,7 @@ function CreateInvoice() {
                                         justify-center
                                         min-h-[105px]
                                         border
-                                        border-gray-300
+                                        border-borderLight
                                         cursor-pointer
                                         hover:bg-gray-50
                                         transition
@@ -1107,22 +1318,29 @@ function CreateInvoice() {
 
                                     <Upload
                                         size={20}
-                                        className="text-gray-500 mb-2"
+                                        className="text-textSecondary mb-2"
                                     />
 
-                                    <span className="text-xs text-gray-600">
+                                    <span className="
+                                        text-xs
+                                        text-textSecondary
+                                    ">
                                         Drag and drop file here
                                     </span>
 
-                                    <span className="text-xs text-gray-500 my-2">
+                                    <span className="
+                                        text-xs
+                                        text-textSecondary
+                                        my-2
+                                    ">
                                         or
                                     </span>
 
                                     <span
                                         className="
                                             border
-                                            border-[#8b3dff]
-                                            text-[#8b3dff]
+                                            border-primary
+                                            text-primary
                                             px-3
                                             py-1
                                             rounded
@@ -1132,7 +1350,11 @@ function CreateInvoice() {
                                         Browse file
                                     </span>
 
-                                    <span className="text-[10px] text-gray-400 mt-2">
+                                    <span className="
+                                        text-[10px]
+                                        text-textMuted
+                                        mt-2
+                                    ">
                                         {file
                                             ? file.name
                                             : "(PDF, JPG, PNG - Max 5MB)"
@@ -1150,14 +1372,30 @@ function CreateInvoice() {
                                 </label>
 
 
-                                <p className="text-xs font-medium text-gray-700 mt-5 mb-3">
+                                <p className="
+                                    text-xs
+                                    font-medium
+                                    text-textSecondary
+                                    mt-5
+                                    mb-3
+                                ">
                                     Send Invoice To
                                 </p>
 
 
-                                <div className="flex flex-wrap gap-4">
+                                <div className="
+                                    flex
+                                    flex-wrap
+                                    gap-4
+                                ">
 
-                                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                                    <label className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                        text-xs
+                                        cursor-pointer
+                                    ">
 
                                         <input
                                             type="radio"
@@ -1168,7 +1406,7 @@ function CreateInvoice() {
                                                 setSendTo(e.target.value)
                                             }
                                             disabled={loadingAction !== null}
-                                            className="accent-[#8b3dff]"
+                                            className="accent-primary"
                                         />
 
                                         <Mail size={14} />
@@ -1178,7 +1416,13 @@ function CreateInvoice() {
                                     </label>
 
 
-                                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                                    <label className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                        text-xs
+                                        cursor-pointer
+                                    ">
 
                                         <input
                                             type="radio"
@@ -1189,7 +1433,7 @@ function CreateInvoice() {
                                                 setSendTo(e.target.value)
                                             }
                                             disabled={loadingAction !== null}
-                                            className="accent-[#8b3dff]"
+                                            className="accent-primary"
                                         />
 
                                         <MessageCircle size={14} />
@@ -1199,7 +1443,13 @@ function CreateInvoice() {
                                     </label>
 
 
-                                    <label className="flex items-center gap-2 text-xs cursor-pointer">
+                                    <label className="
+                                        flex
+                                        items-center
+                                        gap-2
+                                        text-xs
+                                        cursor-pointer
+                                    ">
 
                                         <input
                                             type="radio"
@@ -1210,7 +1460,7 @@ function CreateInvoice() {
                                                 setSendTo(e.target.value)
                                             }
                                             disabled={loadingAction !== null}
-                                            className="accent-[#8b3dff]"
+                                            className="accent-primary"
                                         />
 
                                         Both
@@ -1256,11 +1506,11 @@ function CreateInvoice() {
                             px-6
                             py-3
                             border
-                            border-gray-400
+                            border-borderLight
                             rounded-md
                             text-sm
                             font-medium
-                            text-gray-700
+                            text-textSecondary
                             hover:bg-gray-100
                             active:scale-[0.98]
                             transition
@@ -1270,15 +1520,27 @@ function CreateInvoice() {
                     >
 
                         {loadingAction === "draft" ? (
-                            <span className="flex items-center justify-center gap-2">
+
+                            <span className="
+                                flex
+                                items-center
+                                justify-center
+                                gap-2
+                            ">
+
                                 <Loader2
                                     size={16}
                                     className="animate-spin"
                                 />
+
                                 Saving...
+
                             </span>
+
                         ) : (
+
                             "Save as Draft"
+
                         )}
 
                     </button>
@@ -1299,12 +1561,12 @@ function CreateInvoice() {
                             gap-2
                             px-6
                             py-3
-                            bg-[#8b3dff]
+                            bg-primary
                             text-white
                             rounded-md
                             text-sm
                             font-medium
-                            hover:bg-[#7830e6]
+                            hover:bg-primaryHover
                             hover:shadow-lg
                             active:scale-[0.98]
                             transition-all
@@ -1314,18 +1576,28 @@ function CreateInvoice() {
                     >
 
                         {loadingAction === "preview" ? (
+
                             <>
+
                                 <Loader2
                                     size={16}
                                     className="animate-spin"
                                 />
+
                                 Saving...
+
                             </>
+
                         ) : (
+
                             <>
+
                                 <Check size={16} />
+
                                 Save & Preview
+
                             </>
+
                         )}
 
                     </button>
@@ -1346,12 +1618,12 @@ function CreateInvoice() {
                             gap-2
                             px-6
                             py-3
-                            bg-[#171126]
+                            bg-pageBackground
                             text-white
                             rounded-md
                             text-sm
                             font-medium
-                            hover:bg-[#241a3b]
+                            hover:bg-primaryHover
                             hover:shadow-lg
                             active:scale-[0.98]
                             transition-all
@@ -1361,15 +1633,22 @@ function CreateInvoice() {
                     >
 
                         {loadingAction === "send" ? (
+
                             <>
+
                                 <Loader2
                                     size={16}
                                     className="animate-spin"
                                 />
+
                                 Sending...
+
                             </>
+
                         ) : (
+
                             "Save & Send"
+
                         )}
 
                     </button>
