@@ -39,15 +39,17 @@ function LeadPipeline() {
 
     return (
 
-        <div className="w-full min-w-0">
+        <div className="w-full min-w-0 overflow-hidden">
 
             <div
                 className="
                     w-full
-                    h-[235px]
+                    min-h-[235px]
                     flex
                     items-center
                     justify-center
+                    px-1
+                    sm:px-2
                 "
             >
 
@@ -55,9 +57,11 @@ function LeadPipeline() {
                     className="
                         w-full
                         max-w-[330px]
+
                         flex
                         flex-col
                         items-center
+
                         gap-[8px]
                     "
                 >
@@ -71,6 +75,7 @@ function LeadPipeline() {
                                 flex
                                 items-center
                                 justify-center
+                                min-w-0
                             "
                         >
 
@@ -79,13 +84,22 @@ function LeadPipeline() {
                             <div
                                 className="
                                     h-[34px]
+
                                     flex
                                     items-center
                                     justify-center
+
                                     text-white
-                                    text-[12px]
+
+                                    text-[11px]
+                                    sm:text-[12px]
+
                                     font-semibold
-                                    shrink-0
+
+                                    shrink
+                                    min-w-0
+
+                                    overflow-hidden
                                 "
                                 style={{
                                     width: item.width,
@@ -102,10 +116,17 @@ function LeadPipeline() {
 
                             <span
                                 className="
-                                    w-[42px]
-                                    ml-3
-                                    text-[12px]
+                                    w-[38px]
+                                    sm:w-[42px]
+
+                                    ml-2
+                                    sm:ml-3
+
+                                    text-[11px]
+                                    sm:text-[12px]
+
                                     font-medium
+
                                     shrink-0
                                 "
                                 style={{

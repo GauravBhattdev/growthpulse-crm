@@ -10,10 +10,15 @@ import {
     Ticket,
     Building2,
     Settings,
-    HelpCircle
+    HelpCircle,
+    X
 } from "lucide-react";
 
-function Sidebar() {
+
+function Sidebar({
+    isSidebarOpen,
+    setIsSidebarOpen
+}) {
 
     const menuItems = [
         {
@@ -53,58 +58,132 @@ function Sidebar() {
         }
     ];
 
+
+    const handleNavigation = () => {
+        setIsSidebarOpen(false);
+    };
+
+
+    const navLinkClass = ({ isActive }) =>
+        `
+        group
+
+        flex
+        items-center
+        gap-3
+        no-underline
+        text-white
+
+        px-3
+        lg:px-5
+
+        py-3
+
+        mx-2
+        lg:mx-3
+
+        my-1
+
+        rounded-md
+
+        transition-all
+        duration-300
+        ease-out
+
+        justify-start
+
+        hover:translate-x-1
+        hover:shadow-md
+
+        ${
+            isActive
+                ? `
+                    bg-[#3f315f]
+                    shadow-[0_4px_12px_rgba(0,0,0,0.20)]
+                `
+                : `
+                    hover:bg-[#2b1c43]
+                `
+        }
+        `;
+
+
     return (
 
         <aside
-            className="
+            className={`
                 fixed
                 top-0
                 left-0
-                w-[70px]
-                lg:w-[240px]
+                w-[240px]
                 h-screen
                 bg-[#160d27]
                 text-white
                 z-50
                 overflow-y-auto
-            "
+
+                transform
+                transition-transform
+                duration-300
+                ease-in-out
+
+                lg:translate-x-0
+
+                ${
+                    isSidebarOpen
+                        ? "translate-x-0"
+                        : "-translate-x-full"
+                }
+            `}
         >
 
             {/* =================================================
                 LOGO
             ================================================= */}
 
-            <h2
-                className="
-                    text-2xl
-                    font-bold
-                    py-5
-                    m-0
-                    text-center
-                    lg:text-left
-                    px-3
-                    lg:px-7
-                    cursor-pointer
-                    transition-all
-                    duration-300
-                    hover:scale-[1.03]
-                "
-            >
+            <div className="
+                flex
+                items-center
+                justify-between
+                px-5
+                lg:px-7
+                py-5
+            ">
 
-                {/* Desktop Logo */}
-
-                <span className="hidden lg:inline">
+                <h2
+                    className="
+                        text-2xl
+                        font-bold
+                        m-0
+                        cursor-pointer
+                        transition-all
+                        duration-300
+                        hover:scale-[1.03]
+                    "
+                >
                     GrowthPulse
-                </span>
+                </h2>
 
 
-                {/* Mobile Logo */}
+                {/* Mobile Close Button */}
 
-                <span className="lg:hidden">
-                    G
-                </span>
+                <button
+                    type="button"
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="
+                        lg:hidden
+                        p-1
+                        rounded-md
+                        hover:bg-[#2b1c43]
+                    "
+                    aria-label="Close menu"
+                >
 
-            </h2>
+                    <X size={22} />
+
+                </button>
+
+            </div>
 
 
             {/* =================================================
@@ -126,55 +205,11 @@ function Sidebar() {
                                 <NavLink
                                     to={item.path}
                                     title={item.name}
-                                    className={({ isActive }) =>
-                                        `
-                                        group
-
-                                        flex
-                                        items-center
-                                        gap-3
-                                        no-underline
-                                        text-white
-
-                                        px-3
-                                        lg:px-5
-
-                                        py-3
-
-                                        mx-2
-                                        lg:mx-3
-
-                                        my-1
-
-                                        rounded-md
-
-                                        transition-all
-                                        duration-300
-                                        ease-out
-
-                                        justify-center
-                                        lg:justify-start
-
-                                        hover:translate-x-1
-                                        hover:shadow-md
-
-                                        ${
-                                            isActive
-                                                ? `
-                                                    bg-[#3f315f]
-                                                    shadow-[0_4px_12px_rgba(0,0,0,0.20)]
-                                                `
-                                                : `
-                                                    hover:bg-[#2b1c43]
-                                                `
-                                        }
-                                        `
-                                    }
+                                    onClick={handleNavigation}
+                                    className={navLinkClass}
                                 >
 
-                                    {/* =================================================
-                                        ICON
-                                    ================================================= */}
+                                    {/* Icon */}
 
                                     <Icon
                                         size={19}
@@ -193,24 +228,14 @@ function Sidebar() {
                                     />
 
 
-                                    {/* =================================================
-                                        MENU TEXT
-                                    ================================================= */}
+                                    {/* Menu Text */}
 
-                                    <span
-                                        className="
-                                            hidden
-                                            lg:inline
-
-                                            transition-all
-                                            duration-300
-
-                                            group-hover:translate-x-[2px]
-                                        "
-                                    >
-
+                                    <span className="
+                                        transition-all
+                                        duration-300
+                                        group-hover:translate-x-[2px]
+                                    ">
                                         {item.name}
-
                                     </span>
 
                                 </NavLink>
@@ -249,50 +274,8 @@ function Sidebar() {
                         <NavLink
                             to="/settings"
                             title="Settings"
-                            className={({ isActive }) =>
-                                `
-                                group
-
-                                flex
-                                items-center
-                                gap-3
-                                no-underline
-                                text-white
-
-                                px-3
-                                lg:px-5
-
-                                py-3
-
-                                mx-2
-                                lg:mx-3
-
-                                my-1
-
-                                rounded-md
-
-                                transition-all
-                                duration-300
-                                ease-out
-
-                                justify-center
-                                lg:justify-start
-
-                                hover:translate-x-1
-                                hover:shadow-md
-
-                                ${
-                                    isActive
-                                        ? `
-                                            bg-[#3f315f]
-                                            shadow-[0_4px_12px_rgba(0,0,0,0.20)]
-                                        `
-                                        : `
-                                            hover:bg-[#2b1c43]
-                                        `
-                                }
-                                `
-                            }
+                            onClick={handleNavigation}
+                            className={navLinkClass}
                         >
 
                             <Settings
@@ -311,17 +294,7 @@ function Sidebar() {
                                 "
                             />
 
-                            <span
-                                className="
-                                    hidden
-                                    lg:inline
-
-                                    transition-all
-                                    duration-300
-
-                                    group-hover:translate-x-[2px]
-                                "
-                            >
+                            <span>
                                 Settings
                             </span>
 
@@ -339,50 +312,8 @@ function Sidebar() {
                         <NavLink
                             to="/help-support"
                             title="Help & Support"
-                            className={({ isActive }) =>
-                                `
-                                group
-
-                                flex
-                                items-center
-                                gap-3
-                                no-underline
-                                text-white
-
-                                px-3
-                                lg:px-5
-
-                                py-3
-
-                                mx-2
-                                lg:mx-3
-
-                                my-1
-
-                                rounded-md
-
-                                transition-all
-                                duration-300
-                                ease-out
-
-                                justify-center
-                                lg:justify-start
-
-                                hover:translate-x-1
-                                hover:shadow-md
-
-                                ${
-                                    isActive
-                                        ? `
-                                            bg-[#3f315f]
-                                            shadow-[0_4px_12px_rgba(0,0,0,0.20)]
-                                        `
-                                        : `
-                                            hover:bg-[#2b1c43]
-                                        `
-                                }
-                                `
-                            }
+                            onClick={handleNavigation}
+                            className={navLinkClass}
                         >
 
                             <HelpCircle
@@ -401,17 +332,7 @@ function Sidebar() {
                                 "
                             />
 
-                            <span
-                                className="
-                                    hidden
-                                    lg:inline
-
-                                    transition-all
-                                    duration-300
-
-                                    group-hover:translate-x-[2px]
-                                "
-                            >
+                            <span>
                                 Help & Support
                             </span>
 
@@ -426,6 +347,8 @@ function Sidebar() {
         </aside>
 
     );
+
 }
+
 
 export default Sidebar;
