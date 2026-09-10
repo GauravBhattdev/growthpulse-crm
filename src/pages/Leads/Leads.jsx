@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     Users,
@@ -16,6 +16,10 @@ import {
     Upload,
     UserPlus
 } from "lucide-react";
+
+import { useNavigate } from "react-router-dom";
+
+import Loader from "../../components/Loader/Loader";
 
 
 // =====================================================
@@ -137,9 +141,57 @@ const leads = [
 
 function Leads() {
 
+    const navigate = useNavigate();
+
+    const [loading, setLoading] = useState(true);
+
+
+    // =====================================================
+    // TEMPORARY LOADING
+    // =====================================================
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+
+            setLoading(false);
+
+        }, 1500);
+
+
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    // =====================================================
+    // SHOW LOADER
+    // =====================================================
+
+    if (loading) {
+
+        return (
+
+            <div className="
+                min-h-screen
+                bg-white
+                flex
+                items-center
+                justify-center
+            ">
+
+                <Loader text="Loading leads..." />
+
+            </div>
+
+        );
+
+    }
+
+
     return (
 
-        <div className="w-full min-h-screen bg-white">
+        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
 
             {/* =================================================
                 PAGE HEADER
@@ -212,7 +264,7 @@ function Leads() {
 
                         <Upload size={18} />
 
-                        Import leads
+                        Export leads
 
                     </button>
 
@@ -220,6 +272,7 @@ function Leads() {
                     {/* CREATE LEAD */}
 
                     <button
+                        onClick={() => navigate("/create-lead")}
                         className="
                             flex
                             items-center

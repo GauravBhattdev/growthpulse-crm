@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
     Search,
@@ -8,6 +8,8 @@ import {
     ChevronLeft,
     ChevronRight
 } from "lucide-react";
+
+import CreateTeamMember from "../../components/CreateTeamMember/CreateTeamMember";
 
 
 const members = [
@@ -76,9 +78,12 @@ const members = [
 
 function TeamMember() {
 
+    const [showCreateMember, setShowCreateMember] = useState(false);
+
+
     return (
 
-        <div className="w-full min-h-[calc(100vh-66px)] bg-white">
+        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
 
             {/* =================================
                 PAGE HEADER
@@ -99,9 +104,11 @@ function TeamMember() {
                 </div>
 
 
-                {/* Create Team Button */}
+                {/* Create Team Member Button */}
 
                 <button
+                    type="button"
+                    onClick={() => setShowCreateMember(true)}
                     className="
                         flex
                         items-center
@@ -116,9 +123,12 @@ function TeamMember() {
                         hover:bg-[#3f315f]
                         transition
                         duration-200
+                        cursor-pointer
                     "
                 >
-                    + Create Team
+
+                    + Create Team Member
+
                 </button>
 
             </div>
@@ -514,10 +524,12 @@ function TeamMember() {
                     <div className="flex items-center gap-5">
 
                         <button>
+
                             <ChevronLeft
                                 size={17}
                                 className="text-gray-700"
                             />
+
                         </button>
 
 
@@ -556,10 +568,12 @@ function TeamMember() {
 
 
                         <button>
+
                             <ChevronRight
                                 size={17}
                                 className="text-gray-700"
                             />
+
                         </button>
 
                     </div>
@@ -591,8 +605,23 @@ function TeamMember() {
 
             </div>
 
+
+            {/* =================================
+                CREATE TEAM MEMBER POPUP
+            ================================== */}
+
+            {showCreateMember && (
+
+                <CreateTeamMember
+                    onClose={() => setShowCreateMember(false)}
+                />
+
+            )}
+
         </div>
+
     );
 }
+
 
 export default TeamMember;

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import {
     FileText,
@@ -13,13 +13,12 @@ import {
     ChevronLeft,
     ChevronRight,
     ChevronDown,
-    Upload
+    Upload,
+    Loader2
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
 
-// =====================================================
-// INVOICE DATA
-// =====================================================
 
 const invoices = [
     {
@@ -65,34 +64,44 @@ const invoices = [
 ];
 
 
-// =====================================================
-// INVOICE COMPONENT
-// =====================================================
-
 function Invoice() {
+
+    const navigate = useNavigate();
+
+    const [importingInvoice, setImportingInvoice] = useState(false);
+
+
+    // ==============================
+    // IMPORT INVOICE
+    // ==============================
+
+    const handleImportInvoice = () => {
+
+        setImportingInvoice(true);
+
+        console.log("Importing Invoice...");
+
+        setTimeout(() => {
+
+            setImportingInvoice(false);
+
+            console.log("Invoice imported successfully!");
+
+            alert("Invoice imported successfully!");
+
+        }, 1500);
+
+    };
+
 
     return (
 
-        <div className="w-full min-h-screen bg-white">
+        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
 
-            {/* =================================================
-                PAGE HEADER
-            ================================================= */}
 
-            <div
-                className="
-                    flex
-                    flex-col
-                    sm:flex-row
-                    items-start
-                    sm:items-center
-                    justify-between
-                    gap-4
-                    pt-3
-                "
-            >
+            {/* ================= HEADER SECTION ================= */}
 
-                {/* PAGE TITLE */}
+            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
 
                 <div>
 
@@ -100,66 +109,76 @@ function Invoice() {
                         Invoice
                     </h1>
 
-                    <p className="mt-1 text-[13px] text-[#444]">
+                    <p className="text-[13px] text-[#555] mt-1">
                         Manage and track all your invoices
                     </p>
 
                 </div>
 
 
-                {/* =================================================
-                    PAGE ACTION BUTTONS
-                ================================================= */}
+                <div className="flex flex-col sm:flex-row gap-3">
 
-                <div
-                    className="
-                        flex
-                        flex-col
-                        sm:flex-row
-                        items-stretch
-                        sm:items-center
-                        gap-3
-                        w-full
-                        sm:w-auto
-                    "
-                >
 
-                    {/* IMPORT INVOICE */}
+                    {/* ================= IMPORT INVOICE BUTTON ================= */}
 
                     <button
+                        type="button"
+                        onClick={handleImportInvoice}
+                        disabled={importingInvoice}
                         className="
                             flex
                             items-center
                             justify-center
                             gap-2
-                            bg-white
                             border
-                            border-[#333]
-                            text-[#222]
+                            border-gray-300
+                            text-gray-700
                             px-5
                             py-3
                             rounded-md
                             text-sm
                             font-medium
                             hover:bg-gray-100
-                            transition
+                            hover:shadow-sm
+                            active:scale-95
+                            transition-all
                             duration-200
                             w-full
                             sm:w-auto
+                            disabled:opacity-60
+                            disabled:cursor-not-allowed
+                            disabled:active:scale-100
                         "
                     >
 
-                        <Upload size={18} />
+                        {importingInvoice ? (
+                            <>
+                                <Loader2
+                                    size={17}
+                                    className="animate-spin"
+                                />
 
-                        Import Invoice
+                                Importing...
+                            </>
+                        ) : (
+                            <>
+                                <Upload size={17} />
+
+                                Import Invoice
+                            </>
+                        )}
 
                     </button>
 
 
-                    {/* CREATE INVOICE */}
+                    {/* ================= CREATE INVOICE BUTTON ================= */}
 
                     <button
+                        onClick={() => navigate("/create-invoice")}
+                        disabled={importingInvoice}
                         className="
+                            group
+                            relative
                             flex
                             items-center
                             justify-center
@@ -171,19 +190,73 @@ function Invoice() {
                             rounded-md
                             text-sm
                             font-medium
+                            overflow-hidden
+                            shadow-sm
                             hover:bg-[#3f315f]
-                            transition
+                            hover:shadow-lg
+                            hover:-translate-y-[1px]
+                            active:translate-y-0
+                            active:scale-[0.97]
+                            transition-all
                             duration-200
                             w-full
                             sm:w-auto
+                            disabled:opacity-60
+                            disabled:cursor-not-allowed
+                            disabled:hover:translate-y-0
                         "
                     >
 
-                        <span className="text-[20px] leading-none">
-                            +
+                        {/* Shine Effect */}
+
+                        <span
+                            className="
+                                absolute
+                                inset-0
+                                -translate-x-full
+                                group-hover:translate-x-full
+                                bg-gradient-to-r
+                                from-transparent
+                                via-white/10
+                                to-transparent
+                                transition-transform
+                                duration-700
+                            "
+                        />
+
+
+                        {/* Plus Icon */}
+
+                        <span
+                            className="
+                                relative
+                                z-10
+                                flex
+                                items-center
+                                justify-center
+                                w-5
+                                h-5
+                                rounded-full
+                                bg-white/20
+                                group-hover:bg-white/30
+                                group-hover:rotate-90
+                                transition-all
+                                duration-300
+                            "
+                        >
+
+                            <span className="text-[18px] leading-none">
+                                +
+                            </span>
+
                         </span>
 
-                        Create Invoice
+
+                        {/* Button Text */}
+
+                        <span className="relative z-10">
+                            Create Invoice
+                        </span>
 
                     </button>
 
@@ -192,252 +265,149 @@ function Invoice() {
             </div>
 
 
-            {/* =================================================
-                SUMMARY CARDS
-            ================================================= */}
+            {/* ================= SUMMARY CARDS ================= */}
 
-            <div
-                className="
-                    grid
-                    grid-cols-1
-                    sm:grid-cols-2
-                    lg:grid-cols-4
-                    gap-5
-                    mt-8
-                "
-            >
+            <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4 mt-8">
 
 
-                {/* =================================================
-                    TOTAL INVOICES
-                ================================================= */}
+                {/* TOTAL INVOICES */}
 
-                <div
-                    className="
-                        bg-white
-                        border
-                        border-gray-300
-                        rounded-lg
-                        h-[100px]
-                        flex
-                        items-center
-                        px-4
-                        shadow-sm
-                        hover:shadow-md
-                        transition
-                    "
-                >
+                <div className="border border-gray-200 rounded-lg p-5 bg-white">
 
-                    <div
-                        className="
-                            w-12
-                            h-12
-                            rounded-full
-                            bg-purple-100
-                            text-purple-500
-                            flex
-                            items-center
-                            justify-center
-                            mr-4
-                            shrink-0
-                        "
-                    >
+                    <div className="flex items-center justify-between">
 
-                        <FileText size={23} />
+                        <div>
 
-                    </div>
+                            <p className="text-sm text-gray-500">
+                                Total Invoices
+                            </p>
+
+                            <h2 className="text-2xl font-semibold text-gray-900 mt-2">
+                                56
+                            </h2>
+
+                        </div>
 
 
-                    <div>
+                        <div className="w-10 h-10 rounded-full bg-purple-100 flex items-center justify-center">
 
-                        <p className="text-sm text-gray-700">
-                            Total Invoices
-                        </p>
+                            <FileText
+                                size={20}
+                                className="text-[#4b397b]"
+                            />
 
-                        <h2 className="text-2xl font-semibold text-gray-900">
-                            56
-                        </h2>
-
-                        <p className="text-xs text-gray-600">
-                            This Month
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                {/* =================================================
-                    PAID
-                ================================================= */}
+                {/* PAID */}
 
-                <div
-                    className="
-                        bg-white
-                        border
-                        border-gray-300
-                        rounded-lg
-                        h-[100px]
-                        flex
-                        items-center
-                        px-4
-                        shadow-sm
-                        hover:shadow-md
-                        transition
-                    "
-                >
+                <div className="border border-gray-200 rounded-lg p-5 bg-white">
 
-                    <div
-                        className="
-                            w-12
-                            h-12
-                            rounded-full
-                            bg-green-100
-                            text-green-500
-                            flex
-                            items-center
-                            justify-center
-                            mr-4
-                            shrink-0
-                        "
-                    >
+                    <div className="flex items-center justify-between">
 
-                        <Check size={24} />
+                        <div>
 
-                    </div>
+                            <p className="text-sm text-gray-500">
+                                Paid
+                            </p>
+
+                            <h2 className="text-2xl font-semibold text-gray-900 mt-2">
+                                32
+                            </h2>
+
+                            <p className="text-xs text-gray-500 mt-1">
+                                ₹8,45,000
+                            </p>
+
+                        </div>
 
 
-                    <div>
+                        <div className="w-10 h-10 rounded-full bg-green-100 flex items-center justify-center">
 
-                        <p className="text-sm text-gray-700">
-                            Paid
-                        </p>
+                            <Check
+                                size={20}
+                                className="text-green-600"
+                            />
 
-                        <h2 className="text-2xl font-semibold text-gray-900">
-                            32
-                        </h2>
-
-                        <p className="text-xs text-green-500">
-                            ₹ 8,45,000
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                {/* =================================================
-                    PENDING
-                ================================================= */}
+                {/* PENDING */}
 
-                <div
-                    className="
-                        bg-white
-                        border
-                        border-gray-300
-                        rounded-lg
-                        h-[100px]
-                        flex
-                        items-center
-                        px-4
-                        shadow-sm
-                        hover:shadow-md
-                        transition
-                    "
-                >
+                <div className="border border-gray-200 rounded-lg p-5 bg-white">
 
-                    <div
-                        className="
-                            w-12
-                            h-12
-                            rounded-full
-                            bg-orange-100
-                            text-orange-500
-                            flex
-                            items-center
-                            justify-center
-                            mr-4
-                            shrink-0
-                        "
-                    >
+                    <div className="flex items-center justify-between">
 
-                        <Clock size={24} />
+                        <div>
 
-                    </div>
+                            <p className="text-sm text-gray-500">
+                                Pending
+                            </p>
+
+                            <h2 className="text-2xl font-semibold text-gray-900 mt-2">
+                                18
+                            </h2>
+
+                            <p className="text-xs text-gray-500 mt-1">
+                                ₹3,20,000
+                            </p>
+
+                        </div>
 
 
-                    <div>
+                        <div className="w-10 h-10 rounded-full bg-yellow-100 flex items-center justify-center">
 
-                        <p className="text-sm text-gray-700">
-                            Pending
-                        </p>
+                            <Clock
+                                size={20}
+                                className="text-yellow-600"
+                            />
 
-                        <h2 className="text-2xl font-semibold text-gray-900">
-                            18
-                        </h2>
-
-                        <p className="text-xs text-orange-500">
-                            ₹ 3,20,000
-                        </p>
+                        </div>
 
                     </div>
 
                 </div>
 
 
-                {/* =================================================
-                    OVERDUE
-                ================================================= */}
+                {/* OVERDUE */}
 
-                <div
-                    className="
-                        bg-white
-                        border
-                        border-gray-300
-                        rounded-lg
-                        h-[100px]
-                        flex
-                        items-center
-                        px-4
-                        shadow-sm
-                        hover:shadow-md
-                        transition
-                    "
-                >
+                <div className="border border-gray-200 rounded-lg p-5 bg-white">
 
-                    <div
-                        className="
-                            w-12
-                            h-12
-                            rounded-full
-                            bg-red-100
-                            text-red-500
-                            flex
-                            items-center
-                            justify-center
-                            mr-4
-                            shrink-0
-                        "
-                    >
+                    <div className="flex items-center justify-between">
 
-                        <AlertCircle size={24} />
+                        <div>
 
-                    </div>
+                            <p className="text-sm text-gray-500">
+                                Overdue
+                            </p>
+
+                            <h2 className="text-2xl font-semibold text-gray-900 mt-2">
+                                6
+                            </h2>
+
+                            <p className="text-xs text-gray-500 mt-1">
+                                ₹1,15,000
+                            </p>
+
+                        </div>
 
 
-                    <div>
+                        <div className="w-10 h-10 rounded-full bg-red-100 flex items-center justify-center">
 
-                        <p className="text-sm text-gray-700">
-                            Overdue
-                        </p>
+                            <AlertCircle
+                                size={20}
+                                className="text-red-600"
+                            />
 
-                        <h2 className="text-2xl font-semibold text-gray-900">
-                            6
-                        </h2>
-
-                        <p className="text-xs text-red-500">
-                            ₹ 1,15,000
-                        </p>
+                        </div>
 
                     </div>
 
@@ -446,606 +416,579 @@ function Invoice() {
             </div>
 
 
-            {/* =================================================
-                TABLE CONTAINER
-            ================================================= */}
+            {/* ================= SEARCH AND FILTERS ================= */}
 
-            <div
-                className="
-                    mt-8
-                    bg-white
-                    border
-                    border-gray-300
-                    rounded-lg
-                    shadow-sm
-                    overflow-hidden
-                "
-            >
+            <div className="mt-8 flex flex-col lg:flex-row gap-4 lg:items-center lg:justify-between">
 
-                {/* =================================================
-                    FILTER BAR
-                ================================================= */}
 
-                <div
-                    className="
-                        min-h-[50px]
-                        flex
-                        flex-col
-                        lg:flex-row
-                        items-stretch
-                        lg:items-center
-                        justify-between
-                        gap-3
-                        p-2
-                        border-b
-                        border-gray-300
-                    "
-                >
+                {/* SEARCH */}
 
-                    {/* SEARCH */}
+                <div className="relative w-full lg:w-[320px]">
 
-                    <div
+                    <Search
+                        size={18}
                         className="
-                            flex
-                            items-center
+                            absolute
+                            left-3
+                            top-1/2
+                            -translate-y-1/2
+                            text-gray-400
+                        "
+                    />
+
+                    <input
+                        type="text"
+                        placeholder="Search Invoice"
+                        className="
+                            w-full
                             border
                             border-gray-300
                             rounded-md
-                            h-[32px]
-                            w-full
-                            sm:w-[165px]
-                            px-2
+                            pl-10
+                            pr-3
+                            py-2.5
+                            text-sm
+                            outline-none
+                            focus:border-[#4b397b]
+                            focus:ring-1
+                            focus:ring-[#4b397b]
                         "
-                    >
-
-                        <Search
-                            size={15}
-                            className="text-gray-500 shrink-0"
-                        />
-
-                        <input
-                            type="text"
-                            placeholder="Search Invoice..."
-                            className="
-                                ml-2
-                                w-full
-                                outline-none
-                                text-xs
-                                text-gray-700
-                                min-w-0
-                            "
-                        />
-
-                    </div>
-
-
-                    {/* =================================================
-                        RIGHT FILTERS
-                    ================================================= */}
-
-                    <div
-                        className="
-                            flex
-                            flex-wrap
-                            items-center
-                            gap-2
-                            w-full
-                            lg:w-auto
-                        "
-                    >
-
-
-                        {/* START DATE */}
-
-                        <button
-                            className="
-                                flex
-                                items-center
-                                justify-between
-                                gap-4
-                                border
-                                border-gray-300
-                                rounded-md
-                                h-[32px]
-                                px-3
-                                text-xs
-                                text-gray-700
-                                hover:bg-gray-100
-                                flex-1
-                                sm:flex-none
-                                whitespace-nowrap
-                            "
-                        >
-
-                            May 24, 2026
-
-                            <ChevronDown size={14} />
-
-                        </button>
-
-
-                        {/* END DATE */}
-
-                        <button
-                            className="
-                                flex
-                                items-center
-                                justify-between
-                                gap-4
-                                border
-                                border-gray-300
-                                rounded-md
-                                h-[32px]
-                                px-3
-                                text-xs
-                                text-gray-700
-                                hover:bg-gray-100
-                                flex-1
-                                sm:flex-none
-                                whitespace-nowrap
-                            "
-                        >
-
-                            May 30, 2026
-
-                            <ChevronDown size={14} />
-
-                        </button>
-
-
-                        {/* FILTER */}
-
-                        <button
-                            className="
-                                w-[34px]
-                                h-[32px]
-                                border
-                                border-gray-300
-                                rounded-md
-                                flex
-                                items-center
-                                justify-center
-                                hover:bg-gray-100
-                                shrink-0
-                            "
-                        >
-
-                            <Filter size={17} />
-
-                        </button>
-
-                    </div>
+                    />
 
                 </div>
 
 
-                {/* =================================================
-                    INVOICE TABLE
-                ================================================= */}
+                {/* FILTERS */}
 
-                <div className="overflow-x-auto">
-
-                    <table className="w-full min-w-[850px] border-collapse">
+                <div className="flex flex-col sm:flex-row gap-3">
 
 
-                        {/* TABLE HEADER */}
+                    {/* DATE 1 */}
 
-                        <thead>
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            flex
+                            items-center
+                            justify-between
+                            gap-3
+                            border
+                            border-gray-300
+                            rounded-md
+                            px-4
+                            py-2.5
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
 
-                            <tr className="bg-[#eeeeee]">
+                        May 24, 2026
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-9
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Invoice ID
-                                </th>
+                        <ChevronDown size={16} />
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Client
-                                </th>
+                    </button>
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Issue Date
-                                </th>
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Due Date
-                                </th>
+                    {/* DATE 2 */}
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Amount
-                                </th>
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            flex
+                            items-center
+                            justify-between
+                            gap-3
+                            border
+                            border-gray-300
+                            rounded-md
+                            px-4
+                            py-2.5
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Status
-                                </th>
+                        May 30, 2026
 
-                                <th
-                                    className="
-                                        text-left
-                                        px-4
-                                        py-3
-                                        text-xs
-                                        font-medium
-                                        text-gray-700
-                                    "
-                                >
-                                    Action
-                                </th>
+                        <ChevronDown size={16} />
+
+                    </button>
+
+
+                    {/* FILTER */}
+
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            flex
+                            items-center
+                            justify-center
+                            gap-2
+                            border
+                            border-gray-300
+                            rounded-md
+                            px-4
+                            py-2.5
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            hover:shadow-sm
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+
+                        <Filter size={16} />
+
+                        Filter
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            {/* ================= INVOICE TABLE ================= */}
+
+            <div className="mt-6 border border-gray-200 rounded-lg overflow-x-auto">
+
+                <table className="w-full min-w-[900px]">
+
+
+                    {/* TABLE HEADER */}
+
+                    <thead className="bg-gray-50">
+
+                        <tr>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Invoice ID
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Client
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Issue Date
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Due Date
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Amount
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Status
+                            </th>
+
+                            <th className="text-left px-5 py-4 text-xs font-semibold text-gray-600">
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    {/* TABLE BODY */}
+
+                    <tbody>
+
+                        {invoices.map((invoice) => (
+
+                            <tr
+                                key={invoice.id}
+                                className="
+                                    border-t
+                                    border-gray-200
+                                    hover:bg-gray-50
+                                    transition
+                                "
+                            >
+
+                                <td className="px-5 py-4 text-sm font-medium text-[#4b397b]">
+                                    {invoice.id}
+                                </td>
+
+
+                                <td className="px-5 py-4 text-sm text-gray-700">
+                                    {invoice.client}
+                                </td>
+
+
+                                <td className="px-5 py-4 text-sm text-gray-600">
+                                    {invoice.issueDate}
+                                </td>
+
+
+                                <td className="px-5 py-4 text-sm text-gray-600">
+                                    {invoice.dueDate}
+                                </td>
+
+
+                                <td className="px-5 py-4 text-sm font-medium text-gray-800">
+                                    {invoice.amount}
+                                </td>
+
+
+                                {/* STATUS */}
+
+                                <td className="px-5 py-4">
+
+
+                                    {/* PAID */}
+
+                                    {invoice.status === "Paid" && (
+
+                                        <span
+                                            className="
+                                                inline-flex
+                                                items-center
+                                                gap-1
+                                                px-3
+                                                py-1
+                                                rounded-full
+                                                text-xs
+                                                font-medium
+                                                bg-green-100
+                                                text-green-700
+                                            "
+                                        >
+
+                                            <Check size={13} />
+
+                                            Paid
+
+                                        </span>
+
+                                    )}
+
+
+                                    {/* PENDING */}
+
+                                    {invoice.status === "Pending" && (
+
+                                        <span
+                                            className="
+                                                inline-flex
+                                                items-center
+                                                gap-1
+                                                px-3
+                                                py-1
+                                                rounded-full
+                                                text-xs
+                                                font-medium
+                                                bg-yellow-100
+                                                text-yellow-700
+                                            "
+                                        >
+
+                                            <Clock size={13} />
+
+                                            Pending
+
+                                        </span>
+
+                                    )}
+
+
+                                    {/* OVERDUE */}
+
+                                    {invoice.status === "Overdue" && (
+
+                                        <span
+                                            className="
+                                                inline-flex
+                                                items-center
+                                                gap-1
+                                                px-3
+                                                py-1
+                                                rounded-full
+                                                text-xs
+                                                font-medium
+                                                bg-red-100
+                                                text-red-700
+                                            "
+                                        >
+
+                                            <AlertCircle size={13} />
+
+                                            Overdue
+
+                                        </span>
+
+                                    )}
+
+                                </td>
+
+
+                                {/* ACTIONS */}
+
+                                <td className="px-5 py-4">
+
+                                    <div className="flex items-center gap-2">
+
+
+                                        {/* VIEW */}
+
+                                        <button
+                                            disabled={importingInvoice}
+                                            className="
+                                                p-2
+                                                rounded-md
+                                                hover:bg-gray-100
+                                                text-gray-600
+                                                hover:text-[#4b397b]
+                                                transition
+                                                disabled:opacity-50
+                                                disabled:cursor-not-allowed
+                                            "
+                                        >
+
+                                            <Eye size={17} />
+
+                                        </button>
+
+
+                                        {/* DOWNLOAD */}
+
+                                        <button
+                                            disabled={importingInvoice}
+                                            className="
+                                                p-2
+                                                rounded-md
+                                                hover:bg-gray-100
+                                                text-gray-600
+                                                hover:text-[#4b397b]
+                                                transition
+                                                disabled:opacity-50
+                                                disabled:cursor-not-allowed
+                                            "
+                                        >
+
+                                            <Download size={17} />
+
+                                        </button>
+
+
+                                        {/* MORE */}
+
+                                        <button
+                                            disabled={importingInvoice}
+                                            className="
+                                                p-2
+                                                rounded-md
+                                                hover:bg-gray-100
+                                                text-gray-600
+                                                hover:text-[#4b397b]
+                                                transition
+                                                disabled:opacity-50
+                                                disabled:cursor-not-allowed
+                                            "
+                                        >
+
+                                            <MoreVertical size={17} />
+
+                                        </button>
+
+                                    </div>
+
+                                </td>
+
 
                             </tr>
 
-                        </thead>
+                        ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
 
 
-                        {/* =================================================
-                            TABLE BODY
-                        ================================================= */}
+            {/* ================= PAGINATION ================= */}
 
-                        <tbody>
-
-                            {invoices.map((invoice) => (
-
-                                <tr
-                                    key={invoice.id}
-                                    className="
-                                        border-b
-                                        border-gray-300
-                                        hover:bg-gray-50
-                                        transition
-                                    "
-                                >
-
-                                    {/* INVOICE ID */}
-
-                                    <td
-                                        className="
-                                            px-9
-                                            py-4
-                                            text-xs
-                                            font-medium
-                                            text-purple-600
-                                        "
-                                    >
-                                        {invoice.id}
-                                    </td>
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-5 pb-6">
 
 
-                                    {/* CLIENT */}
-
-                                    <td
-                                        className="
-                                            px-4
-                                            py-4
-                                            text-xs
-                                            text-gray-700
-                                        "
-                                    >
-                                        {invoice.client}
-                                    </td>
+                <p className="text-sm text-gray-500">
+                    Showing 1 to 6 of 37 results
+                </p>
 
 
-                                    {/* ISSUE DATE */}
-
-                                    <td
-                                        className="
-                                            px-4
-                                            py-4
-                                            text-xs
-                                            text-gray-700
-                                        "
-                                    >
-                                        {invoice.issueDate}
-                                    </td>
+                <div className="flex items-center gap-2">
 
 
-                                    {/* DUE DATE */}
+                    {/* PREVIOUS */}
 
-                                    <td
-                                        className="
-                                            px-4
-                                            py-4
-                                            text-xs
-                                            text-gray-700
-                                        "
-                                    >
-                                        {invoice.dueDate}
-                                    </td>
-
-
-                                    {/* AMOUNT */}
-
-                                    <td
-                                        className="
-                                            px-4
-                                            py-4
-                                            text-xs
-                                            text-gray-700
-                                        "
-                                    >
-                                        {invoice.amount}
-                                    </td>
-
-
-                                    {/* STATUS */}
-
-                                    <td className="px-4 py-4">
-
-                                        <span
-                                            className={`
-                                                inline-block
-                                                px-2
-                                                py-1
-                                                rounded
-                                                text-[10px]
-                                                font-medium
-
-                                                ${
-                                                    invoice.status === "Paid"
-                                                        ? "bg-green-100 text-green-600"
-                                                        : invoice.status === "Pending"
-                                                        ? "bg-orange-100 text-orange-500"
-                                                        : "bg-red-100 text-red-500"
-                                                }
-                                            `}
-                                        >
-                                            {invoice.status}
-                                        </span>
-
-                                    </td>
-
-
-                                    {/* ACTIONS */}
-
-                                    <td className="px-4 py-4">
-
-                                        <div className="flex items-center gap-4">
-
-                                            {/* VIEW */}
-
-                                            <button
-                                                className="
-                                                    text-gray-600
-                                                    hover:text-purple-600
-                                                "
-                                            >
-
-                                                <Eye size={17} />
-
-                                            </button>
-
-
-                                            {/* DOWNLOAD */}
-
-                                            <button
-                                                className="
-                                                    text-gray-600
-                                                    hover:text-purple-600
-                                                "
-                                            >
-
-                                                <Download size={16} />
-
-                                            </button>
-
-
-                                            {/* MORE */}
-
-                                            <button
-                                                className="
-                                                    text-gray-700
-                                                    hover:text-black
-                                                "
-                                            >
-
-                                                <MoreVertical size={17} />
-
-                                            </button>
-
-                                        </div>
-
-                                    </td>
-
-                                </tr>
-
-                            ))}
-
-                        </tbody>
-
-                    </table>
-
-                </div>
-
-
-                {/* =================================================
-                    PAGINATION
-                ================================================= */}
-
-                <div
-                    className="
-                        min-h-[55px]
-                        flex
-                        flex-col
-                        sm:flex-row
-                        items-center
-                        sm:items-center
-                        justify-between
-                        gap-3
-                        px-4
-                        sm:px-10
-                        py-3
-                    "
-                >
-
-                    {/* RESULT COUNT */}
-
-                    <p className="text-xs text-gray-600">
-                        Showing 1 to 6 of 37 results
-                    </p>
-
-
-                    {/* PAGE CONTROLS */}
-
-                    <div
+                    <button
+                        disabled={importingInvoice}
                         className="
-                            flex
-                            flex-wrap
-                            items-center
-                            justify-center
-                            gap-3
+                            p-2
+                            border
+                            border-gray-300
+                            rounded-md
+                            text-gray-500
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
                         "
                     >
 
+                        <ChevronLeft size={17} />
 
-                        {/* PREVIOUS */}
-
-                        <button
-                            className="text-gray-700 hover:text-purple-600"
-                        >
-
-                            <ChevronLeft size={17} />
-
-                        </button>
+                    </button>
 
 
-                        {/* PAGE 1 */}
+                    {/* PAGE 1 */}
 
-                        <button
-                            className="
-                                w-7
-                                h-7
-                                bg-purple-600
-                                text-white
-                                rounded
-                                text-xs
-                            "
-                        >
-                            1
-                        </button>
-
-
-                        {/* PAGE 2 */}
-
-                        <button
-                            className="text-xs text-gray-700"
-                        >
-                            2
-                        </button>
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            w-8
+                            h-8
+                            rounded-md
+                            bg-[#4b397b]
+                            text-white
+                            text-sm
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+                        1
+                    </button>
 
 
-                        {/* PAGE 3 */}
+                    {/* PAGE 2 */}
 
-                        <button
-                            className="text-xs text-gray-700"
-                        >
-                            3
-                        </button>
-
-
-                        {/* MORE */}
-
-                        <span className="text-xs text-gray-500">
-                            ...
-                        </span>
-
-
-                        {/* PAGE 250 */}
-
-                        <button
-                            className="text-xs text-gray-700"
-                        >
-                            250
-                        </button>
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            w-8
+                            h-8
+                            rounded-md
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+                        2
+                    </button>
 
 
-                        {/* NEXT */}
+                    {/* PAGE 3 */}
 
-                        <button
-                            className="text-gray-700 hover:text-purple-600"
-                        >
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            w-8
+                            h-8
+                            rounded-md
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+                        3
+                    </button>
 
-                            <ChevronRight size={17} />
 
-                        </button>
+                    <span className="px-1 text-gray-500">
+                        ...
+                    </span>
 
 
-                        {/* PAGE SIZE */}
+                    {/* PAGE 250 */}
 
-                        <button
-                            className="
-                                flex
-                                items-center
-                                gap-2
-                                border
-                                border-gray-300
-                                rounded
-                                px-3
-                                py-2
-                                text-xs
-                                hover:bg-gray-100
-                                whitespace-nowrap
-                            "
-                        >
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            w-8
+                            h-8
+                            rounded-md
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+                        250
+                    </button>
 
-                            10 / Page
 
-                            <ChevronDown size={13} />
+                    {/* NEXT */}
 
-                        </button>
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            p-2
+                            border
+                            border-gray-300
+                            rounded-md
+                            text-gray-500
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
 
-                    </div>
+                        <ChevronRight size={17} />
+
+                    </button>
+
+
+                    {/* PAGE SIZE */}
+
+                    <button
+                        disabled={importingInvoice}
+                        className="
+                            flex
+                            items-center
+                            gap-2
+                            border
+                            border-gray-300
+                            rounded-md
+                            px-3
+                            py-2
+                            text-sm
+                            text-gray-600
+                            hover:bg-gray-100
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                        "
+                    >
+
+                        10 / Page
+
+                        <ChevronDown size={15} />
+
+                    </button>
 
                 </div>
 
@@ -1054,6 +997,7 @@ function Invoice() {
         </div>
 
     );
+
 }
 
 
