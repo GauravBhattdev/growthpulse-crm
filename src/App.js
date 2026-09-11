@@ -22,7 +22,7 @@ import Settings from "./pages/Settings/Settings";
 import HelpSupport from "./pages/HelpSupport/HelpSupport";
 import CreateLead from "./pages/CreateLead/createLead";
 import NotFound from "./pages/NotFound/NotFound";
-
+import { toast } from "react-toastify";
 // Layout
 import MainLayout from "./components/MainLayout/MainLayout";
 

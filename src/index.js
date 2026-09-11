@@ -6,6 +6,7 @@ import {
   QueryClientProvider
 } from "@tanstack/react-query";
 
+import { ToastContainer } from "react-toastify";
 import App from "./App";
 
 import "./index.css";
@@ -25,7 +26,8 @@ root.render(
     <QueryClientProvider client={queryClient}>
 
       <App />
-
+        
+        <ToastContainer />
     </QueryClientProvider>
 
   </React.StrictMode>

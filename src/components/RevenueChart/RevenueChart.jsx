@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { createPortal } from "react-dom";
 
 import {
     AreaChart,
@@ -350,14 +351,15 @@ function RevenueChart() {
 
             {/* CUSTOM DATE POPUP */}
 
-            {showCustomModal && (
-
-                <CustomDateRange
-                    onClose={() => setShowCustomModal(false)}
-                    onApply={handleCustomApply}
-                />
-
-            )}
+            {showCustomModal &&
+    createPortal(
+        <CustomDateRange
+            onClose={() => setShowCustomModal(false)}
+            onApply={handleCustomApply}
+        />,
+        document.body
+    )
+}
 
         </>
 

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
+import { toast } from "react-toastify";
 
 function ManualLeadForm() {
 
@@ -87,7 +88,7 @@ function ManualLeadForm() {
 
             console.log("Created Lead:", formData);
 
-            alert("Lead created successfully!");
+            toast.success("Lead created successfully!");
 
         }, 1500);
 
@@ -152,7 +153,6 @@ function ManualLeadForm() {
                 pb-3
             "
         >
-
 
             {/* ==========================================
                 BASIC INFORMATION
@@ -256,7 +256,6 @@ function ManualLeadForm() {
                 gap-x-9
                 gap-y-3
             ">
-
 
                 {/* FIRST NAME */}
 
@@ -424,7 +423,6 @@ function ManualLeadForm() {
                 gap-x-9
                 gap-y-3
             ">
-
 
                 {/* SOURCE */}
 
@@ -667,7 +665,6 @@ function ManualLeadForm() {
                 gap-x-9
                 gap-y-3
             ">
-
 
                 {/* ADDRESS */}
 

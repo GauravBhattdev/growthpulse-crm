@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
+// import BottomRightCheckbox from "../BottomRightCheckbox/BottomRightCheckbox";
 
 
 function MainLayout({ children }) {
@@ -68,6 +69,11 @@ function MainLayout({ children }) {
                 ">
                     {children}
                 </main>
+
+
+                {/* Bottom Right Checkbox */}
+
+                {/* <BottomRightCheckbox /> */}
 
             </div>
 

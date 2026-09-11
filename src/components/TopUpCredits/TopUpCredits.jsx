@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
   X,
@@ -14,6 +14,40 @@ function TopUpCredits({ onClose }) {
 
   const [paymentMethod, setPaymentMethod] = useState("card");
 
+  // Animation states
+  const [isVisible, setIsVisible] = useState(false);
+  const [isClosing, setIsClosing] = useState(false);
+
+
+  // ==============================
+  // OPEN ANIMATION
+  // ==============================
+
+  useEffect(() => {
+
+    const timer = setTimeout(() => {
+      setIsVisible(true);
+    }, 20);
+
+    return () => clearTimeout(timer);
+
+  }, []);
+
+
+  // ==============================
+  // CLOSE ANIMATION
+  // ==============================
+
+  const handleClose = () => {
+
+    setIsClosing(true);
+
+    setTimeout(() => {
+      onClose();
+    }, 500);
+
+  };
+
 
   return (
 
@@ -26,43 +60,92 @@ function TopUpCredits({ onClose }) {
       "
     >
 
-      {/* Add / Manage Credits Panel */}
+      {/* ==============================
+          ADD / MANAGE CREDITS PANEL
+      ============================== */}
 
       <div
-        className="
+        className={`
           pointer-events-auto
+
           absolute
           top-10
           right-0
+
           w-full
           sm:w-[400px]
-          h-auto
-          max-h-screen
+
+          max-h-[calc(100vh-2.5rem)]
+
           bg-[#171126]
           border-l
           border-[#3d315d]
           shadow-2xl
           text-white
+
           overflow-y-auto
-        "
+          overflow-x-hidden
+
+          transform-gpu
+          transition-all
+          duration-500
+          ease-out
+
+          origin-bottom-right
+
+          ${
+            isClosing
+              ? `
+                translate-x-[100%]
+                translate-y-[80px]
+                scale-90
+                rotate-6
+                opacity-0
+              `
+              : isVisible
+                ? `
+                  translate-x-0
+                  translate-y-0
+                  scale-100
+                  rotate-0
+                  opacity-100
+                `
+                : `
+                  translate-x-[100%]
+                  translate-y-[80px]
+                  scale-90
+                  rotate-6
+                  opacity-0
+                `
+          }
+        `}
       >
 
-        {/* Header */}
+        {/* ==============================
+            HEADER
+        ============================== */}
 
         <div
           className="
             flex
             items-center
             justify-between
-            px-5
+
+            px-4
+            sm:px-5
+
             py-4
+
+            gap-3
           "
         >
 
           <h2
             className="
-              text-lg
+              text-base
+              sm:text-lg
               font-semibold
+              truncate
             "
           >
             Add / Manage Credits
@@ -73,12 +156,13 @@ function TopUpCredits({ onClose }) {
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="
               text-white
               hover:text-gray-300
               transition
               cursor-pointer
+              shrink-0
             "
           >
 
@@ -89,9 +173,16 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* Current Credits */}
+        {/* ==============================
+            CURRENT CREDITS
+        ============================== */}
 
-        <div className="px-5">
+        <div
+          className="
+            px-4
+            sm:px-5
+          "
+        >
 
           <div
             className="
@@ -99,7 +190,9 @@ function TopUpCredits({ onClose }) {
               border-[#6c637d]
               rounded-md
               bg-[#262236]
-              p-4
+
+              p-3
+              sm:p-4
             "
           >
 
@@ -107,7 +200,8 @@ function TopUpCredits({ onClose }) {
               className="
                 flex
                 items-center
-                gap-4
+                gap-3
+                sm:gap-4
               "
             >
 
@@ -115,33 +209,52 @@ function TopUpCredits({ onClose }) {
 
               <div
                 className="
-                  w-12
-                  h-12
+                  w-10
+                  h-10
+                  sm:w-12
+                  sm:h-12
+
                   rounded-full
                   bg-purple-600
+
                   flex
                   items-center
                   justify-center
+
                   shrink-0
                 "
               >
 
-                <Wallet size={23} />
+                <Wallet
+                  size={20}
+                  className="sm:hidden"
+                />
+
+                <Wallet
+                  size={23}
+                  className="hidden sm:block"
+                />
 
               </div>
 
 
               {/* Credit Information */}
 
-              <div>
+              <div className="min-w-0">
 
-                <p className="text-sm">
+                <p
+                  className="
+                    text-xs
+                    sm:text-sm
+                  "
+                >
                   Current Credits
                 </p>
 
                 <p
                   className="
-                    text-2xl
+                    text-xl
+                    sm:text-2xl
                     font-bold
                     mt-1
                   "
@@ -168,13 +281,24 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* Add Credits */}
+        {/* ==============================
+            ADD CREDITS
+        ============================== */}
 
-        <div className="px-5 pt-5">
+        <div
+          className="
+            px-4
+            sm:px-5
+
+            pt-5
+          "
+        >
 
           <h3
             className="
-              text-lg
+              text-base
+              sm:text-lg
+
               font-semibold
               mb-4
             "
@@ -188,7 +312,10 @@ function TopUpCredits({ onClose }) {
           <div
             className="
               grid
-              grid-cols-4
+
+              grid-cols-2
+              sm:grid-cols-4
+
               gap-2
             "
           >
@@ -199,21 +326,28 @@ function TopUpCredits({ onClose }) {
               type="button"
               onClick={() => setSelectedCredits(500)}
               className={`
-                h-[82px]
+                h-[78px]
+                sm:h-[82px]
+
                 rounded-md
                 border
+
                 ${
                   selectedCredits === 500
                     ? "border-purple-500 bg-purple-500/10"
                     : "border-[#6c637d] bg-black"
                 }
+
                 hover:border-purple-400
                 transition
                 cursor-pointer
+
                 flex
                 flex-col
                 items-center
                 justify-center
+
+                min-w-0
               `}
             >
 
@@ -238,21 +372,28 @@ function TopUpCredits({ onClose }) {
               type="button"
               onClick={() => setSelectedCredits(1000)}
               className={`
-                h-[82px]
+                h-[78px]
+                sm:h-[82px]
+
                 rounded-md
                 border
+
                 ${
                   selectedCredits === 1000
                     ? "border-purple-500 bg-purple-500/10"
                     : "border-[#6c637d] bg-black"
                 }
+
                 hover:border-purple-400
                 transition
                 cursor-pointer
+
                 flex
                 flex-col
                 items-center
                 justify-center
+
+                min-w-0
               `}
             >
 
@@ -277,21 +418,28 @@ function TopUpCredits({ onClose }) {
               type="button"
               onClick={() => setSelectedCredits(2500)}
               className={`
-                h-[82px]
+                h-[78px]
+                sm:h-[82px]
+
                 rounded-md
                 border
+
                 ${
                   selectedCredits === 2500
                     ? "border-purple-500 bg-purple-500/10"
                     : "border-[#6c637d] bg-black"
                 }
+
                 hover:border-purple-400
                 transition
                 cursor-pointer
+
                 flex
                 flex-col
                 items-center
                 justify-center
+
+                min-w-0
               `}
             >
 
@@ -316,21 +464,28 @@ function TopUpCredits({ onClose }) {
               type="button"
               onClick={() => setSelectedCredits(0)}
               className={`
-                h-[82px]
+                h-[78px]
+                sm:h-[82px]
+
                 rounded-md
                 border
+
                 ${
                   selectedCredits === 0
                     ? "border-purple-500 bg-purple-500/10"
                     : "border-[#6c637d] bg-black"
                 }
+
                 hover:border-purple-400
                 transition
                 cursor-pointer
+
                 flex
                 flex-col
                 items-center
                 justify-center
+
+                min-w-0
               `}
             >
 
@@ -353,13 +508,24 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* Payment Details */}
+        {/* ==============================
+            PAYMENT DETAILS
+        ============================== */}
 
-        <div className="px-5 pt-5">
+        <div
+          className="
+            px-4
+            sm:px-5
+
+            pt-5
+          "
+        >
 
           <h3
             className="
-              text-lg
+              text-base
+              sm:text-lg
+
               font-semibold
               mb-4
             "
@@ -385,13 +551,18 @@ function TopUpCredits({ onClose }) {
             <div
               className="
                 h-[40px]
+
                 border
                 border-[#6c637d]
                 rounded-md
                 bg-black
+
                 flex
                 items-center
-                px-4
+
+                px-3
+                sm:px-4
+
                 text-gray-400
                 text-sm
               "
@@ -421,8 +592,11 @@ function TopUpCredits({ onClose }) {
             <div
               className="
                 flex
-                items-center
-                gap-5
+                items-start
+
+                gap-x-4
+                gap-y-3
+
                 flex-wrap
               "
             >
@@ -434,8 +608,13 @@ function TopUpCredits({ onClose }) {
                   flex
                   items-center
                   gap-2
-                  text-sm
+
+                  text-xs
+                  sm:text-sm
+
                   cursor-pointer
+
+                  min-w-0
                 "
               >
 
@@ -445,10 +624,12 @@ function TopUpCredits({ onClose }) {
                   value="card"
                   checked={paymentMethod === "card"}
                   onChange={() => setPaymentMethod("card")}
-                  className="accent-purple-600"
+                  className="accent-purple-600 shrink-0"
                 />
 
-                Credit / Debit Card
+                <span>
+                  Credit / Debit Card
+                </span>
 
               </label>
 
@@ -460,8 +641,13 @@ function TopUpCredits({ onClose }) {
                   flex
                   items-center
                   gap-2
-                  text-sm
+
+                  text-xs
+                  sm:text-sm
+
                   cursor-pointer
+
+                  min-w-0
                 "
               >
 
@@ -471,10 +657,12 @@ function TopUpCredits({ onClose }) {
                   value="upi"
                   checked={paymentMethod === "upi"}
                   onChange={() => setPaymentMethod("upi")}
-                  className="accent-purple-600"
+                  className="accent-purple-600 shrink-0"
                 />
 
-                UPI
+                <span>
+                  UPI
+                </span>
 
               </label>
 
@@ -486,8 +674,13 @@ function TopUpCredits({ onClose }) {
                   flex
                   items-center
                   gap-2
-                  text-sm
+
+                  text-xs
+                  sm:text-sm
+
                   cursor-pointer
+
+                  min-w-0
                 "
               >
 
@@ -497,10 +690,12 @@ function TopUpCredits({ onClose }) {
                   value="netbanking"
                   checked={paymentMethod === "netbanking"}
                   onChange={() => setPaymentMethod("netbanking")}
-                  className="accent-purple-600"
+                  className="accent-purple-600 shrink-0"
                 />
 
-                Net banking
+                <span>
+                  Net banking
+                </span>
 
               </label>
 
@@ -511,14 +706,21 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* Bottom Buttons */}
+        {/* ==============================
+            BOTTOM BUTTONS
+        ============================== */}
 
         <div
           className="
             flex
             items-center
-            gap-5
-            px-5
+
+            gap-3
+            sm:gap-5
+
+            px-4
+            sm:px-5
+
             py-5
           "
         >
@@ -527,17 +729,24 @@ function TopUpCredits({ onClose }) {
 
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             className="
               h-[40px]
-              px-5
+
+              px-4
+              sm:px-5
+
               border
               border-[#8b8498]
               rounded-md
+
               text-sm
+
               hover:bg-[#262236]
               transition
               cursor-pointer
+
+              shrink-0
             "
           >
             Cancel
@@ -550,14 +759,24 @@ function TopUpCredits({ onClose }) {
             type="button"
             className="
               h-[40px]
+
               flex-1
+              min-w-0
+
               bg-purple-600
               hover:bg-purple-700
+
               rounded-md
-              text-sm
+
+              text-xs
+              sm:text-sm
+
               font-medium
+
               transition
               cursor-pointer
+
+              whitespace-nowrap
             "
           >
             Proceed to Payment

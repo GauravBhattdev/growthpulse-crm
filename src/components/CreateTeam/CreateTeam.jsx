@@ -1,10 +1,12 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     X,
     Megaphone,
     ChevronDown
 } from "lucide-react";
+
+import { toast } from "react-toastify";
 
 import FormInput from "./FormInput";
 import FormSelect from "./FormSelect";
@@ -28,87 +30,189 @@ function CreateTeam({ onClose }) {
     const [visibility, setVisibility] = useState("");
     const [members, setMembers] = useState("");
 
+    // Controls opening animation
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Controls closing animation
+    const [isClosing, setIsClosing] = useState(false);
+
+
+    // ==========================================
+    // OPENING ANIMATION
+    // ==========================================
+
+    useEffect(() => {
+
+        requestAnimationFrame(() => {
+            setIsVisible(true);
+        });
+
+    }, []);
+
+
+    // ==========================================
+    // CLOSE POPUP WITH ANIMATION
+    // ==========================================
+
+    const handleClose = () => {
+
+        setIsClosing(true);
+
+        setTimeout(() => {
+            onClose();
+        }, 500);
+
+    };
+
+
+    // ==========================================
+    // CREATE TEAM
+    // ==========================================
+
+    const handleCreateTeam = () => {
+
+        // Check if Team Name is empty
+        if (!teamName.trim()) {
+
+            toast.error("Please enter a team name.");
+
+            return;
+        }
+
+
+        // Show success notification
+        toast.success(
+            `Team "${teamName}" created successfully!`
+        );
+
+
+        // Close the Create Team panel
+        handleClose();
+
+    };
+
 
     return (
 
-        <div className="
-            fixed
-            inset-0
-            z-[110]
-            pointer-events-none
-        ">
-
+        <div
+            className="
+                fixed
+                inset-0
+                z-[110]
+                pointer-events-none
+            "
+        >
 
             {/* =================================================
                 CREATE TEAM PANEL
             ================================================= */}
 
-            <div className="
-                pointer-events-auto
-                absolute
-                top-10
-                right-0
-                w-full
-                sm:w-[350px]
-                h-[600px]
-                bg-background
-                text-textPrimary
-                shadow-2xl
-                flex
-                flex-col
-            ">
+            <div
+                className={`
+                    pointer-events-auto
+                    absolute
+                    top-10
+                    right-0
+                    w-full
+                    sm:w-[350px]
+                    max-w-full
+                    h-[calc(100vh-2.5rem)]
+                    sm:h-[600px]
+                    bg-background
+                    text-textPrimary
+                    shadow-2xl
+                    flex
+                    flex-col
+                    overflow-hidden
 
+                    transform
+                    transition-transform
+                    duration-500
+                    ease-in-out
+
+                    ${
+                        isClosing
+                            ? "-translate-y-[110%]"
+                            : isVisible
+                                ? "translate-y-0"
+                                : "-translate-y-[110%]"
+                    }
+                `}
+            >
 
                 {/* =================================================
                     HEADER
                 ================================================= */}
 
-                <div className="
-                    px-6
-                    pt-5
-                    pb-3
-                    shrink-0
-                ">
+                <div
+                    className="
+                        px-4
+                        sm:px-6
+                        pt-4
+                        sm:pt-5
+                        pb-3
+                        shrink-0
+                    "
+                >
 
-                    <div className="
-                        flex
-                        items-start
-                        justify-between
-                    ">
+                    <div
+                        className="
+                            flex
+                            items-start
+                            justify-between
+                            gap-3
+                        "
+                    >
 
-                        <div>
+                        <div className="min-w-0">
 
-                            <h2 className="
-                                text-[23px]
-                                font-semibold
-                                text-textPrimary
-                            ">
+                            <h2
+                                className="
+                                    text-[20px]
+                                    sm:text-[23px]
+                                    font-semibold
+                                    text-textPrimary
+                                    truncate
+                                "
+                            >
                                 Create Team
                             </h2>
 
 
-                            <p className="
-                                text-[13px]
-                                text-textSecondary
-                                mt-1
-                            ">
+                            <p
+                                className="
+                                    text-[11px]
+                                    sm:text-[13px]
+                                    text-textSecondary
+                                    mt-1
+                                    leading-relaxed
+                                "
+                            >
                                 Add a new team to organize your work better
                             </p>
 
                         </div>
 
 
+                        {/* =================================================
+                            CLOSE BUTTON
+                        ================================================= */}
+
                         <button
                             type="button"
-                            onClick={onClose}
+                            onClick={handleClose}
                             className="
+                                shrink-0
                                 text-textPrimary
                                 hover:text-textSecondary
                                 transition
                                 cursor-pointer
                             "
                         >
-                            <X size={24} />
+                            <X
+                                size={22}
+                                className="sm:w-6 sm:h-6"
+                            />
                         </button>
 
                     </div>
@@ -120,13 +224,18 @@ function CreateTeam({ onClose }) {
                     FORM CONTENT
                 ================================================= */}
 
-                <div className="
-                    flex-1
-                    overflow-y-auto
-                    px-6
-                    pb-6
-                ">
-
+                <div
+                    className="
+                        flex-1
+                        min-h-0
+                        overflow-y-auto
+                        overflow-x-hidden
+                        px-4
+                        sm:px-6
+                        pb-5
+                        sm:pb-6
+                    "
+                >
 
                     {/* =================================================
                         TEAM INFORMATION
@@ -134,12 +243,15 @@ function CreateTeam({ onClose }) {
 
                     <FormSection title="Team Information">
 
-                        <div className="
-                            grid
-                            grid-cols-1
-                            sm:grid-cols-[1fr_105px]
-                            gap-4
-                        ">
+                        <div
+                            className="
+                                grid
+                                grid-cols-1
+                                sm:grid-cols-[1fr_105px]
+                                gap-3
+                                sm:gap-4
+                            "
+                        >
 
                             <FormInput
                                 label="Team Name"
@@ -151,17 +263,22 @@ function CreateTeam({ onClose }) {
                             />
 
 
-                            {/* TEAM ICON */}
+                            {/* =================================================
+                                TEAM ICON
+                            ================================================= */}
 
                             <div>
 
-                                <label className="
-                                    block
-                                    text-[13px]
-                                    font-medium
-                                    text-textPrimary
-                                    mb-1.5
-                                ">
+                                <label
+                                    className="
+                                        block
+                                        text-[12px]
+                                        sm:text-[13px]
+                                        font-medium
+                                        text-textPrimary
+                                        mb-1.5
+                                    "
+                                >
                                     Team Icon
                                 </label>
 
@@ -182,23 +299,29 @@ function CreateTeam({ onClose }) {
                                     "
                                 >
 
-                                    <span className="
-                                        w-7
-                                        h-7
-                                        rounded-full
-                                        bg-primary
-                                        flex
-                                        items-center
-                                        justify-center
-                                        text-white
-                                    ">
+                                    <span
+                                        className="
+                                            w-7
+                                            h-7
+                                            rounded-full
+                                            bg-primary
+                                            flex
+                                            items-center
+                                            justify-center
+                                            text-white
+                                            shrink-0
+                                        "
+                                    >
                                         <Megaphone size={15} />
                                     </span>
 
 
                                     <ChevronDown
                                         size={18}
-                                        className="text-textSecondary"
+                                        className="
+                                            text-textSecondary
+                                            shrink-0
+                                        "
                                     />
 
                                 </button>
@@ -208,17 +331,22 @@ function CreateTeam({ onClose }) {
                         </div>
 
 
-                        {/* DESCRIPTION */}
+                        {/* =================================================
+                            DESCRIPTION
+                        ================================================= */}
 
-                        <div className="mt-4">
+                        <div className="mt-3 sm:mt-4">
 
-                            <label className="
-                                block
-                                text-[13px]
-                                font-medium
-                                text-textPrimary
-                                mb-1.5
-                            ">
+                            <label
+                                className="
+                                    block
+                                    text-[12px]
+                                    sm:text-[13px]
+                                    font-medium
+                                    text-textPrimary
+                                    mb-1.5
+                                "
+                            >
                                 Description
                             </label>
 
@@ -256,13 +384,16 @@ function CreateTeam({ onClose }) {
                                 />
 
 
-                                <span className="
-                                    absolute
-                                    bottom-1.5
-                                    right-2
-                                    text-[11px]
-                                    text-textSecondary
-                                ">
+                                <span
+                                    className="
+                                        absolute
+                                        bottom-1.5
+                                        right-2
+                                        text-[10px]
+                                        sm:text-[11px]
+                                        text-textSecondary
+                                    "
+                                >
                                     {description.length}/150
                                 </span>
 
@@ -279,12 +410,14 @@ function CreateTeam({ onClose }) {
 
                     <FormSection title="Team Setting">
 
-                        <div className="
-                            grid
-                            grid-cols-1
-                            sm:grid-cols-2
-                            gap-3
-                        ">
+                        <div
+                            className="
+                                grid
+                                grid-cols-1
+                                sm:grid-cols-2
+                                gap-3
+                            "
+                        >
 
                             <FormSelect
                                 label="Team Leader"
@@ -310,13 +443,16 @@ function CreateTeam({ onClose }) {
                         </div>
 
 
-                        <div className="
-                            grid
-                            grid-cols-1
-                            sm:grid-cols-2
-                            gap-3
-                            mt-4
-                        ">
+                        <div
+                            className="
+                                grid
+                                grid-cols-1
+                                sm:grid-cols-2
+                                gap-3
+                                mt-3
+                                sm:mt-4
+                            "
+                        >
 
                             <FormInput
                                 label="Member Limit"
@@ -360,7 +496,7 @@ function CreateTeam({ onClose }) {
                             }
                             placeholder="Search and select members"
                             options={memberOptions}
-                            width="w-full sm:w-[215px]"
+                            width="w-full"
                             helperText="Maximum number of members"
                         />
 
@@ -373,57 +509,70 @@ function CreateTeam({ onClose }) {
                     FOOTER
                 ================================================= */}
 
-                <div className="
-                    shrink-0
-                    border-t
-                    border-borderLight
-                    bg-background
-                    px-6
-                    py-3
-                    flex
-                    justify-end
-                    items-center
-                    gap-2
-                ">
+                <div
+                    className="
+                        shrink-0
+                        border-t
+                        border-borderLight
+                        bg-background
+                        px-4
+                        sm:px-6
+                        py-3
+                        flex
+                        justify-end
+                        items-center
+                        gap-2
+                    "
+                >
 
-
-                    {/* CANCEL */}
+                    {/* =================================================
+                        CANCEL BUTTON
+                    ================================================= */}
 
                     <button
                         type="button"
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="
                             h-[32px]
-                            px-4
+                            px-3
+                            sm:px-4
                             border
                             border-borderLight
                             rounded
-                            text-[12px]
+                            text-[11px]
+                            sm:text-[12px]
                             text-textPrimary
                             hover:bg-gray-100
                             transition
                             cursor-pointer
+                            whitespace-nowrap
                         "
                     >
                         Cancel
                     </button>
 
 
-                    {/* CREATE TEAM */}
+                    {/* =================================================
+                        CREATE TEAM BUTTON
+                    ================================================= */}
 
                     <button
                         type="button"
+                        onClick={handleCreateTeam}
                         className="
                             h-[32px]
-                            px-4
+                            px-3
+                            sm:px-4
                             bg-primary
                             hover:bg-primaryHover
                             text-white
                             rounded
-                            text-[12px]
+                            text-[11px]
+                            sm:text-[12px]
                             font-medium
                             transition
                             cursor-pointer
+                            whitespace-nowrap
                         "
                     >
                         Create Team

@@ -1,83 +1,79 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-import {
-    X,
-    Calendar
-} from "lucide-react";
+import { X } from "lucide-react";
 
 
 function CustomDateRange({ onClose, onApply }) {
 
     const [startDate, setStartDate] = useState("");
-
     const [endDate, setEndDate] = useState("");
 
+    // Animation states
+    const [isVisible, setIsVisible] = useState(false);
+    const [isClosing, setIsClosing] = useState(false);
 
-    /* ==============================
-       RESET
-    =============================== */
 
-    const handleReset = () => {
+    // Open animation
+    useEffect(() => {
 
-        setStartDate("");
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 20);
 
-        setEndDate("");
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    // Close animation
+    const handleClose = () => {
+
+        setIsClosing(true);
+
+        setTimeout(() => {
+            onClose();
+        }, 300);
 
     };
 
 
-    /* ==============================
-       QUICK SELECT
-    =============================== */
+    // Reset both dates
+    const handleReset = () => {
+        setStartDate("");
+        setEndDate("");
+    };
 
+
+    // Quick date selection
     const handleQuickSelect = (type) => {
 
         const today = new Date();
 
         let start = new Date(today);
-
         let end = new Date(today);
 
 
         if (type === "today") {
-
             start = new Date(today);
-
             end = new Date(today);
-
         }
 
 
         if (type === "yesterday") {
-
-            start.setDate(
-                today.getDate() - 1
-            );
-
+            start.setDate(today.getDate() - 1);
             end = new Date(start);
-
         }
 
 
         if (type === "last7") {
-
-            start.setDate(
-                today.getDate() - 6
-            );
-
+            start.setDate(today.getDate() - 6);
             end = new Date(today);
-
         }
 
 
         if (type === "last30") {
-
-            start.setDate(
-                today.getDate() - 29
-            );
-
+            start.setDate(today.getDate() - 29);
             end = new Date(today);
-
         }
 
 
@@ -90,7 +86,6 @@ function CustomDateRange({ onClose, onApply }) {
             );
 
             end = new Date(today);
-
         }
 
 
@@ -107,17 +102,13 @@ function CustomDateRange({ onClose, onApply }) {
                 today.getMonth(),
                 0
             );
-
         }
 
 
         if (type === "thisQuarter") {
 
             const quarterStart =
-                Math.floor(
-                    today.getMonth() / 3
-                ) * 3;
-
+                Math.floor(today.getMonth() / 3) * 3;
 
             start = new Date(
                 today.getFullYear(),
@@ -126,32 +117,23 @@ function CustomDateRange({ onClose, onApply }) {
             );
 
             end = new Date(today);
-
         }
 
 
         if (type === "lastQuarter") {
 
             const currentQuarter =
-                Math.floor(
-                    today.getMonth() / 3
-                );
+                Math.floor(today.getMonth() / 3);
 
-
-            let year =
-                today.getFullYear();
-
+            let year = today.getFullYear();
 
             let month =
                 (currentQuarter - 1) * 3;
 
 
             if (month < 0) {
-
                 month = 9;
-
                 year--;
-
             }
 
 
@@ -166,75 +148,61 @@ function CustomDateRange({ onClose, onApply }) {
                 month + 3,
                 0
             );
-
         }
 
 
+        // Convert Date object to YYYY-MM-DD
         const formatDate = (date) => {
 
-            const year =
-                date.getFullYear();
+            const year = date.getFullYear();
 
-            const month =
-                String(
-                    date.getMonth() + 1
-                ).padStart(2, "0");
+            const month = String(
+                date.getMonth() + 1
+            ).padStart(2, "0");
 
-            const day =
-                String(
-                    date.getDate()
-                ).padStart(2, "0");
+            const day = String(
+                date.getDate()
+            ).padStart(2, "0");
 
 
             return `${year}-${month}-${day}`;
-
         };
 
 
-        setStartDate(
-            formatDate(start)
-        );
-
-        setEndDate(
-            formatDate(end)
-        );
-
+        setStartDate(formatDate(start));
+        setEndDate(formatDate(end));
     };
 
 
-    /* ==============================
-       APPLY
-    =============================== */
-
+    // Apply selected date range
     const handleApply = () => {
 
         if (!startDate || !endDate) {
 
-            alert("Please select start date and end date.");
+            alert(
+                "Please select start date and end date."
+            );
 
             return;
-
         }
 
 
-        if (new Date(startDate) > new Date(endDate)) {
+        if (
+            new Date(startDate) >
+            new Date(endDate)
+        ) {
 
-            alert("Start date cannot be after end date.");
+            alert(
+                "Start date cannot be after end date."
+            );
 
             return;
-
         }
 
 
         if (onApply) {
-
-            onApply(
-                startDate,
-                endDate
-            );
-
+            onApply(startDate, endDate);
         }
-
     };
 
 
@@ -244,34 +212,59 @@ function CustomDateRange({ onClose, onApply }) {
             className="
                 fixed
                 inset-0
-                z-[999]
+                z-[9999]
                 bg-black/50
+                overflow-hidden
+                pointer-events-auto
             "
         >
 
+            {/* Date Range Panel */}
+
             <div
-                className="
+                className={`
                     absolute
                     top-3
-                    right-0
-                    w-full
-                    max-w-[720px]
+                    right-3
+
+                    w-[520px]
+                    max-w-[calc(100%-24px)]
+
+                    max-h-[calc(100vh-24px)]
+                    overflow-y-auto
+
                     bg-[#171126]
                     border
                     border-[#3d315d]
                     shadow-2xl
+
                     text-white
-                    p-8
-                "
+
+                    p-5
+
+                    transform
+                    transition-all
+                    duration-300
+                    ease-out
+
+                    ${
+                        isClosing
+                            ? "translate-y-full opacity-0"
+                            : isVisible
+                                ? "translate-y-0 opacity-100"
+                                : "-translate-y-full opacity-0"
+                    }
+                `}
             >
 
-                {/* HEADER */}
+                {/* Header */}
 
                 <div
                     className="
                         flex
                         items-start
                         justify-between
+                        mb-4
                     "
                 >
 
@@ -279,190 +272,148 @@ function CustomDateRange({ onClose, onApply }) {
 
                         <h2
                             className="
-                                text-[28px]
+                                text-xl
                                 font-semibold
                             "
                         >
                             Custom Date Range
                         </h2>
 
-
                         <p
                             className="
-                                mt-2
-                                text-[16px]
-                                text-[#D1CDD8]
+                                text-xs
+                                text-gray-400
+                                mt-1
                             "
                         >
-                            Select a custom date range to
-                            view revenue data.
+                            Select a date range or choose
+                            a quick option.
                         </p>
 
                     </div>
 
 
+                    {/* Close Button */}
+
                     <button
                         type="button"
-                        onClick={onClose}
+                        onClick={handleClose}
                         className="
-                            text-gray-300
+                            p-1
+                            text-gray-400
                             hover:text-white
+                            transition
                             cursor-pointer
                         "
                     >
-
-                        <X size={24} />
-
+                        <X size={20} />
                     </button>
 
                 </div>
 
 
-                {/* DATE INPUTS */}
+                {/* Date Inputs */}
 
                 <div
                     className="
                         grid
                         grid-cols-2
-                        gap-6
-                        mt-6
+                        gap-3
+                        mb-4
                     "
                 >
 
-                    {/* START DATE */}
+                    {/* Start Date */}
 
                     <div>
 
                         <label
                             className="
                                 block
-                                text-[17px]
-                                mb-2
+                                text-xs
+                                text-gray-300
+                                mb-1.5
                             "
                         >
                             Start Date
                         </label>
 
 
-                        <div className="relative">
-
-                            <Calendar
-                                size={22}
-                                className="
-                                    absolute
-                                    right-4
-                                    top-1/2
-                                    -translate-y-1/2
-                                    text-white
-                                    pointer-events-none
-                                "
-                            />
-
-
-                            <input
-                                id="datepicker-range-start"
-                                name="start"
-                                type="date"
-                                value={startDate}
-                                onChange={(e) =>
-                                    setStartDate(
-                                        e.target.value
-                                    )
-                                }
-                                className="
-                                    block
-                                    w-full
-                                    h-[55px]
-                                    px-4
-                                    pr-12
-                                    bg-[#292438]
-                                    border
-                                    border-[#8b8498]
-                                    text-white
-                                    text-[16px]
-                                    rounded-md
-                                    outline-none
-                                    focus:border-[#8B3DFF]
-                                "
-                            />
-
-                        </div>
+                        <input
+                            type="date"
+                            value={startDate}
+                            onChange={(e) =>
+                                setStartDate(e.target.value)
+                            }
+                            className="
+                                w-full
+                                h-10
+                                px-3
+                                rounded-md
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-white
+                                text-sm
+                                outline-none
+                                focus:border-[#8B3DF5]
+                            "
+                        />
 
                     </div>
 
 
-                    {/* END DATE */}
+                    {/* End Date */}
 
                     <div>
 
                         <label
                             className="
                                 block
-                                text-[17px]
-                                mb-2
+                                text-xs
+                                text-gray-300
+                                mb-1.5
                             "
                         >
                             End Date
                         </label>
 
 
-                        <div className="relative">
-
-                            <Calendar
-                                size={22}
-                                className="
-                                    absolute
-                                    right-4
-                                    top-1/2
-                                    -translate-y-1/2
-                                    text-white
-                                    pointer-events-none
-                                "
-                            />
-
-
-                            <input
-                                id="datepicker-range-end"
-                                name="end"
-                                type="date"
-                                value={endDate}
-                                onChange={(e) =>
-                                    setEndDate(
-                                        e.target.value
-                                    )
-                                }
-                                className="
-                                    block
-                                    w-full
-                                    h-[55px]
-                                    px-4
-                                    pr-12
-                                    bg-[#292438]
-                                    border
-                                    border-[#8b8498]
-                                    text-white
-                                    text-[16px]
-                                    rounded-md
-                                    outline-none
-                                    focus:border-[#8B3DFF]
-                                "
-                            />
-
-                        </div>
+                        <input
+                            type="date"
+                            value={endDate}
+                            onChange={(e) =>
+                                setEndDate(e.target.value)
+                            }
+                            className="
+                                w-full
+                                h-10
+                                px-3
+                                rounded-md
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-white
+                                text-sm
+                                outline-none
+                                focus:border-[#8B3DF5]
+                            "
+                        />
 
                     </div>
 
                 </div>
 
 
-                {/* QUICK SELECT */}
+                {/* Quick Select */}
 
-                <div className="mt-7">
+                <div className="mb-4">
 
                     <h3
                         className="
-                            text-[18px]
-                            mb-4
+                            text-sm
+                            font-medium
+                            mb-2
                         "
                     >
                         Quick Select
@@ -473,7 +424,7 @@ function CustomDateRange({ onClose, onApply }) {
                         className="
                             grid
                             grid-cols-4
-                            gap-4
+                            gap-2
                         "
                     >
 
@@ -483,13 +434,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("today")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Today
@@ -502,13 +455,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("yesterday")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Yesterday
@@ -521,13 +476,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("last7")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Last 7 Days
@@ -540,13 +497,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("last30")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Last 30 Days
@@ -559,13 +518,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("thisMonth")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             This Month
@@ -578,13 +539,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("lastMonth")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Last Month
@@ -597,13 +560,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("thisQuarter")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             This Quarter
@@ -616,13 +581,15 @@ function CustomDateRange({ onClose, onApply }) {
                                 handleQuickSelect("lastQuarter")
                             }
                             className="
-                                h-[52px]
-                                border
-                                border-[#8b8498]
+                                h-9
                                 rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                                hover:border-[#8B3DFF]
+                                bg-[#211936]
+                                border
+                                border-[#3d315d]
+                                text-xs
+                                hover:bg-[#2b2145]
+                                transition
+                                cursor-pointer
                             "
                         >
                             Last Quarter
@@ -633,86 +600,91 @@ function CustomDateRange({ onClose, onApply }) {
                 </div>
 
 
-                {/* BUTTONS */}
+                {/* Bottom Buttons */}
 
                 <div
                     className="
                         flex
-                        items-center
-                        justify-between
-                        mt-7
+                        justify-end
+                        gap-2
+                        pt-3
+                        border-t
+                        border-[#3d315d]
                     "
                 >
+
+                    {/* Reset */}
 
                     <button
                         type="button"
                         onClick={handleReset}
                         className="
-                            h-[48px]
-                            px-7
-                            border
-                            border-[#8b8498]
+                            h-9
+                            px-4
                             rounded-md
-                            text-[16px]
-                            hover:bg-[#292438]
+                            border
+                            border-[#3d315d]
+                            text-xs
+                            text-gray-300
+                            hover:bg-[#211936]
+                            transition
+                            cursor-pointer
                         "
                     >
                         Reset
                     </button>
 
 
-                    <div
+                    {/* Cancel */}
+
+                    <button
+                        type="button"
+                        onClick={handleClose}
                         className="
-                            flex
-                            items-center
-                            gap-4
+                            h-9
+                            px-4
+                            rounded-md
+                            border
+                            border-[#3d315d]
+                            text-xs
+                            text-gray-300
+                            hover:bg-[#211936]
+                            transition
+                            cursor-pointer
                         "
                     >
-
-                        <button
-                            type="button"
-                            onClick={onClose}
-                            className="
-                                h-[48px]
-                                px-7
-                                border
-                                border-[#8b8498]
-                                rounded-md
-                                text-[16px]
-                                hover:bg-[#292438]
-                            "
-                        >
-                            Cancel
-                        </button>
+                        Cancel
+                    </button>
 
 
-                        <button
-                            type="button"
-                            onClick={handleApply}
-                            className="
-                                h-[48px]
-                                px-9
-                                bg-[#8B3DFF]
-                                hover:bg-[#742be0]
-                                rounded-md
-                                text-[16px]
-                                font-medium
-                            "
-                        >
-                            Apply
-                        </button>
+                    {/* Apply */}
 
-                    </div>
+                    <button
+                        type="button"
+                        onClick={handleApply}
+                        className="
+                            h-9
+                            px-5
+                            rounded-md
+                            bg-[#8B3DF5]
+                            text-xs
+                            font-medium
+                            hover:bg-[#7630D8]
+                            transition
+                            cursor-pointer
+                        "
+                    >
+                        Apply
+                    </button>
 
                 </div>
 
             </div>
 
         </div>
-
     );
-
 }
 
 
 export default CustomDateRange;
+
