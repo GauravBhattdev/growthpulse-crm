@@ -1,5 +1,4 @@
-
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
     Bell,
@@ -12,11 +11,72 @@ import {
 import CreditsPopup from "../CreditsPopup/CreditsPopup";
 import TopUpCredits from "../TopUpCredits/TopUpCredits";
 import NotificationPopup from "../NotificationPopup/NotificationPopup";
+import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 
 function Header({ onMenuClick }) {
 
+    // Controls notification / credits / topup popup
     const [showPopup, setShowPopup] = useState(null);
+
+    // Controls profile dropdown
+    const [showProfile, setShowProfile] = useState(false);
+
+    // Reference for profile area
+    const profileRef = useRef(null);
+
+
+    /*
+        =====================================================
+        CLOSE PROFILE DROPDOWN WHEN CLICKING OUTSIDE
+        =====================================================
+    */
+
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+
+            if (
+                profileRef.current &&
+                !profileRef.current.contains(event.target)
+            ) {
+
+                setShowProfile(false);
+
+            }
+
+        };
+
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+
+        };
+
+    }, []);
+
+
+    /*
+        =====================================================
+        PROFILE CLICK
+        =====================================================
+    */
+
+    const handleProfileClick = () => {
+
+        setShowProfile((previous) => !previous);
+
+    };
 
 
     return (
@@ -27,6 +87,7 @@ function Header({ onMenuClick }) {
 
                 min-h-[66px]
                 w-full
+
                 bg-[#171126]
 
                 flex
@@ -44,11 +105,11 @@ function Header({ onMenuClick }) {
 
                 sticky
                 top-0
-                z-30
 
-              
+                z-30
             "
         >
+
 
             {/* =================================================
                 MOBILE MENU BUTTON
@@ -106,13 +167,19 @@ function Header({ onMenuClick }) {
                 "
             >
 
+
                 {/* =================================================
                     BELL / NOTIFICATIONS
                 ================================================= */}
 
                 <button
                     type="button"
-                    onClick={() => setShowPopup("notifications")}
+                    onClick={() => {
+
+                        setShowPopup("notifications");
+                        setShowProfile(false);
+
+                    }}
                     className="
                         flex
                         items-center
@@ -151,7 +218,12 @@ function Header({ onMenuClick }) {
 
                 <button
                     type="button"
-                    onClick={() => setShowPopup("topup")}
+                    onClick={() => {
+
+                        setShowPopup("topup");
+                        setShowProfile(false);
+
+                    }}
                     className="
                         flex
                         items-center
@@ -210,7 +282,12 @@ function Header({ onMenuClick }) {
 
                 <button
                     type="button"
-                    onClick={() => setShowPopup("credits")}
+                    onClick={() => {
+
+                        setShowPopup("credits");
+                        setShowProfile(false);
+
+                    }}
                     className="
                         text-[10px]
                         sm:text-sm
@@ -245,71 +322,111 @@ function Header({ onMenuClick }) {
                 ================================================= */}
 
                 <div
-                    className="
-                        flex
-                        items-center
-
-                        gap-1
-                        sm:gap-[10px]
-
-                        text-white
-
-                        text-sm
-                        sm:text-base
-
-                        font-semibold
-
-                        cursor-pointer
-
-                        shrink-0
-                    "
+                    ref={profileRef}
+                    className="relative shrink-0"
                 >
 
-                    {/* Profile Circle */}
-
-                    <div
+                    <button
+                        type="button"
+                        onClick={handleProfileClick}
                         className="
-                            w-8
-                            h-8
-
-                            sm:w-10
-                            sm:h-10
-
-                            bg-white
-
-                            text-[#171126]
-
-                            rounded-full
-
                             flex
                             items-center
-                            justify-center
 
-                            shrink-0
+                            gap-1
+                            sm:gap-[10px]
+
+                            text-white
+
+                            text-sm
+                            sm:text-base
+
+                            font-semibold
+
+                            cursor-pointer
+
+                            rounded-md
+
+                            px-1
+                            sm:px-2
+
+                            py-1
+
+                            hover:bg-[#2b1c43]
+
+                            transition-colors
                         "
+                        aria-label="Open profile menu"
                     >
 
-                        <UserRound
-                            size={18}
-                            className="sm:w-[23px] sm:h-[23px]"
+                        {/* Profile Circle */}
+
+                        <div
+                            className="
+                                w-8
+                                h-8
+
+                                sm:w-10
+                                sm:h-10
+
+                                bg-white
+
+                                text-[#171126]
+
+                                rounded-full
+
+                                flex
+                                items-center
+                                justify-center
+
+                                shrink-0
+                            "
+                        >
+
+                            <UserRound
+                                size={18}
+                                className="sm:w-[23px] sm:h-[23px]"
+                            />
+
+                        </div>
+
+
+                        {/* Admin Text */}
+
+                        <span className="hidden sm:inline">
+                            Admin
+                        </span>
+
+
+                        {/* Dropdown Arrow */}
+
+                        <ChevronDown
+                            size={16}
+                            className={`
+                                sm:w-5
+                                sm:h-5
+
+                                transition-transform
+                                duration-200
+
+                                ${showProfile ? "rotate-180" : ""}
+                            `}
                         />
 
-                    </div>
+                    </button>
 
 
-                    {/* Admin Text */}
+                    {/* =================================================
+                        PROFILE DROPDOWN
+                    ================================================= */}
 
-                    <span className="hidden sm:inline">
-                        Admin
-                    </span>
+                    {showProfile && (
 
+                        <ProfileDropdown
+                            onClose={() => setShowProfile(false)}
+                        />
 
-                    {/* Dropdown */}
-
-                    <ChevronDown
-                        size={16}
-                        className="sm:w-5 sm:h-5"
-                    />
+                    )}
 
                 </div>
 
@@ -321,9 +438,11 @@ function Header({ onMenuClick }) {
             ================================================= */}
 
             {showPopup === "notifications" && (
+
                 <NotificationPopup
                     onClose={() => setShowPopup(null)}
                 />
+
             )}
 
 
@@ -332,9 +451,11 @@ function Header({ onMenuClick }) {
             ================================================= */}
 
             {showPopup === "credits" && (
+
                 <CreditsPopup
                     onClose={() => setShowPopup(null)}
                 />
+
             )}
 
 
@@ -343,9 +464,11 @@ function Header({ onMenuClick }) {
             ================================================= */}
 
             {showPopup === "topup" && (
+
                 <TopUpCredits
                     onClose={() => setShowPopup(null)}
                 />
+
             )}
 
         </header>

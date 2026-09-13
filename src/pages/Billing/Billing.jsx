@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 import {
     Crown,
@@ -15,8 +15,31 @@ import {
     Download
 } from "lucide-react";
 
+import Loader from "../../components/Loader/Loader";
+
 
 function Billing() {
+
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    if (loading) {
+
+        return <Loader text="Loading billing..." />;
+
+    }
+
 
     return (
         <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">

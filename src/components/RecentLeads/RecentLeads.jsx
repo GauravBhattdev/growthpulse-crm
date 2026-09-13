@@ -1,5 +1,4 @@
 import React from "react";
-
 const leads = [
   {
     id: 1,
@@ -45,6 +44,60 @@ const leads = [
     time: "1h ago",
     avatar: "NM",
     color: "#3b9b62"
+  },
+  {
+    id: 6,
+    name: "Amit Kapoor",
+    company: "CloudWorks",
+    status: "Qualified",
+    time: "1h ago",
+    avatar: "AK",
+    color: "#f59e0b"
+  },
+  {
+    id: 7,
+    name: "Sneha Gupta",
+    company: "PixelLabs",
+    status: "Contacted",
+    time: "2h ago",
+    avatar: "SG",
+    color: "#ec4899"
+  },
+  {
+    id: 8,
+    name: "Rohit Malhotra",
+    company: "InnoTech",
+    status: "New",
+    time: "2h ago",
+    avatar: "RM",
+    color: "#06b6d4"
+  },
+  {
+    id: 9,
+    name: "Pooja Agarwal",
+    company: "SoftEdge",
+    status: "Proposal",
+    time: "3h ago",
+    avatar: "PA",
+    color: "#a855f7"
+  },
+  {
+    id: 10,
+    name: "Vikas Rawat",
+    company: "DataFlow",
+    status: "Qualified",
+    time: "4h ago",
+    avatar: "VR",
+    color: "#10b981"
+  },
+  {
+    id: 11,
+    name: "Simran Kaur",
+    company: "NextGen",
+    status: "Closed",
+    time: "5h ago",
+    avatar: "SK",
+    color: "#f97316"
   }
 ];
 

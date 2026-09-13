@@ -1,4 +1,5 @@
-import React from "react";
+
+import React, { useState } from "react";
 
 import {
     Building2,
@@ -18,6 +19,13 @@ import {
     Headphones,
     Briefcase
 } from "lucide-react";
+
+
+// =====================================================
+// EDIT ORGANISATION COMPONENT
+// =====================================================
+
+import EditOrganisation from "../../components/EditOrganisation/EditOrganisation";
 
 
 // =====================================================
@@ -161,6 +169,13 @@ const organisationSettings = [
 
 function Organisation() {
 
+    // =================================================
+    // EDIT ORGANISATION POPUP STATE
+    // =================================================
+
+    const [showEditOrganisation, setShowEditOrganisation] = useState(false);
+
+
     return (
 
         <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
@@ -226,27 +241,39 @@ function Organisation() {
                 ================================================= */}
 
                 <button
+                    type="button"
+                    onClick={() => setShowEditOrganisation(true)}
                     className="
                         absolute
                         top-3
                         right-3
                         sm:top-4
                         sm:right-4
+
                         flex
                         items-center
                         gap-1.5
+
                         border
                         border-gray-400
+
                         bg-white
                         text-gray-700
+
                         px-3
                         py-1.5
+
                         rounded
+
                         text-[10px]
                         sm:text-[11px]
+
                         font-medium
+
                         hover:bg-gray-100
+
                         transition
+                        duration-200
                     "
                 >
 
@@ -266,8 +293,10 @@ function Organisation() {
                     flex-col
                     lg:flex-row
                     lg:items-center
+
                     gap-5
                     lg:gap-7
+
                     pt-8
                     lg:pt-3
                 ">
@@ -290,15 +319,21 @@ function Organisation() {
                         <div className="
                             w-[75px]
                             h-[75px]
+
                             sm:w-[95px]
                             sm:h-[95px]
+
                             rounded-full
+
                             border
                             border-gray-400
+
                             flex
                             items-center
                             justify-center
+
                             shrink-0
+
                             shadow-sm
                         ">
 
@@ -318,6 +353,7 @@ function Organisation() {
                             <h2 className="
                                 text-[16px]
                                 sm:text-[17px]
+
                                 font-semibold
                                 text-[#222]
                             ">
@@ -331,7 +367,9 @@ function Organisation() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-2
+
                                 text-[11px]
                                 text-gray-600
                             ">
@@ -351,7 +389,9 @@ function Organisation() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-2
+
                                 text-[11px]
                                 text-gray-600
                             ">
@@ -371,7 +411,9 @@ function Organisation() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-2
+
                                 text-[11px]
                                 text-gray-600
                             ">
@@ -391,7 +433,9 @@ function Organisation() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-2
+
                                 text-[11px]
                                 text-gray-600
                             ">
@@ -418,13 +462,17 @@ function Organisation() {
                         grid-cols-2
                         sm:grid-cols-4
                         lg:grid-cols-4
+
                         w-full
                         lg:w-auto
                         lg:min-w-[470px]
+
                         border-t
                         lg:border-t-0
+
                         pt-4
                         lg:pt-0
+
                         gap-y-4
                     ">
 
@@ -434,6 +482,7 @@ function Organisation() {
                         <div className="
                             lg:border-l
                             border-gray-300
+
                             px-3
                             sm:px-4
                         ">
@@ -450,6 +499,7 @@ function Organisation() {
                                 mt-3
                                 text-[11px]
                                 sm:text-[12px]
+
                                 font-medium
                                 text-gray-800
                             ">
@@ -464,6 +514,7 @@ function Organisation() {
                         <div className="
                             border-l
                             border-gray-300
+
                             px-3
                             sm:px-4
                         ">
@@ -480,6 +531,7 @@ function Organisation() {
                                 mt-3
                                 text-[11px]
                                 sm:text-[12px]
+
                                 font-medium
                                 text-gray-800
                             ">
@@ -494,6 +546,7 @@ function Organisation() {
                         <div className="
                             border-l
                             border-gray-300
+
                             px-3
                             sm:px-4
                         ">
@@ -510,8 +563,10 @@ function Organisation() {
                                 mt-3
                                 text-[11px]
                                 sm:text-[12px]
+
                                 font-medium
                                 text-gray-800
+
                                 whitespace-nowrap
                             ">
                                 01 Jan, 2026
@@ -525,6 +580,7 @@ function Organisation() {
                         <div className="
                             border-l
                             border-gray-300
+
                             px-3
                             sm:px-4
                         ">
@@ -539,10 +595,13 @@ function Organisation() {
 
                             <p className="
                                 mt-3
+
                                 text-[10px]
                                 sm:text-[11px]
+
                                 font-medium
                                 text-gray-800
+
                                 whitespace-nowrap
                             ">
                                 09ABCDE1234F1Z5
@@ -564,7 +623,9 @@ function Organisation() {
             <div className="
                 grid
                 grid-cols-1
+
                 xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)]
+
                 gap-3
                 mt-3
             ">
@@ -576,10 +637,14 @@ function Organisation() {
 
                 <div className="
                     bg-white
+
                     border
                     border-gray-300
+
                     rounded-lg
+
                     shadow-sm
+
                     overflow-hidden
                 ">
 
@@ -588,9 +653,12 @@ function Organisation() {
 
                     <div className="
                         h-[42px]
+
                         flex
                         items-center
+
                         px-3
+
                         border-b
                         border-gray-300
                     ">
@@ -625,9 +693,12 @@ function Organisation() {
 
                                     <th className="
                                         text-left
+
                                         px-3
                                         py-3
+
                                         text-[11px]
+
                                         font-medium
                                         text-gray-800
                                     ">
@@ -636,9 +707,12 @@ function Organisation() {
 
                                     <th className="
                                         text-left
+
                                         px-3
                                         py-3
+
                                         text-[11px]
+
                                         font-medium
                                         text-gray-800
                                     ">
@@ -647,9 +721,12 @@ function Organisation() {
 
                                     <th className="
                                         text-left
+
                                         px-3
                                         py-3
+
                                         text-[11px]
+
                                         font-medium
                                         text-gray-800
                                     ">
@@ -658,9 +735,12 @@ function Organisation() {
 
                                     <th className="
                                         text-left
+
                                         px-3
                                         py-3
+
                                         text-[11px]
+
                                         font-medium
                                         text-gray-800
                                     ">
@@ -669,9 +749,12 @@ function Organisation() {
 
                                     <th className="
                                         text-left
+
                                         px-3
                                         py-3
+
                                         text-[11px]
+
                                         font-medium
                                         text-gray-800
                                     ">
@@ -694,7 +777,9 @@ function Organisation() {
                                         className="
                                             border-b
                                             border-gray-300
+
                                             hover:bg-gray-50
+
                                             transition
                                         "
                                     >
@@ -719,17 +804,24 @@ function Organisation() {
                                                 <div className={`
                                                     w-5
                                                     h-5
+
                                                     rounded-full
+
                                                     ${member.color}
+
                                                     flex
                                                     items-center
                                                     justify-center
+
                                                     text-[7px]
                                                     text-white
                                                     font-medium
+
                                                     shrink-0
                                                 `}>
+
                                                     {member.avatar}
+
                                                 </div>
 
 
@@ -738,6 +830,7 @@ function Organisation() {
                                                 <span className="
                                                     text-[10px]
                                                     text-gray-800
+
                                                     whitespace-nowrap
                                                 ">
                                                     {member.name}
@@ -751,9 +844,12 @@ function Organisation() {
                                                     <span className="
                                                         px-1.5
                                                         py-0.5
+
                                                         rounded
+
                                                         bg-purple-100
                                                         text-purple-500
+
                                                         text-[7px]
                                                     ">
                                                         You
@@ -771,8 +867,10 @@ function Organisation() {
                                         <td className="
                                             px-3
                                             py-3
+
                                             text-[10px]
                                             text-gray-700
+
                                             whitespace-nowrap
                                         ">
                                             {member.email}
@@ -784,8 +882,10 @@ function Organisation() {
                                         <td className="
                                             px-3
                                             py-3
+
                                             text-[10px]
                                             text-gray-700
+
                                             whitespace-nowrap
                                         ">
                                             {member.role}
@@ -797,8 +897,10 @@ function Organisation() {
                                         <td className="
                                             px-3
                                             py-3
+
                                             text-[10px]
                                             text-gray-700
+
                                             whitespace-nowrap
                                         ">
                                             {member.department}
@@ -807,21 +909,29 @@ function Organisation() {
 
                                         {/* STATUS */}
 
-                                        <td className="px-3 py-3">
+                                        <td className="
+                                            px-3
+                                            py-3
+                                        ">
 
                                             <span className={`
                                                 px-2
                                                 py-1
+
                                                 rounded
+
                                                 text-[7px]
                                                 font-medium
+
                                                 ${
                                                     member.status === "Active"
                                                         ? "bg-green-100 text-green-600"
                                                         : "bg-red-100 text-red-500"
                                                 }
                                             `}>
+
                                                 {member.status}
+
                                             </span>
 
                                         </td>
@@ -856,10 +966,14 @@ function Organisation() {
 
                     <div className="
                         bg-white
+
                         border
                         border-gray-300
+
                         rounded-lg
+
                         shadow-sm
+
                         overflow-hidden
                     ">
 
@@ -868,10 +982,13 @@ function Organisation() {
 
                         <div className="
                             h-[42px]
+
                             flex
                             items-center
                             justify-between
+
                             px-3
+
                             border-b
                             border-gray-300
                         ">
@@ -887,6 +1004,7 @@ function Organisation() {
                             <button className="
                                 text-purple-500
                                 text-[12px]
+
                                 hover:text-purple-700
                             ">
                                 Manage
@@ -911,13 +1029,15 @@ function Organisation() {
                                             flex
                                             items-center
                                             justify-between
+
                                             py-2
+
                                             border-b
                                             border-gray-200
+
                                             last:border-b-0
                                         "
                                     >
-
 
                                         <div className="
                                             flex
@@ -928,8 +1048,11 @@ function Organisation() {
                                             <div className="
                                                 w-5
                                                 h-5
+
                                                 bg-gray-200
+
                                                 rounded
+
                                                 flex
                                                 items-center
                                                 justify-center
@@ -976,10 +1099,14 @@ function Organisation() {
 
                     <div className="
                         bg-white
+
                         border
                         border-gray-300
+
                         rounded-lg
+
                         shadow-sm
+
                         overflow-hidden
                     ">
 
@@ -988,10 +1115,13 @@ function Organisation() {
 
                         <div className="
                             h-[42px]
+
                             flex
                             items-center
                             justify-between
+
                             px-3
+
                             border-b
                             border-gray-300
                         ">
@@ -1007,6 +1137,7 @@ function Organisation() {
                             <button className="
                                 text-purple-500
                                 text-[12px]
+
                                 hover:text-purple-700
                             ">
                                 Manage
@@ -1029,15 +1160,22 @@ function Organisation() {
                                         key={setting.id}
                                         className="
                                             w-full
+
                                             flex
                                             items-center
                                             justify-between
+
                                             py-2.5
+
                                             border-b
                                             border-gray-200
+
                                             last:border-b-0
+
                                             text-left
+
                                             hover:bg-gray-50
+
                                             transition
                                         "
                                     >
@@ -1091,6 +1229,7 @@ function Organisation() {
                 grid
                 grid-cols-1
                 sm:grid-cols-3
+
                 gap-3
                 mt-3
             ">
@@ -1101,9 +1240,13 @@ function Organisation() {
                 <div className="
                     border
                     border-gray-300
+
                     rounded-lg
+
                     p-4
+
                     bg-white
+
                     shadow-sm
                 ">
 
@@ -1117,7 +1260,9 @@ function Organisation() {
                     <h2 className="
                         text-xl
                         font-semibold
+
                         mt-1
+
                         text-gray-900
                     ">
                         8
@@ -1131,9 +1276,13 @@ function Organisation() {
                 <div className="
                     border
                     border-gray-300
+
                     rounded-lg
+
                     p-4
+
                     bg-white
+
                     shadow-sm
                 ">
 
@@ -1147,7 +1296,9 @@ function Organisation() {
                     <h2 className="
                         text-xl
                         font-semibold
+
                         mt-1
+
                         text-gray-900
                     ">
                         65
@@ -1161,9 +1312,13 @@ function Organisation() {
                 <div className="
                     border
                     border-gray-300
+
                     rounded-lg
+
                     p-4
+
                     bg-white
+
                     shadow-sm
                 ">
 
@@ -1177,7 +1332,9 @@ function Organisation() {
                     <h2 className="
                         text-xl
                         font-semibold
+
                         mt-1
+
                         text-gray-900
                     ">
                         118
@@ -1187,6 +1344,19 @@ function Organisation() {
 
             </div>
 
+
+            {/* =====================================================
+                EDIT ORGANISATION POPUP
+            ===================================================== */}
+
+            {showEditOrganisation && (
+
+                <EditOrganisation
+                    onClose={() => setShowEditOrganisation(false)}
+                />
+
+            )}
+
         </div>
 
     );
@@ -1194,3 +1364,4 @@ function Organisation() {
 
 
 export default Organisation;
+

@@ -10,8 +10,6 @@ import {
 
 import { useNavigate } from "react-router-dom";
 
-
-
 import Loader from "../../components/Loader/Loader";
 
 
@@ -120,6 +118,10 @@ function Leads() {
 
     const [sourceFilter, setSourceFilter] = useState("All");
 
+    const [assignedFilter, setAssignedFilter] = useState("All");
+
+
+    /* ================= LOADING ================= */
 
     useEffect(() => {
 
@@ -132,14 +134,7 @@ function Leads() {
     }, []);
 
 
-    if (loading) {
-
-        return (
-            <Loader text="Loading Leads..." />
-        );
-
-    }
-
+    /* ================= FILTER LOGIC ================= */
 
     const filteredLeads = leads.filter((lead) => {
 
@@ -163,13 +158,43 @@ function Leads() {
             lead.source === sourceFilter;
 
 
+        const matchesAssigned =
+            assignedFilter === "All" ||
+            lead.assignedTo === assignedFilter;
+
+
         return (
             matchesSearch &&
             matchesStatus &&
-            matchesSource
+            matchesSource &&
+            matchesAssigned
         );
 
     });
+
+
+    /* ================= CLEAR FILTERS ================= */
+
+    const clearFilters = () => {
+
+        setSearchTerm("");
+
+        setStatusFilter("All");
+
+        setSourceFilter("All");
+
+        setAssignedFilter("All");
+
+    };
+
+
+    if (loading) {
+
+        return (
+            <Loader text="Loading Leads..." />
+        );
+
+    }
 
 
     return (
@@ -340,7 +365,6 @@ function Leads() {
 
                     </button>
 
-
                 </div>
 
             </div>
@@ -434,22 +458,26 @@ function Leads() {
                     flex
                     flex-col
                     md:flex-row
+                    md:items-center
                     gap-3
                     mb-6
                 "
             >
 
-                {/* Search */}
+                {/* ================= SEARCH ================= */}
 
                 <div
                     className="
                         relative
-                        flex-1
+                        w-full
+                        md:w-64
+                        lg:w-72
+                        shrink-0
                     "
                 >
 
                     <Search
-                        size={18}
+                        size={17}
                         className="
                             absolute
                             left-3
@@ -471,8 +499,8 @@ function Leads() {
                             border
                             border-gray-300
                             rounded-md
-                            pl-10
-                            pr-4
+                            pl-9
+                            pr-3
                             py-2.5
                             text-sm
                             outline-none
@@ -485,117 +513,207 @@ function Leads() {
                 </div>
 
 
-                {/* Status Filter */}
+                {/* ================= RIGHT FILTER AREA ================= */}
 
-                <div className="relative">
+                <div
+                    className="
+                        flex
+                        flex-wrap
+                        items-center
+                        justify-end
+                        gap-3
+                        md:ml-auto
+                    "
+                >
 
-                    <Filter
-                        size={16}
-                        className="
-                            absolute
-                            left-3
-                            top-1/2
-                            -translate-y-1/2
-                            text-gray-400
-                            pointer-events-none
-                        "
-                    />
+                    {/* Status Filter */}
+
+                    <div className="relative">
+
+                        <Filter
+                            size={15}
+                            className="
+                                absolute
+                                left-3
+                                top-1/2
+                                -translate-y-1/2
+                                text-gray-400
+                                pointer-events-none
+                            "
+                        />
+
+                        <select
+                            value={statusFilter}
+                            onChange={(e) =>
+                                setStatusFilter(e.target.value)
+                            }
+                            className="
+                                w-full
+                                sm:w-40
+                                border
+                                border-gray-300
+                                rounded-md
+                                pl-9
+                                pr-8
+                                py-2.5
+                                text-sm
+                                bg-white
+                                outline-none
+                                focus:ring-2
+                                focus:ring-purple-500
+                                focus:border-purple-500
+                            "
+                        >
+
+                            <option value="All">
+                                All Status
+                            </option>
+
+                            <option value="New">
+                                New
+                            </option>
+
+                            <option value="Contacted">
+                                Contacted
+                            </option>
+
+                            <option value="Qualified">
+                                Qualified
+                            </option>
+
+                            <option value="Proposal">
+                                Proposal
+                            </option>
+
+                            <option value="Closed">
+                                Closed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* Source Filter */}
 
                     <select
-                        value={statusFilter}
+                        value={sourceFilter}
                         onChange={(e) =>
-                            setStatusFilter(e.target.value)
+                            setSourceFilter(e.target.value)
                         }
                         className="
                             w-full
-                            md:w-44
+                            sm:w-40
                             border
                             border-gray-300
                             rounded-md
-                            pl-9
-                            pr-8
+                            px-3
                             py-2.5
                             text-sm
                             bg-white
                             outline-none
                             focus:ring-2
                             focus:ring-purple-500
+                            focus:border-purple-500
                         "
                     >
 
                         <option value="All">
-                            All Status
+                            All Sources
                         </option>
 
-                        <option value="New">
-                            New
+                        <option value="Website">
+                            Website
                         </option>
 
-                        <option value="Contacted">
-                            Contacted
+                        <option value="LinkedIn">
+                            LinkedIn
                         </option>
 
-                        <option value="Qualified">
-                            Qualified
+                        <option value="Referral">
+                            Referral
                         </option>
 
-                        <option value="Proposal">
-                            Proposal
-                        </option>
-
-                        <option value="Closed">
-                            Closed
+                        <option value="Cold Call">
+                            Cold Call
                         </option>
 
                     </select>
 
+
+                    {/* Assigned Filter */}
+
+                    <select
+                        value={assignedFilter}
+                        onChange={(e) =>
+                            setAssignedFilter(e.target.value)
+                        }
+                        className="
+                            w-full
+                            sm:w-40
+                            border
+                            border-gray-300
+                            rounded-md
+                            px-3
+                            py-2.5
+                            text-sm
+                            bg-white
+                            outline-none
+                            focus:ring-2
+                            focus:ring-purple-500
+                            focus:border-purple-500
+                        "
+                    >
+
+                        <option value="All">
+                            All Assigned
+                        </option>
+
+                        <option value="Him Mostins">
+                            Him Mostins
+                        </option>
+
+                        <option value="Virele Netkatorie">
+                            Virele Netkatorie
+                        </option>
+
+                        <option value="Linte Preddenbling">
+                            Linte Preddenbling
+                        </option>
+
+                    </select>
+
+
+                    {/* Filter / Reset Button */}
+
+                    <button
+                        onClick={clearFilters}
+                        title="Clear all filters"
+                        className="
+                            flex
+                            items-center
+                            justify-center
+                            w-11
+                            h-11
+                            border
+                            border-gray-300
+                            rounded-md
+                            bg-white
+                            text-gray-700
+                            hover:bg-gray-50
+                            hover:text-purple-600
+                            active:scale-95
+                            transition-all
+                            duration-200
+                            shrink-0
+                        "
+                    >
+
+                        <Filter size={18} />
+
+                    </button>
+
                 </div>
-
-
-                {/* Source Filter */}
-
-                <select
-                    value={sourceFilter}
-                    onChange={(e) =>
-                        setSourceFilter(e.target.value)
-                    }
-                    className="
-                        w-full
-                        md:w-44
-                        border
-                        border-gray-300
-                        rounded-md
-                        px-3
-                        py-2.5
-                        text-sm
-                        bg-white
-                        outline-none
-                        focus:ring-2
-                        focus:ring-purple-500
-                    "
-                >
-
-                    <option value="All">
-                        All Sources
-                    </option>
-
-                    <option value="Website">
-                        Website
-                    </option>
-
-                    <option value="LinkedIn">
-                        LinkedIn
-                    </option>
-
-                    <option value="Referral">
-                        Referral
-                    </option>
-
-                    <option value="Cold Call">
-                        Cold Call
-                    </option>
-
-                </select>
 
             </div>
 

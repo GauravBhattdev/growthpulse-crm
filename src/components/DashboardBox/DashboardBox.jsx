@@ -10,6 +10,7 @@ function DashboardBox({ title, children }) {
                 rounded-[8px]
 
                 min-h-[250px]
+                lg:min-h-[190px]
 
                 w-full
                 min-w-0

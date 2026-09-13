@@ -20,6 +20,11 @@ function Sidebar({
     setIsSidebarOpen
 }) {
 
+
+    /* =================================================
+       MENU ITEMS
+    ================================================= */
+
     const menuItems = [
         {
             name: "Dashboard",
@@ -59,10 +64,24 @@ function Sidebar({
     ];
 
 
+    /* =================================================
+       CLOSE SIDEBAR AFTER NAVIGATION
+    ================================================= */
+
     const handleNavigation = () => {
         setIsSidebarOpen(false);
     };
 
+
+    /* =================================================
+       NAVIGATION LINK CLASS
+
+       DESKTOP:
+       Icon + name
+
+       MOBILE:
+       Icon + name
+    ================================================= */
 
     const navLinkClass = ({ isActive }) =>
         `
@@ -70,7 +89,9 @@ function Sidebar({
 
         flex
         items-center
+
         gap-3
+
         no-underline
         text-white
 
@@ -90,8 +111,6 @@ function Sidebar({
         duration-300
         ease-out
 
-        justify-start
-
         hover:translate-x-1
         hover:shadow-md
 
@@ -99,6 +118,7 @@ function Sidebar({
             isActive
                 ? `
                     bg-[#3f315f]
+
                     shadow-[0_4px_12px_rgba(0,0,0,0.20)]
                 `
                 : `
@@ -113,16 +133,24 @@ function Sidebar({
         <aside
             className={`
                 fixed
+
                 top-0
                 left-0
-                w-[240px]
+
+                w-[280px]
+                lg:w-[240px]
+
                 h-screen
+
                 bg-[#160d27]
                 text-white
+
                 z-50
+
                 overflow-y-auto
 
                 transform
+
                 transition-transform
                 duration-300
                 ease-in-out
@@ -137,27 +165,41 @@ function Sidebar({
             `}
         >
 
+
             {/* =================================================
-                LOGO
+                SIDEBAR HEADER
             ================================================= */}
 
-            <div className="
-                flex
-                items-center
-                justify-between
-                px-5
-                lg:px-7
-                py-5
-            ">
+            <div
+                className="
+                    flex
+                    items-center
+                    justify-between
+
+                    px-5
+                    lg:px-7
+
+                    py-5
+                "
+            >
+
+                {/* =================================================
+                    LOGO
+                ================================================= */}
 
                 <h2
                     className="
                         text-2xl
+
                         font-bold
+
                         m-0
+
                         cursor-pointer
+
                         transition-all
                         duration-300
+
                         hover:scale-[1.03]
                     "
                 >
@@ -165,17 +207,30 @@ function Sidebar({
                 </h2>
 
 
-                {/* Mobile Close Button */}
+                {/* =================================================
+                    MOBILE CLOSE BUTTON
+                ================================================= */}
 
                 <button
                     type="button"
+
                     onClick={() => setIsSidebarOpen(false)}
+
                     className="
                         lg:hidden
-                        p-1
+
+                        p-1.5
+
                         rounded-md
+
+                        text-white
+
                         hover:bg-[#2b1c43]
+
+                        transition-all
+                        duration-200
                     "
+
                     aria-label="Close menu"
                 >
 
@@ -192,7 +247,13 @@ function Sidebar({
 
             <nav>
 
-                <ul className="list-none p-0 m-0">
+                <ul
+                    className="
+                        list-none
+                        p-0
+                        m-0
+                    "
+                >
 
                     {menuItems.map((item) => {
 
@@ -200,20 +261,27 @@ function Sidebar({
 
                         return (
 
-                            <li key={item.path}>
+                            <li
+                                key={item.path}
+                            >
 
                                 <NavLink
                                     to={item.path}
-                                    title={item.name}
+
                                     onClick={handleNavigation}
+
                                     className={navLinkClass}
                                 >
 
-                                    {/* Icon */}
+                                    {/* =================================================
+                                        ICON
+                                    ================================================= */}
 
                                     <Icon
                                         size={19}
+
                                         strokeWidth={2}
+
                                         className="
                                             shrink-0
 
@@ -228,13 +296,18 @@ function Sidebar({
                                     />
 
 
-                                    {/* Menu Text */}
+                                    {/* =================================================
+                                        NAME
+                                    ================================================= */}
 
-                                    <span className="
-                                        transition-all
-                                        duration-300
-                                        group-hover:translate-x-[2px]
-                                    ">
+                                    <span
+                                        className="
+                                            transition-all
+                                            duration-300
+
+                                            group-hover:translate-x-[2px]
+                                        "
+                                    >
                                         {item.name}
                                     </span>
 
@@ -258,12 +331,21 @@ function Sidebar({
             <div
                 className="
                     absolute
+
                     bottom-5
+
                     w-full
                 "
             >
 
-                <ul className="list-none p-0 m-0">
+                <ul
+                    className="
+                        list-none
+                        p-0
+                        m-0
+                    "
+                >
+
 
                     {/* =================================================
                         SETTINGS
@@ -273,14 +355,17 @@ function Sidebar({
 
                         <NavLink
                             to="/settings"
-                            title="Settings"
+
                             onClick={handleNavigation}
+
                             className={navLinkClass}
                         >
 
                             <Settings
                                 size={19}
+
                                 strokeWidth={2}
+
                                 className="
                                     shrink-0
 
@@ -293,6 +378,7 @@ function Sidebar({
                                     group-hover:rotate-6
                                 "
                             />
+
 
                             <span>
                                 Settings
@@ -311,14 +397,17 @@ function Sidebar({
 
                         <NavLink
                             to="/help-support"
-                            title="Help & Support"
+
                             onClick={handleNavigation}
+
                             className={navLinkClass}
                         >
 
                             <HelpCircle
                                 size={19}
+
                                 strokeWidth={2}
+
                                 className="
                                     shrink-0
 
@@ -331,6 +420,7 @@ function Sidebar({
                                     group-hover:rotate-2
                                 "
                             />
+
 
                             <span>
                                 Help & Support

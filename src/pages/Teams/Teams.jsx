@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import {
@@ -12,6 +12,7 @@ import {
 } from "lucide-react";
 
 import CreateTeam from "../../components/CreateTeam/CreateTeam";
+import Loader from "../../components/Loader/Loader";
 
 
 const teams = [
@@ -68,6 +69,26 @@ function Teams() {
     const navigate = useNavigate();
 
     const [showCreateTeam, setShowCreateTeam] = useState(false);
+
+    const [loading, setLoading] = useState(true);
+
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    if (loading) {
+
+        return <Loader text="Loading teams..." />;
+
+    }
 
 
     return (
