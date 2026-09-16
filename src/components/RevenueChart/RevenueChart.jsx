@@ -37,8 +37,8 @@ const chartData = {
     ],
 
     D30: [
-        { day: "1", revenue: 25 },
-        { day: "5", revenue: 40 },
+        { day: "1",  revenue: 25 },
+        { day: "5",  revenue: 40 },
         { day: "10", revenue: 55 },
         { day: "15", revenue: 45 },
         { day: "20", revenue: 75 },
@@ -105,7 +105,7 @@ function RevenueChart() {
                     <span
                         className="
                             text-[11px]
-                            text-[#D1CDD8]
+                            text-theme-text-secondary
                             whitespace-nowrap
                         "
                     >
@@ -134,8 +134,8 @@ function RevenueChart() {
                                 cursor-pointer
                                 ${
                                     selectedRange === "D1"
-                                        ? "bg-[#8B3DFF] text-white"
-                                        : "bg-white text-[#333]"
+                                        ? "bg-primary text-white"
+                                        : "bg-theme-surface-secondary text-theme-text-secondary hover:text-theme-text"
                                 }
                             `}
                         >
@@ -162,8 +162,8 @@ function RevenueChart() {
                                 cursor-pointer
                                 ${
                                     selectedRange === "D7"
-                                        ? "bg-[#8B3DFF] text-white"
-                                        : "bg-white text-[#333]"
+                                        ? "bg-primary text-white"
+                                        : "bg-theme-surface-secondary text-theme-text-secondary hover:text-theme-text"
                                 }
                             `}
                         >
@@ -190,8 +190,8 @@ function RevenueChart() {
                                 cursor-pointer
                                 ${
                                     selectedRange === "D30"
-                                        ? "bg-[#8B3DFF] text-white"
-                                        : "bg-white text-[#333]"
+                                        ? "bg-primary text-white"
+                                        : "bg-theme-surface-secondary text-theme-text-secondary hover:text-theme-text"
                                 }
                             `}
                         >
@@ -215,8 +215,8 @@ function RevenueChart() {
                                 cursor-pointer
                                 ${
                                     selectedRange === "CUSTOM"
-                                        ? "bg-[#8B3DFF] text-white"
-                                        : "bg-white text-[#333]"
+                                        ? "bg-primary text-white"
+                                        : "bg-theme-surface-secondary text-theme-text-secondary hover:text-theme-text"
                                 }
                             `}
                         >
@@ -234,11 +234,13 @@ function RevenueChart() {
                     customDates.startDate &&
                     customDates.endDate && (
 
-                        <p className="
-                            text-[9px]
-                            text-[#A9A3B5]
-                            mb-2
-                        ">
+                        <p
+                            className="
+                                text-[9px]
+                                text-theme-text-secondary
+                                mb-2
+                            "
+                        >
                             {customDates.startDate} to {customDates.endDate}
                         </p>
 
@@ -247,18 +249,9 @@ function RevenueChart() {
 
                 {/* REVENUE CHART */}
 
-                <div
-                    className="
-                        w-full
-                        min-w-0
-                        h-[170px]
-                    "
-                >
+                <div className="w-full min-w-0 h-[170px]">
 
-                    <ResponsiveContainer
-                        width="100%"
-                        height="100%"
-                    >
+                    <ResponsiveContainer width="100%" height="100%">
 
                         <AreaChart
                             data={data}
@@ -271,7 +264,8 @@ function RevenueChart() {
                         >
 
                             <CartesianGrid
-                                stroke="#514b62"
+                                stroke="currentColor"
+                                className="text-theme-border-light"
                                 strokeDasharray="3 3"
                                 vertical={true}
                                 horizontal={true}
@@ -283,9 +277,10 @@ function RevenueChart() {
                                 axisLine={false}
                                 tickLine={false}
                                 tick={{
-                                    fill: "#A9A3B5",
+                                    fill: "currentColor",
                                     fontSize: 8
                                 }}
+                                className="text-theme-text-secondary"
                             />
 
 
@@ -302,9 +297,10 @@ function RevenueChart() {
                                 axisLine={false}
                                 tickLine={false}
                                 tick={{
-                                    fill: "#A9A3B5",
+                                    fill: "currentColor",
                                     fontSize: 8
                                 }}
+                                className="text-theme-text-secondary"
                             />
 
 
@@ -314,10 +310,10 @@ function RevenueChart() {
                                     "Revenue"
                                 ]}
                                 contentStyle={{
-                                    backgroundColor: "#292438",
-                                    border: "1px solid #514b62",
+                                    backgroundColor: "var(--color-surface)",
+                                    border: "1px solid var(--color-border-light)",
                                     borderRadius: "6px",
-                                    color: "#FFFFFF",
+                                    color: "var(--color-text)",
                                     fontSize: "10px"
                                 }}
                             />
@@ -326,14 +322,14 @@ function RevenueChart() {
                             <Area
                                 type="monotone"
                                 dataKey="revenue"
-                                stroke="#8B3DFF"
+                                stroke="#8B3DF5"
                                 strokeWidth={2}
-                                fill="#8B3DFF"
+                                fill="#8B3DF5"
                                 fillOpacity={0.25}
                                 dot={{
                                     r: 3,
-                                    fill: "#8B3DFF",
-                                    stroke: "#8B3DFF"
+                                    fill: "#8B3DF5",
+                                    stroke: "#8B3DF5"
                                 }}
                                 activeDot={{
                                     r: 5
@@ -352,14 +348,14 @@ function RevenueChart() {
             {/* CUSTOM DATE POPUP */}
 
             {showCustomModal &&
-    createPortal(
-        <CustomDateRange
-            onClose={() => setShowCustomModal(false)}
-            onApply={handleCustomApply}
-        />,
-        document.body
-    )
-}
+                createPortal(
+                    <CustomDateRange
+                        onClose={() => setShowCustomModal(false)}
+                        onApply={handleCustomApply}
+                    />,
+                    document.body
+                )
+            }
 
         </>
 

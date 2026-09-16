@@ -70,7 +70,9 @@ function MainLayout({ children }) {
         <div
             className="
                 min-h-screen
-                bg-[#120d20]
+                bg-theme-page
+                transition-colors
+                duration-300
             "
         >
 
@@ -119,7 +121,7 @@ function MainLayout({ children }) {
             <div
                 className={`
                     min-h-screen
-                    bg-[#120d20]
+                    bg-theme-page
 
                     ml-0
 
@@ -166,15 +168,6 @@ function MainLayout({ children }) {
 
                 </main>
 
-
-                {/* =================================================
-                    BOTTOM RIGHT CHECKBOX
-                ================================================= */}
-
-                {/*
-                <BottomRightCheckbox />
-                */}
-
             </div>
 
         </div>
@@ -185,4 +178,3 @@ function MainLayout({ children }) {
 
 
 export default MainLayout;
-

@@ -4,9 +4,9 @@ function DashboardBox({ title, children }) {
     return (
         <div
             className="
-                bg-[#292438]
+                bg-theme-surface
                 border
-                border-[#514b62]
+                border-theme-border-light
                 rounded-[8px]
 
                 min-h-[250px]
@@ -18,13 +18,13 @@ function DashboardBox({ title, children }) {
                 p-3
                 sm:p-[18px]
 
-                shadow-[0_1px_4px_rgba(0,0,0,0.20)]
+                shadow-sm
 
                 transition-all
                 duration-300
 
                 hover:-translate-y-[3px]
-                hover:shadow-[0_6px_16px_rgba(0,0,0,0.30)]
+                hover:shadow-md
             "
         >
 
@@ -38,7 +38,7 @@ function DashboardBox({ title, children }) {
                     sm:text-[15px]
 
                     font-semibold
-                    text-white
+                    text-theme-text
 
                     truncate
                 "

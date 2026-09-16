@@ -117,15 +117,14 @@ function Header({
 
         <header
             className="
-                relative
+               
 
                 min-h-[66px]
                 w-full
 
                 bg-theme-surface
 
-                border-b
-                border-theme-border
+                
 
                 flex
                 items-center

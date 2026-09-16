@@ -112,8 +112,7 @@ function Sidebar({
 
                 bg-theme-surface
 
-                border-r
-                border-theme-border
+                
 
                 flex
                 flex-col
@@ -154,8 +153,7 @@ function Sidebar({
 
                     px-4
 
-                    border-b
-                    border-theme-border
+                  
                 "
             >
 

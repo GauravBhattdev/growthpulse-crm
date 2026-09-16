@@ -5,9 +5,9 @@ function StatCard({ icon, title, value, percentage }) {
 
         <div
             className="
-                bg-[#292438]
+                bg-theme-surface
                 border
-                border-[#514b62]
+                border-theme-border-light
                 rounded-[7px]
 
                 min-h-[102px]
@@ -19,12 +19,12 @@ function StatCard({ icon, title, value, percentage }) {
                 p-3
                 sm:p-[14px]
 
-                shadow-[0_1px_4px_rgba(0,0,0,0.25)]
+                shadow-sm
 
                 w-full
                 min-w-0
 
-                transition-transform
+                transition-all
                 duration-300
 
                 hover:scale-[1.04]
@@ -43,7 +43,7 @@ function StatCard({ icon, title, value, percentage }) {
 
                     rounded-full
 
-                    bg-[#8B3DFF]
+                    bg-primary
 
                     text-white
 
@@ -65,7 +65,6 @@ function StatCard({ icon, title, value, percentage }) {
 
             <div className="min-w-0 flex-1">
 
-
                 {/* Title */}
 
                 <p
@@ -76,7 +75,7 @@ function StatCard({ icon, title, value, percentage }) {
                         text-[12px]
                         sm:text-[13px]
 
-                        text-[#E5E1EA]
+                        text-theme-text-secondary
 
                         truncate
                     "
@@ -94,7 +93,7 @@ function StatCard({ icon, title, value, percentage }) {
                         text-[18px]
                         sm:text-[20px]
 
-                        text-white
+                        text-theme-text
                         font-semibold
 
                         truncate
