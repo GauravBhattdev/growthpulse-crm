@@ -173,44 +173,75 @@ function Organisation() {
     // EDIT ORGANISATION POPUP STATE
     // =================================================
 
-    const [showEditOrganisation, setShowEditOrganisation] = useState(false);
+    const [showEditOrganisation, setShowEditOrganisation] =
+        useState(false);
 
 
     return (
 
-        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
+        <div
+            className="
+                w-full
+                min-h-screen
+
+                bg-theme-page
+                text-theme-text
+
+                pl-6
+                sm:pl-8
+                lg:pl-10
+
+                pt-6
+                sm:pt-8
+                lg:pt-10
+
+                pr-4
+                sm:pr-6
+                lg:pr-8
+
+                transition-colors
+                duration-300
+            "
+        >
 
 
             {/* =====================================================
                 PAGE HEADER
             ===================================================== */}
 
-            <div className="
-                flex
-                flex-col
-                sm:flex-row
-                sm:items-start
-                sm:justify-between
-                gap-3
-            ">
+            <div
+                className="
+                    flex
+                    flex-col
+                    sm:flex-row
+                    sm:items-start
+                    sm:justify-between
+                    gap-3
+                "
+            >
 
                 <div>
 
-                    <h1 className="
-                        text-[25px]
-                        sm:text-[27px]
-                        font-semibold
-                        text-[#111]
-                    ">
+                    <h1
+                        className="
+                            text-[25px]
+                            sm:text-[27px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Organization
                     </h1>
 
-                    <p className="
-                        mt-1
-                        text-[12px]
-                        sm:text-[13px]
-                        text-gray-600
-                    ">
+
+                    <p
+                        className="
+                            mt-1
+                            text-[12px]
+                            sm:text-[13px]
+                            text-theme-text-secondary
+                        "
+                    >
                         Manage your organization details, members and settings
                     </p>
 
@@ -223,17 +254,28 @@ function Organisation() {
                 MAIN ORGANISATION PROFILE BOX
             ===================================================== */}
 
-            <div className="
-                mt-4
-                bg-white
-                border
-                border-gray-300
-                rounded-lg
-                shadow-sm
-                p-4
-                sm:p-5
-                relative
-            ">
+            <div
+                className="
+                    mt-4
+
+                    bg-theme-surface
+
+                    border
+                    border-theme-border-light
+
+                    rounded-lg
+
+                    shadow-sm
+
+                    p-4
+                    sm:p-5
+
+                    relative
+
+                    transition-colors
+                    duration-300
+                "
+            >
 
 
                 {/* =================================================
@@ -245,8 +287,10 @@ function Organisation() {
                     onClick={() => setShowEditOrganisation(true)}
                     className="
                         absolute
+
                         top-3
                         right-3
+
                         sm:top-4
                         sm:right-4
 
@@ -255,10 +299,11 @@ function Organisation() {
                         gap-1.5
 
                         border
-                        border-gray-400
+                        border-theme-border-light
 
-                        bg-white
-                        text-gray-700
+                        bg-theme-surface
+
+                        text-theme-text-secondary
 
                         px-3
                         py-1.5
@@ -270,7 +315,8 @@ function Organisation() {
 
                         font-medium
 
-                        hover:bg-gray-100
+                        hover:bg-theme-surface-secondary
+                        hover:text-theme-text
 
                         transition
                         duration-200
@@ -288,59 +334,68 @@ function Organisation() {
                     PROFILE CONTENT
                 ================================================= */}
 
-                <div className="
-                    flex
-                    flex-col
-                    lg:flex-row
-                    lg:items-center
+                <div
+                    className="
+                        flex
+                        flex-col
+                        lg:flex-row
+                        lg:items-center
 
-                    gap-5
-                    lg:gap-7
+                        gap-5
+                        lg:gap-7
 
-                    pt-8
-                    lg:pt-3
-                ">
+                        pt-8
+                        lg:pt-3
+                    "
+                >
 
 
                     {/* =================================================
                         LEFT SIDE
                     ================================================= */}
 
-                    <div className="
-                        flex
-                        items-start
-                        gap-4
-                        lg:flex-1
-                    ">
+                    <div
+                        className="
+                            flex
+                            items-start
+                            gap-4
+
+                            lg:flex-1
+                        "
+                    >
 
 
                         {/* ORGANISATION ICON */}
 
-                        <div className="
-                            w-[75px]
-                            h-[75px]
+                        <div
+                            className="
+                                w-[75px]
+                                h-[75px]
 
-                            sm:w-[95px]
-                            sm:h-[95px]
+                                sm:w-[95px]
+                                sm:h-[95px]
 
-                            rounded-full
+                                rounded-full
 
-                            border
-                            border-gray-400
+                                border
+                                border-theme-border-light
 
-                            flex
-                            items-center
-                            justify-center
+                                flex
+                                items-center
+                                justify-center
 
-                            shrink-0
+                                shrink-0
 
-                            shadow-sm
-                        ">
+                                shadow-sm
+
+                                bg-theme-surface-secondary
+                            "
+                        >
 
                             <Building2
                                 size={42}
                                 strokeWidth={1.7}
-                                className="text-black"
+                                className="text-theme-text"
                             />
 
                         </div>
@@ -350,29 +405,30 @@ function Organisation() {
 
                         <div className="min-w-0">
 
-                            <h2 className="
-                                text-[16px]
-                                sm:text-[17px]
-
-                                font-semibold
-                                text-[#222]
-                            ">
+                            <h2
+                                className="
+                                    text-[16px]
+                                    sm:text-[17px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 GrowthPulse Technologies
                             </h2>
 
 
                             {/* LOCATION */}
 
-                            <div className="
-                                flex
-                                items-center
-                                gap-2
-
-                                mt-2
-
-                                text-[11px]
-                                text-gray-600
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-2
+                                    mt-2
+                                    text-[11px]
+                                    text-theme-text-secondary
+                                "
+                            >
 
                                 <MapPin size={14} />
 
@@ -385,16 +441,16 @@ function Organisation() {
 
                             {/* EMAIL */}
 
-                            <div className="
-                                flex
-                                items-center
-                                gap-2
-
-                                mt-2
-
-                                text-[11px]
-                                text-gray-600
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-2
+                                    mt-2
+                                    text-[11px]
+                                    text-theme-text-secondary
+                                "
+                            >
 
                                 <Mail size={14} />
 
@@ -407,16 +463,16 @@ function Organisation() {
 
                             {/* PHONE */}
 
-                            <div className="
-                                flex
-                                items-center
-                                gap-2
-
-                                mt-2
-
-                                text-[11px]
-                                text-gray-600
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-2
+                                    mt-2
+                                    text-[11px]
+                                    text-theme-text-secondary
+                                "
+                            >
 
                                 <Phone size={14} />
 
@@ -429,16 +485,16 @@ function Organisation() {
 
                             {/* WEBSITE */}
 
-                            <div className="
-                                flex
-                                items-center
-                                gap-2
-
-                                mt-2
-
-                                text-[11px]
-                                text-gray-600
-                            ">
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-2
+                                    mt-2
+                                    text-[11px]
+                                    text-theme-text-secondary
+                                "
+                            >
 
                                 <Globe size={14} />
 
@@ -457,52 +513,60 @@ function Organisation() {
                         RIGHT SIDE ORGANISATION INFORMATION
                     ================================================= */}
 
-                    <div className="
-                        grid
-                        grid-cols-2
-                        sm:grid-cols-4
-                        lg:grid-cols-4
+                    <div
+                        className="
+                            grid
+                            grid-cols-2
+                            sm:grid-cols-4
+                            lg:grid-cols-4
 
-                        w-full
-                        lg:w-auto
-                        lg:min-w-[470px]
+                            w-full
+                            lg:w-auto
+                            lg:min-w-[470px]
 
-                        border-t
-                        lg:border-t-0
+                            border-t
+                            lg:border-t-0
 
-                        pt-4
-                        lg:pt-0
+                            border-theme-border-light
 
-                        gap-y-4
-                    ">
+                            pt-4
+                            lg:pt-0
+
+                            gap-y-4
+                        "
+                    >
 
 
                         {/* PLAN */}
 
-                        <div className="
-                            lg:border-l
-                            border-gray-300
+                        <div
+                            className="
+                                lg:border-l
+                                border-theme-border-light
+                                px-3
+                                sm:px-4
+                            "
+                        >
 
-                            px-3
-                            sm:px-4
-                        ">
-
-                            <p className="
-                                text-[10px]
-                                sm:text-[11px]
-                                text-gray-400
-                            ">
+                            <p
+                                className="
+                                    text-[10px]
+                                    sm:text-[11px]
+                                    text-theme-text-muted
+                                "
+                            >
                                 Plan
                             </p>
 
-                            <p className="
-                                mt-3
-                                text-[11px]
-                                sm:text-[12px]
-
-                                font-medium
-                                text-gray-800
-                            ">
+                            <p
+                                className="
+                                    mt-3
+                                    text-[11px]
+                                    sm:text-[12px]
+                                    font-medium
+                                    text-theme-text
+                                "
+                            >
                                 Professional
                             </p>
 
@@ -511,30 +575,34 @@ function Organisation() {
 
                         {/* MEMBER LIMIT */}
 
-                        <div className="
-                            border-l
-                            border-gray-300
+                        <div
+                            className="
+                                border-l
+                                border-theme-border-light
+                                px-3
+                                sm:px-4
+                            "
+                        >
 
-                            px-3
-                            sm:px-4
-                        ">
-
-                            <p className="
-                                text-[10px]
-                                sm:text-[11px]
-                                text-gray-400
-                            ">
+                            <p
+                                className="
+                                    text-[10px]
+                                    sm:text-[11px]
+                                    text-theme-text-muted
+                                "
+                            >
                                 Member Limit
                             </p>
 
-                            <p className="
-                                mt-3
-                                text-[11px]
-                                sm:text-[12px]
-
-                                font-medium
-                                text-gray-800
-                            ">
+                            <p
+                                className="
+                                    mt-3
+                                    text-[11px]
+                                    sm:text-[12px]
+                                    font-medium
+                                    text-theme-text
+                                "
+                            >
                                 20
                             </p>
 
@@ -543,32 +611,35 @@ function Organisation() {
 
                         {/* JOINED ON */}
 
-                        <div className="
-                            border-l
-                            border-gray-300
+                        <div
+                            className="
+                                border-l
+                                border-theme-border-light
+                                px-3
+                                sm:px-4
+                            "
+                        >
 
-                            px-3
-                            sm:px-4
-                        ">
-
-                            <p className="
-                                text-[10px]
-                                sm:text-[11px]
-                                text-gray-400
-                            ">
+                            <p
+                                className="
+                                    text-[10px]
+                                    sm:text-[11px]
+                                    text-theme-text-muted
+                                "
+                            >
                                 Joined On
                             </p>
 
-                            <p className="
-                                mt-3
-                                text-[11px]
-                                sm:text-[12px]
-
-                                font-medium
-                                text-gray-800
-
-                                whitespace-nowrap
-                            ">
+                            <p
+                                className="
+                                    mt-3
+                                    text-[11px]
+                                    sm:text-[12px]
+                                    font-medium
+                                    text-theme-text
+                                    whitespace-nowrap
+                                "
+                            >
                                 01 Jan, 2026
                             </p>
 
@@ -577,33 +648,35 @@ function Organisation() {
 
                         {/* GST NUMBER */}
 
-                        <div className="
-                            border-l
-                            border-gray-300
+                        <div
+                            className="
+                                border-l
+                                border-theme-border-light
+                                px-3
+                                sm:px-4
+                            "
+                        >
 
-                            px-3
-                            sm:px-4
-                        ">
-
-                            <p className="
-                                text-[10px]
-                                sm:text-[11px]
-                                text-gray-400
-                            ">
+                            <p
+                                className="
+                                    text-[10px]
+                                    sm:text-[11px]
+                                    text-theme-text-muted
+                                "
+                            >
                                 GST No.
                             </p>
 
-                            <p className="
-                                mt-3
-
-                                text-[10px]
-                                sm:text-[11px]
-
-                                font-medium
-                                text-gray-800
-
-                                whitespace-nowrap
-                            ">
+                            <p
+                                className="
+                                    mt-3
+                                    text-[10px]
+                                    sm:text-[11px]
+                                    font-medium
+                                    text-theme-text
+                                    whitespace-nowrap
+                                "
+                            >
                                 09ABCDE1234F1Z5
                             </p>
 
@@ -620,54 +693,55 @@ function Organisation() {
                 LOWER CONTENT
             ===================================================== */}
 
-            <div className="
-                grid
-                grid-cols-1
-
-                xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)]
-
-                gap-3
-                mt-3
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    xl:grid-cols-[minmax(0,1.8fr)_minmax(280px,1fr)]
+                    gap-3
+                    mt-3
+                "
+            >
 
 
                 {/* =================================================
                     TEAM MEMBERS
                 ================================================= */}
 
-                <div className="
-                    bg-white
-
-                    border
-                    border-gray-300
-
-                    rounded-lg
-
-                    shadow-sm
-
-                    overflow-hidden
-                ">
+                <div
+                    className="
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+                        rounded-lg
+                        shadow-sm
+                        overflow-hidden
+                        transition-colors
+                        duration-300
+                    "
+                >
 
 
                     {/* TEAM MEMBERS HEADER */}
 
-                    <div className="
-                        h-[42px]
+                    <div
+                        className="
+                            h-[42px]
+                            flex
+                            items-center
+                            px-3
+                            border-b
+                            border-theme-border-light
+                        "
+                    >
 
-                        flex
-                        items-center
-
-                        px-3
-
-                        border-b
-                        border-gray-300
-                    ">
-
-                        <h2 className="
-                            text-[14px]
-                            font-semibold
-                            text-gray-800
-                        ">
+                        <h2
+                            className="
+                                text-[14px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             Team Members
                         </h2>
 
@@ -678,86 +752,88 @@ function Organisation() {
 
                     <div className="overflow-x-auto">
 
-                        <table className="
-                            w-full
-                            min-w-[650px]
-                            border-collapse
-                        ">
+                        <table
+                            className="
+                                w-full
+                                min-w-[650px]
+                                border-collapse
+                            "
+                        >
 
 
                             {/* TABLE HEADER */}
 
                             <thead>
 
-                                <tr className="bg-purple-200">
+                                <tr
+                                    className="
+                                        bg-purple-100
+                                        dark:bg-purple-500/10
+                                    "
+                                >
 
-                                    <th className="
-                                        text-left
-
-                                        px-3
-                                        py-3
-
-                                        text-[11px]
-
-                                        font-medium
-                                        text-gray-800
-                                    ">
+                                    <th
+                                        className="
+                                            text-left
+                                            px-4
+                                            py-3
+                                            text-[11px]
+                                            font-semibold
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Name
                                     </th>
 
-                                    <th className="
-                                        text-left
-
-                                        px-3
-                                        py-3
-
-                                        text-[11px]
-
-                                        font-medium
-                                        text-gray-800
-                                    ">
+                                    <th
+                                        className="
+                                            text-left
+                                            px-4
+                                            py-3
+                                            text-[11px]
+                                            font-semibold
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Email
                                     </th>
 
-                                    <th className="
-                                        text-left
-
-                                        px-3
-                                        py-3
-
-                                        text-[11px]
-
-                                        font-medium
-                                        text-gray-800
-                                    ">
+                                    <th
+                                        className="
+                                            text-left
+                                            px-4
+                                            py-3
+                                            text-[11px]
+                                            font-semibold
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Role
                                     </th>
 
-                                    <th className="
-                                        text-left
-
-                                        px-3
-                                        py-3
-
-                                        text-[11px]
-
-                                        font-medium
-                                        text-gray-800
-                                    ">
+                                    <th
+                                        className="
+                                            text-left
+                                            px-4
+                                            py-3
+                                            text-[11px]
+                                            font-semibold
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Department
                                     </th>
 
-                                    <th className="
-                                        text-left
-
-                                        px-3
-                                        py-3
-
-                                        text-[11px]
-
-                                        font-medium
-                                        text-gray-800
-                                    ">
+                                    <th
+                                        className="
+                                            text-left
+                                            px-4
+                                            py-3
+                                            text-[11px]
+                                            font-semibold
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Status
                                     </th>
 
@@ -776,11 +852,10 @@ function Organisation() {
                                         key={member.id}
                                         className="
                                             border-b
-                                            border-gray-300
-
-                                            hover:bg-gray-50
-
-                                            transition
+                                            border-theme-border-light
+                                            hover:bg-theme-surface-secondary
+                                            transition-colors
+                                            duration-200
                                         "
                                     >
 
@@ -788,51 +863,50 @@ function Organisation() {
                                         {/* NAME */}
 
                                         <td className="
-                                            px-3
-                                            py-3
+                                            px-4
+                                            py-3.5
                                         ">
 
-                                            <div className="
-                                                flex
-                                                items-center
-                                                gap-2
-                                            ">
-
+                                            <div
+                                                className="
+                                                    flex
+                                                    items-center
+                                                    gap-2.5
+                                                "
+                                            >
 
                                                 {/* AVATAR */}
 
-                                                <div className={`
-                                                    w-5
-                                                    h-5
-
-                                                    rounded-full
-
-                                                    ${member.color}
-
-                                                    flex
-                                                    items-center
-                                                    justify-center
-
-                                                    text-[7px]
-                                                    text-white
-                                                    font-medium
-
-                                                    shrink-0
-                                                `}>
-
+                                                <div
+                                                    className={`
+                                                        w-7
+                                                        h-7
+                                                        rounded-full
+                                                        ${member.color}
+                                                        flex
+                                                        items-center
+                                                        justify-center
+                                                        text-[9px]
+                                                        text-white
+                                                        font-semibold
+                                                        shrink-0
+                                                        shadow-sm
+                                                    `}
+                                                >
                                                     {member.avatar}
-
                                                 </div>
 
 
                                                 {/* NAME */}
 
-                                                <span className="
-                                                    text-[10px]
-                                                    text-gray-800
-
-                                                    whitespace-nowrap
-                                                ">
+                                                <span
+                                                    className="
+                                                        text-[12px]
+                                                        font-medium
+                                                        text-theme-text
+                                                        whitespace-nowrap
+                                                    "
+                                                >
                                                     {member.name}
                                                 </span>
 
@@ -841,17 +915,19 @@ function Organisation() {
 
                                                 {member.you && (
 
-                                                    <span className="
-                                                        px-1.5
-                                                        py-0.5
-
-                                                        rounded
-
-                                                        bg-purple-100
-                                                        text-purple-500
-
-                                                        text-[7px]
-                                                    ">
+                                                    <span
+                                                        className="
+                                                            px-1.5
+                                                            py-0.5
+                                                            rounded-full
+                                                            bg-purple-100
+                                                            dark:bg-purple-500/10
+                                                            text-purple-600
+                                                            dark:text-purple-400
+                                                            text-[8px]
+                                                            font-medium
+                                                        "
+                                                    >
                                                         You
                                                     </span>
 
@@ -864,71 +940,78 @@ function Organisation() {
 
                                         {/* EMAIL */}
 
-                                        <td className="
-                                            px-3
-                                            py-3
-
-                                            text-[10px]
-                                            text-gray-700
-
-                                            whitespace-nowrap
-                                        ">
+                                        <td
+                                            className="
+                                                px-4
+                                                py-3.5
+                                                text-[11px]
+                                                font-normal
+                                                text-theme-text-secondary
+                                                whitespace-nowrap
+                                            "
+                                        >
                                             {member.email}
                                         </td>
 
 
                                         {/* ROLE */}
 
-                                        <td className="
-                                            px-3
-                                            py-3
-
-                                            text-[10px]
-                                            text-gray-700
-
-                                            whitespace-nowrap
-                                        ">
+                                        <td
+                                            className="
+                                                px-4
+                                                py-3.5
+                                                text-[11px]
+                                                font-normal
+                                                text-theme-text-secondary
+                                                whitespace-nowrap
+                                            "
+                                        >
                                             {member.role}
                                         </td>
 
 
                                         {/* DEPARTMENT */}
 
-                                        <td className="
-                                            px-3
-                                            py-3
-
-                                            text-[10px]
-                                            text-gray-700
-
-                                            whitespace-nowrap
-                                        ">
+                                        <td
+                                            className="
+                                                px-4
+                                                py-3.5
+                                                text-[11px]
+                                                font-normal
+                                                text-theme-text-secondary
+                                                whitespace-nowrap
+                                            "
+                                        >
                                             {member.department}
                                         </td>
 
 
                                         {/* STATUS */}
 
-                                        <td className="
-                                            px-3
-                                            py-3
-                                        ">
+                                        <td
+                                            className="
+                                                px-4
+                                                py-3.5
+                                            "
+                                        >
 
-                                            <span className={`
-                                                px-2
-                                                py-1
+                                            <span
+                                                className={`
+                                                    inline-flex
+                                                    items-center
+                                                    px-2.5
+                                                    py-1
+                                                    rounded-full
+                                                    text-[8px]
+                                                    font-medium
 
-                                                rounded
-
-                                                text-[7px]
-                                                font-medium
-
-                                                ${
-                                                    member.status === "Active"
-                                                        ? "bg-green-100 text-green-600"
-                                                        : "bg-red-100 text-red-500"
-                                                }
-                                            `}>
+                                                    ${
+                                                        member.status === "Active"
+                                                            ? "bg-green-100 text-green-600 dark:bg-green-500/10 dark:text-green-400"
+                                                            : "bg-red-100 text-red-500 dark:bg-red-500/10 dark:text-red-400"
+                                                    }
+                                                `}
+                                            >
 
                                                 {member.status}
 
@@ -953,60 +1036,65 @@ function Organisation() {
                     RIGHT SIDE
                 ================================================= */}
 
-                <div className="
-                    flex
-                    flex-col
-                    gap-3
-                ">
+                <div
+                    className="
+                        flex
+                        flex-col
+                        gap-3
+                    "
+                >
 
 
                     {/* =================================================
                         DEPARTMENTS
                     ================================================= */}
 
-                    <div className="
-                        bg-white
-
-                        border
-                        border-gray-300
-
-                        rounded-lg
-
-                        shadow-sm
-
-                        overflow-hidden
-                    ">
-
+                    <div
+                        className="
+                            bg-theme-surface
+                            border
+                            border-theme-border-light
+                            rounded-lg
+                            shadow-sm
+                            overflow-hidden
+                            transition-colors
+                            duration-300
+                        "
+                    >
 
                         {/* HEADER */}
 
-                        <div className="
-                            h-[42px]
+                        <div
+                            className="
+                                h-[42px]
+                                flex
+                                items-center
+                                justify-between
+                                px-3
+                                border-b
+                                border-theme-border-light
+                            "
+                        >
 
-                            flex
-                            items-center
-                            justify-between
-
-                            px-3
-
-                            border-b
-                            border-gray-300
-                        ">
-
-                            <h2 className="
-                                text-[14px]
-                                font-semibold
-                                text-gray-800
-                            ">
+                            <h2
+                                className="
+                                    text-[14px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 Departments
                             </h2>
 
-                            <button className="
-                                text-purple-500
-                                text-[12px]
 
-                                hover:text-purple-700
-                            ">
+                            <button
+                                className="
+                                    text-purple-500
+                                    text-[12px]
+                                    hover:text-purple-700
+                                    transition-colors
+                                "
+                            >
                                 Manage
                             </button>
 
@@ -1019,7 +1107,8 @@ function Organisation() {
 
                             {departments.map((department) => {
 
-                                const DepartmentIcon = department.icon;
+                                const DepartmentIcon =
+                                    department.icon;
 
                                 return (
 
@@ -1029,56 +1118,61 @@ function Organisation() {
                                             flex
                                             items-center
                                             justify-between
-
                                             py-2
-
                                             border-b
-                                            border-gray-200
-
+                                            border-theme-border-light
                                             last:border-b-0
                                         "
                                     >
 
-                                        <div className="
-                                            flex
-                                            items-center
-                                            gap-2
-                                        ">
-
-                                            <div className="
-                                                w-5
-                                                h-5
-
-                                                bg-gray-200
-
-                                                rounded
-
+                                        <div
+                                            className="
                                                 flex
                                                 items-center
-                                                justify-center
-                                            ">
+                                                gap-2
+                                            "
+                                        >
+
+                                            <div
+                                                className="
+                                                    w-5
+                                                    h-5
+                                                    bg-theme-surface-secondary
+                                                    rounded
+                                                    flex
+                                                    items-center
+                                                    justify-center
+                                                "
+                                            >
 
                                                 <DepartmentIcon
                                                     size={12}
-                                                    className="text-gray-700"
+                                                    className="
+                                                        text-theme-text-secondary
+                                                    "
                                                 />
 
                                             </div>
 
-                                            <span className="
-                                                text-[10px]
-                                                text-gray-700
-                                            ">
+
+                                            <span
+                                                className="
+                                                    text-[10px]
+                                                    text-theme-text-secondary
+                                                "
+                                            >
                                                 {department.name}
                                             </span>
 
                                         </div>
 
 
-                                        <span className="
-                                            text-[9px]
-                                            text-gray-700
-                                        ">
+                                        <span
+                                            className="
+                                                text-[9px]
+                                                text-theme-text-secondary
+                                            "
+                                        >
                                             {department.members} Members
                                         </span>
 
@@ -1097,49 +1191,52 @@ function Organisation() {
                         ORGANISATION SETTINGS
                     ================================================= */}
 
-                    <div className="
-                        bg-white
-
-                        border
-                        border-gray-300
-
-                        rounded-lg
-
-                        shadow-sm
-
-                        overflow-hidden
-                    ">
-
+                    <div
+                        className="
+                            bg-theme-surface
+                            border
+                            border-theme-border-light
+                            rounded-lg
+                            shadow-sm
+                            overflow-hidden
+                            transition-colors
+                            duration-300
+                        "
+                    >
 
                         {/* HEADER */}
 
-                        <div className="
-                            h-[42px]
+                        <div
+                            className="
+                                h-[42px]
+                                flex
+                                items-center
+                                justify-between
+                                px-3
+                                border-b
+                                border-theme-border-light
+                            "
+                        >
 
-                            flex
-                            items-center
-                            justify-between
-
-                            px-3
-
-                            border-b
-                            border-gray-300
-                        ">
-
-                            <h2 className="
-                                text-[14px]
-                                font-semibold
-                                text-gray-800
-                            ">
+                            <h2
+                                className="
+                                    text-[14px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 Organization Setting
                             </h2>
 
-                            <button className="
-                                text-purple-500
-                                text-[12px]
 
-                                hover:text-purple-700
-                            ">
+                            <button
+                                className="
+                                    text-purple-500
+                                    text-[12px]
+                                    hover:text-purple-700
+                                    transition-colors
+                                "
+                            >
                                 Manage
                             </button>
 
@@ -1152,7 +1249,8 @@ function Organisation() {
 
                             {organisationSettings.map((setting) => {
 
-                                const SettingIcon = setting.icon;
+                                const SettingIcon =
+                                    setting.icon;
 
                                 return (
 
@@ -1160,41 +1258,42 @@ function Organisation() {
                                         key={setting.id}
                                         className="
                                             w-full
-
                                             flex
                                             items-center
                                             justify-between
-
                                             py-2.5
-
                                             border-b
-                                            border-gray-200
-
+                                            border-theme-border-light
                                             last:border-b-0
-
                                             text-left
-
-                                            hover:bg-gray-50
-
-                                            transition
+                                            hover:bg-theme-surface-secondary
+                                            transition-colors
+                                            duration-200
                                         "
                                     >
 
-                                        <div className="
-                                            flex
-                                            items-center
-                                            gap-2
-                                        ">
+                                        <div
+                                            className="
+                                                flex
+                                                items-center
+                                                gap-2
+                                            "
+                                        >
 
                                             <SettingIcon
                                                 size={17}
-                                                className="text-gray-700"
+                                                className="
+                                                    text-theme-text-secondary
+                                                "
                                             />
 
-                                            <span className="
-                                                text-[10px]
-                                                text-gray-700
-                                            ">
+
+                                            <span
+                                                className="
+                                                    text-[10px]
+                                                    text-theme-text-secondary
+                                                "
+                                            >
                                                 {setting.name}
                                             </span>
 
@@ -1203,7 +1302,9 @@ function Organisation() {
 
                                         <ChevronRight
                                             size={15}
-                                            className="text-gray-700"
+                                            className="
+                                                text-theme-text-secondary
+                                            "
                                         />
 
                                     </button>
@@ -1225,46 +1326,50 @@ function Organisation() {
                 ORGANISATION SUMMARY
             ===================================================== */}
 
-            <div className="
-                grid
-                grid-cols-1
-                sm:grid-cols-3
-
-                gap-3
-                mt-3
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-3
+                    gap-3
+                    mt-3
+                "
+            >
 
 
                 {/* DEPARTMENTS */}
 
-                <div className="
-                    border
-                    border-gray-300
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-lg
+                        p-4
+                        bg-theme-surface
+                        shadow-sm
+                        transition-colors
+                        duration-300
+                    "
+                >
 
-                    rounded-lg
-
-                    p-4
-
-                    bg-white
-
-                    shadow-sm
-                ">
-
-                    <p className="
-                        text-[10px]
-                        text-gray-500
-                    ">
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-muted
+                        "
+                    >
                         Departments
                     </p>
 
-                    <h2 className="
-                        text-xl
-                        font-semibold
 
-                        mt-1
-
-                        text-gray-900
-                    ">
+                    <h2
+                        className="
+                            text-xl
+                            font-semibold
+                            mt-1
+                            text-theme-text
+                        "
+                    >
                         8
                     </h2>
 
@@ -1273,34 +1378,37 @@ function Organisation() {
 
                 {/* TEAM MEMBERS */}
 
-                <div className="
-                    border
-                    border-gray-300
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-lg
+                        p-4
+                        bg-theme-surface
+                        shadow-sm
+                        transition-colors
+                        duration-300
+                    "
+                >
 
-                    rounded-lg
-
-                    p-4
-
-                    bg-white
-
-                    shadow-sm
-                ">
-
-                    <p className="
-                        text-[10px]
-                        text-gray-500
-                    ">
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-muted
+                        "
+                    >
                         Team Members
                     </p>
 
-                    <h2 className="
-                        text-xl
-                        font-semibold
 
-                        mt-1
-
-                        text-gray-900
-                    ">
+                    <h2
+                        className="
+                            text-xl
+                            font-semibold
+                            mt-1
+                            text-theme-text
+                        "
+                    >
                         65
                     </h2>
 
@@ -1309,34 +1417,37 @@ function Organisation() {
 
                 {/* ACTIVE PROJECTS */}
 
-                <div className="
-                    border
-                    border-gray-300
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-lg
+                        p-4
+                        bg-theme-surface
+                        shadow-sm
+                        transition-colors
+                        duration-300
+                    "
+                >
 
-                    rounded-lg
-
-                    p-4
-
-                    bg-white
-
-                    shadow-sm
-                ">
-
-                    <p className="
-                        text-[10px]
-                        text-gray-500
-                    ">
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-muted
+                        "
+                    >
                         Active Projects
                     </p>
 
-                    <h2 className="
-                        text-xl
-                        font-semibold
 
-                        mt-1
-
-                        text-gray-900
-                    ">
+                    <h2
+                        className="
+                            text-xl
+                            font-semibold
+                            mt-1
+                            text-theme-text
+                        "
+                    >
                         118
                     </h2>
 
@@ -1352,7 +1463,9 @@ function Organisation() {
             {showEditOrganisation && (
 
                 <EditOrganisation
-                    onClose={() => setShowEditOrganisation(false)}
+                    onClose={() =>
+                        setShowEditOrganisation(false)
+                    }
                 />
 
             )}
@@ -1360,6 +1473,7 @@ function Organisation() {
         </div>
 
     );
+
 }
 
 

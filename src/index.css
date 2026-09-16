@@ -1,3 +1,79 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+/* =================================================
+   LIGHT THEME
+================================================= */
+
+:root {
+
+    --color-page: #f7f7fb;
+
+    --color-surface: #ffffff;
+
+    --color-surface-secondary: #f3f4f6;
+
+
+    --color-text: #111111;
+
+    --color-text-secondary: #6b7280;
+
+    --color-text-muted: #9ca3af;
+
+
+    --color-border: #e5e7eb;
+
+    --color-border-light: #d1d5db;
+}
+
+
+/* =================================================
+   DARK THEME
+================================================= */
+
+.dark {
+
+    --color-page: #120d20;
+
+    --color-surface: #160d27;
+
+    --color-surface-secondary: #1d1430;
+
+
+    --color-text: #ffffff;
+
+    --color-text-secondary: #d1cdd8;
+
+    --color-text-muted: #9ca3af;
+
+
+    --color-border: #2b1c43;
+
+    --color-border-light: #403254;
+}
+
+
+/* =================================================
+   GLOBAL
+================================================= */
+
+html,
+body,
+#root {
+
+    min-height: 100%;
+
+    margin: 0;
+
+}
+
+
+body {
+
+    background-color: var(--color-page);
+
+    color: var(--color-text);
+
+}

@@ -23,7 +23,7 @@ const teams = [
         activeProjects: 32,
         performance: 88,
         icon: Megaphone,
-        iconBg: "bg-purple-200",
+        iconBg: "bg-purple-200 dark:bg-purple-500/20",
     },
     {
         id: 2,
@@ -32,7 +32,7 @@ const teams = [
         activeProjects: 18,
         performance: 76,
         icon: BarChart3,
-        iconBg: "bg-blue-200",
+        iconBg: "bg-blue-200 dark:bg-blue-500/20",
     },
     {
         id: 3,
@@ -41,7 +41,7 @@ const teams = [
         activeProjects: 28,
         performance: 84,
         icon: PenTool,
-        iconBg: "bg-green-200",
+        iconBg: "bg-green-200 dark:bg-green-500/20",
     },
     {
         id: 4,
@@ -50,7 +50,7 @@ const teams = [
         activeProjects: 12,
         performance: 82,
         icon: Headphones,
-        iconBg: "bg-yellow-200",
+        iconBg: "bg-yellow-200 dark:bg-yellow-500/20",
     },
     {
         id: 5,
@@ -59,7 +59,7 @@ const teams = [
         activeProjects: 26,
         performance: 90,
         icon: Code2,
-        iconBg: "bg-purple-200",
+        iconBg: "bg-purple-200 dark:bg-purple-500/20",
     }
 ];
 
@@ -93,7 +93,23 @@ function Teams() {
 
     return (
 
-        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10">
+        <div className="
+            w-full
+            min-h-screen
+            bg-theme-page
+            text-theme-text
+            pl-6
+            sm:pl-8
+            lg:pl-10
+            pr-4
+            sm:pr-6
+            lg:pr-8
+            pt-4
+            sm:pt-5
+            lg:pt-6
+            transition-colors
+            duration-300
+        ">
 
             {/* =========================
                 PAGE HEADER
@@ -108,17 +124,24 @@ function Teams() {
                     sm:items-center
                     justify-between
                     gap-4
-                    pt-3
                 "
             >
 
                 <div>
 
-                    <h1 className="text-[27px] font-semibold text-black">
+                    <h1 className="
+                        text-[27px]
+                        font-semibold
+                        text-theme-text
+                    ">
                         Teams
                     </h1>
 
-                    <p className="mt-1 text-[13px] text-black">
+                    <p className="
+                        mt-1
+                        text-[13px]
+                        text-theme-text-secondary
+                    ">
                         Manage all your teams and performance.
                     </p>
 
@@ -230,9 +253,9 @@ function Teams() {
                         <div
                             key={team.id}
                             className="
-                                bg-white
+                                bg-theme-surface
                                 border
-                                border-[#cfcfcf]
+                                border-theme-border-light
                                 p-4
                                 min-h-[200px]
                                 hover:shadow-md
@@ -270,7 +293,7 @@ function Teams() {
 
                                     <TeamIcon
                                         size={30}
-                                        className="text-[#111]"
+                                        className="text-theme-text"
                                     />
 
                                 </div>
@@ -284,14 +307,18 @@ function Teams() {
                                         className="
                                             text-[18px]
                                             font-medium
-                                            text-[#222]
+                                            text-theme-text
                                             break-words
                                         "
                                     >
                                         {team.name}
                                     </h2>
 
-                                    <p className="text-[12px] text-[#333] mt-1">
+                                    <p className="
+                                        text-[12px]
+                                        text-theme-text-secondary
+                                        mt-1
+                                    ">
                                         {team.members} Members
                                     </p>
 
@@ -314,6 +341,7 @@ function Teams() {
                                             bg-[#e8b08c]
                                             border-2
                                             border-white
+                                            dark:border-[#160d27]
                                             flex
                                             items-center
                                             justify-center
@@ -331,6 +359,7 @@ function Teams() {
                                             bg-[#d8b090]
                                             border-2
                                             border-white
+                                            dark:border-[#160d27]
                                             flex
                                             items-center
                                             justify-center
@@ -348,6 +377,7 @@ function Teams() {
                                             bg-[#8d8d8d]
                                             border-2
                                             border-white
+                                            dark:border-[#160d27]
                                             flex
                                             items-center
                                             justify-center
@@ -366,6 +396,7 @@ function Teams() {
                                             bg-[#e6b4c0]
                                             border-2
                                             border-white
+                                            dark:border-[#160d27]
                                             flex
                                             items-center
                                             justify-center
@@ -383,6 +414,7 @@ function Teams() {
                                             bg-[#777]
                                             border-2
                                             border-white
+                                            dark:border-[#160d27]
                                             flex
                                             items-center
                                             justify-center
@@ -403,11 +435,13 @@ function Teams() {
                                         h-7
                                         rounded-full
                                         bg-gray-200
+                                        dark:bg-gray-700
                                         flex
                                         items-center
                                         justify-center
                                         text-[9px]
                                         text-gray-700
+                                        dark:text-gray-200
                                         shrink-0
                                     "
                                 >
@@ -419,7 +453,11 @@ function Teams() {
 
                             {/* Divider */}
 
-                            <div className="border-t border-gray-300 mt-4"></div>
+                            <div className="
+                                border-t
+                                border-theme-border-light
+                                mt-4
+                            "></div>
 
 
                             {/* Projects and Performance */}
@@ -435,11 +473,17 @@ function Teams() {
                                 "
                             >
 
-                                <span className="text-[18px] text-[#333]">
+                                <span className="
+                                    text-[18px]
+                                    text-theme-text
+                                ">
                                     {team.activeProjects}
                                 </span>
 
-                                <span className="ml-2 text-[#333]">
+                                <span className="
+                                    ml-2
+                                    text-theme-text-secondary
+                                ">
                                     Active Projects
                                 </span>
 
@@ -447,7 +491,7 @@ function Teams() {
                                 <span
                                     className="
                                         mx-3
-                                        text-gray-300
+                                        text-theme-text-muted
                                         hidden
                                         sm:inline
                                     "
@@ -460,13 +504,17 @@ function Teams() {
                                     className="
                                         text-[16px]
                                         text-green-600
+                                        dark:text-green-400
                                         font-medium
                                     "
                                 >
                                     {team.performance}%
                                 </span>
 
-                                <span className="ml-2 text-[#333]">
+                                <span className="
+                                    ml-2
+                                    text-theme-text-secondary
+                                ">
                                     Performance
                                 </span>
 
@@ -505,15 +553,15 @@ function Teams() {
                                         type="button"
                                         className="
                                             border
-                                            border-gray-300
-                                            bg-white
+                                            border-theme-border-light
+                                            bg-theme-surface
                                             px-4
                                             py-2
                                             rounded
                                             text-[11px]
-                                            text-[#4b397b]
+                                            text-primary
                                             font-semibold
-                                            hover:bg-gray-50
+                                            hover:bg-theme-surface-secondary
                                             transition
                                         "
                                     >
@@ -530,15 +578,15 @@ function Teams() {
                                         onClick={() => navigate("/team-member")}
                                         className="
                                             border
-                                            border-gray-300
-                                            bg-white
+                                            border-theme-border-light
+                                            bg-theme-surface
                                             px-4
                                             py-2
                                             rounded
                                             text-[11px]
-                                            text-[#4b397b]
+                                            text-primary
                                             font-semibold
-                                            hover:bg-gray-50
+                                            hover:bg-theme-surface-secondary
                                             transition
                                         "
                                     >
@@ -555,12 +603,16 @@ function Teams() {
                                 <button
                                     type="button"
                                     className="
-                                        text-gray-700
-                                        hover:text-black
+                                        text-theme-text-secondary
+                                        hover:text-theme-text
+                                        hover:bg-theme-surface-secondary
+                                        rounded-md
+                                        p-1
                                         transition
                                         self-end
                                         sm:self-auto
                                     "
+                                    title="More Options"
                                 >
 
                                     <MoreVertical size={20} />

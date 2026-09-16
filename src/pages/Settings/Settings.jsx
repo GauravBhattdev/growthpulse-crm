@@ -33,7 +33,8 @@ function Settings() {
     // ACTIVE MENU
     // =================================================
 
-    const [activeMenu, setActiveMenu] = useState("Profile");
+    const [activeMenu, setActiveMenu] =
+        useState("Profile");
 
 
     // =================================================
@@ -147,20 +148,25 @@ function Settings() {
 
     return (
 
-        /*
-            IMPORTANT:
+        <div
+            className="
+                w-full
+                min-h-screen
 
-            No dark background here.
+                bg-theme-page
 
-            Header and Sidebar background are handled
-            by MainLayout.
+                px-4
+                sm:px-6
+                lg:px-8
 
-            Settings page content stays WHITE.
-        */
+                pt-6
+                sm:pt-8
+                lg:pt-10
 
-          <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
-
-
+                transition-colors
+                duration-300
+            "
+        >
 
             {/* =====================================================
                 PAGE HEADER
@@ -172,8 +178,10 @@ function Settings() {
                     className="
                         text-[25px]
                         sm:text-[27px]
+
                         font-semibold
-                        text-gray-900
+
+                        text-theme-text
                     "
                 >
                     Setting
@@ -182,9 +190,11 @@ function Settings() {
                 <p
                     className="
                         mt-1
+
                         text-[11px]
                         sm:text-[13px]
-                        text-gray-600
+
+                        text-theme-text-secondary
                     "
                 >
                     Manage your account, preference and workspace setting
@@ -200,9 +210,13 @@ function Settings() {
             <div
                 className="
                     grid
+
                     grid-cols-1
+
                     lg:grid-cols-12
+
                     gap-3
+
                     mt-3
                 "
             >
@@ -216,10 +230,10 @@ function Settings() {
                     className="
                         lg:col-span-3
 
-                        bg-white
+                        bg-theme-surface
 
                         border
-                        border-gray-300
+                        border-theme-border
 
                         rounded-lg
 
@@ -228,6 +242,9 @@ function Settings() {
                         p-2.5
 
                         h-fit
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
@@ -242,10 +259,13 @@ function Settings() {
 
                             <button
                                 key={item.name}
+
                                 type="button"
+
                                 onClick={() =>
                                     setActiveMenu(item.name)
                                 }
+
                                 className={`
                                     w-full
 
@@ -268,13 +288,26 @@ function Settings() {
 
                                     ${
                                         isActive
-                                            ? "bg-purple-100 text-purple-700"
-                                            : "text-gray-700 hover:bg-gray-100"
+                                            ? `
+                                                bg-purple-100
+                                                dark:bg-theme-surface-secondary
+
+                                                text-purple-700
+                                                dark:text-primary
+                                            `
+                                            : `
+                                                text-theme-text-secondary
+
+                                                hover:bg-theme-surface-secondary
+                                                hover:text-theme-text
+                                            `
                                     }
                                 `}
                             >
 
-                                <MenuIcon size={16} />
+                                <MenuIcon
+                                    size={16}
+                                />
 
                                 <span>
                                     {item.name}
@@ -282,7 +315,10 @@ function Settings() {
 
                                 <ChevronRight
                                     size={14}
-                                    className="ml-auto"
+
+                                    className="
+                                        ml-auto
+                                    "
                                 />
 
                             </button>
@@ -316,10 +352,10 @@ function Settings() {
 
                     <div
                         className="
-                            bg-white
+                            bg-theme-surface
 
                             border
-                            border-gray-300
+                            border-theme-border
 
                             rounded-lg
 
@@ -327,9 +363,11 @@ function Settings() {
 
                             p-3
                             sm:p-4
+
+                            transition-colors
+                            duration-300
                         "
                     >
-
 
                         {/* HEADER */}
 
@@ -340,7 +378,7 @@ function Settings() {
 
                                 font-semibold
 
-                                text-gray-900
+                                text-theme-text
                             "
                         >
                             Profile Information
@@ -351,7 +389,7 @@ function Settings() {
                                 text-[9px]
                                 sm:text-[10px]
 
-                                text-gray-500
+                                text-theme-text-secondary
 
                                 mt-0.5
                             "
@@ -424,7 +462,10 @@ function Settings() {
 
                                     <Camera
                                         size={9}
-                                        className="text-white"
+
+                                        className="
+                                            text-white
+                                        "
                                     />
 
                                 </div>
@@ -434,14 +475,18 @@ function Settings() {
 
                             <button
                                 type="button"
-                                onClick={handleChangePhoto}
+
+                                onClick={
+                                    handleChangePhoto
+                                }
+
                                 className="
                                     flex
                                     items-center
                                     gap-1.5
 
                                     border
-                                    border-gray-400
+                                    border-theme-border-light
 
                                     rounded
 
@@ -450,15 +495,18 @@ function Settings() {
 
                                     text-[9px]
 
-                                    text-gray-700
+                                    text-theme-text-secondary
 
-                                    hover:bg-gray-100
+                                    hover:bg-theme-surface-secondary
+                                    hover:text-theme-text
 
                                     transition
                                 "
                             >
 
-                                <Camera size={11} />
+                                <Camera
+                                    size={11}
+                                />
 
                                 Change Photo
 
@@ -474,7 +522,9 @@ function Settings() {
                         <div
                             className="
                                 grid
+
                                 grid-cols-1
+
                                 sm:grid-cols-2
 
                                 gap-x-2
@@ -487,16 +537,21 @@ function Settings() {
 
                             {/* FULL NAME */}
 
-                            <div className="sm:col-span-2">
+                            <div
+                                className="
+                                    sm:col-span-2
+                                "
+                            >
 
                                 <label
                                     className="
                                         block
 
                                         text-[9px]
+
                                         font-medium
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -506,16 +561,21 @@ function Settings() {
 
                                 <input
                                     type="text"
+
                                     value={fullName}
+
                                     onChange={(e) =>
-                                        setFullName(e.target.value)
+                                        setFullName(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
                                         h-[32px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -523,11 +583,15 @@ function Settings() {
 
                                         text-[10px]
 
-                                        text-gray-800
+                                        bg-theme-surface
+
+                                        text-theme-text
 
                                         outline-none
 
                                         focus:border-purple-500
+
+                                        transition-colors
                                     "
                                 />
 
@@ -536,16 +600,21 @@ function Settings() {
 
                             {/* EMAIL */}
 
-                            <div className="sm:col-span-2">
+                            <div
+                                className="
+                                    sm:col-span-2
+                                "
+                            >
 
                                 <label
                                     className="
                                         block
 
                                         text-[9px]
+
                                         font-medium
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -555,16 +624,21 @@ function Settings() {
 
                                 <input
                                     type="email"
+
                                     value={email}
+
                                     onChange={(e) =>
-                                        setEmail(e.target.value)
+                                        setEmail(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
                                         h-[32px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -572,11 +646,15 @@ function Settings() {
 
                                         text-[10px]
 
-                                        text-gray-800
+                                        bg-theme-surface
+
+                                        text-theme-text
 
                                         outline-none
 
                                         focus:border-purple-500
+
+                                        transition-colors
                                     "
                                 />
 
@@ -592,9 +670,10 @@ function Settings() {
                                         block
 
                                         text-[9px]
+
                                         font-medium
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -604,16 +683,21 @@ function Settings() {
 
                                 <input
                                     type="text"
+
                                     value={phone}
+
                                     onChange={(e) =>
-                                        setPhone(e.target.value)
+                                        setPhone(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
                                         h-[32px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -621,11 +705,15 @@ function Settings() {
 
                                         text-[10px]
 
-                                        text-gray-800
+                                        bg-theme-surface
+
+                                        text-theme-text
 
                                         outline-none
 
                                         focus:border-purple-500
+
+                                        transition-colors
                                     "
                                 />
 
@@ -641,9 +729,10 @@ function Settings() {
                                         block
 
                                         text-[9px]
+
                                         font-medium
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -653,16 +742,21 @@ function Settings() {
 
                                 <input
                                     type="text"
+
                                     value={designation}
+
                                     onChange={(e) =>
-                                        setDesignation(e.target.value)
+                                        setDesignation(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
                                         h-[32px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -670,11 +764,15 @@ function Settings() {
 
                                         text-[10px]
 
-                                        text-gray-800
+                                        bg-theme-surface
+
+                                        text-theme-text
 
                                         outline-none
 
                                         focus:border-purple-500
+
+                                        transition-colors
                                     "
                                 />
 
@@ -685,20 +783,28 @@ function Settings() {
 
                         {/* SAVE */}
 
-                        <div className="mt-3">
+                        <div
+                            className="
+                                mt-3
+                            "
+                        >
 
                             <button
                                 type="button"
-                                onClick={handleSaveChanges}
+
+                                onClick={
+                                    handleSaveChanges
+                                }
+
                                 className="
                                     flex
                                     items-center
                                     gap-1.5
 
                                     border
-                                    border-gray-500
+                                    border-theme-border-light
 
-                                    bg-white
+                                    bg-theme-surface
 
                                     rounded
 
@@ -707,15 +813,17 @@ function Settings() {
 
                                     text-[9px]
 
-                                    text-gray-800
+                                    text-theme-text
 
-                                    hover:bg-gray-100
+                                    hover:bg-theme-surface-secondary
 
                                     transition
                                 "
                             >
 
-                                <Save size={12} />
+                                <Save
+                                    size={12}
+                                />
 
                                 Save Changes
 
@@ -732,10 +840,10 @@ function Settings() {
 
                     <div
                         className="
-                            bg-white
+                            bg-theme-surface
 
                             border
-                            border-gray-300
+                            border-theme-border
 
                             rounded-lg
 
@@ -743,6 +851,9 @@ function Settings() {
 
                             p-3
                             sm:p-4
+
+                            transition-colors
+                            duration-300
                         "
                     >
 
@@ -753,7 +864,7 @@ function Settings() {
 
                                 font-semibold
 
-                                text-gray-900
+                                text-theme-text
                             "
                         >
                             Preferences
@@ -763,7 +874,7 @@ function Settings() {
                             className="
                                 text-[9px]
 
-                                text-gray-500
+                                text-theme-text-secondary
 
                                 mt-0.5
                             "
@@ -775,7 +886,9 @@ function Settings() {
                         <div
                             className="
                                 grid
+
                                 grid-cols-1
+
                                 sm:grid-cols-2
 
                                 gap-3
@@ -795,7 +908,7 @@ function Settings() {
 
                                         text-[9px]
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -805,16 +918,20 @@ function Settings() {
 
                                 <select
                                     value={language}
+
                                     onChange={(e) =>
-                                        setLanguage(e.target.value)
+                                        setLanguage(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
 
                                         h-[27px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -822,7 +939,13 @@ function Settings() {
 
                                         text-[8px]
 
+                                        bg-theme-surface
+
+                                        text-theme-text
+
                                         outline-none
+
+                                        focus:border-purple-500
                                     "
                                 >
 
@@ -849,7 +972,7 @@ function Settings() {
 
                                         text-[9px]
 
-                                        text-gray-700
+                                        text-theme-text-secondary
 
                                         mb-1
                                     "
@@ -859,16 +982,20 @@ function Settings() {
 
                                 <select
                                     value={timezone}
+
                                     onChange={(e) =>
-                                        setTimezone(e.target.value)
+                                        setTimezone(
+                                            e.target.value
+                                        )
                                     }
+
                                     className="
                                         w-full
 
                                         h-[27px]
 
                                         border
-                                        border-gray-700
+                                        border-theme-border-light
 
                                         rounded
 
@@ -876,7 +1003,13 @@ function Settings() {
 
                                         text-[8px]
 
+                                        bg-theme-surface
+
+                                        text-theme-text
+
                                         outline-none
+
+                                        focus:border-purple-500
                                     "
                                 >
 
@@ -911,12 +1044,19 @@ function Settings() {
                             "
                         >
 
-                            <Bell size={11} />
+                            <Bell
+                                size={11}
+
+                                className="
+                                    text-theme-text-secondary
+                                "
+                            />
 
                             <span
                                 className="
                                     text-[9px]
-                                    text-gray-700
+
+                                    text-theme-text-secondary
                                 "
                             >
                                 Email Notification
@@ -927,11 +1067,13 @@ function Settings() {
 
                             <button
                                 type="button"
+
                                 onClick={() =>
                                     setEmailNotification(
                                         !emailNotification
                                     )
                                 }
+
                                 className={`
                                     relative
 
@@ -945,7 +1087,7 @@ function Settings() {
                                     ${
                                         emailNotification
                                             ? "bg-purple-500"
-                                            : "bg-gray-300"
+                                            : "bg-gray-400"
                                     }
                                 `}
                             >
@@ -1004,10 +1146,10 @@ function Settings() {
 
                     <div
                         className="
-                            bg-white
+                            bg-theme-surface
 
                             border
-                            border-gray-300
+                            border-theme-border
 
                             rounded-lg
 
@@ -1015,6 +1157,9 @@ function Settings() {
 
                             p-3
                             sm:p-4
+
+                            transition-colors
+                            duration-300
                         "
                     >
 
@@ -1025,7 +1170,7 @@ function Settings() {
 
                                 font-semibold
 
-                                text-gray-900
+                                text-theme-text
                             "
                         >
                             Account Details
@@ -1035,7 +1180,7 @@ function Settings() {
                             className="
                                 text-[9px]
 
-                                text-gray-500
+                                text-theme-text-secondary
 
                                 mt-0.5
                             "
@@ -1051,6 +1196,7 @@ function Settings() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-4
                             "
                         >
@@ -1062,7 +1208,8 @@ function Settings() {
 
                                     rounded-full
 
-                                    bg-yellow-200
+                                    bg-yellow-100
+                                    dark:bg-yellow-900/30
 
                                     flex
                                     items-center
@@ -1072,20 +1219,31 @@ function Settings() {
 
                                 <Star
                                     size={12}
-                                    className="text-yellow-500"
+
+                                    className="
+                                        text-yellow-500
+                                    "
                                 />
 
                             </div>
 
-                            <span className="text-[9px] text-gray-700">
+                            <span
+                                className="
+                                    text-[9px]
+
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Plan
                             </span>
 
                             <span
                                 className="
                                     ml-auto
+
                                     text-[9px]
-                                    text-gray-700
+
+                                    text-theme-text
                                 "
                             >
                                 Professional
@@ -1118,6 +1276,7 @@ function Settings() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-3
                             "
                         >
@@ -1129,7 +1288,8 @@ function Settings() {
 
                                     rounded-full
 
-                                    bg-green-200
+                                    bg-green-100
+                                    dark:bg-green-900/30
 
                                     flex
                                     items-center
@@ -1139,12 +1299,21 @@ function Settings() {
 
                                 <Coins
                                     size={12}
-                                    className="text-green-600"
+
+                                    className="
+                                        text-green-600
+                                    "
                                 />
 
                             </div>
 
-                            <span className="text-[9px] text-gray-700">
+                            <span
+                                className="
+                                    text-[9px]
+
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Credits
                             </span>
 
@@ -1153,7 +1322,8 @@ function Settings() {
                                     ml-auto
 
                                     text-[9px]
-                                    text-gray-700
+
+                                    text-theme-text
                                 "
                             >
                                 2,450
@@ -1161,6 +1331,7 @@ function Settings() {
 
                             <button
                                 type="button"
+
                                 className="
                                     border
                                     border-purple-500
@@ -1172,6 +1343,11 @@ function Settings() {
                                     px-1
 
                                     rounded
+
+                                    hover:bg-purple-50
+                                    dark:hover:bg-purple-900/20
+
+                                    transition
                                 "
                             >
                                 + Add Credits
@@ -1187,6 +1363,7 @@ function Settings() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-3
                             "
                         >
@@ -1198,7 +1375,8 @@ function Settings() {
 
                                     rounded-full
 
-                                    bg-blue-200
+                                    bg-blue-100
+                                    dark:bg-blue-900/30
 
                                     flex
                                     items-center
@@ -1208,12 +1386,21 @@ function Settings() {
 
                                 <CalendarDays
                                     size={12}
-                                    className="text-blue-600"
+
+                                    className="
+                                        text-blue-600
+                                    "
                                 />
 
                             </div>
 
-                            <span className="text-[9px] text-gray-700">
+                            <span
+                                className="
+                                    text-[9px]
+
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Member Since
                             </span>
 
@@ -1222,7 +1409,8 @@ function Settings() {
                                     ml-auto
 
                                     text-[9px]
-                                    text-gray-700
+
+                                    text-theme-text
                                 "
                             >
                                 12 Aug 2025
@@ -1238,6 +1426,7 @@ function Settings() {
                                 flex
                                 items-center
                                 gap-2
+
                                 mt-3
                             "
                         >
@@ -1249,7 +1438,8 @@ function Settings() {
 
                                     rounded-full
 
-                                    bg-purple-200
+                                    bg-purple-100
+                                    dark:bg-purple-900/30
 
                                     flex
                                     items-center
@@ -1259,12 +1449,21 @@ function Settings() {
 
                                 <Clock
                                     size={12}
-                                    className="text-purple-600"
+
+                                    className="
+                                        text-purple-600
+                                    "
                                 />
 
                             </div>
 
-                            <span className="text-[9px] text-gray-700">
+                            <span
+                                className="
+                                    text-[9px]
+
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Last Login
                             </span>
 
@@ -1273,7 +1472,8 @@ function Settings() {
                                     ml-auto
 
                                     text-[9px]
-                                    text-gray-700
+
+                                    text-theme-text
                                 "
                             >
                                 26 Sep 2025, 04:32
@@ -1286,6 +1486,7 @@ function Settings() {
 
                         <button
                             type="button"
+
                             className="
                                 w-full
 
@@ -1303,6 +1504,7 @@ function Settings() {
                                 text-purple-500
 
                                 hover:bg-purple-50
+                                dark:hover:bg-purple-900/20
 
                                 transition
                             "
@@ -1319,10 +1521,10 @@ function Settings() {
 
                     <div
                         className="
-                            bg-white
+                            bg-theme-surface
 
                             border
-                            border-gray-300
+                            border-theme-border
 
                             rounded-lg
 
@@ -1330,6 +1532,9 @@ function Settings() {
 
                             p-3
                             sm:p-4
+
+                            transition-colors
+                            duration-300
                         "
                     >
 
@@ -1340,7 +1545,7 @@ function Settings() {
 
                                 font-semibold
 
-                                text-gray-900
+                                text-theme-text
                             "
                         >
                             Quick Action
@@ -1350,7 +1555,7 @@ function Settings() {
                             className="
                                 text-[9px]
 
-                                text-gray-500
+                                text-theme-text-secondary
 
                                 mt-0.5
                             "
@@ -1363,7 +1568,7 @@ function Settings() {
                             className="
                                 border-t
 
-                                border-gray-400
+                                border-theme-border-light
 
                                 mt-3
                             "
@@ -1374,6 +1579,7 @@ function Settings() {
 
                         <button
                             type="button"
+
                             className="
                                 w-full
 
@@ -1384,11 +1590,14 @@ function Settings() {
                                 py-2.5
 
                                 border-b
-                                border-gray-300
+                                border-theme-border-light
 
                                 text-left
 
-                                hover:bg-gray-50
+                                text-theme-text-secondary
+
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
 
                                 transition
                             "
@@ -1396,13 +1605,11 @@ function Settings() {
 
                             <LockKeyhole
                                 size={15}
-                                className="text-gray-700"
                             />
 
                             <span
                                 className="
                                     text-[9px]
-                                    text-gray-700
                                 "
                             >
                                 Change Password
@@ -1410,7 +1617,10 @@ function Settings() {
 
                             <ChevronRight
                                 size={14}
-                                className="ml-auto"
+
+                                className="
+                                    ml-auto
+                                "
                             />
 
                         </button>
@@ -1420,6 +1630,7 @@ function Settings() {
 
                         <button
                             type="button"
+
                             className="
                                 w-full
 
@@ -1430,11 +1641,14 @@ function Settings() {
                                 py-2.5
 
                                 border-b
-                                border-gray-300
+                                border-theme-border-light
 
                                 text-left
 
-                                hover:bg-gray-50
+                                text-theme-text-secondary
+
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
 
                                 transition
                             "
@@ -1442,13 +1656,11 @@ function Settings() {
 
                             <ShieldCheck
                                 size={15}
-                                className="text-gray-700"
                             />
 
                             <span
                                 className="
                                     text-[9px]
-                                    text-gray-700
                                 "
                             >
                                 Two-Factor Authentication
@@ -1456,7 +1668,10 @@ function Settings() {
 
                             <ChevronRight
                                 size={14}
-                                className="ml-auto"
+
+                                className="
+                                    ml-auto
+                                "
                             />
 
                         </button>
@@ -1466,6 +1681,7 @@ function Settings() {
 
                         <button
                             type="button"
+
                             className="
                                 w-full
 
@@ -1476,11 +1692,14 @@ function Settings() {
                                 py-2.5
 
                                 border-b
-                                border-gray-300
+                                border-theme-border-light
 
                                 text-left
 
-                                hover:bg-gray-50
+                                text-theme-text-secondary
+
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
 
                                 transition
                             "
@@ -1488,13 +1707,11 @@ function Settings() {
 
                             <Download
                                 size={15}
-                                className="text-gray-700"
                             />
 
                             <span
                                 className="
                                     text-[9px]
-                                    text-gray-700
                                 "
                             >
                                 Download Data
@@ -1502,7 +1719,10 @@ function Settings() {
 
                             <ChevronRight
                                 size={14}
-                                className="ml-auto"
+
+                                className="
+                                    ml-auto
+                                "
                             />
 
                         </button>
@@ -1512,6 +1732,7 @@ function Settings() {
 
                         <button
                             type="button"
+
                             className="
                                 w-full
 
@@ -1524,6 +1745,7 @@ function Settings() {
                                 text-left
 
                                 hover:bg-red-50
+                                dark:hover:bg-red-900/20
 
                                 transition
                             "
@@ -1531,12 +1753,16 @@ function Settings() {
 
                             <Trash2
                                 size={15}
-                                className="text-red-500"
+
+                                className="
+                                    text-red-500
+                                "
                             />
 
                             <span
                                 className="
                                     text-[9px]
+
                                     text-red-500
                                 "
                             >
@@ -1545,9 +1771,11 @@ function Settings() {
 
                             <ChevronRight
                                 size={14}
+
                                 className="
                                     ml-auto
-                                    text-gray-700
+
+                                    text-theme-text-secondary
                                 "
                             />
 

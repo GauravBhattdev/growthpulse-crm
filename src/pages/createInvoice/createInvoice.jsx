@@ -244,13 +244,16 @@ function CreateInvoice() {
 
         <div className="
             w-full
-            bg-background
             min-h-screen
+            bg-theme-page
+            text-theme-text
             px-4
             sm:px-6
             lg:px-8
             py-5
             sm:py-7
+            transition-colors
+            duration-300
         ">
 
 
@@ -273,9 +276,10 @@ function CreateInvoice() {
                             h-9
                             rounded-md
                             border
-                            border-borderLight
-                            text-textSecondary
-                            hover:bg-gray-100
+                            border-theme-border-light
+                            text-theme-text-secondary
+                            bg-theme-surface
+                            hover:bg-theme-surface-secondary
                             transition
                             disabled:opacity-50
                             disabled:cursor-not-allowed
@@ -293,7 +297,7 @@ function CreateInvoice() {
                             text-2xl
                             sm:text-[27px]
                             font-semibold
-                            text-textPrimary
+                            text-theme-text
                         ">
                             Create Invoice
                         </h1>
@@ -322,11 +326,11 @@ function CreateInvoice() {
                                 Invoice
                             </button>
 
-                            <span className="text-textSecondary">
+                            <span className="text-theme-text-muted">
                                 ›
                             </span>
 
-                            <span className="text-textSecondary">
+                            <span className="text-theme-text-secondary">
                                 Create Invoice
                             </span>
 
@@ -346,14 +350,16 @@ function CreateInvoice() {
             <div
                 className="
                     border
-                    border-borderLight
+                    border-theme-border-light
+                    bg-theme-surface
                     rounded-xl
                     p-4
                     sm:p-5
                     lg:p-6
+                    transition-colors
+                    duration-300
                 "
             >
-
 
                 <div
                     className="
@@ -402,7 +408,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     First Name
@@ -418,8 +424,11 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
@@ -427,7 +436,7 @@ function CreateInvoice() {
                                         focus:ring-1
                                         focus:ring-primary
                                         transition
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -442,7 +451,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Last Name
@@ -458,8 +467,11 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
@@ -467,7 +479,7 @@ function CreateInvoice() {
                                         focus:ring-1
                                         focus:ring-primary
                                         transition
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -482,7 +494,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Email
@@ -498,8 +510,11 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
@@ -507,7 +522,7 @@ function CreateInvoice() {
                                         focus:ring-1
                                         focus:ring-primary
                                         transition
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -522,7 +537,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Phone Number
@@ -538,8 +553,11 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
@@ -547,7 +565,7 @@ function CreateInvoice() {
                                         focus:ring-1
                                         focus:ring-primary
                                         transition
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -587,7 +605,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     First Name
@@ -603,15 +621,18 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
                                         focus:border-primary
                                         focus:ring-1
                                         focus:ring-primary
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -626,7 +647,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Last Name
@@ -642,15 +663,18 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
                                         focus:border-primary
                                         focus:ring-1
                                         focus:ring-primary
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -665,7 +689,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Email
@@ -681,15 +705,18 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
                                         focus:border-primary
                                         focus:ring-1
                                         focus:ring-primary
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -704,7 +731,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Phone Number
@@ -720,15 +747,18 @@ function CreateInvoice() {
                                     className="
                                         w-full
                                         h-10
+                                        bg-theme-surface
+                                        text-theme-text
+                                        placeholder:text-theme-text-muted
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         px-3
                                         text-xs
                                         outline-none
                                         focus:border-primary
                                         focus:ring-1
                                         focus:ring-primary
-                                        disabled:bg-gray-100
+                                        disabled:opacity-60
                                     "
                                 />
 
@@ -757,7 +787,7 @@ function CreateInvoice() {
                             <div className="
                                 min-w-[760px]
                                 border
-                                border-borderLight
+                                border-theme-border-light
                                 rounded-md
                                 overflow-hidden
                             ">
@@ -767,8 +797,9 @@ function CreateInvoice() {
                                         grid
                                         grid-cols-[2fr_1fr_1.2fr_1fr_1fr_45px]
                                         bg-purple-100
+                                        dark:bg-purple-500/10
                                         border-b
-                                        border-borderLight
+                                        border-theme-border-light
                                     "
                                 >
 
@@ -777,7 +808,7 @@ function CreateInvoice() {
                                         py-3
                                         text-xs
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                     ">
                                         Item/Description
                                     </div>
@@ -787,7 +818,7 @@ function CreateInvoice() {
                                         py-3
                                         text-xs
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                     ">
                                         Quantity
                                     </div>
@@ -797,7 +828,7 @@ function CreateInvoice() {
                                         py-3
                                         text-xs
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                     ">
                                         Unit Price (₹)
                                     </div>
@@ -807,7 +838,7 @@ function CreateInvoice() {
                                         py-3
                                         text-xs
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                     ">
                                         Tax (%)
                                     </div>
@@ -817,7 +848,7 @@ function CreateInvoice() {
                                         py-3
                                         text-xs
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                     ">
                                         Amount (₹)
                                     </div>
@@ -842,8 +873,9 @@ function CreateInvoice() {
                                                 grid-cols-[2fr_1fr_1.2fr_1fr_1fr_45px]
                                                 items-center
                                                 border-b
-                                                border-gray-200
+                                                border-theme-border-light
                                                 last:border-b-0
+                                                bg-theme-surface
                                             "
                                         >
 
@@ -864,13 +896,18 @@ function CreateInvoice() {
                                                     className="
                                                         w-full
                                                         h-9
+                                                        bg-theme-surface
+                                                        text-theme-text
+                                                        placeholder:text-theme-text-muted
                                                         border
-                                                        border-borderLight
+                                                        border-theme-border-light
                                                         px-2
                                                         text-xs
                                                         outline-none
                                                         focus:border-primary
-                                                        disabled:bg-gray-100
+                                                        focus:ring-1
+                                                        focus:ring-primary
+                                                        disabled:opacity-60
                                                     "
                                                 />
 
@@ -894,13 +931,17 @@ function CreateInvoice() {
                                                     className="
                                                         w-full
                                                         h-9
+                                                        bg-theme-surface
+                                                        text-theme-text
                                                         border
-                                                        border-borderLight
+                                                        border-theme-border-light
                                                         px-2
                                                         text-xs
                                                         outline-none
                                                         focus:border-primary
-                                                        disabled:bg-gray-100
+                                                        focus:ring-1
+                                                        focus:ring-primary
+                                                        disabled:opacity-60
                                                     "
                                                 />
 
@@ -924,13 +965,17 @@ function CreateInvoice() {
                                                     className="
                                                         w-full
                                                         h-9
+                                                        bg-theme-surface
+                                                        text-theme-text
                                                         border
-                                                        border-borderLight
+                                                        border-theme-border-light
                                                         px-2
                                                         text-xs
                                                         outline-none
                                                         focus:border-primary
-                                                        disabled:bg-gray-100
+                                                        focus:ring-1
+                                                        focus:ring-primary
+                                                        disabled:opacity-60
                                                     "
                                                 />
 
@@ -952,14 +997,17 @@ function CreateInvoice() {
                                                     className="
                                                         w-full
                                                         h-9
+                                                        bg-theme-surface
+                                                        text-theme-text
                                                         border
-                                                        border-borderLight
+                                                        border-theme-border-light
                                                         px-2
                                                         text-xs
                                                         outline-none
-                                                        bg-background
                                                         focus:border-primary
-                                                        disabled:bg-gray-100
+                                                        focus:ring-1
+                                                        focus:ring-primary
+                                                        disabled:opacity-60
                                                     "
                                                 >
 
@@ -991,7 +1039,7 @@ function CreateInvoice() {
                                             <div className="
                                                 px-3
                                                 text-xs
-                                                text-textSecondary
+                                                text-theme-text-secondary
                                             ">
 
                                                 ₹ {amount.toFixed(2)}
@@ -1011,6 +1059,7 @@ function CreateInvoice() {
                                                         p-2
                                                         text-red-500
                                                         hover:bg-red-50
+                                                        dark:hover:bg-red-500/10
                                                         rounded
                                                         transition
                                                         disabled:opacity-50
@@ -1054,6 +1103,7 @@ function CreateInvoice() {
                                 text-xs
                                 rounded-sm
                                 hover:bg-purple-50
+                                dark:hover:bg-purple-500/10
                                 transition
                                 disabled:opacity-50
                                 disabled:cursor-not-allowed
@@ -1076,13 +1126,14 @@ function CreateInvoice() {
 
                     <div className="
                         xl:border-l
-                        xl:border-borderLight
+                        xl:border-theme-border-light
                         xl:pl-5
                     ">
 
                         <div className="
                             border
-                            border-borderLight
+                            border-theme-border-light
+                            bg-theme-surface
                             shadow-sm
                         ">
 
@@ -1105,11 +1156,11 @@ function CreateInvoice() {
                                     mb-4
                                 ">
 
-                                    <span>
+                                    <span className="text-theme-text-secondary">
                                         Sub Total
                                     </span>
 
-                                    <span>
+                                    <span className="text-theme-text">
                                         ₹ {subTotal.toFixed(2)}
                                     </span>
 
@@ -1124,7 +1175,7 @@ function CreateInvoice() {
                                     mb-4
                                 ">
 
-                                    <span>
+                                    <span className="text-theme-text-secondary">
                                         Discount
                                     </span>
 
@@ -1147,17 +1198,21 @@ function CreateInvoice() {
                                             className="
                                                 w-20
                                                 h-7
+                                                bg-theme-surface
+                                                text-theme-text
                                                 border
-                                                border-borderLight
+                                                border-theme-border-light
                                                 px-2
                                                 text-xs
                                                 outline-none
                                                 focus:border-primary
-                                                disabled:bg-gray-100
+                                                focus:ring-1
+                                                focus:ring-primary
+                                                disabled:opacity-60
                                             "
                                         />
 
-                                        <span>
+                                        <span className="text-theme-text">
                                             ₹ {Number(discount || 0).toFixed(2)}
                                         </span>
 
@@ -1173,11 +1228,11 @@ function CreateInvoice() {
                                     mb-5
                                 ">
 
-                                    <span>
+                                    <span className="text-theme-text-secondary">
                                         Tax
                                     </span>
 
-                                    <span>
+                                    <span className="text-theme-text">
                                         ₹ {taxAmount.toFixed(2)}
                                     </span>
 
@@ -1186,7 +1241,7 @@ function CreateInvoice() {
 
                                 <div className="
                                     border-t
-                                    border-borderLight
+                                    border-theme-border-light
                                     pt-3
                                 ">
 
@@ -1199,6 +1254,7 @@ function CreateInvoice() {
                                         <span className="
                                             font-semibold
                                             text-sm
+                                            text-theme-text
                                         ">
                                             Total Amount
                                         </span>
@@ -1224,7 +1280,7 @@ function CreateInvoice() {
 
                             <div className="
                                 border-t
-                                border-borderLight
+                                border-theme-border-light
                                 p-3
                             ">
 
@@ -1242,7 +1298,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mb-2
                                 ">
                                     Notes (optional)
@@ -1261,14 +1317,19 @@ function CreateInvoice() {
                                         disabled={loadingAction !== null}
                                         className="
                                             w-full
+                                            bg-theme-surface
+                                            text-theme-text
+                                            placeholder:text-theme-text-muted
                                             border
-                                            border-borderLight
+                                            border-theme-border-light
                                             p-2
                                             text-xs
                                             resize-none
                                             outline-none
                                             focus:border-primary
-                                            disabled:bg-gray-100
+                                            focus:ring-1
+                                            focus:ring-primary
+                                            disabled:opacity-60
                                         "
                                     />
 
@@ -1277,7 +1338,7 @@ function CreateInvoice() {
                                         bottom-2
                                         right-2
                                         text-[10px]
-                                        text-textMuted
+                                        text-theme-text-muted
                                     ">
                                         {notes.length}/300
                                     </span>
@@ -1289,7 +1350,7 @@ function CreateInvoice() {
                                     block
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mt-5
                                     mb-2
                                 ">
@@ -1298,39 +1359,36 @@ function CreateInvoice() {
 
 
                                 <label
-                                    className={`
+                                    className="
                                         flex
                                         flex-col
                                         items-center
                                         justify-center
                                         min-h-[105px]
+                                        bg-theme-surface
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         cursor-pointer
-                                        hover:bg-gray-50
+                                        hover:bg-theme-surface-secondary
                                         transition
-                                        ${loadingAction !== null
-                                            ? "opacity-50 cursor-not-allowed"
-                                            : ""
-                                        }
-                                    `}
+                                    "
                                 >
 
                                     <Upload
                                         size={20}
-                                        className="text-textSecondary mb-2"
+                                        className="text-theme-text-secondary mb-2"
                                     />
 
                                     <span className="
                                         text-xs
-                                        text-textSecondary
+                                        text-theme-text-secondary
                                     ">
                                         Drag and drop file here
                                     </span>
 
                                     <span className="
                                         text-xs
-                                        text-textSecondary
+                                        text-theme-text-secondary
                                         my-2
                                     ">
                                         or
@@ -1352,7 +1410,7 @@ function CreateInvoice() {
 
                                     <span className="
                                         text-[10px]
-                                        text-textMuted
+                                        text-theme-text-muted
                                         mt-2
                                     ">
                                         {file
@@ -1375,7 +1433,7 @@ function CreateInvoice() {
                                 <p className="
                                     text-xs
                                     font-medium
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mt-5
                                     mb-3
                                 ">
@@ -1394,6 +1452,7 @@ function CreateInvoice() {
                                         items-center
                                         gap-2
                                         text-xs
+                                        text-theme-text
                                         cursor-pointer
                                     ">
 
@@ -1421,6 +1480,7 @@ function CreateInvoice() {
                                         items-center
                                         gap-2
                                         text-xs
+                                        text-theme-text
                                         cursor-pointer
                                     ">
 
@@ -1448,6 +1508,7 @@ function CreateInvoice() {
                                         items-center
                                         gap-2
                                         text-xs
+                                        text-theme-text
                                         cursor-pointer
                                     ">
 
@@ -1506,12 +1567,13 @@ function CreateInvoice() {
                             px-6
                             py-3
                             border
-                            border-borderLight
+                            border-theme-border-light
+                            bg-theme-surface
                             rounded-md
                             text-sm
                             font-medium
-                            text-textSecondary
-                            hover:bg-gray-100
+                            text-theme-text-secondary
+                            hover:bg-theme-surface-secondary
                             active:scale-[0.98]
                             transition
                             disabled:opacity-60
@@ -1618,12 +1680,12 @@ function CreateInvoice() {
                             gap-2
                             px-6
                             py-3
-                            bg-pageBackground
+                            bg-[#151026]
                             text-white
                             rounded-md
                             text-sm
                             font-medium
-                            hover:bg-primaryHover
+                            hover:bg-[#7630D8]
                             hover:shadow-lg
                             active:scale-[0.98]
                             transition-all
@@ -1653,6 +1715,7 @@ function CreateInvoice() {
 
                     </button>
 
+
                 </div>
 
             </div>
@@ -1665,3 +1728,4 @@ function CreateInvoice() {
 
 
 export default CreateInvoice;
+

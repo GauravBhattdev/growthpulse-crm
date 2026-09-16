@@ -134,19 +134,6 @@ const priorityOptions = [
 
 
 // =====================================================
-// DATE RANGE OPTIONS
-// =====================================================
-
-const dateRangeOptions = [
-    "D1",
-    "D3",
-    "D7",
-    "D15",
-    "D30"
-];
-
-
-// =====================================================
 // SUPPORT TICKETS COMPONENT
 // =====================================================
 
@@ -188,26 +175,22 @@ function SupportTickets() {
 
 
     // =================================================
-    // DATE RANGE STATE
-    // =================================================
-
-    const [selectedDateRange, setSelectedDateRange] = useState("D7");
-
-
-    // =================================================
     // DROPDOWN STATE
     // =================================================
 
-    const [showStatusDropdown, setShowStatusDropdown] = useState(false);
+    const [showStatusDropdown, setShowStatusDropdown] =
+        useState(false);
 
-    const [showPriorityDropdown, setShowPriorityDropdown] = useState(false);
+    const [showPriorityDropdown, setShowPriorityDropdown] =
+        useState(false);
 
 
     // =================================================
     // FILTER PANEL STATE
     // =================================================
 
-    const [showFilterPanel, setShowFilterPanel] = useState(false);
+    const [showFilterPanel, setShowFilterPanel] =
+        useState(false);
 
 
     // =================================================
@@ -306,17 +289,6 @@ function SupportTickets() {
 
 
     // =================================================
-    // DATE RANGE HANDLER
-    // =================================================
-
-    const handleDateRangeChange = (range) => {
-
-        setSelectedDateRange(range);
-
-    };
-
-
-    // =================================================
     // STATUS CHECKBOX HANDLER
     // =================================================
 
@@ -369,57 +341,13 @@ function SupportTickets() {
 
 
     // =================================================
-    // DUMMY DATE RANGE FILTER
-    // =================================================
-
-    const getTicketsByDateRange = () => {
-
-        switch (selectedDateRange) {
-
-            case "D1":
-
-                return tickets.slice(0, 1);
-
-
-            case "D3":
-
-                return tickets.slice(0, 2);
-
-
-            case "D7":
-
-                return tickets.slice(0, 4);
-
-
-            case "D15":
-
-                return tickets.slice(0, 6);
-
-
-            case "D30":
-
-                return tickets.slice(0, 8);
-
-
-            default:
-
-                return tickets;
-
-        }
-
-    };
-
-
-    // =================================================
     // FILTER TICKETS
     // =================================================
 
-    const dateFilteredTickets = getTicketsByDateRange();
+    const filteredTickets = tickets.filter((ticket) => {
 
-
-    const filteredTickets = dateFilteredTickets.filter((ticket) => {
-
-        const searchValue = searchText.toLowerCase();
+        const searchValue =
+            searchText.toLowerCase().trim();
 
 
         // SEARCH FILTER
@@ -465,8 +393,6 @@ function SupportTickets() {
 
         setSelectedPriorities([]);
 
-        setSelectedDateRange("D7");
-
         setShowFilterPanel(false);
 
     };
@@ -491,7 +417,9 @@ function SupportTickets() {
             className="
                 w-full
                 min-h-screen
-                bg-white
+
+                bg-theme-page
+                text-theme-text
 
                 pl-6
                 pr-4
@@ -505,6 +433,9 @@ function SupportTickets() {
                 pt-6
                 sm:pt-8
                 lg:pt-10
+
+                transition-colors
+                duration-300
             "
         >
 
@@ -527,11 +458,23 @@ function SupportTickets() {
 
                 <div>
 
-                    <h1 className="text-[27px] font-semibold text-[#111]">
+                    <h1
+                        className="
+                            text-[27px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Support Tickets
                     </h1>
 
-                    <p className="mt-1 text-[13px] text-[#444]">
+                    <p
+                        className="
+                            mt-1
+                            text-[13px]
+                            text-theme-text-secondary
+                        "
+                    >
                         Manage your subscription, payments and billing details
                     </p>
 
@@ -632,11 +575,16 @@ function SupportTickets() {
                 <div
                     className="
                         h-[80px]
-                        bg-white
-                        border border-gray-300
+
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+
                         rounded-lg
                         shadow-sm
-                        flex items-center
+
+                        flex
+                        items-center
                         px-4
 
                         transition-all
@@ -650,12 +598,20 @@ function SupportTickets() {
 
                     <div
                         className="
-                            w-11 h-11
+                            w-11
+                            h-11
+
                             rounded-full
+
                             bg-purple-100
+                            dark:bg-purple-500/10
+
                             text-purple-500
-                            flex items-center
+
+                            flex
+                            items-center
                             justify-center
+
                             mr-4
                             shrink-0
                         "
@@ -668,15 +624,31 @@ function SupportTickets() {
 
                     <div>
 
-                        <p className="text-xs text-gray-700">
+                        <p
+                            className="
+                                text-xs
+                                text-theme-text-secondary
+                            "
+                        >
                             Total Tickets
                         </p>
 
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2
+                            className="
+                                text-xl
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             1,248
                         </h2>
 
-                        <p className="text-[10px] text-gray-500">
+                        <p
+                            className="
+                                text-[10px]
+                                text-theme-text-muted
+                            "
+                        >
                             All Time
                         </p>
 
@@ -690,14 +662,21 @@ function SupportTickets() {
                 <div
                     className="
                         h-[80px]
-                        bg-white
-                        border border-gray-300
+
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+
                         rounded-lg
                         shadow-sm
-                        flex items-center
+
+                        flex
+                        items-center
                         px-4
+
                         transition-all
                         duration-300
+
                         hover:-translate-y-1
                         hover:scale-[1.02]
                         hover:shadow-md
@@ -706,12 +685,20 @@ function SupportTickets() {
 
                     <div
                         className="
-                            w-11 h-11
+                            w-11
+                            h-11
+
                             rounded-full
+
                             bg-blue-100
+                            dark:bg-blue-500/10
+
                             text-blue-500
-                            flex items-center
+
+                            flex
+                            items-center
                             justify-center
+
                             mr-4
                             shrink-0
                         "
@@ -724,11 +711,22 @@ function SupportTickets() {
 
                     <div>
 
-                        <p className="text-xs text-gray-700">
+                        <p
+                            className="
+                                text-xs
+                                text-theme-text-secondary
+                            "
+                        >
                             Open
                         </p>
 
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2
+                            className="
+                                text-xl
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             156
                         </h2>
 
@@ -742,14 +740,21 @@ function SupportTickets() {
                 <div
                     className="
                         h-[80px]
-                        bg-white
-                        border border-gray-300
+
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+
                         rounded-lg
                         shadow-sm
-                        flex items-center
+
+                        flex
+                        items-center
                         px-4
+
                         transition-all
                         duration-300
+
                         hover:-translate-y-1
                         hover:scale-[1.02]
                         hover:shadow-md
@@ -758,12 +763,20 @@ function SupportTickets() {
 
                     <div
                         className="
-                            w-11 h-11
+                            w-11
+                            h-11
+
                             rounded-full
+
                             bg-orange-100
+                            dark:bg-orange-500/10
+
                             text-orange-500
-                            flex items-center
+
+                            flex
+                            items-center
                             justify-center
+
                             mr-4
                             shrink-0
                         "
@@ -776,11 +789,22 @@ function SupportTickets() {
 
                     <div>
 
-                        <p className="text-xs text-gray-700">
+                        <p
+                            className="
+                                text-xs
+                                text-theme-text-secondary
+                            "
+                        >
                             In Progress
                         </p>
 
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2
+                            className="
+                                text-xl
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             72
                         </h2>
 
@@ -794,14 +818,21 @@ function SupportTickets() {
                 <div
                     className="
                         h-[80px]
-                        bg-white
-                        border border-gray-300
+
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+
                         rounded-lg
                         shadow-sm
-                        flex items-center
+
+                        flex
+                        items-center
                         px-4
+
                         transition-all
                         duration-300
+
                         hover:-translate-y-1
                         hover:scale-[1.02]
                         hover:shadow-md
@@ -810,12 +841,20 @@ function SupportTickets() {
 
                     <div
                         className="
-                            w-11 h-11
+                            w-11
+                            h-11
+
                             rounded-full
+
                             bg-green-100
+                            dark:bg-green-500/10
+
                             text-green-500
-                            flex items-center
+
+                            flex
+                            items-center
                             justify-center
+
                             mr-4
                             shrink-0
                         "
@@ -828,11 +867,22 @@ function SupportTickets() {
 
                     <div>
 
-                        <p className="text-xs text-gray-700">
+                        <p
+                            className="
+                                text-xs
+                                text-theme-text-secondary
+                            "
+                        >
                             Resolved
                         </p>
 
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2
+                            className="
+                                text-xl
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             980
                         </h2>
 
@@ -846,14 +896,21 @@ function SupportTickets() {
                 <div
                     className="
                         h-[80px]
-                        bg-white
-                        border border-gray-300
+
+                        bg-theme-surface
+                        border
+                        border-theme-border-light
+
                         rounded-lg
                         shadow-sm
-                        flex items-center
+
+                        flex
+                        items-center
                         px-4
+
                         transition-all
                         duration-300
+
                         hover:-translate-y-1
                         hover:scale-[1.02]
                         hover:shadow-md
@@ -862,12 +919,20 @@ function SupportTickets() {
 
                     <div
                         className="
-                            w-11 h-11
+                            w-11
+                            h-11
+
                             rounded-full
+
                             bg-red-100
+                            dark:bg-red-500/10
+
                             text-red-500
-                            flex items-center
+
+                            flex
+                            items-center
                             justify-center
+
                             mr-4
                             shrink-0
                         "
@@ -880,11 +945,22 @@ function SupportTickets() {
 
                     <div>
 
-                        <p className="text-xs text-gray-700">
+                        <p
+                            className="
+                                text-xs
+                                text-theme-text-secondary
+                            "
+                        >
                             Closed
                         </p>
 
-                        <h2 className="text-xl font-semibold text-gray-900">
+                        <h2
+                            className="
+                                text-xl
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             50
                         </h2>
 
@@ -902,11 +978,14 @@ function SupportTickets() {
             <div
                 className="
                     mt-7
+
                     flex
                     flex-col
+
                     sm:flex-row
                     sm:items-center
                     sm:justify-between
+
                     gap-3
                 "
             >
@@ -917,35 +996,53 @@ function SupportTickets() {
                     className="
                         flex
                         items-center
+
                         border
-                        border-gray-300
+                        border-theme-border-light
+
                         rounded-md
+
                         h-[32px]
+
                         w-full
                         sm:w-[220px]
+
                         px-2
-                        bg-white
+
+                        bg-theme-surface
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
                     <Search
                         size={14}
-                        className="text-gray-600 shrink-0"
+                        className="
+                            text-theme-text-secondary
+                            shrink-0
+                        "
                     />
 
                     <input
                         type="text"
                         placeholder="Search Ticket"
                         value={searchText}
-                        onChange={(e) => setSearchText(e.target.value)}
+                        onChange={(e) =>
+                            setSearchText(e.target.value)
+                        }
                         className="
                             ml-2
                             w-full
                             outline-none
                             border-none
+
                             text-[10px]
-                            text-gray-700
-                            placeholder:text-gray-500
+                            text-theme-text
+
+                            placeholder:text-theme-text-muted
+
+                            bg-transparent
                         "
                     />
 
@@ -970,20 +1067,30 @@ function SupportTickets() {
                     <button
                         className="
                             h-[32px]
+
                             flex
                             items-center
                             justify-center
                             gap-2
+
                             px-3
+
                             border
-                            border-gray-300
-                            bg-white
+                            border-theme-border-light
+
+                            bg-theme-surface
+
                             rounded-md
+
                             text-[10px]
-                            text-gray-700
-                            hover:bg-gray-100
+                            text-theme-text-secondary
+
+                            hover:bg-theme-surface-secondary
+                            hover:text-theme-text
+
                             transition
                             duration-200
+
                             flex-1
                             sm:flex-none
                         "
@@ -1001,19 +1108,27 @@ function SupportTickets() {
                     <button
                         className="
                             h-[32px]
+
                             flex
                             items-center
                             justify-center
                             gap-2
+
                             px-3
+
                             bg-[#8b3df5]
                             text-white
+
                             rounded-md
+
                             text-[10px]
                             font-medium
+
                             hover:bg-[#7430d6]
+
                             transition
                             duration-200
+
                             flex-1
                             sm:flex-none
                         "
@@ -1037,11 +1152,19 @@ function SupportTickets() {
             <div
                 className="
                     mt-2
-                    bg-white
-                    border border-gray-300
+
+                    bg-theme-surface
+
+                    border
+                    border-theme-border-light
+
                     rounded-lg
                     shadow-sm
+
                     overflow-hidden
+
+                    transition-colors
+                    duration-300
                 "
             >
 
@@ -1052,94 +1175,27 @@ function SupportTickets() {
                 <div
                     className="
                         min-h-[52px]
+
                         flex
                         flex-col
+
                         lg:flex-row
                         lg:items-center
                         lg:justify-between
+
                         gap-3
+
                         px-2
                         py-2
+
                         border-b
-                        border-gray-300
+                        border-theme-border-light
                     "
                 >
 
-                    {/* =================================================
-                        DATE RANGE BUTTONS
-                    ================================================= */}
+                    {/* LEFT SPACE */}
 
-                    <div
-                        className="
-                            flex
-                            flex-wrap
-                            items-center
-                            gap-1
-                        "
-                    >
-
-                        {dateRangeOptions.map((range) => (
-
-                            <button
-                                key={range}
-                                onClick={() =>
-                                    handleDateRangeChange(range)
-                                }
-                                className={`
-                                    h-[30px]
-                                    px-4
-                                    border
-                                    border-gray-300
-                                    text-[9px]
-
-                                    transition-all
-                                    duration-200
-                                    ease-out
-
-                                    ${
-                                        selectedDateRange === range
-                                            ? "bg-[#8b3df5] text-white shadow-sm"
-                                            : "bg-white text-gray-700 hover:bg-gray-100"
-                                    }
-                                `}
-                            >
-
-                                {range}
-
-                            </button>
-
-                        ))}
-
-
-                        {/* CUSTOM */}
-
-                        <button
-                            onClick={() => {
-                                alert(
-                                    "Custom Date Range will be connected later."
-                                );
-                            }}
-                            className="
-                                h-[30px]
-                                px-4
-                                border
-                                border-gray-300
-                                text-[9px]
-                                text-gray-700
-                                bg-white
-
-                                transition-all
-                                duration-200
-
-                                hover:bg-gray-100
-                            "
-                        >
-
-                            Custom
-
-                        </button>
-
-                    </div>
+                    <div className="hidden lg:block" />
 
 
                     {/* =================================================
@@ -1179,19 +1235,26 @@ function SupportTickets() {
                                 className="
                                     h-[32px]
                                     min-w-[100px]
+
                                     px-3
+
                                     border
-                                    border-gray-300
+                                    border-theme-border-light
+
                                     rounded-md
+
                                     flex
                                     items-center
                                     justify-between
                                     gap-2
-                                    text-[10px]
-                                    text-gray-700
-                                    bg-white
 
-                                    hover:bg-gray-50
+                                    text-[10px]
+                                    text-theme-text-secondary
+
+                                    bg-theme-surface
+
+                                    hover:bg-theme-surface-secondary
+                                    hover:text-theme-text
 
                                     transition
                                     duration-200
@@ -1225,15 +1288,23 @@ function SupportTickets() {
                                 <div
                                     className="
                                         absolute
+
                                         right-0
                                         top-[38px]
+
                                         z-50
+
                                         w-[170px]
-                                        bg-white
+
+                                        bg-theme-surface
+
                                         border
-                                        border-gray-300
+                                        border-theme-border-light
+
                                         rounded-md
+
                                         shadow-lg
+
                                         p-2
                                     "
                                 >
@@ -1245,12 +1316,17 @@ function SupportTickets() {
                                             flex
                                             items-center
                                             gap-2
+
                                             px-2
                                             py-2
+
                                             text-[10px]
-                                            text-gray-700
+                                            text-theme-text-secondary
+
                                             cursor-pointer
-                                            hover:bg-gray-100
+
+                                            hover:bg-theme-surface-secondary
+
                                             rounded
                                         "
                                     >
@@ -1263,6 +1339,7 @@ function SupportTickets() {
                                             onChange={() =>
                                                 setSelectedStatuses([])
                                             }
+                                            className="accent-[#8b3df5]"
                                         />
 
                                         All Status
@@ -1270,7 +1347,13 @@ function SupportTickets() {
                                     </label>
 
 
-                                    <div className="border-t border-gray-200 my-1" />
+                                    <div
+                                        className="
+                                            border-t
+                                            border-theme-border
+                                            my-1
+                                        "
+                                    />
 
 
                                     {statusOptions.map((status) => (
@@ -1281,12 +1364,17 @@ function SupportTickets() {
                                                 flex
                                                 items-center
                                                 gap-2
+
                                                 px-2
                                                 py-2
+
                                                 text-[10px]
-                                                text-gray-700
+                                                text-theme-text-secondary
+
                                                 cursor-pointer
-                                                hover:bg-gray-100
+
+                                                hover:bg-theme-surface-secondary
+
                                                 rounded
                                             "
                                         >
@@ -1299,6 +1387,7 @@ function SupportTickets() {
                                                 onChange={() =>
                                                     handleStatusChange(status)
                                                 }
+                                                className="accent-[#8b3df5]"
                                             />
 
                                             {status}
@@ -1338,19 +1427,26 @@ function SupportTickets() {
                                 className="
                                     h-[32px]
                                     min-w-[95px]
+
                                     px-3
+
                                     border
-                                    border-gray-300
+                                    border-theme-border-light
+
                                     rounded-md
+
                                     flex
                                     items-center
                                     justify-between
                                     gap-2
-                                    text-[10px]
-                                    text-gray-700
-                                    bg-white
 
-                                    hover:bg-gray-50
+                                    text-[10px]
+                                    text-theme-text-secondary
+
+                                    bg-theme-surface
+
+                                    hover:bg-theme-surface-secondary
+                                    hover:text-theme-text
 
                                     transition
                                     duration-200
@@ -1384,15 +1480,23 @@ function SupportTickets() {
                                 <div
                                     className="
                                         absolute
+
                                         right-0
                                         top-[38px]
+
                                         z-50
+
                                         w-[160px]
-                                        bg-white
+
+                                        bg-theme-surface
+
                                         border
-                                        border-gray-300
+                                        border-theme-border-light
+
                                         rounded-md
+
                                         shadow-lg
+
                                         p-2
                                     "
                                 >
@@ -1404,12 +1508,17 @@ function SupportTickets() {
                                             flex
                                             items-center
                                             gap-2
+
                                             px-2
                                             py-2
+
                                             text-[10px]
-                                            text-gray-700
+                                            text-theme-text-secondary
+
                                             cursor-pointer
-                                            hover:bg-gray-100
+
+                                            hover:bg-theme-surface-secondary
+
                                             rounded
                                         "
                                     >
@@ -1422,6 +1531,7 @@ function SupportTickets() {
                                             onChange={() =>
                                                 setSelectedPriorities([])
                                             }
+                                            className="accent-[#8b3df5]"
                                         />
 
                                         All Priority
@@ -1429,7 +1539,13 @@ function SupportTickets() {
                                     </label>
 
 
-                                    <div className="border-t border-gray-200 my-1" />
+                                    <div
+                                        className="
+                                            border-t
+                                            border-theme-border
+                                            my-1
+                                        "
+                                    />
 
 
                                     {priorityOptions.map((priority) => (
@@ -1440,12 +1556,17 @@ function SupportTickets() {
                                                 flex
                                                 items-center
                                                 gap-2
+
                                                 px-2
                                                 py-2
+
                                                 text-[10px]
-                                                text-gray-700
+                                                text-theme-text-secondary
+
                                                 cursor-pointer
-                                                hover:bg-gray-100
+
+                                                hover:bg-theme-surface-secondary
+
                                                 rounded
                                             "
                                         >
@@ -1460,6 +1581,7 @@ function SupportTickets() {
                                                         priority
                                                     )
                                                 }
+                                                className="accent-[#8b3df5]"
                                             />
 
                                             {priority}
@@ -1483,14 +1605,21 @@ function SupportTickets() {
                             onClick={handleResetFilters}
                             className="
                                 h-[32px]
-                                px-3
-                                border
-                                border-gray-300
-                                rounded-md
-                                text-[10px]
-                                text-gray-700
 
-                                hover:bg-gray-100
+                                px-3
+
+                                border
+                                border-theme-border-light
+
+                                rounded-md
+
+                                text-[10px]
+                                text-theme-text-secondary
+
+                                bg-theme-surface
+
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
 
                                 transition
                                 duration-200
@@ -1526,6 +1655,7 @@ function SupportTickets() {
                                 className={`
                                     h-[32px]
                                     w-[34px]
+
                                     border
                                     rounded-md
 
@@ -1539,7 +1669,7 @@ function SupportTickets() {
                                     ${
                                         showFilterPanel
                                             ? "bg-[#8b3df5] text-white border-[#8b3df5]"
-                                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                                            : "bg-theme-surface text-theme-text-secondary border-theme-border-light hover:bg-theme-surface-secondary hover:text-theme-text"
                                     }
                                 `}
                             >
@@ -1570,16 +1700,21 @@ function SupportTickets() {
                                 <div
                                     className="
                                         absolute
+
                                         right-0
                                         top-[38px]
+
                                         z-50
 
                                         w-[230px]
 
-                                        bg-white
+                                        bg-theme-surface
+
                                         border
-                                        border-gray-300
+                                        border-theme-border-light
+
                                         rounded-lg
+
                                         shadow-lg
 
                                         p-3
@@ -1593,6 +1728,7 @@ function SupportTickets() {
                                             flex
                                             items-center
                                             justify-between
+
                                             mb-3
                                         "
                                     >
@@ -1601,7 +1737,7 @@ function SupportTickets() {
                                             className="
                                                 text-[11px]
                                                 font-semibold
-                                                text-gray-800
+                                                text-theme-text
                                             "
                                         >
                                             Active Filters
@@ -1613,8 +1749,9 @@ function SupportTickets() {
                                                 setShowFilterPanel(false)
                                             }
                                             className="
-                                                text-gray-500
-                                                hover:text-gray-800
+                                                text-theme-text-muted
+                                                hover:text-theme-text
+
                                                 transition
                                             "
                                         >
@@ -1630,20 +1767,33 @@ function SupportTickets() {
 
                                     <div className="mb-3">
 
-                                        <p className="text-[9px] text-gray-500 mb-1">
+                                        <p
+                                            className="
+                                                text-[9px]
+                                                text-theme-text-muted
+                                                mb-1
+                                            "
+                                        >
                                             Status
                                         </p>
 
                                         <div
                                             className="
-                                                bg-gray-100
+                                                bg-theme-surface-secondary
+
                                                 rounded
+
                                                 px-2
                                                 py-1.5
                                             "
                                         >
 
-                                            <p className="text-[10px] text-gray-700">
+                                            <p
+                                                className="
+                                                    text-[10px]
+                                                    text-theme-text-secondary
+                                                "
+                                            >
 
                                                 {selectedStatuses.length === 0
                                                     ? "All Status"
@@ -1661,20 +1811,33 @@ function SupportTickets() {
 
                                     <div className="mb-3">
 
-                                        <p className="text-[9px] text-gray-500 mb-1">
+                                        <p
+                                            className="
+                                                text-[9px]
+                                                text-theme-text-muted
+                                                mb-1
+                                            "
+                                        >
                                             Priority
                                         </p>
 
                                         <div
                                             className="
-                                                bg-gray-100
+                                                bg-theme-surface-secondary
+
                                                 rounded
+
                                                 px-2
                                                 py-1.5
                                             "
                                         >
 
-                                            <p className="text-[10px] text-gray-700">
+                                            <p
+                                                className="
+                                                    text-[10px]
+                                                    text-theme-text-secondary
+                                                "
+                                            >
 
                                                 {selectedPriorities.length === 0
                                                     ? "All Priority"
@@ -1700,6 +1863,7 @@ function SupportTickets() {
                                             hover:bg-[#7430d6]
 
                                             text-white
+
                                             text-[9px]
                                             font-medium
 
@@ -1731,41 +1895,140 @@ function SupportTickets() {
 
                 <div className="overflow-x-auto">
 
-                    <table className="w-full min-w-[900px] border-collapse">
+                    <table
+                        className="
+                            w-full
+                            min-w-[900px]
+                            border-collapse
+                        "
+                    >
 
                         <thead>
 
-                            <tr className="bg-purple-300">
+                            <tr
+                                className="
+                                    bg-purple-100
+                                    dark:bg-purple-500/10
+                                "
+                            >
 
-                                <th className="text-left px-7 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-7
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Ticket ID
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Subject
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Customer
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Department
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Priority
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Status
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Created On
                                 </th>
 
-                                <th className="text-left px-3 py-2.5 text-[10px] font-medium text-gray-700">
+                                <th
+                                    className="
+                                        text-left
+                                        px-3
+                                        py-2.5
+
+                                        text-[10px]
+                                        font-medium
+
+                                        text-theme-text-secondary
+                                    "
+                                >
                                     Action
                                 </th>
 
@@ -1784,26 +2047,66 @@ function SupportTickets() {
                                         key={ticket.id}
                                         className="
                                             border-b
-                                            border-gray-300
-                                            hover:bg-gray-50
+                                            border-theme-border-light
+
+                                            hover:bg-theme-surface-secondary
+
                                             transition
                                             duration-200
                                         "
                                     >
 
-                                        <td className="px-7 py-3 text-[10px] font-medium text-purple-600">
+                                        <td
+                                            className="
+                                                px-7
+                                                py-3
+
+                                                text-[10px]
+                                                font-medium
+
+                                                text-purple-500
+                                            "
+                                        >
                                             {ticket.id}
                                         </td>
 
-                                        <td className="px-3 py-3 text-[10px] text-gray-700 whitespace-nowrap">
+                                        <td
+                                            className="
+                                                px-3
+                                                py-3
+
+                                                text-[10px]
+                                                text-theme-text-secondary
+
+                                                whitespace-nowrap
+                                            "
+                                        >
                                             {ticket.subject}
                                         </td>
 
-                                        <td className="px-3 py-3 text-[10px] text-gray-700 whitespace-nowrap">
+                                        <td
+                                            className="
+                                                px-3
+                                                py-3
+
+                                                text-[10px]
+                                                text-theme-text-secondary
+
+                                                whitespace-nowrap
+                                            "
+                                        >
                                             {ticket.customer}
                                         </td>
 
-                                        <td className="px-3 py-3 text-[10px] text-gray-700">
+                                        <td
+                                            className="
+                                                px-3
+                                                py-3
+
+                                                text-[10px]
+                                                text-theme-text-secondary
+                                            "
+                                        >
                                             {ticket.department}
                                         </td>
 
@@ -1812,18 +2115,21 @@ function SupportTickets() {
                                             <span
                                                 className={`
                                                     inline-block
+
                                                     px-2
                                                     py-1
+
                                                     rounded
+
                                                     text-[8px]
                                                     font-medium
 
                                                     ${
                                                         ticket.priority === "High"
-                                                            ? "bg-red-100 text-red-500"
+                                                            ? "bg-red-100 text-red-500 dark:bg-red-500/10 dark:text-red-400"
                                                             : ticket.priority === "Medium"
-                                                            ? "bg-orange-100 text-orange-500"
-                                                            : "bg-green-100 text-green-600"
+                                                            ? "bg-orange-100 text-orange-500 dark:bg-orange-500/10 dark:text-orange-400"
+                                                            : "bg-green-100 text-green-600 dark:bg-green-500/10 dark:text-green-400"
                                                     }
                                                 `}
                                             >
@@ -1839,20 +2145,23 @@ function SupportTickets() {
                                             <span
                                                 className={`
                                                     inline-block
+
                                                     px-2
                                                     py-1
+
                                                     rounded
+
                                                     text-[8px]
                                                     font-medium
 
                                                     ${
                                                         ticket.status === "Open"
-                                                            ? "bg-blue-100 text-blue-500"
+                                                            ? "bg-blue-100 text-blue-500 dark:bg-blue-500/10 dark:text-blue-400"
                                                             : ticket.status === "In Progress"
-                                                            ? "bg-orange-100 text-orange-500"
+                                                            ? "bg-orange-100 text-orange-500 dark:bg-orange-500/10 dark:text-orange-400"
                                                             : ticket.status === "Resolved"
-                                                            ? "bg-green-100 text-green-600"
-                                                            : "bg-gray-200 text-gray-600"
+                                                            ? "bg-green-100 text-green-600 dark:bg-green-500/10 dark:text-green-400"
+                                                            : "bg-gray-200 text-gray-600 dark:bg-gray-500/20 dark:text-gray-300"
                                                     }
                                                 `}
                                             >
@@ -1863,13 +2172,28 @@ function SupportTickets() {
 
                                         </td>
 
-                                        <td className="px-3 py-2 text-[9px] text-gray-700 whitespace-nowrap">
+                                        <td
+                                            className="
+                                                px-3
+                                                py-2
+
+                                                text-[9px]
+                                                text-theme-text-secondary
+
+                                                whitespace-nowrap
+                                            "
+                                        >
 
                                             <div>
                                                 {ticket.date}
                                             </div>
 
-                                            <div className="text-[7px] text-gray-500">
+                                            <div
+                                                className="
+                                                    text-[7px]
+                                                    text-theme-text-muted
+                                                "
+                                            >
                                                 {ticket.time}
                                             </div>
 
@@ -1877,15 +2201,22 @@ function SupportTickets() {
 
                                         <td className="px-3 py-3">
 
-                                            <div className="flex items-center gap-4">
+                                            <div
+                                                className="
+                                                    flex
+                                                    items-center
+                                                    gap-4
+                                                "
+                                            >
 
                                                 <Eye
                                                     size={14}
                                                     className="
-                                                        text-gray-600
+                                                        text-theme-text-secondary
+
                                                         cursor-pointer
 
-                                                        hover:text-purple-600
+                                                        hover:text-purple-500
 
                                                         transition
                                                         duration-200
@@ -1895,9 +2226,11 @@ function SupportTickets() {
                                                 <MoreVertical
                                                     size={15}
                                                     className="
-                                                        text-gray-700
+                                                        text-theme-text-secondary
+
                                                         cursor-pointer
 
+                                                        hover:text-theme-text
                                                         hover:scale-110
 
                                                         transition
@@ -1921,9 +2254,11 @@ function SupportTickets() {
                                         colSpan="8"
                                         className="
                                             text-center
+
                                             py-10
+
                                             text-[11px]
-                                            text-gray-500
+                                            text-theme-text-muted
                                         "
                                     >
 
@@ -1949,21 +2284,31 @@ function SupportTickets() {
                 <div
                     className="
                         min-h-[40px]
+
                         flex
                         flex-col
+
                         sm:flex-row
                         sm:items-center
                         sm:justify-between
+
                         gap-3
+
                         px-4
                         sm:px-7
+
                         py-2
                     "
                 >
 
-                    <p className="text-[9px] text-gray-600">
+                    <p
+                        className="
+                            text-[9px]
+                            text-theme-text-muted
+                        "
+                    >
 
-                        Showing {filteredTickets.length} of {dateFilteredTickets.length} results
+                        Showing {filteredTickets.length} of {tickets.length} results
 
                     </p>
 
@@ -1973,6 +2318,7 @@ function SupportTickets() {
                             flex
                             flex-wrap
                             items-center
+
                             gap-3
                             sm:gap-5
                         "
@@ -1980,8 +2326,10 @@ function SupportTickets() {
 
                         <button
                             className="
-                                text-gray-700
-                                hover:text-purple-600
+                                text-theme-text-secondary
+
+                                hover:text-purple-500
+
                                 transition
                             "
                         >
@@ -1995,9 +2343,12 @@ function SupportTickets() {
                             className="
                                 w-5
                                 h-5
+
                                 bg-purple-600
                                 text-white
+
                                 rounded
+
                                 text-[9px]
                             "
                         >
@@ -2005,26 +2356,54 @@ function SupportTickets() {
                         </button>
 
 
-                        <button className="text-[9px] text-gray-700">
+                        <button
+                            className="
+                                text-[9px]
+                                text-theme-text-secondary
+
+                                hover:text-theme-text
+                            "
+                        >
                             2
                         </button>
 
-                        <button className="text-[9px] text-gray-700">
+                        <button
+                            className="
+                                text-[9px]
+                                text-theme-text-secondary
+
+                                hover:text-theme-text
+                            "
+                        >
                             3
                         </button>
 
-                        <span className="text-[9px] text-gray-500">
+                        <span
+                            className="
+                                text-[9px]
+                                text-theme-text-muted
+                            "
+                        >
                             ...
                         </span>
 
-                        <button className="text-[9px] text-gray-700">
+                        <button
+                            className="
+                                text-[9px]
+                                text-theme-text-secondary
+
+                                hover:text-theme-text
+                            "
+                        >
                             250
                         </button>
 
                         <button
                             className="
-                                text-gray-700
-                                hover:text-purple-600
+                                text-theme-text-secondary
+
+                                hover:text-purple-500
+
                                 transition
                             "
                         >
@@ -2039,14 +2418,22 @@ function SupportTickets() {
                                 flex
                                 items-center
                                 gap-2
+
                                 border
-                                border-gray-300
+                                border-theme-border-light
+
                                 rounded
+
                                 px-2.5
                                 py-1.5
-                                text-[9px]
 
-                                hover:bg-gray-100
+                                text-[9px]
+                                text-theme-text-secondary
+
+                                bg-theme-surface
+
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
 
                                 transition
                             "

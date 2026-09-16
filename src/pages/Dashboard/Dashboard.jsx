@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 
 import {
@@ -42,13 +43,15 @@ function Dashboard() {
 
         return (
 
-            <div className="
-                min-h-screen
-                bg-[#120d20]
-                flex
-                items-center
-                justify-center
-            ">
+            <div
+                className="
+                    min-h-[calc(100vh-66px)]
+                    bg-theme-page
+                    flex
+                    items-center
+                    justify-center
+                "
+            >
 
                 <Loader text="Loading dashboard..." />
 
@@ -61,35 +64,69 @@ function Dashboard() {
 
     return (
 
-        <div className="px-2 py-[18px] bg-[#120d20] min-h-screen">
+        <div
+            className="
+                w-full
+                min-h-[calc(100vh-66px)]
+                bg-theme-page
+                text-theme-text
 
-            {/* Dashboard Heading */}
+                px-3
+                sm:px-4
+                lg:px-5
+
+                py-4
+            "
+        >
+
+            {/* =================================================
+                DASHBOARD HEADING
+            ================================================= */}
 
             <div>
 
-                <h1 className="m-0 text-[27px] font-semibold text-white">
+                <h1
+                    className="
+                        m-0
+                        text-[27px]
+                        font-semibold
+                        text-theme-text
+                    "
+                >
                     Dashboard
                 </h1>
 
-                <p className="mt-[5px] mb-[18px] text-[13px] text-[#D1CDD8]">
+
+                <p
+                    className="
+                        mt-[5px]
+                        mb-[18px]
+                        text-[13px]
+                        text-theme-text-secondary
+                    "
+                >
                     Welcome Back, Admin! Here's what's happening today.
                 </p>
 
             </div>
 
 
-            {/* Statistics Cards */}
+            {/* =================================================
+                STATISTICS CARDS
+            ================================================= */}
 
-            <div className="
-                w-full
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-3
-                xl:grid-cols-5
-                gap-4
-                items-stretch
-            ">
+            <div
+                className="
+                    w-full
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    lg:grid-cols-3
+                    xl:grid-cols-5
+                    gap-4
+                    items-stretch
+                "
+            >
 
                 <StatCard
                     icon={<Users size={22} />}
@@ -129,16 +166,20 @@ function Dashboard() {
             </div>
 
 
-            {/* Charts */}
+            {/* =================================================
+                CHARTS
+            ================================================= */}
 
-            <div className="
-                grid
-                grid-cols-1
-                lg:grid-cols-2
-                xl:grid-cols-3
-                gap-4
-                mt-[18px]
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    lg:grid-cols-2
+                    xl:grid-cols-3
+                    gap-4
+                    mt-[18px]
+                "
+            >
 
                 <DashboardBox title="Lead Pipeline">
                     <LeadPipeline />
@@ -155,15 +196,19 @@ function Dashboard() {
             </div>
 
 
-            {/* Recent Sections */}
+            {/* =================================================
+                RECENT SECTIONS
+            ================================================= */}
 
-            <div className="
-                grid
-                grid-cols-1
-                lg:grid-cols-2
-                gap-4
-                mt-[18px]
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    lg:grid-cols-2
+                    gap-4
+                    mt-[18px]
+                "
+            >
 
                 <DashboardBox title="Recent leads">
                     <RecentLeads />
@@ -181,4 +226,6 @@ function Dashboard() {
 
 }
 
+
 export default Dashboard;
+

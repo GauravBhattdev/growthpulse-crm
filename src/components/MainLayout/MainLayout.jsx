@@ -1,32 +1,105 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import Sidebar from "../Sidebar/Sidebar";
 import Header from "../Header/Header";
-// import BottomRightCheckbox from "../BottomRightCheckbox/BottomRightCheckbox";
 
 
 function MainLayout({ children }) {
 
-    const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    /* =================================================
+       THEME
+    ================================================= */
+
+    const [theme, setTheme] = useState(() => {
+
+        const savedTheme =
+            localStorage.getItem("theme");
+
+        return savedTheme || "dark";
+
+    });
+
+
+    /* =================================================
+       APPLY THEME
+    ================================================= */
+
+    useEffect(() => {
+
+        const root =
+            document.documentElement;
+
+
+        if (theme === "dark") {
+
+            root.classList.add("dark");
+
+        } else {
+
+            root.classList.remove("dark");
+
+        }
+
+
+        localStorage.setItem(
+            "theme",
+            theme
+        );
+
+    }, [theme]);
+
+
+    /* =================================================
+       MOBILE SIDEBAR
+    ================================================= */
+
+    const [isSidebarOpen, setIsSidebarOpen] =
+        useState(false);
+
+
+    /* =================================================
+       DESKTOP SIDEBAR
+    ================================================= */
+
+    const [isSidebarCollapsed, setIsSidebarCollapsed] =
+        useState(false);
 
 
     return (
 
-        <div className="min-h-screen bg-[#151026]">
+        <div
+            className="
+                min-h-screen
+                bg-[#120d20]
+            "
+        >
 
-            {/* Sidebar */}
+            {/* =================================================
+                SIDEBAR
+            ================================================= */}
 
             <Sidebar
                 isSidebarOpen={isSidebarOpen}
                 setIsSidebarOpen={setIsSidebarOpen}
+
+                isSidebarCollapsed={isSidebarCollapsed}
+                setIsSidebarCollapsed={setIsSidebarCollapsed}
+
+                theme={theme}
             />
 
 
-            {/* Mobile Overlay */}
+            {/* =================================================
+                MOBILE OVERLAY
+            ================================================= */}
 
             {isSidebarOpen && (
+
                 <div
-                    onClick={() => setIsSidebarOpen(false)}
+                    onClick={() =>
+                        setIsSidebarOpen(false)
+                    }
+
                     className="
                         fixed
                         inset-0
@@ -35,45 +108,72 @@ function MainLayout({ children }) {
                         lg:hidden
                     "
                 />
+
             )}
 
 
-            {/* Main Area */}
+            {/* =================================================
+                MAIN AREA
+            ================================================= */}
 
             <div
-                className="
+                className={`
                     min-h-screen
-                    bg-[#151026]
+                    bg-[#120d20]
+
                     ml-0
-                    lg:ml-[240px]
-                "
+
+                    ${
+                        isSidebarCollapsed
+                            ? "lg:ml-[78px]"
+                            : "lg:ml-[240px]"
+                    }
+
+                    transition-all
+                    duration-300
+                    ease-in-out
+                `}
             >
 
-                {/* Header */}
+                {/* =================================================
+                    HEADER
+                ================================================= */}
 
                 <Header
-                    onMenuClick={() => setIsSidebarOpen(true)}
+                    onMenuClick={() =>
+                        setIsSidebarOpen(true)
+                    }
+
+                    theme={theme}
+
+                    setTheme={setTheme}
                 />
 
 
-                {/* Page Content */}
+                {/* =================================================
+                    PAGE CONTENT
+                ================================================= */}
 
-                <main className="
-                    px-3
-                    sm:px-4
-                    lg:px-5
-                    py-4
-                    w-full
-                    max-w-full
-                    overflow-x-hidden
-                ">
+                <main
+                    className="
+                        w-full
+                        max-w-full
+                        overflow-x-hidden
+                    "
+                >
+
                     {children}
+
                 </main>
 
 
-                {/* Bottom Right Checkbox */}
+                {/* =================================================
+                    BOTTOM RIGHT CHECKBOX
+                ================================================= */}
 
-                {/* <BottomRightCheckbox /> */}
+                {/*
+                <BottomRightCheckbox />
+                */}
 
             </div>
 
@@ -85,3 +185,4 @@ function MainLayout({ children }) {
 
 
 export default MainLayout;
+

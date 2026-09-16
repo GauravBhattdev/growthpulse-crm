@@ -42,7 +42,31 @@ function Billing() {
 
 
     return (
-        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
+
+        <div
+            className="
+                w-full
+                min-h-screen
+
+                bg-theme-page
+                text-theme-text
+
+                pl-6
+                sm:pl-8
+                lg:pl-10
+
+                pr-4
+                sm:pr-6
+                lg:pr-8
+
+                pt-6
+                sm:pt-8
+                lg:pt-10
+
+                transition-colors
+                duration-300
+            "
+        >
 
             {/* ================= PAGE HEADER ================= */}
 
@@ -50,11 +74,23 @@ function Billing() {
 
                 <div>
 
-                    <h1 className="text-[27px] font-semibold text-[#111]">
+                    <h1
+                        className="
+                            text-[27px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Billing
                     </h1>
 
-                    <p className="mt-1 text-[13px] text-[#444]">
+                    <p
+                        className="
+                            mt-1
+                            text-[13px]
+                            text-theme-text-secondary
+                        "
+                    >
                         Manage your subscription, payments and billing details
                     </p>
 
@@ -72,11 +108,19 @@ function Billing() {
 
                 <div
                     className="
-                        bg-white
-                        border border-gray-300
+                        bg-theme-surface
+
+                        border
+                        border-theme-border-light
+
                         rounded-lg
+
                         shadow-sm
+
                         p-4
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
@@ -86,34 +130,70 @@ function Billing() {
 
                         <div
                             className="
-                                w-11 h-11
+                                w-11
+                                h-11
+
                                 rounded-full
+
                                 bg-purple-100
+                                dark:bg-purple-500/10
+
                                 text-purple-600
-                                flex items-center
+                                dark:text-purple-400
+
+                                flex
+                                items-center
                                 justify-center
+
                                 mr-3
                             "
                         >
+
                             <Crown size={22} />
+
                         </div>
 
 
                         <div>
 
-                            <p className="text-[11px] text-gray-700">
+                            <p
+                                className="
+                                    text-[11px]
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Current Plan
                             </p>
 
-                            <h2 className="text-[17px] font-semibold text-gray-900">
+                            <h2
+                                className="
+                                    text-[17px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 Professional Plan
                             </h2>
 
-                            <p className="text-[13px] text-gray-700">
-                                <span className="font-semibold text-[16px]">
+                            <p
+                                className="
+                                    text-[13px]
+                                    text-theme-text-secondary
+                                "
+                            >
+
+                                <span
+                                    className="
+                                        font-semibold
+                                        text-[16px]
+                                        text-theme-text
+                                    "
+                                >
                                     ₹ 4,999
                                 </span>
+
                                 {" "} / month
+
                             </p>
 
                         </div>
@@ -123,7 +203,13 @@ function Billing() {
 
                     {/* Description */}
 
-                    <p className="text-[12px] text-gray-700 mt-4">
+                    <p
+                        className="
+                            text-[12px]
+                            text-theme-text-secondary
+                            mt-4
+                        "
+                    >
                         All the tools you need to grow your business
                     </p>
 
@@ -132,33 +218,128 @@ function Billing() {
 
                     <div className="grid grid-cols-2 gap-y-3 mt-4">
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             20 Team Members
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             Analytics & Reports
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             5,000 Leads
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             Email Support
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             Calling & Recording
                         </div>
 
-                        <div className="flex items-center gap-2 text-[11px] text-gray-700">
-                            <Check size={13} className="text-purple-600" />
+
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+
+                                text-[11px]
+                                text-theme-text-secondary
+                            "
+                        >
+                            <Check
+                                size={13}
+                                className="
+                                    text-purple-600
+                                    dark:text-purple-400
+                                "
+                            />
                             Custom Integration
                         </div>
 
@@ -172,25 +353,43 @@ function Billing() {
                         <button
                             className="
                                 bg-purple-600
+
                                 text-white
-                                px-6 py-2
+
+                                px-6
+                                py-2
+
                                 rounded
+
                                 text-[11px]
+
                                 hover:bg-purple-700
+
                                 transition
                             "
                         >
                             Manage Plan
                         </button>
 
+
                         <button
                             className="
-                                border border-purple-400
+                                border
+                                border-purple-400
+
                                 text-purple-600
-                                px-6 py-2
+                                dark:text-purple-400
+
+                                px-6
+                                py-2
+
                                 rounded
+
                                 text-[11px]
+
                                 hover:bg-purple-50
+                                dark:hover:bg-purple-500/10
+
                                 transition
                             "
                         >
@@ -206,21 +405,40 @@ function Billing() {
 
                 <div
                     className="
-                        bg-white
-                        border border-gray-300
+                        bg-theme-surface
+
+                        border
+                        border-theme-border-light
+
                         rounded-lg
+
                         shadow-sm
+
                         p-4
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
                     <div className="flex justify-between items-center">
 
-                        <h2 className="text-[12px] font-semibold text-gray-800">
+                        <h2
+                            className="
+                                text-[12px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             Usage Overview
                         </h2>
 
-                        <span className="text-[10px] text-gray-500">
+                        <span
+                            className="
+                                text-[10px]
+                                text-theme-text-muted
+                            "
+                        >
                             Reset on 01 June, 2026
                         </span>
 
@@ -235,36 +453,74 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8 h-8
+                                    w-8
+                                    h-8
+
                                     bg-purple-100
+                                    dark:bg-purple-500/10
+
                                     text-purple-600
-                                    flex items-center
+                                    dark:text-purple-400
+
+                                    flex
+                                    items-center
                                     justify-center
+
                                     rounded
+
                                     mr-3
                                 "
                             >
+
                                 <Users size={17} />
+
                             </div>
+
 
                             <div className="flex-1">
 
                                 <div className="flex justify-between">
 
-                                    <span className="text-[11px] text-gray-700">
+                                    <span
+                                        className="
+                                            text-[11px]
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Team Members
                                     </span>
 
-                                    <span className="text-[9px] text-gray-500">
+                                    <span
+                                        className="
+                                            text-[9px]
+                                            text-theme-text-muted
+                                        "
+                                    >
                                         12 / 20
                                     </span>
 
                                 </div>
 
-                                <div className="h-[5px] bg-gray-200 rounded-full mt-2">
+
+                                <div
+                                    className="
+                                        h-[5px]
+
+                                        bg-gray-200
+                                        dark:bg-gray-700
+
+                                        rounded-full
+
+                                        mt-2
+                                    "
+                                >
 
                                     <div
-                                        className="h-full bg-purple-600 rounded-full"
+                                        className="
+                                            h-full
+                                            bg-purple-600
+                                            rounded-full
+                                        "
                                         style={{ width: "60%" }}
                                     />
 
@@ -285,36 +541,74 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8 h-8
+                                    w-8
+                                    h-8
+
                                     bg-purple-100
+                                    dark:bg-purple-500/10
+
                                     text-purple-600
-                                    flex items-center
+                                    dark:text-purple-400
+
+                                    flex
+                                    items-center
                                     justify-center
+
                                     rounded
+
                                     mr-3
                                 "
                             >
+
                                 <CircleDot size={17} />
+
                             </div>
+
 
                             <div className="flex-1">
 
                                 <div className="flex justify-between">
 
-                                    <span className="text-[11px] text-gray-700">
+                                    <span
+                                        className="
+                                            text-[11px]
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Leads
                                     </span>
 
-                                    <span className="text-[9px] text-gray-500">
+                                    <span
+                                        className="
+                                            text-[9px]
+                                            text-theme-text-muted
+                                        "
+                                    >
                                         2,450 / 5000
                                     </span>
 
                                 </div>
 
-                                <div className="h-[5px] bg-gray-200 rounded-full mt-2">
+
+                                <div
+                                    className="
+                                        h-[5px]
+
+                                        bg-gray-200
+                                        dark:bg-gray-700
+
+                                        rounded-full
+
+                                        mt-2
+                                    "
+                                >
 
                                     <div
-                                        className="h-full bg-purple-600 rounded-full"
+                                        className="
+                                            h-full
+                                            bg-purple-600
+                                            rounded-full
+                                        "
                                         style={{ width: "49%" }}
                                     />
 
@@ -335,36 +629,74 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8 h-8
+                                    w-8
+                                    h-8
+
                                     bg-purple-100
+                                    dark:bg-purple-500/10
+
                                     text-purple-600
-                                    flex items-center
+                                    dark:text-purple-400
+
+                                    flex
+                                    items-center
                                     justify-center
+
                                     rounded
+
                                     mr-3
                                 "
                             >
+
                                 <Cloud size={17} />
+
                             </div>
+
 
                             <div className="flex-1">
 
                                 <div className="flex justify-between">
 
-                                    <span className="text-[11px] text-gray-700">
+                                    <span
+                                        className="
+                                            text-[11px]
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Storage
                                     </span>
 
-                                    <span className="text-[9px] text-gray-500">
+                                    <span
+                                        className="
+                                            text-[9px]
+                                            text-theme-text-muted
+                                        "
+                                    >
                                         18.6 / 50GB
                                     </span>
 
                                 </div>
 
-                                <div className="h-[5px] bg-gray-200 rounded-full mt-2">
+
+                                <div
+                                    className="
+                                        h-[5px]
+
+                                        bg-gray-200
+                                        dark:bg-gray-700
+
+                                        rounded-full
+
+                                        mt-2
+                                    "
+                                >
 
                                     <div
-                                        className="h-full bg-purple-600 rounded-full"
+                                        className="
+                                            h-full
+                                            bg-purple-600
+                                            rounded-full
+                                        "
                                         style={{ width: "37%" }}
                                     />
 
@@ -385,36 +717,74 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8 h-8
+                                    w-8
+                                    h-8
+
                                     bg-purple-100
+                                    dark:bg-purple-500/10
+
                                     text-purple-600
-                                    flex items-center
+                                    dark:text-purple-400
+
+                                    flex
+                                    items-center
                                     justify-center
+
                                     rounded
+
                                     mr-3
                                 "
                             >
+
                                 <Phone size={17} />
+
                             </div>
+
 
                             <div className="flex-1">
 
                                 <div className="flex justify-between">
 
-                                    <span className="text-[11px] text-gray-700">
+                                    <span
+                                        className="
+                                            text-[11px]
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         Calling Minutes
                                     </span>
 
-                                    <span className="text-[9px] text-gray-500">
+                                    <span
+                                        className="
+                                            text-[9px]
+                                            text-theme-text-muted
+                                        "
+                                    >
                                         1250 / 5000 Min
                                     </span>
 
                                 </div>
 
-                                <div className="h-[5px] bg-gray-200 rounded-full mt-2">
+
+                                <div
+                                    className="
+                                        h-[5px]
+
+                                        bg-gray-200
+                                        dark:bg-gray-700
+
+                                        rounded-full
+
+                                        mt-2
+                                    "
+                                >
 
                                     <div
-                                        className="h-full bg-purple-600 rounded-full"
+                                        className="
+                                            h-full
+                                            bg-purple-600
+                                            rounded-full
+                                        "
                                         style={{ width: "25%" }}
                                     />
 
@@ -427,7 +797,21 @@ function Billing() {
                     </div>
 
 
-                    <button className="text-purple-600 text-[10px] mt-3">
+                    <button
+                        className="
+                            text-purple-600
+                            dark:text-purple-400
+
+                            text-[10px]
+
+                            mt-3
+
+                            hover:text-purple-700
+                            dark:hover:text-purple-300
+
+                            transition
+                        "
+                    >
                         View Full Image
                     </button>
 
@@ -445,15 +829,32 @@ function Billing() {
 
                 <div
                     className="
-                        bg-white
-                        border border-gray-300
+                        bg-theme-surface
+
+                        border
+                        border-theme-border-light
+
                         rounded-lg
+
                         shadow-sm
+
                         p-3
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
-                    <h2 className="text-[11px] font-semibold text-gray-800 mb-2">
+                    <h2
+                        className="
+                            text-[11px]
+                            font-semibold
+
+                            text-theme-text
+
+                            mb-2
+                        "
+                    >
                         Billing Information
                     </h2>
 
@@ -520,7 +921,13 @@ function Billing() {
                         icon={<MapPin size={13} />}
                         title="Billing Address"
                         value={
-                            <span className="text-[8px] leading-3">
+                            <span
+                                className="
+                                    text-[8px]
+                                    leading-3
+                                    text-theme-text-secondary
+                                "
+                            >
                                 GrowthPulse Technologies Pvt. Ltd.<br />
                                 123Business Park, Sector 62,<br />
                                 Noida, Uttar Pradesh - 201301, India
@@ -536,21 +943,50 @@ function Billing() {
 
                 <div
                     className="
-                        bg-white
-                        border border-gray-300
+                        bg-theme-surface
+
+                        border
+                        border-theme-border-light
+
                         rounded-lg
+
                         shadow-sm
+
                         p-3
+
+                        transition-colors
+                        duration-300
                     "
                 >
 
-                    <div className="flex justify-between items-center mb-3">
+                    <div
+                        className="
+                            flex
+                            justify-between
+                            items-center
 
-                        <h2 className="text-[11px] font-semibold text-gray-800">
+                            mb-3
+                        "
+                    >
+
+                        <h2
+                            className="
+                                text-[11px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             Payment History
                         </h2>
 
-                        <span className="text-[10px] text-purple-600">
+                        <span
+                            className="
+                                text-[10px]
+
+                                text-purple-600
+                                dark:text-purple-400
+                            "
+                        >
                             Reset on 01 June, 2026
                         </span>
 
@@ -559,7 +995,21 @@ function Billing() {
 
                     {/* Table Header */}
 
-                    <div className="grid grid-cols-4 text-[9px] text-gray-500 pb-2 border-b border-gray-200">
+                    <div
+                        className="
+                            grid
+                            grid-cols-4
+
+                            text-[9px]
+
+                            text-theme-text-muted
+
+                            pb-2
+
+                            border-b
+                            border-theme-border-light
+                        "
+                    >
 
                         <span>Date</span>
 
@@ -585,12 +1035,19 @@ function Billing() {
                         <div
                             key={date}
                             className="
-                                grid grid-cols-4
+                                grid
+                                grid-cols-4
+
                                 items-center
+
                                 py-2
-                                border-b border-gray-200
+
+                                border-b
+                                border-theme-border-light
+
                                 text-[9px]
-                                text-gray-700
+
+                                text-theme-text-secondary
                             "
                         >
 
@@ -611,9 +1068,16 @@ function Billing() {
                                 <span
                                     className="
                                         bg-green-100
+                                        dark:bg-green-500/10
+
                                         text-green-600
-                                        px-2 py-1
+                                        dark:text-green-400
+
+                                        px-2
+                                        py-1
+
                                         rounded
+
                                         text-[8px]
                                     "
                                 >
@@ -633,11 +1097,22 @@ function Billing() {
 
                         <button
                             className="
-                                flex items-center
+                                flex
+                                items-center
+
                                 gap-1
+
                                 text-purple-600
+                                dark:text-purple-400
+
                                 text-[10px]
+
                                 font-medium
+
+                                hover:text-purple-700
+                                dark:hover:text-purple-300
+
+                                transition
                             "
                         >
 
@@ -654,6 +1129,7 @@ function Billing() {
             </div>
 
         </div>
+
     );
 }
 
@@ -667,39 +1143,88 @@ function BillingRow({ icon, title, value, action }) {
         <div
             className="
                 min-h-[34px]
-                flex items-center
-                border-b border-gray-200
+
+                flex
+                items-center
+
+                border-b
+                border-theme-border-light
             "
         >
 
             <div
                 className="
-                    w-6 h-6
+                    w-6
+                    h-6
+
                     bg-purple-100
+                    dark:bg-purple-500/10
+
                     text-purple-600
+                    dark:text-purple-400
+
                     rounded
-                    flex items-center
+
+                    flex
+                    items-center
                     justify-center
+
                     mr-3
+
+                    shrink-0
                 "
             >
+
                 {icon}
+
             </div>
 
 
-            <div className="w-[125px] text-[10px] text-gray-700">
+            <div
+                className="
+                    w-[125px]
+
+                    text-[10px]
+
+                    text-theme-text-secondary
+                "
+            >
                 {title}
             </div>
 
 
-            <div className="flex-1 text-right text-[10px] text-gray-700">
+            <div
+                className="
+                    flex-1
+
+                    text-right
+
+                    text-[10px]
+
+                    text-theme-text-secondary
+                "
+            >
                 {value}
             </div>
 
 
             {action && (
 
-                <button className="ml-3 text-[9px] text-purple-600">
+                <button
+                    className="
+                        ml-3
+
+                        text-[9px]
+
+                        text-purple-600
+                        dark:text-purple-400
+
+                        hover:text-purple-700
+                        dark:hover:text-purple-300
+
+                        transition
+                    "
+                >
                     {action}
                 </button>
 
@@ -712,3 +1237,4 @@ function BillingRow({ icon, title, value, action }) {
 
 
 export default Billing;
+

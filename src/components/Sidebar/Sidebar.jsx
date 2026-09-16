@@ -1,131 +1,101 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
 
 import {
     LayoutDashboard,
     Users,
-    UserPlus,
+    UserRound,
     FileText,
     CreditCard,
-    Ticket,
+    Headphones,
     Building2,
     Settings,
     HelpCircle,
-    X
+    Menu,
+    X,
 } from "lucide-react";
+
+import { NavLink } from "react-router-dom";
 
 
 function Sidebar({
     isSidebarOpen,
-    setIsSidebarOpen
+    setIsSidebarOpen,
+    isSidebarCollapsed,
+    setIsSidebarCollapsed,
 }) {
 
-
-    /* =================================================
-       MENU ITEMS
-    ================================================= */
+    // =================================================
+    // MAIN MENU
+    // =================================================
 
     const menuItems = [
         {
             name: "Dashboard",
             path: "/dashboard",
-            icon: LayoutDashboard
+            icon: LayoutDashboard,
         },
         {
             name: "Teams",
             path: "/teams",
-            icon: Users
+            icon: Users,
         },
         {
             name: "Leads",
             path: "/leads",
-            icon: UserPlus
+            icon: UserRound,
         },
         {
             name: "Invoice",
             path: "/invoice",
-            icon: FileText
+            icon: FileText,
         },
         {
             name: "Billing",
             path: "/billing",
-            icon: CreditCard
+            icon: CreditCard,
         },
         {
             name: "Support Tickets",
             path: "/support-tickets",
-            icon: Ticket
+            icon: Headphones,
         },
         {
             name: "Organisation",
             path: "/organisation",
-            icon: Building2
-        }
+            icon: Building2,
+        },
     ];
 
 
-    /* =================================================
-       CLOSE SIDEBAR AFTER NAVIGATION
-    ================================================= */
+    // =================================================
+    // BOTTOM MENU
+    // =================================================
 
-    const handleNavigation = () => {
-        setIsSidebarOpen(false);
-    };
+    const bottomItems = [
+        {
+            name: "Settings",
+            path: "/settings",
+            icon: Settings,
+        },
+        {
+            name: "Help & Support",
+            path: "/help-support",
+            icon: HelpCircle,
+        },
+    ];
 
 
-    /* =================================================
-       NAVIGATION LINK CLASS
+    // =================================================
+    // MOBILE NAVIGATION
+    // =================================================
 
-       DESKTOP:
-       Icon + name
+    const handleMobileNavigation = () => {
 
-       MOBILE:
-       Icon + name
-    ================================================= */
-
-    const navLinkClass = ({ isActive }) =>
-        `
-        group
-
-        flex
-        items-center
-
-        gap-3
-
-        no-underline
-        text-white
-
-        px-3
-        lg:px-5
-
-        py-3
-
-        mx-2
-        lg:mx-3
-
-        my-1
-
-        rounded-md
-
-        transition-all
-        duration-300
-        ease-out
-
-        hover:translate-x-1
-        hover:shadow-md
-
-        ${
-            isActive
-                ? `
-                    bg-[#3f315f]
-
-                    shadow-[0_4px_12px_rgba(0,0,0,0.20)]
-                `
-                : `
-                    hover:bg-[#2b1c43]
-                `
+        if (window.innerWidth < 1024) {
+            setIsSidebarOpen(false);
         }
-        `;
+
+    };
 
 
     return (
@@ -133,108 +103,223 @@ function Sidebar({
         <aside
             className={`
                 fixed
-
                 top-0
                 left-0
-
-                w-[280px]
-                lg:w-[240px]
-
-                h-screen
-
-                bg-[#160d27]
-                text-white
-
                 z-50
 
-                overflow-y-auto
+                h-screen
+                w-[280px]
 
-                transform
+                bg-theme-surface
 
-                transition-transform
+                border-r
+                border-theme-border
+
+                flex
+                flex-col
+
+                overflow-visible
+
+                transition-all
                 duration-300
                 ease-in-out
 
-                lg:translate-x-0
+                ${
+                    isSidebarCollapsed
+                        ? "lg:w-[78px]"
+                        : "lg:w-[240px]"
+                }
 
                 ${
                     isSidebarOpen
                         ? "translate-x-0"
                         : "-translate-x-full"
                 }
+
+                lg:translate-x-0
             `}
         >
 
-
             {/* =================================================
-                SIDEBAR HEADER
+                LOGO HEADER
             ================================================= */}
 
             <div
                 className="
+                    h-[66px]
+                    shrink-0
+
                     flex
                     items-center
-                    justify-between
 
-                    px-5
-                    lg:px-7
+                    px-4
 
-                    py-5
+                    border-b
+                    border-theme-border
                 "
             >
 
-                {/* =================================================
-                    LOGO
-                ================================================= */}
+                <div
+                    className={`
+                        flex
+                        items-center
 
-                <h2
-                    className="
-                        text-2xl
+                        w-full
 
-                        font-bold
-
-                        m-0
-
-                        cursor-pointer
-
-                        transition-all
-                        duration-300
-
-                        hover:scale-[1.03]
-                    "
+                        ${
+                            isSidebarCollapsed
+                                ? "lg:justify-center"
+                                : "justify-between"
+                        }
+                    `}
                 >
-                    GrowthPulse
-                </h2>
+
+                    {/* LOGO */}
+
+                    <div
+                        className="
+                            flex
+                            items-center
+                            gap-3
+                        "
+                    >
+
+                        <div
+                            className="
+                                w-9
+                                h-9
+                                shrink-0
+
+                                rounded-lg
+
+                                bg-primary
+
+                                flex
+                                items-center
+                                justify-center
+
+                                text-white
+
+                                font-bold
+                                text-sm
+                            "
+                        >
+                            G
+                        </div>
 
 
-                {/* =================================================
-                    MOBILE CLOSE BUTTON
-                ================================================= */}
+                        {!isSidebarCollapsed && (
+
+                            <span
+                                className="
+                                    text-theme-text
+
+                                    font-semibold
+                                    text-lg
+
+                                    whitespace-nowrap
+
+                                    hidden
+                                    lg:block
+                                "
+                            >
+                                GrowthPulse
+                            </span>
+
+                        )}
+
+                    </div>
+
+
+                    {/* MOBILE CLOSE */}
+
+                    <button
+                        type="button"
+
+                        onClick={() =>
+                            setIsSidebarOpen(false)
+                        }
+
+                        className="
+                            lg:hidden
+
+                            w-9
+                            h-9
+
+                            rounded-lg
+
+                            flex
+                            items-center
+                            justify-center
+
+                            text-theme-text-secondary
+
+                            hover:bg-theme-surface-secondary
+                            hover:text-theme-text
+
+                            transition
+                            duration-200
+                        "
+                    >
+
+                        <X size={20} />
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            {/* =================================================
+                HAMBURGER
+                ONLY ICON - NO "COLLAPSE MENU" TEXT
+            ================================================= */}
+
+            <div
+                className="
+                    px-4
+                    pt-4
+                    pb-2
+
+                    hidden
+                    lg:block
+                "
+            >
 
                 <button
                     type="button"
 
-                    onClick={() => setIsSidebarOpen(false)}
+                    onClick={() =>
+                        setIsSidebarCollapsed(
+                            !isSidebarCollapsed
+                        )
+                    }
 
                     className="
-                        lg:hidden
+                        w-10
+                        h-10
 
-                        p-1.5
+                        rounded-lg
 
-                        rounded-md
+                        flex
+                        items-center
+                        justify-center
 
-                        text-white
+                        text-theme-text-secondary
 
-                        hover:bg-[#2b1c43]
+                        hover:bg-theme-surface-secondary
+                        hover:text-theme-text
 
                         transition-all
                         duration-200
                     "
-
-                    aria-label="Close menu"
                 >
 
-                    <X size={22} />
+                    <Menu
+                        size={21}
+                        strokeWidth={2}
+                    />
 
                 </button>
 
@@ -245,13 +330,22 @@ function Sidebar({
                 MAIN NAVIGATION
             ================================================= */}
 
-            <nav>
+            <nav
+                className="
+                    flex-1
 
-                <ul
+                    px-3
+                    py-3
+
+                    overflow-visible
+                "
+            >
+
+                <div
                     className="
-                        list-none
-                        p-0
-                        m-0
+                        flex
+                        flex-col
+                        gap-1
                     "
                 >
 
@@ -261,176 +355,329 @@ function Sidebar({
 
                         return (
 
-                            <li
+                            <NavLink
                                 key={item.path}
+
+                                to={item.path}
+
+                                onClick={
+                                    handleMobileNavigation
+                                }
+
+                                className={({
+                                    isActive,
+                                }) => `
+                                    group
+                                    relative
+
+                                    w-full
+                                    h-11
+
+                                    rounded-lg
+
+                                    flex
+                                    items-center
+
+                                    transition-all
+                                    duration-200
+
+                                    ${
+                                        isSidebarCollapsed
+                                            ? "lg:justify-center"
+                                            : "justify-start px-3 gap-3"
+                                    }
+
+                                    ${
+                                        isActive
+                                            ? `
+                                                bg-theme-surface-secondary
+                                                text-primary
+                                            `
+                                            : `
+                                                text-theme-text-secondary
+
+                                                hover:bg-theme-surface-secondary
+                                                hover:text-theme-text
+                                            `
+                                    }
+                                `}
                             >
 
-                                <NavLink
-                                    to={item.path}
+                                {/* ICON */}
 
-                                    onClick={handleNavigation}
+                                <Icon
+                                    size={20}
+                                    strokeWidth={2}
 
-                                    className={navLinkClass}
-                                >
-
-                                    {/* =================================================
-                                        ICON
-                                    ================================================= */}
-
-                                    <Icon
-                                        size={19}
-
-                                        strokeWidth={2}
-
-                                        className="
-                                            shrink-0
-
-                                            transition-all
-                                            duration-300
-                                            ease-out
-
-                                            group-hover:-translate-y-1
-                                            group-hover:scale-110
-                                            group-hover:rotate-2
-                                        "
-                                    />
+                                    className="
+                                        shrink-0
+                                    "
+                                />
 
 
-                                    {/* =================================================
-                                        NAME
-                                    ================================================= */}
+                                {/* MENU NAME */}
+
+                                {!isSidebarCollapsed && (
 
                                     <span
                                         className="
-                                            transition-all
-                                            duration-300
+                                            text-sm
+                                            font-medium
 
-                                            group-hover:translate-x-[2px]
+                                            whitespace-nowrap
+
+                                            hidden
+                                            lg:block
                                         "
                                     >
                                         {item.name}
                                     </span>
 
-                                </NavLink>
+                                )}
 
-                            </li>
+
+                                {/* =================================================
+                                    COLLAPSED TOOLTIP
+                                ================================================= */}
+
+                                {isSidebarCollapsed && (
+
+                                    <div
+                                        className="
+                                            hidden
+                                            lg:block
+
+                                            absolute
+
+                                            left-[70px]
+                                            top-1/2
+
+                                            -translate-y-1/2
+
+                                            z-[9999]
+
+                                            whitespace-nowrap
+
+                                            px-3
+                                            py-2
+
+                                            rounded-lg
+
+                                            bg-theme-surface-secondary
+
+                                            border
+                                            border-theme-border-light
+
+                                            text-theme-text
+
+                                            text-sm
+                                            font-medium
+
+                                            shadow-lg
+
+                                            opacity-0
+                                            invisible
+
+                                            translate-x-[-4px]
+
+                                            group-hover:opacity-100
+                                            group-hover:visible
+                                            group-hover:translate-x-0
+
+                                            transition-all
+                                            duration-200
+
+                                            pointer-events-none
+                                        "
+                                    >
+                                        {item.name}
+                                    </div>
+
+                                )}
+
+                            </NavLink>
 
                         );
 
                     })}
 
-                </ul>
+                </div>
 
             </nav>
 
 
             {/* =================================================
-                BOTTOM NAVIGATION
+                BOTTOM MENU
             ================================================= */}
 
             <div
                 className="
-                    absolute
+                    shrink-0
 
-                    bottom-5
-
-                    w-full
+                    px-3
+                    pb-4
                 "
             >
 
-                <ul
+                <div
                     className="
-                        list-none
-                        p-0
-                        m-0
+                        flex
+                        flex-col
+                        gap-1
                     "
                 >
 
+                    {bottomItems.map((item) => {
 
-                    {/* =================================================
-                        SETTINGS
-                    ================================================= */}
+                        const Icon = item.icon;
 
-                    <li>
+                        return (
 
-                        <NavLink
-                            to="/settings"
+                            <NavLink
+                                key={item.path}
 
-                            onClick={handleNavigation}
+                                to={item.path}
 
-                            className={navLinkClass}
-                        >
+                                onClick={
+                                    handleMobileNavigation
+                                }
 
-                            <Settings
-                                size={19}
+                                className={({
+                                    isActive,
+                                }) => `
+                                    group
+                                    relative
 
-                                strokeWidth={2}
+                                    w-full
+                                    h-11
 
-                                className="
-                                    shrink-0
+                                    rounded-lg
 
-                                    transition-all
-                                    duration-300
-                                    ease-out
-
-                                    group-hover:-translate-y-1
-                                    group-hover:scale-110
-                                    group-hover:rotate-6
-                                "
-                            />
-
-
-                            <span>
-                                Settings
-                            </span>
-
-                        </NavLink>
-
-                    </li>
-
-
-                    {/* =================================================
-                        HELP & SUPPORT
-                    ================================================= */}
-
-                    <li>
-
-                        <NavLink
-                            to="/help-support"
-
-                            onClick={handleNavigation}
-
-                            className={navLinkClass}
-                        >
-
-                            <HelpCircle
-                                size={19}
-
-                                strokeWidth={2}
-
-                                className="
-                                    shrink-0
+                                    flex
+                                    items-center
 
                                     transition-all
-                                    duration-300
-                                    ease-out
+                                    duration-200
 
-                                    group-hover:-translate-y-1
-                                    group-hover:scale-110
-                                    group-hover:rotate-2
-                                "
-                            />
+                                    ${
+                                        isSidebarCollapsed
+                                            ? "lg:justify-center"
+                                            : "justify-start px-3 gap-3"
+                                    }
+
+                                    ${
+                                        isActive
+                                            ? `
+                                                bg-theme-surface-secondary
+                                                text-primary
+                                            `
+                                            : `
+                                                text-theme-text-secondary
+
+                                                hover:bg-theme-surface-secondary
+                                                hover:text-theme-text
+                                            `
+                                    }
+                                `}
+                            >
+
+                                <Icon
+                                    size={20}
+                                    strokeWidth={2}
+
+                                    className="
+                                        shrink-0
+                                    "
+                                />
 
 
-                            <span>
-                                Help & Support
-                            </span>
+                                {/* MENU NAME */}
 
-                        </NavLink>
+                                {!isSidebarCollapsed && (
 
-                    </li>
+                                    <span
+                                        className="
+                                            text-sm
+                                            font-medium
 
-                </ul>
+                                            whitespace-nowrap
+
+                                            hidden
+                                            lg:block
+                                        "
+                                    >
+                                        {item.name}
+                                    </span>
+
+                                )}
+
+
+                                {/* =================================================
+                                    COLLAPSED TOOLTIP
+                                ================================================= */}
+
+                                {isSidebarCollapsed && (
+
+                                    <div
+                                        className="
+                                            hidden
+                                            lg:block
+
+                                            absolute
+
+                                            left-[70px]
+                                            top-1/2
+
+                                            -translate-y-1/2
+
+                                            z-[9999]
+
+                                            whitespace-nowrap
+
+                                            px-3
+                                            py-2
+
+                                            rounded-lg
+
+                                            bg-theme-surface-secondary
+
+                                            border
+                                            border-theme-border-light
+
+                                            text-theme-text
+
+                                            text-sm
+                                            font-medium
+
+                                            shadow-lg
+
+                                            opacity-0
+                                            invisible
+
+                                            translate-x-[-4px]
+
+                                            group-hover:opacity-100
+                                            group-hover:visible
+                                            group-hover:translate-x-0
+
+                                            transition-all
+                                            duration-200
+
+                                            pointer-events-none
+                                        "
+                                    >
+                                        {item.name}
+                                    </div>
+
+                                )}
+
+                            </NavLink>
+
+                        );
+
+                    })}
+
+                </div>
 
             </div>
 

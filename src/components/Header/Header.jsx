@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, {
+    useEffect,
+    useRef,
+    useState
+} from "react";
 
 import {
     Bell,
+    Eye,
     UserRound,
     ChevronDown,
     Plus,
@@ -14,13 +19,21 @@ import NotificationPopup from "../NotificationPopup/NotificationPopup";
 import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 
 
-function Header({ onMenuClick }) {
+function Header({
+    onMenuClick,
+    theme,
+    setTheme
+}) {
 
     // Controls notification / credits / topup popup
-    const [showPopup, setShowPopup] = useState(null);
+    const [showPopup, setShowPopup] =
+        useState(null);
+
 
     // Controls profile dropdown
-    const [showProfile, setShowProfile] = useState(false);
+    const [showProfile, setShowProfile] =
+        useState(false);
+
 
     // Reference for profile area
     const profileRef = useRef(null);
@@ -38,7 +51,9 @@ function Header({ onMenuClick }) {
 
             if (
                 profileRef.current &&
-                !profileRef.current.contains(event.target)
+                !profileRef.current.contains(
+                    event.target
+                )
             ) {
 
                 setShowProfile(false);
@@ -74,7 +89,26 @@ function Header({ onMenuClick }) {
 
     const handleProfileClick = () => {
 
-        setShowProfile((previous) => !previous);
+        setShowProfile(
+            (previous) => !previous
+        );
+
+    };
+
+
+    /*
+        =====================================================
+        THEME TOGGLE
+    =====================================================
+    */
+
+    const handleThemeToggle = () => {
+
+        setTheme(
+            theme === "dark"
+                ? "light"
+                : "dark"
+        );
 
     };
 
@@ -88,7 +122,10 @@ function Header({ onMenuClick }) {
                 min-h-[66px]
                 w-full
 
-                bg-[#171126]
+                bg-theme-surface
+
+                border-b
+                border-theme-border
 
                 flex
                 items-center
@@ -107,6 +144,9 @@ function Header({ onMenuClick }) {
                 top-0
 
                 z-30
+
+                transition-colors
+                duration-300
             "
         >
 
@@ -117,7 +157,9 @@ function Header({ onMenuClick }) {
 
             <button
                 type="button"
+
                 onClick={onMenuClick}
+
                 className="
                     lg:hidden
 
@@ -130,14 +172,15 @@ function Header({ onMenuClick }) {
 
                     rounded-md
 
-                    text-white
+                    text-theme
 
-                    hover:bg-[#2b1c43]
+                    hover:bg-theme-surface-secondary
 
                     transition-colors
 
                     shrink-0
                 "
+
                 aria-label="Open menu"
             >
 
@@ -159,7 +202,7 @@ function Header({ onMenuClick }) {
                     sm:gap-3
                     md:gap-6
 
-                    text-white
+                    text-theme
 
                     min-w-0
 
@@ -169,17 +212,14 @@ function Header({ onMenuClick }) {
 
 
                 {/* =================================================
-                    BELL / NOTIFICATIONS
+                    EYE / THEME BUTTON
                 ================================================= */}
 
                 <button
                     type="button"
-                    onClick={() => {
 
-                        setShowPopup("notifications");
-                        setShowProfile(false);
+                    onClick={handleThemeToggle}
 
-                    }}
                     className="
                         flex
                         items-center
@@ -195,18 +235,97 @@ function Header({ onMenuClick }) {
 
                         shrink-0
 
-                        hover:bg-[#2b1c43]
+                        text-theme
+
+                        hover:bg-theme-surface-secondary
+
+                        transition-all
+                        duration-200
+
+                        cursor-pointer
+
+                        active:scale-95
+                    "
+
+                    aria-label={
+                        theme === "dark"
+                            ? "Switch to light mode"
+                            : "Switch to dark mode"
+                    }
+
+                    title={
+                        theme === "dark"
+                            ? "Switch to light mode"
+                            : "Switch to dark mode"
+                    }
+                >
+
+                    <Eye
+                        size={19}
+                        className="
+                            sm:w-[22px]
+                            sm:h-[22px]
+
+                            transition-transform
+                            duration-300
+
+                            hover:scale-110
+                        "
+                    />
+
+                </button>
+
+
+                {/* =================================================
+                    BELL / NOTIFICATIONS
+                ================================================= */}
+
+                <button
+                    type="button"
+
+                    onClick={() => {
+
+                        setShowPopup(
+                            "notifications"
+                        );
+
+                        setShowProfile(false);
+
+                    }}
+
+                    className="
+                        flex
+                        items-center
+                        justify-center
+
+                        w-8
+                        h-8
+
+                        sm:w-9
+                        sm:h-9
+
+                        rounded-md
+
+                        shrink-0
+
+                        text-theme
+
+                        hover:bg-theme-surface-secondary
 
                         transition-colors
 
                         cursor-pointer
                     "
+
                     aria-label="Notifications"
                 >
 
                     <Bell
                         size={19}
-                        className="sm:w-[22px] sm:h-[22px]"
+                        className="
+                            sm:w-[22px]
+                            sm:h-[22px]
+                        "
                     />
 
                 </button>
@@ -218,12 +337,15 @@ function Header({ onMenuClick }) {
 
                 <button
                     type="button"
+
                     onClick={() => {
 
                         setShowPopup("topup");
+
                         setShowProfile(false);
 
                     }}
+
                     className="
                         flex
                         items-center
@@ -266,7 +388,10 @@ function Header({ onMenuClick }) {
 
                     <Plus
                         size={14}
-                        className="sm:w-[17px] sm:h-[17px]"
+                        className="
+                            sm:w-[17px]
+                            sm:h-[17px]
+                        "
                     />
 
                     <span>
@@ -282,12 +407,15 @@ function Header({ onMenuClick }) {
 
                 <button
                     type="button"
+
                     onClick={() => {
 
                         setShowPopup("credits");
+
                         setShowProfile(false);
 
                     }}
+
                     className="
                         text-[10px]
                         sm:text-sm
@@ -296,9 +424,9 @@ function Header({ onMenuClick }) {
 
                         whitespace-nowrap
 
-                        text-white
+                        text-theme
 
-                        hover:text-purple-300
+                        hover:text-primary
 
                         transition
 
@@ -310,7 +438,12 @@ function Header({ onMenuClick }) {
 
                     Credits:
 
-                    <span className="ml-1 font-semibold">
+                    <span
+                        className="
+                            ml-1
+                            font-semibold
+                        "
+                    >
                         234
                     </span>
 
@@ -323,12 +456,18 @@ function Header({ onMenuClick }) {
 
                 <div
                     ref={profileRef}
-                    className="relative shrink-0"
+
+                    className="
+                        relative
+                        shrink-0
+                    "
                 >
 
                     <button
                         type="button"
+
                         onClick={handleProfileClick}
+
                         className="
                             flex
                             items-center
@@ -336,7 +475,7 @@ function Header({ onMenuClick }) {
                             gap-1
                             sm:gap-[10px]
 
-                            text-white
+                            text-theme
 
                             text-sm
                             sm:text-base
@@ -352,10 +491,11 @@ function Header({ onMenuClick }) {
 
                             py-1
 
-                            hover:bg-[#2b1c43]
+                            hover:bg-theme-surface-secondary
 
                             transition-colors
                         "
+
                         aria-label="Open profile menu"
                     >
 
@@ -369,9 +509,9 @@ function Header({ onMenuClick }) {
                                 sm:w-10
                                 sm:h-10
 
-                                bg-white
+                                bg-theme-surface-secondary
 
-                                text-[#171126]
+                                text-theme
 
                                 rounded-full
 
@@ -380,12 +520,18 @@ function Header({ onMenuClick }) {
                                 justify-center
 
                                 shrink-0
+
+                                border
+                                border-theme-border
                             "
                         >
 
                             <UserRound
                                 size={18}
-                                className="sm:w-[23px] sm:h-[23px]"
+                                className="
+                                    sm:w-[23px]
+                                    sm:h-[23px]
+                                "
                             />
 
                         </div>
@@ -393,7 +539,12 @@ function Header({ onMenuClick }) {
 
                         {/* Admin Text */}
 
-                        <span className="hidden sm:inline">
+                        <span
+                            className="
+                                hidden
+                                sm:inline
+                            "
+                        >
                             Admin
                         </span>
 
@@ -402,6 +553,7 @@ function Header({ onMenuClick }) {
 
                         <ChevronDown
                             size={16}
+
                             className={`
                                 sm:w-5
                                 sm:h-5
@@ -409,7 +561,11 @@ function Header({ onMenuClick }) {
                                 transition-transform
                                 duration-200
 
-                                ${showProfile ? "rotate-180" : ""}
+                                ${
+                                    showProfile
+                                        ? "rotate-180"
+                                        : ""
+                                }
                             `}
                         />
 
@@ -423,7 +579,9 @@ function Header({ onMenuClick }) {
                     {showProfile && (
 
                         <ProfileDropdown
-                            onClose={() => setShowProfile(false)}
+                            onClose={() =>
+                                setShowProfile(false)
+                            }
                         />
 
                     )}
@@ -440,7 +598,9 @@ function Header({ onMenuClick }) {
             {showPopup === "notifications" && (
 
                 <NotificationPopup
-                    onClose={() => setShowPopup(null)}
+                    onClose={() =>
+                        setShowPopup(null)
+                    }
                 />
 
             )}
@@ -453,7 +613,9 @@ function Header({ onMenuClick }) {
             {showPopup === "credits" && (
 
                 <CreditsPopup
-                    onClose={() => setShowPopup(null)}
+                    onClose={() =>
+                        setShowPopup(null)
+                    }
                 />
 
             )}
@@ -466,7 +628,9 @@ function Header({ onMenuClick }) {
             {showPopup === "topup" && (
 
                 <TopUpCredits
-                    onClose={() => setShowPopup(null)}
+                    onClose={() =>
+                        setShowPopup(null)
+                    }
                 />
 
             )}
