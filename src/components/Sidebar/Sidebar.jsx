@@ -10,7 +10,7 @@ import {
     Building2,
     Settings,
     HelpCircle,
-    Menu,
+    LogOut,
     X,
 } from "lucide-react";
 
@@ -29,41 +29,13 @@ function Sidebar({
     // =================================================
 
     const menuItems = [
-        {
-            name: "Dashboard",
-            path: "/dashboard",
-            icon: LayoutDashboard,
-        },
-        {
-            name: "Teams",
-            path: "/teams",
-            icon: Users,
-        },
-        {
-            name: "Leads",
-            path: "/leads",
-            icon: UserRound,
-        },
-        {
-            name: "Invoice",
-            path: "/invoice",
-            icon: FileText,
-        },
-        {
-            name: "Billing",
-            path: "/billing",
-            icon: CreditCard,
-        },
-        {
-            name: "Support Tickets",
-            path: "/support-tickets",
-            icon: Headphones,
-        },
-        {
-            name: "Organisation",
-            path: "/organisation",
-            icon: Building2,
-        },
+        { name: "Dashboard", path: "/dashboard", icon: LayoutDashboard },
+        { name: "Teams", path: "/teams", icon: Users },
+        { name: "Leads", path: "/leads", icon: UserRound },
+        { name: "Invoice", path: "/invoice", icon: FileText },
+        { name: "Billing", path: "/billing", icon: CreditCard },
+        { name: "Support Tickets", path: "/support-tickets", icon: Headphones },
+        { name: "Organisation", path: "/organisation", icon: Building2 },
     ];
 
 
@@ -72,16 +44,8 @@ function Sidebar({
     // =================================================
 
     const bottomItems = [
-        {
-            name: "Settings",
-            path: "/settings",
-            icon: Settings,
-        },
-        {
-            name: "Help & Support",
-            path: "/help-support",
-            icon: HelpCircle,
-        },
+        { name: "Settings", path: "/settings", icon: Settings },
+        { name: "Help & Support", path: "/help-support", icon: HelpCircle },
     ];
 
 
@@ -98,588 +62,459 @@ function Sidebar({
     };
 
 
+    // =================================================
+    // CLOSE HANDLER
+    // =================================================
+
+    const handleClose = () => {
+
+        if (window.innerWidth < 1024) {
+            setIsSidebarOpen(false);
+        } else {
+            setIsSidebarCollapsed(true);
+        }
+
+    };
+
+
     return (
 
-        <aside
-            className={`
-                fixed
-                top-0
-                left-0
-                z-50
+        <>
 
-                h-screen
-                w-[280px]
+            {/* MOBILE OVERLAY */}
 
-                bg-theme-surface
+            {isSidebarOpen && (
+                <div
+                    onClick={() => setIsSidebarOpen(false)}
+                    className="
+                        fixed inset-0 z-40
+                        bg-black/50
+                        lg:hidden
+                    "
+                />
+            )}
 
-                
 
-                flex
-                flex-col
+            {/* SIDEBAR */}
 
-                overflow-visible
+            <aside
+                className={`
+                    fixed
+                    top-0
+                    left-0
+                    z-50
 
-                transition-all
-                duration-300
-                ease-in-out
+                    h-screen
 
-                ${
-                    isSidebarCollapsed
-                        ? "lg:w-[78px]"
-                        : "lg:w-[240px]"
-                }
+                    w-[280px]
+                    max-w-[85vw]
 
-                ${
-                    isSidebarOpen
-                        ? "translate-x-0"
-                        : "-translate-x-full"
-                }
+                    bg-theme-surface
 
-                lg:translate-x-0
-            `}
-        >
-
-            {/* =================================================
-                LOGO HEADER
-            ================================================= */}
-
-            <div
-                className="
-                    h-[66px]
-                    shrink-0
+                    border-r
+                    border-theme-border
 
                     flex
-                    items-center
+                    flex-col
 
-                    px-4
+                    overflow-visible
 
-                  
-                "
+                    transition-all
+                    duration-300
+                    ease-in-out
+
+                    ${isSidebarCollapsed ? "lg:w-[78px]" : "lg:w-[240px]"}
+
+                    ${isSidebarOpen ? "translate-x-0" : "-translate-x-full"}
+
+                    lg:translate-x-0
+                `}
             >
 
+                {/* LOGO HEADER */}
+
                 <div
-                    className={`
+                    className="
+                        h-[60px]
+                        sm:h-[66px]
+                        shrink-0
                         flex
                         items-center
-
-                        w-full
-
-                        ${
-                            isSidebarCollapsed
-                                ? "lg:justify-center"
-                                : "justify-between"
-                        }
-                    `}
+                        px-4
+                        border-b
+                        border-theme-border
+                    "
                 >
 
-                    {/* LOGO */}
-
                     <div
-                        className="
+                        className={`
                             flex
                             items-center
-                            gap-3
-                        "
+                            w-full
+                            ${isSidebarCollapsed ? "lg:justify-center" : "justify-between"}
+                        `}
                     >
 
-                        <div
-                            className="
-                                w-9
-                                h-9
-                                shrink-0
+                        {/* LOGO */}
 
-                                rounded-lg
+                        <div className="flex items-center gap-3">
 
-                                bg-primary
+                            <div
+                                className="
+                                    w-8
+                                    h-8
+                                    sm:w-9
+                                    sm:h-9
+                                    shrink-0
+                                    rounded-lg
+                                    bg-primary
+                                    flex
+                                    items-center
+                                    justify-center
+                                    text-white
+                                    font-bold
+                                    text-sm
+                                "
+                            >
+                                G
+                            </div>
 
-                                flex
-                                items-center
-                                justify-center
-
-                                text-white
-
-                                font-bold
-                                text-sm
-                            "
-                        >
-                            G
-                        </div>
-
-
-                        {!isSidebarCollapsed && (
 
                             <span
-                                className="
+                                className={`
                                     text-theme-text
-
                                     font-semibold
-                                    text-lg
-
+                                    text-base
+                                    sm:text-lg
                                     whitespace-nowrap
-
-                                    hidden
-                                    lg:block
-                                "
+                                    ${isSidebarCollapsed ? "lg:hidden" : "block"}
+                                `}
                             >
                                 GrowthPulse
                             </span>
 
-                        )}
+                        </div>
+
+
+                        {/* MOBILE CLOSE BUTTON */}
+
+                        <button
+                            type="button"
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="
+                                lg:hidden
+                                w-9
+                                h-9
+                                rounded-lg
+                                flex
+                                items-center
+                                justify-center
+                                text-theme-text-secondary
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
+                                transition
+                                duration-200
+                                cursor-pointer
+                            "
+                            aria-label="Close menu"
+                        >
+                            <X size={20} />
+                        </button>
 
                     </div>
 
+                </div>
 
-                    {/* MOBILE CLOSE */}
 
-                    <button
-                        type="button"
+                {/* DESKTOP COLLAPSED — LogOut (expand) button */}
 
-                        onClick={() =>
-                            setIsSidebarOpen(false)
-                        }
-
+                {isSidebarCollapsed && (
+                    <div
                         className="
-                            lg:hidden
-
-                            w-9
-                            h-9
-
-                            rounded-lg
-
-                            flex
-                            items-center
-                            justify-center
-
-                            text-theme-text-secondary
-
-                            hover:bg-theme-surface-secondary
-                            hover:text-theme-text
-
-                            transition
-                            duration-200
+                            px-4
+                            pt-4
+                            pb-2
+                            hidden
+                            lg:flex
+                            lg:justify-center
                         "
                     >
+                        <button
+                            type="button"
+                            onClick={() => setIsSidebarCollapsed(false)}
+                            className="
+                                w-10
+                                h-10
+                                rounded-lg
+                                flex
+                                items-center
+                                justify-center
+                                text-theme-text-secondary
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
+                                transition-all
+                                duration-200
+                                cursor-pointer
+                            "
+                            aria-label="Expand sidebar"
+                        >
+                            <LogOut size={21} strokeWidth={2} />
+                        </button>
+                    </div>
+                )}
 
-                        <X size={20} />
 
-                    </button>
+                {/* MAIN NAVIGATION */}
 
-                </div>
-
-            </div>
-
-
-            {/* =================================================
-                HAMBURGER
-                ONLY ICON - NO "COLLAPSE MENU" TEXT
-            ================================================= */}
-
-            <div
-                className="
-                    px-4
-                    pt-4
-                    pb-2
-
-                    hidden
-                    lg:block
-                "
-            >
-
-                <button
-                    type="button"
-
-                    onClick={() =>
-                        setIsSidebarCollapsed(
-                            !isSidebarCollapsed
-                        )
-                    }
-
+                <nav
                     className="
-                        w-10
-                        h-10
-
-                        rounded-lg
-
-                        flex
-                        items-center
-                        justify-center
-
-                        text-theme-text-secondary
-
-                        hover:bg-theme-surface-secondary
-                        hover:text-theme-text
-
-                        transition-all
-                        duration-200
+                        flex-1
+                        px-3
+                        py-3
+                        overflow-visible
                     "
                 >
 
-                    <Menu
-                        size={21}
-                        strokeWidth={2}
-                    />
+                    <div className="flex flex-col gap-1">
 
-                </button>
+                        {menuItems.map((item, index) => {
 
-            </div>
+                            const Icon = item.icon;
+                            const isFirst = index === 0;
+
+                            return (
+
+                                <div
+                                    key={item.path}
+                                    className="flex items-center gap-1"
+                                >
+
+                                    <NavLink
+                                        to={item.path}
+                                        onClick={handleMobileNavigation}
+                                        className={({ isActive }) => `
+                                            group
+                                            relative
+                                            flex-1
+                                            h-11
+                                            rounded-lg
+                                            flex
+                                            items-center
+                                            transition-all
+                                            duration-200
+
+                                            ${
+                                                isSidebarCollapsed
+                                                    ? "lg:justify-center lg:px-0 lg:gap-0 justify-start px-3 gap-3"
+                                                    : "justify-start px-3 gap-3"
+                                            }
+
+                                            ${
+                                                isActive
+                                                    ? "bg-theme-surface-secondary text-primary"
+                                                    : "text-theme-text-secondary hover:bg-theme-surface-secondary hover:text-theme-text"
+                                            }
+                                        `}
+                                    >
+
+                                        <Icon size={20} strokeWidth={2} className="shrink-0" />
 
 
-            {/* =================================================
-                MAIN NAVIGATION
-            ================================================= */}
+                                        <span
+                                            className={`
+                                                text-sm
+                                                font-medium
+                                                whitespace-nowrap
+                                                ${isSidebarCollapsed ? "lg:hidden" : "block"}
+                                            `}
+                                        >
+                                            {item.name}
+                                        </span>
 
-            <nav
-                className="
-                    flex-1
 
-                    px-3
-                    py-3
+                                        {isSidebarCollapsed && (
+                                            <div
+                                                className="
+                                                    hidden
+                                                    lg:block
+                                                    absolute
+                                                    left-[70px]
+                                                    top-1/2
+                                                    -translate-y-1/2
+                                                    z-[9999]
+                                                    whitespace-nowrap
+                                                    px-3
+                                                    py-2
+                                                    rounded-lg
+                                                    bg-theme-surface-secondary
+                                                    border
+                                                    border-theme-border-light
+                                                    text-theme-text
+                                                    text-sm
+                                                    font-medium
+                                                    shadow-lg
+                                                    opacity-0
+                                                    invisible
+                                                    translate-x-[-4px]
+                                                    group-hover:opacity-100
+                                                    group-hover:visible
+                                                    group-hover:translate-x-0
+                                                    transition-all
+                                                    duration-200
+                                                    pointer-events-none
+                                                "
+                                            >
+                                                {item.name}
+                                            </div>
+                                        )}
 
-                    overflow-visible
-                "
-            >
+                                    </NavLink>
 
-                <div
-                    className="
-                        flex
-                        flex-col
-                        gap-1
-                    "
-                >
 
-                    {menuItems.map((item) => {
+                                    {/* DESKTOP X — next to Dashboard row */}
 
-                        const Icon = item.icon;
-
-                        return (
-
-                            <NavLink
-                                key={item.path}
-
-                                to={item.path}
-
-                                onClick={
-                                    handleMobileNavigation
-                                }
-
-                                className={({
-                                    isActive,
-                                }) => `
-                                    group
-                                    relative
-
-                                    w-full
-                                    h-11
-
-                                    rounded-lg
-
-                                    flex
-                                    items-center
-
-                                    transition-all
-                                    duration-200
-
-                                    ${
-                                        isSidebarCollapsed
-                                            ? "lg:justify-center"
-                                            : "justify-start px-3 gap-3"
-                                    }
-
-                                    ${
-                                        isActive
-                                            ? `
-                                                bg-theme-surface-secondary
-                                                text-primary
-                                            `
-                                            : `
+                                    {isFirst && !isSidebarCollapsed && (
+                                        <button
+                                            type="button"
+                                            onClick={handleClose}
+                                            className="
+                                                hidden
+                                                lg:flex
+                                                w-9
+                                                h-9
+                                                rounded-lg
+                                                items-center
+                                                justify-center
+                                                shrink-0
                                                 text-theme-text-secondary
-
                                                 hover:bg-theme-surface-secondary
                                                 hover:text-theme-text
-                                            `
-                                    }
-                                `}
-                            >
+                                                transition
+                                                duration-200
+                                                cursor-pointer
+                                            "
+                                            aria-label="Collapse sidebar"
+                                        >
+                                            <X size={18} />
+                                        </button>
+                                    )}
 
-                                {/* ICON */}
+                                </div>
 
-                                <Icon
-                                    size={20}
-                                    strokeWidth={2}
+                            );
 
-                                    className="
-                                        shrink-0
-                                    "
-                                />
+                        })}
+
+                    </div>
+
+                </nav>
 
 
-                                {/* MENU NAME */}
+                {/* BOTTOM MENU */}
 
-                                {!isSidebarCollapsed && (
+                <div className="shrink-0 px-3 pb-4">
+
+                    <div className="flex flex-col gap-1">
+
+                        {bottomItems.map((item) => {
+
+                            const Icon = item.icon;
+
+                            return (
+
+                                <NavLink
+                                    key={item.path}
+                                    to={item.path}
+                                    onClick={handleMobileNavigation}
+                                    className={({ isActive }) => `
+                                        group
+                                        relative
+                                        w-full
+                                        h-11
+                                        rounded-lg
+                                        flex
+                                        items-center
+                                        transition-all
+                                        duration-200
+
+                                        ${
+                                            isSidebarCollapsed
+                                                ? "lg:justify-center lg:px-0 lg:gap-0 justify-start px-3 gap-3"
+                                                : "justify-start px-3 gap-3"
+                                        }
+
+                                        ${
+                                            isActive
+                                                ? "bg-theme-surface-secondary text-primary"
+                                                : "text-theme-text-secondary hover:bg-theme-surface-secondary hover:text-theme-text"
+                                        }
+                                    `}
+                                >
+
+                                    <Icon size={20} strokeWidth={2} className="shrink-0" />
+
 
                                     <span
-                                        className="
+                                        className={`
                                             text-sm
                                             font-medium
-
                                             whitespace-nowrap
-
-                                            hidden
-                                            lg:block
-                                        "
+                                            ${isSidebarCollapsed ? "lg:hidden" : "block"}
+                                        `}
                                     >
                                         {item.name}
                                     </span>
 
-                                )}
 
-
-                                {/* =================================================
-                                    COLLAPSED TOOLTIP
-                                ================================================= */}
-
-                                {isSidebarCollapsed && (
-
-                                    <div
-                                        className="
-                                            hidden
-                                            lg:block
-
-                                            absolute
-
-                                            left-[70px]
-                                            top-1/2
-
-                                            -translate-y-1/2
-
-                                            z-[9999]
-
-                                            whitespace-nowrap
-
-                                            px-3
-                                            py-2
-
-                                            rounded-lg
-
-                                            bg-theme-surface-secondary
-
-                                            border
-                                            border-theme-border-light
-
-                                            text-theme-text
-
-                                            text-sm
-                                            font-medium
-
-                                            shadow-lg
-
-                                            opacity-0
-                                            invisible
-
-                                            translate-x-[-4px]
-
-                                            group-hover:opacity-100
-                                            group-hover:visible
-                                            group-hover:translate-x-0
-
-                                            transition-all
-                                            duration-200
-
-                                            pointer-events-none
-                                        "
-                                    >
-                                        {item.name}
-                                    </div>
-
-                                )}
-
-                            </NavLink>
-
-                        );
-
-                    })}
-
-                </div>
-
-            </nav>
-
-
-            {/* =================================================
-                BOTTOM MENU
-            ================================================= */}
-
-            <div
-                className="
-                    shrink-0
-
-                    px-3
-                    pb-4
-                "
-            >
-
-                <div
-                    className="
-                        flex
-                        flex-col
-                        gap-1
-                    "
-                >
-
-                    {bottomItems.map((item) => {
-
-                        const Icon = item.icon;
-
-                        return (
-
-                            <NavLink
-                                key={item.path}
-
-                                to={item.path}
-
-                                onClick={
-                                    handleMobileNavigation
-                                }
-
-                                className={({
-                                    isActive,
-                                }) => `
-                                    group
-                                    relative
-
-                                    w-full
-                                    h-11
-
-                                    rounded-lg
-
-                                    flex
-                                    items-center
-
-                                    transition-all
-                                    duration-200
-
-                                    ${
-                                        isSidebarCollapsed
-                                            ? "lg:justify-center"
-                                            : "justify-start px-3 gap-3"
-                                    }
-
-                                    ${
-                                        isActive
-                                            ? `
+                                    {isSidebarCollapsed && (
+                                        <div
+                                            className="
+                                                hidden
+                                                lg:block
+                                                absolute
+                                                left-[70px]
+                                                top-1/2
+                                                -translate-y-1/2
+                                                z-[9999]
+                                                whitespace-nowrap
+                                                px-3
+                                                py-2
+                                                rounded-lg
                                                 bg-theme-surface-secondary
-                                                text-primary
-                                            `
-                                            : `
-                                                text-theme-text-secondary
+                                                border
+                                                border-theme-border-light
+                                                text-theme-text
+                                                text-sm
+                                                font-medium
+                                                shadow-lg
+                                                opacity-0
+                                                invisible
+                                                translate-x-[-4px]
+                                                group-hover:opacity-100
+                                                group-hover:visible
+                                                group-hover:translate-x-0
+                                                transition-all
+                                                duration-200
+                                                pointer-events-none
+                                            "
+                                        >
+                                            {item.name}
+                                        </div>
+                                    )}
 
-                                                hover:bg-theme-surface-secondary
-                                                hover:text-theme-text
-                                            `
-                                    }
-                                `}
-                            >
+                                </NavLink>
 
-                                <Icon
-                                    size={20}
-                                    strokeWidth={2}
+                            );
 
-                                    className="
-                                        shrink-0
-                                    "
-                                />
+                        })}
 
-
-                                {/* MENU NAME */}
-
-                                {!isSidebarCollapsed && (
-
-                                    <span
-                                        className="
-                                            text-sm
-                                            font-medium
-
-                                            whitespace-nowrap
-
-                                            hidden
-                                            lg:block
-                                        "
-                                    >
-                                        {item.name}
-                                    </span>
-
-                                )}
-
-
-                                {/* =================================================
-                                    COLLAPSED TOOLTIP
-                                ================================================= */}
-
-                                {isSidebarCollapsed && (
-
-                                    <div
-                                        className="
-                                            hidden
-                                            lg:block
-
-                                            absolute
-
-                                            left-[70px]
-                                            top-1/2
-
-                                            -translate-y-1/2
-
-                                            z-[9999]
-
-                                            whitespace-nowrap
-
-                                            px-3
-                                            py-2
-
-                                            rounded-lg
-
-                                            bg-theme-surface-secondary
-
-                                            border
-                                            border-theme-border-light
-
-                                            text-theme-text
-
-                                            text-sm
-                                            font-medium
-
-                                            shadow-lg
-
-                                            opacity-0
-                                            invisible
-
-                                            translate-x-[-4px]
-
-                                            group-hover:opacity-100
-                                            group-hover:visible
-                                            group-hover:translate-x-0
-
-                                            transition-all
-                                            duration-200
-
-                                            pointer-events-none
-                                        "
-                                    >
-                                        {item.name}
-                                    </div>
-
-                                )}
-
-                            </NavLink>
-
-                        );
-
-                    })}
+                    </div>
 
                 </div>
 
-            </div>
+            </aside>
 
-        </aside>
+        </>
 
     );
 

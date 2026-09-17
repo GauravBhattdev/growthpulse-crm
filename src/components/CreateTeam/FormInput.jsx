@@ -18,7 +18,7 @@ function FormInput({
                 block
                 text-[13px]
                 font-medium
-                text-textPrimary
+                text-theme-text
                 mb-1.5
             ">
                 {label}
@@ -35,11 +35,13 @@ function FormInput({
                     w-full
                     h-[34px]
                     border
-                    border-borderLight
+                    border-theme-border-light
                     rounded
                     px-2
                     text-[12px]
-                    text-textPrimary
+                    text-theme-text
+                    bg-theme-surface
+                    placeholder:text-theme-text-muted
                     outline-none
                     focus:border-primary
                 "
@@ -49,7 +51,7 @@ function FormInput({
             {helperText && (
                 <p className="
                     text-[9px]
-                    text-textSecondary
+                    text-theme-text-secondary
                     mt-1
                 ">
                     {helperText}

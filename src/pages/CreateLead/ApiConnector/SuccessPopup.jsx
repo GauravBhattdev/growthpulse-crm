@@ -9,49 +9,65 @@ function SuccessPopup({
 }) {
 
     return (
-        <div className="
-            fixed
-            inset-0
-            z-[100]
-            flex
-            items-center
-            justify-center
-            bg-black/40
-            px-4
-        ">
 
-            <div className="
-                w-full
-                max-w-[400px]
-                rounded-xl
-                bg-white
-                p-6
-                shadow-xl
-            ">
+        <div
+            className="
+                fixed
+                inset-0
+                z-[100]
+                flex
+                items-center
+                justify-center
+                bg-black/40
+                px-4
+            "
+        >
 
-                <div className="
-                    flex
-                    items-start
-                    justify-between
-                    gap-4
-                ">
+            <div
+                className="
+                    w-full
+                    max-w-[400px]
+                    rounded-xl
+                    bg-theme-surface
+                    border
+                    border-theme-border
+                    p-6
+                    shadow-xl
+
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                <div
+                    className="
+                        flex
+                        items-start
+                        justify-between
+                        gap-4
+                    "
+                >
 
                     <div>
 
-                        <h3 className="
-                            text-lg
-                            font-semibold
-                            text-gray-800
-                        ">
+                        <h3
+                            className="
+                                text-lg
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             Success
                         </h3>
 
 
-                        <p className="
-                            text-sm
-                            text-gray-500
-                            mt-2
-                        ">
+                        <p
+                            className="
+                                text-sm
+                                text-theme-text-secondary
+                                mt-2
+                            "
+                        >
                             {message}
                         </p>
 
@@ -62,8 +78,10 @@ function SuccessPopup({
                         type="button"
                         onClick={onClose}
                         className="
-                            text-gray-500
-                            hover:text-gray-800
+                            text-theme-text-secondary
+                            hover:text-theme-text
+                            transition
+                            cursor-pointer
                         "
                     >
                         <X size={20} />
@@ -72,11 +90,13 @@ function SuccessPopup({
                 </div>
 
 
-                <div className="
-                    flex
-                    justify-end
-                    mt-6
-                ">
+                <div
+                    className="
+                        flex
+                        justify-end
+                        mt-6
+                    "
+                >
 
                     <button
                         type="button"
@@ -89,6 +109,8 @@ function SuccessPopup({
                             text-sm
                             rounded-md
                             hover:bg-primaryHover
+                            transition
+                            cursor-pointer
                         "
                     >
                         OK

@@ -6,14 +6,16 @@ import {
     Check
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
+import { toast } from "react-toastify";
+
 
 import {
     connectors,
     steps,
     connectionDefaults,
     authenticationMethods,
-    fieldOptions,
-    defaultMappings,
     filterFieldOptions,
     filterConditionOptions,
     defaultFilters,
@@ -32,7 +34,6 @@ import {
 import Stepper from "./ApiConnector/Stepper";
 import SelectConnector from "./ApiConnector/SelectConnector";
 import ConfigureConnection from "./ApiConnector/ConfigureConnection";
-import MapFields from "./ApiConnector/MapFields";
 import FilterData from "./ApiConnector/FilterData";
 import PreviewLeads from "./ApiConnector/PreviewLeads";
 import ImportLeads from "./ApiConnector/ImportLeads";
@@ -41,309 +42,156 @@ import SuccessPopup from "./ApiConnector/SuccessPopup";
 
 function ApiConnector() {
 
-    // =====================================================
-    // STEP
-    // =====================================================
+    const navigate = useNavigate();
 
     const [currentStep, setCurrentStep] = useState(1);
 
+    const [selectedConnector, setSelectedConnector] = useState("Salesforce");
 
-    // =====================================================
-    // CONNECTOR
-    // =====================================================
-
-    const [selectedConnector, setSelectedConnector] =
-        useState("Salesforce");
-
-
-    const [searchText, setSearchText] =
-        useState("");
-
-
-    // =====================================================
-    // CONNECTION
-    // =====================================================
+    const [searchText, setSearchText] = useState("");
 
     const [connectionName, setConnectionName] =
-        useState(
-            connectionDefaults.connectionName
-        );
-
+        useState(connectionDefaults.connectionName);
 
     const [authenticationMethod, setAuthenticationMethod] =
-        useState(
-            connectionDefaults.authenticationMethod
-        );
+        useState(connectionDefaults.authenticationMethod);
 
+    const [clientId, setClientId] = useState("");
+    const [clientSecret, setClientSecret] = useState("");
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
 
-    const [clientId, setClientId] =
-        useState("");
+    const [apiUrl, setApiUrl] = useState(connectionDefaults.apiUrl);
 
+    const [testingConnection, setTestingConnection] = useState(false);
+    const [importingLeads, setImportingLeads] = useState(false);
 
-    const [clientSecret, setClientSecret] =
-        useState("");
+    const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [successMessage, setSuccessMessage] = useState("");
 
+    const [filters, setFilters] = useState(defaultFilters);
 
-    const [username, setUsername] =
-        useState("");
-
-
-    const [password, setPassword] =
-        useState("");
-
-
-    const [apiUrl, setApiUrl] =
-        useState(
-            connectionDefaults.apiUrl
-        );
-
-
-    // =====================================================
-    // LOADING
-    // =====================================================
-
-    const [testingConnection, setTestingConnection] =
-        useState(false);
-
-
-    const [importingLeads, setImportingLeads] =
-        useState(false);
-
-
-    // =====================================================
-    // SUCCESS POPUP
-    // =====================================================
-
-    const [showSuccessPopup, setShowSuccessPopup] =
-        useState(false);
-
-
-    const [successMessage, setSuccessMessage] =
-        useState("");
-
-
-    // =====================================================
-    // MAPPINGS
-    // =====================================================
-
-    const [mappings, setMappings] =
-        useState(defaultMappings);
-
-
-    // =====================================================
-    // FILTERS
-    // =====================================================
-
-    const [filters, setFilters] =
-        useState(defaultFilters);
-
-
-    // =====================================================
-    // STEP NAVIGATION
-    // =====================================================
 
     const handleStepClick = (stepNumber) => {
         setCurrentStep(stepNumber);
     };
 
-
     const handleNext = () => {
-
-        if (currentStep < 6) {
-            setCurrentStep(
-                currentStep + 1
-            );
-        }
+        if (currentStep < 5) setCurrentStep(currentStep + 1);
     };
 
-
     const handleBack = () => {
-
-        if (currentStep > 1) {
-            setCurrentStep(
-                currentStep - 1
-            );
-        }
+        if (currentStep > 1) setCurrentStep(currentStep - 1);
     };
 
 
     const handleFinish = () => {
 
-        setCurrentStep(1);
+        toast.success("Lead created successfully!");
+
+        setTimeout(() => {
+            navigate("/leads");
+        }, 800);
 
     };
 
 
-    // =====================================================
-    // CONNECTOR
-    // =====================================================
+    const handleCancel = () => {
+
+        if (testingConnection || importingLeads) return;
+
+        navigate("/leads");
+
+    };
+
 
     const handleConnectorSelect = (connectorName) => {
-
-        setSelectedConnector(
-            connectorName
-        );
-
+        setSelectedConnector(connectorName);
     };
-
 
     const handleChangeConnector = () => {
-
         setCurrentStep(1);
-
     };
 
-
-    // =====================================================
-    // TEST CONNECTION
-    // =====================================================
 
     const handleTestConnection = () => {
 
         setTestingConnection(true);
 
-
         setTimeout(() => {
 
             setTestingConnection(false);
 
-
-            setSuccessMessage(
-                "Connection tested successfully."
-            );
-
+            setSuccessMessage("Connection tested successfully.");
 
             setShowSuccessPopup(true);
 
         }, 1500);
+
     };
 
-
-    // =====================================================
-    // IMPORT
-    // =====================================================
 
     const handleImport = () => {
 
         setImportingLeads(true);
 
-
         setTimeout(() => {
 
             setImportingLeads(false);
 
+            toast.success("Lead created successfully!");
 
-            setSuccessMessage(
-                "Leads imported successfully!"
-            );
-
-
-            setShowSuccessPopup(true);
+            setTimeout(() => {
+                navigate("/leads");
+            }, 800);
 
         }, 1500);
+
     };
 
-
-    // =====================================================
-    // MAPPING
-    // =====================================================
-
-    const updateMapping = (
-        index,
-        property,
-        value
-    ) => {
-
-        setMappings((previous) => {
-
-            const updated = [
-                ...previous
-            ];
-
-
-            updated[index] = {
-                ...updated[index],
-                [property]: value
-            };
-
-
-            return updated;
-
-        });
-    };
-
-
-    // =====================================================
-    // FILTER
-    // =====================================================
 
     const addFilter = () => {
-
         setFilters((previous) => [
-
             ...previous,
-
-            {
-                ...newFilter
-            }
-
+            { ...newFilter }
         ]);
     };
 
-
     const removeFilter = (index) => {
-
         setFilters((previous) =>
-            previous.filter(
-                (_, filterIndex) =>
-                    filterIndex !== index
-            )
+            previous.filter((_, i) => i !== index)
         );
     };
 
-
     const clearFilters = () => {
-
         setFilters([]);
-
     };
 
-
-    const updateFilter = (
-        index,
-        property,
-        value
-    ) => {
+    const updateFilter = (index, property, value) => {
 
         setFilters((previous) => {
 
-            const updated = [
-                ...previous
-            ];
-
+            const updated = [...previous];
 
             updated[index] = {
                 ...updated[index],
                 [property]: value
             };
 
-
             return updated;
 
         });
+
     };
 
 
-    // =====================================================
-    // FOOTER BUTTONS
-    // =====================================================
+    // =================================================
+    // NEXT BUTTON
+    // =================================================
 
     const renderNextButton = () => {
 
-        // STEP 1
-
         if (currentStep === 1) {
-
             return (
                 <button
                     type="button"
@@ -352,105 +200,48 @@ function ApiConnector() {
                         h-[38px]
                         min-w-[100px]
                         px-5
-                        bg-primary
+                        bg-primary hover:bg-primaryHover
                         text-white
                         rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
+                        text-xs font-medium
+                        flex items-center justify-center gap-2
+                        transition cursor-pointer
                     "
                 >
-
                     Next
-
                     <ChevronRight size={16} />
-
                 </button>
             );
         }
 
-
-        // STEP 2
 
         if (currentStep === 2) {
-
             return (
                 <button
                     type="button"
                     onClick={handleNext}
-                    disabled={
-                        testingConnection ||
-                        importingLeads
-                    }
+                    disabled={testingConnection || importingLeads}
                     className="
                         h-[38px]
                         min-w-[170px]
                         px-5
-                        bg-primary
+                        bg-primary hover:bg-primaryHover
                         text-white
                         rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
-                        disabled:opacity-60
+                        text-xs font-medium
+                        flex items-center justify-center gap-2
+                        transition cursor-pointer
+                        disabled:opacity-60 disabled:cursor-not-allowed
                     "
                 >
-
                     Save & Continue
-
                     <ChevronRight size={16} />
-
                 </button>
             );
         }
 
-
-        // STEP 3
 
         if (currentStep === 3) {
-
-            return (
-                <button
-                    type="button"
-                    onClick={handleNext}
-                    className="
-                        h-[38px]
-                        min-w-[170px]
-                        px-5
-                        bg-primary
-                        text-white
-                        rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
-                    "
-                >
-
-                    Save & Continue
-
-                    <ChevronRight size={16} />
-
-                </button>
-            );
-        }
-
-
-        // STEP 4
-
-        if (currentStep === 4) {
-
             return (
                 <button
                     type="button"
@@ -459,32 +250,22 @@ function ApiConnector() {
                         h-[38px]
                         min-w-[205px]
                         px-5
-                        bg-primary
+                        bg-primary hover:bg-primaryHover
                         text-white
                         rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
+                        text-xs font-medium
+                        flex items-center justify-center gap-2
+                        transition cursor-pointer
                     "
                 >
-
                     Apply Filters & Preview
-
                     <ChevronRight size={16} />
-
                 </button>
             );
         }
 
 
-        // STEP 5
-
-        if (currentStep === 5) {
-
+        if (currentStep === 4) {
             return (
                 <button
                     type="button"
@@ -493,36 +274,22 @@ function ApiConnector() {
                         h-[38px]
                         min-w-[190px]
                         px-5
-                        bg-primary
+                        bg-primary hover:bg-primaryHover
                         text-white
                         rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
+                        text-xs font-medium
+                        flex items-center justify-center gap-2
+                        transition cursor-pointer
                     "
                 >
-
-                    Import{" "}
-
-                    {previewLeadStats.validLeads.toLocaleString()}
-
-                    {" "}Leads
-
+                    Import {previewLeadStats.validLeads.toLocaleString()} Leads
                     <ChevronRight size={16} />
-
                 </button>
             );
         }
 
 
-        // STEP 6
-
-        if (currentStep === 6) {
-
+        if (currentStep === 5) {
             return (
                 <button
                     type="button"
@@ -532,443 +299,229 @@ function ApiConnector() {
                         h-[38px]
                         min-w-[105px]
                         px-5
-                        bg-primary
+                        bg-primary hover:bg-primaryHover
                         text-white
                         rounded-md
-                        text-xs
-                        font-medium
-                        flex
-                        items-center
-                        justify-center
-                        gap-2
-                        hover:bg-primaryHover
-                        disabled:opacity-60
-                        disabled:cursor-not-allowed
+                        text-xs font-medium
+                        flex items-center justify-center gap-2
+                        transition cursor-pointer
+                        disabled:opacity-60 disabled:cursor-not-allowed
                     "
                 >
-
                     Finish
-
                     <Check size={16} />
-
                 </button>
             );
         }
-
 
         return null;
     };
 
 
-    // =====================================================
+    // =================================================
     // STEP CONTENT
-    // =====================================================
+    // =================================================
 
     const renderStepContent = () => {
 
         switch (currentStep) {
 
-            // =================================================
-            // STEP 1
-            // =================================================
-
             case 1:
-
                 return (
                     <SelectConnector
                         connectors={connectors}
                         searchText={searchText}
                         setSearchText={setSearchText}
-                        onConnectorSelect={
-                            handleConnectorSelect
-                        }
+                        onConnectorSelect={handleConnectorSelect}
                     />
                 );
-
-
-            // =================================================
-            // STEP 2
-            // =================================================
 
             case 2:
-
                 return (
                     <ConfigureConnection
-                        selectedConnector={
-                            selectedConnector
-                        }
+                        selectedConnector={selectedConnector}
                         connectors={connectors}
-                        connectionName={
-                            connectionName
-                        }
-                        setConnectionName={
-                            setConnectionName
-                        }
-                        authenticationMethod={
-                            authenticationMethod
-                        }
-                        setAuthenticationMethod={
-                            setAuthenticationMethod
-                        }
-                        authenticationMethods={
-                            authenticationMethods
-                        }
-                        clientId={
-                            clientId
-                        }
-                        setClientId={
-                            setClientId
-                        }
-                        clientSecret={
-                            clientSecret
-                        }
-                        setClientSecret={
-                            setClientSecret
-                        }
-                        username={
-                            username
-                        }
-                        setUsername={
-                            setUsername
-                        }
-                        password={
-                            password
-                        }
-                        setPassword={
-                            setPassword
-                        }
-                        apiUrl={
-                            apiUrl
-                        }
-                        setApiUrl={
-                            setApiUrl
-                        }
-                        testingConnection={
-                            testingConnection
-                        }
-                        onTestConnection={
-                            handleTestConnection
-                        }
-                        onChangeConnector={
-                            handleChangeConnector
-                        }
+                        connectionName={connectionName}
+                        setConnectionName={setConnectionName}
+                        authenticationMethod={authenticationMethod}
+                        setAuthenticationMethod={setAuthenticationMethod}
+                        authenticationMethods={authenticationMethods}
+                        clientId={clientId}
+                        setClientId={setClientId}
+                        clientSecret={clientSecret}
+                        setClientSecret={setClientSecret}
+                        username={username}
+                        setUsername={setUsername}
+                        password={password}
+                        setPassword={setPassword}
+                        apiUrl={apiUrl}
+                        setApiUrl={setApiUrl}
+                        testingConnection={testingConnection}
+                        onTestConnection={handleTestConnection}
+                        onChangeConnector={handleChangeConnector}
                     />
                 );
-
-
-            // =================================================
-            // STEP 3
-            // =================================================
 
             case 3:
-
-                return (
-                    <MapFields
-                        selectedConnector={
-                            selectedConnector
-                        }
-                        connectors={
-                            connectors
-                        }
-                        mappings={
-                            mappings
-                        }
-                        fieldOptions={
-                            fieldOptions
-                        }
-                        updateMapping={
-                            updateMapping
-                        }
-                        onChangeConnector={
-                            handleChangeConnector
-                        }
-                    />
-                );
-
-
-            // =================================================
-            // STEP 4
-            // =================================================
-
-            case 4:
-
                 return (
                     <FilterData
-                        selectedConnector={
-                            selectedConnector
-                        }
-                        connectors={
-                            connectors
-                        }
-                        filters={
-                            filters
-                        }
-                        filterFieldOptions={
-                            filterFieldOptions
-                        }
-                        filterConditionOptions={
-                            filterConditionOptions
-                        }
-                        filterSummary={
-                            filterSummary
-                        }
-                        estimatedLeads={
-                            previewLeadStats.totalLeads
-                        }
-                        updateFilter={
-                            updateFilter
-                        }
-                        addFilter={
-                            addFilter
-                        }
-                        removeFilter={
-                            removeFilter
-                        }
-                        clearFilters={
-                            clearFilters
-                        }
-                        onChangeConnector={
-                            handleChangeConnector
-                        }
+                        selectedConnector={selectedConnector}
+                        connectors={connectors}
+                        filters={filters}
+                        filterFieldOptions={filterFieldOptions}
+                        filterConditionOptions={filterConditionOptions}
+                        filterSummary={filterSummary}
+                        estimatedLeads={previewLeadStats.totalLeads}
+                        updateFilter={updateFilter}
+                        addFilter={addFilter}
+                        removeFilter={removeFilter}
+                        clearFilters={clearFilters}
+                        onChangeConnector={handleChangeConnector}
                     />
                 );
 
-
-            // =================================================
-            // STEP 5
-            // =================================================
-
-            case 5:
-
+            case 4:
                 return (
                     <PreviewLeads
-                        selectedConnector={
-                            selectedConnector
-                        }
-                        connectors={
-                            connectors
-                        }
-                        previewLeads={
-                            previewLeads
-                        }
-                        previewLeadStats={
-                            previewLeadStats
-                        }
-                        previewStatusOptions={
-                            previewStatusOptions
-                        }
-                        previewLeadSourceOptions={
-                            previewLeadSourceOptions
-                        }
-                        rowsPerPageOptions={
-                            rowsPerPageOptions
-                        }
-                        paginationPages={
-                            paginationPages
-                        }
-                        previewPagination={
-                            previewPagination
-                        }
-                        onChangeConnector={
-                            handleChangeConnector
-                        }
+                        selectedConnector={selectedConnector}
+                        connectors={connectors}
+                        previewLeads={previewLeads}
+                        previewLeadStats={previewLeadStats}
+                        previewStatusOptions={previewStatusOptions}
+                        previewLeadSourceOptions={previewLeadSourceOptions}
+                        rowsPerPageOptions={rowsPerPageOptions}
+                        paginationPages={paginationPages}
+                        previewPagination={previewPagination}
+                        onChangeConnector={handleChangeConnector}
                     />
                 );
 
-
-            // =================================================
-            // STEP 6
-            // =================================================
-
-            case 6:
-
+            case 5:
                 return (
                     <ImportLeads
-                        importingLeads={
-                            importingLeads
-                        }
-                        onImport={
-                            handleImport
-                        }
+                        importingLeads={importingLeads}
+                        onImport={handleImport}
                     />
                 );
 
-
             default:
-
                 return null;
         }
+
     };
 
-
-    // =====================================================
-    // RENDER
-    // =====================================================
 
     return (
 
         <div className="w-full">
 
-            {/* MAIN */}
-
-            <div className="
-                flex
-                flex-col
-                lg:flex-row
-                gap-3
-                items-stretch
-            ">
-
-                {/* STEPPER */}
+            <div className="flex flex-col lg:flex-row gap-3 items-stretch">
 
                 <Stepper
                     steps={steps}
                     currentStep={currentStep}
-                    onStepClick={
-                        handleStepClick
-                    }
+                    onStepClick={handleStepClick}
                 />
 
 
-                {/* CONTENT */}
+                <div
+                    className="
+                        flex-1 min-w-0 flex flex-col
+                        border border-theme-border-light
+                        rounded-[8px]
+                        bg-theme-surface
+                        transition-colors duration-300
+                    "
+                >
 
-                <div className="
-                    flex-1
-                    min-w-0
-                    border
-                    border-gray-300
-                    rounded-[8px]
-                    bg-white
-                    p-4
-                    sm:p-5
-                ">
+                    <div className="flex-1 p-4 sm:p-5">
+                        {renderStepContent()}
+                    </div>
 
-                    {renderStepContent()}
+
+                    <div
+                        className="
+                            shrink-0
+                            border-t border-theme-border-light
+                            px-4 sm:px-5
+                            py-3
+                            flex items-center justify-between
+                            gap-3
+                            transition-colors duration-300
+                        "
+                    >
+
+                        <div className="flex items-center gap-2">
+
+                            <button
+                                type="button"
+                                onClick={handleBack}
+                                disabled={currentStep === 1 || testingConnection || importingLeads}
+                                className="
+                                    h-[38px]
+                                    min-w-[92px]
+                                    px-4
+                                    border border-theme-border-light
+                                    rounded-md
+                                    bg-theme-surface
+                                    text-theme-text
+                                    text-xs font-medium
+                                    flex items-center justify-center gap-2
+                                    hover:bg-theme-surface-secondary
+                                    transition cursor-pointer
+                                    disabled:opacity-50 disabled:cursor-not-allowed
+                                "
+                            >
+                                <ChevronLeft size={17} />
+                                Back
+                            </button>
+
+
+                            <button
+                                type="button"
+                                onClick={handleCancel}
+                                disabled={testingConnection || importingLeads}
+                                className="
+                                    h-[38px]
+                                    min-w-[92px]
+                                    px-4
+                                    border border-theme-border-light
+                                    rounded-md
+                                    bg-theme-surface
+                                    text-theme-text
+                                    text-xs font-medium
+                                    flex items-center justify-center gap-2
+                                    hover:bg-theme-surface-secondary
+                                    transition cursor-pointer
+                                    disabled:opacity-50 disabled:cursor-not-allowed
+                                "
+                            >
+                                Cancel
+                            </button>
+
+                        </div>
+
+
+                        {renderNextButton()}
+
+                    </div>
 
                 </div>
 
             </div>
 
-
-            {/* FOOTER */}
-
-            <div className="
-                flex
-                items-center
-                justify-between
-                mt-3
-                gap-3
-            ">
-
-                {/* LEFT BUTTONS */}
-
-                <div className="
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    {/* BACK */}
-
-                    <button
-                        type="button"
-                        onClick={handleBack}
-                        disabled={
-                            currentStep === 1 ||
-                            testingConnection ||
-                            importingLeads
-                        }
-                        className="
-                            h-[38px]
-                            min-w-[92px]
-                            px-4
-                            border
-                            border-gray-800
-                            rounded-md
-                            bg-white
-                            text-gray-900
-                            text-xs
-                            font-medium
-                            flex
-                            items-center
-                            justify-center
-                            gap-2
-                            hover:bg-gray-100
-                            disabled:opacity-50
-                            disabled:cursor-not-allowed
-                        "
-                    >
-
-                        <ChevronLeft size={17} />
-
-                        Back
-
-                    </button>
-
-
-                    {/* CANCEL */}
-
-                    <button
-                        type="button"
-                        onClick={() =>
-                            setCurrentStep(1)
-                        }
-                        disabled={
-                            testingConnection ||
-                            importingLeads
-                        }
-                        className="
-                            h-[38px]
-                            min-w-[92px]
-                            px-4
-                            border
-                            border-gray-800
-                            rounded-md
-                            bg-white
-                            text-gray-900
-                            text-xs
-                            font-medium
-                            flex
-                            items-center
-                            justify-center
-                            gap-2
-                            hover:bg-gray-100
-                            disabled:opacity-50
-                            disabled:cursor-not-allowed
-                        "
-                    >
-
-                        Cancel
-
-                    </button>
-
-                </div>
-
-
-                {/* RIGHT BUTTON */}
-
-                {renderNextButton()}
-
-            </div>
-
-
-            {/* SUCCESS POPUP */}
 
             {showSuccessPopup && (
-
                 <SuccessPopup
-                    message={
-                        successMessage
-                    }
-                    onClose={() =>
-                        setShowSuccessPopup(false)
-                    }
+                    message={successMessage}
+                    onClose={() => setShowSuccessPopup(false)}
                 />
-
             )}
 
         </div>
+
     );
+
 }
 
 

@@ -11,6 +11,8 @@ import {
     Save
 } from "lucide-react";
 
+import { toast } from "react-toastify";
+
 
 // =====================================================
 // EDIT ORGANISATION
@@ -70,9 +72,7 @@ function EditOrganisation({ onClose }) {
         setIsClosing(true);
 
         setTimeout(() => {
-
             onClose();
-
         }, 250);
 
     };
@@ -103,15 +103,7 @@ function EditOrganisation({ onClose }) {
 
     const handleSave = () => {
 
-        console.log("Organization Updated:", {
-            organisationName,
-            location,
-            email,
-            phone,
-            website,
-            details,
-            logo
-        });
+        toast.success("Organization updated successfully!");
 
         handleClose();
 
@@ -144,7 +136,6 @@ function EditOrganisation({ onClose }) {
             `}
         >
 
-
             {/* =================================================
                 POPUP
             ================================================= */}
@@ -156,7 +147,10 @@ function EditOrganisation({ onClose }) {
 
                     max-h-[90vh]
 
-                    bg-white
+                    bg-theme-surface
+
+                    border
+                    border-theme-border-light
 
                     rounded-lg
 
@@ -176,7 +170,6 @@ function EditOrganisation({ onClose }) {
                 `}
             >
 
-
                 {/* =================================================
                     HEADER
                 ================================================= */}
@@ -192,18 +185,11 @@ function EditOrganisation({ onClose }) {
                         px-4
 
                         border-b
-                        border-gray-300
+                        border-theme-border-light
                     "
                 >
 
-                    <div className="
-                        flex
-                        items-center
-                        gap-3
-                    ">
-
-
-                        {/* ORGANIZATION ICON */}
+                    <div className="flex items-center gap-3">
 
                         <div
                             className="
@@ -212,7 +198,7 @@ function EditOrganisation({ onClose }) {
 
                                 rounded-md
 
-                                bg-purple-100
+                                bg-primary/15
 
                                 flex
                                 items-center
@@ -222,33 +208,19 @@ function EditOrganisation({ onClose }) {
 
                             <Building2
                                 size={25}
-                                className="text-purple-500"
+                                className="text-primary"
                             />
 
                         </div>
 
 
-                        {/* TITLE */}
-
                         <div>
 
-                            <h2
-                                className="
-                                    text-[20px]
-                                    font-semibold
-                                    text-gray-900
-                                "
-                            >
+                            <h2 className="text-[20px] font-semibold text-theme-text">
                                 Edit Organization
                             </h2>
 
-                            <p
-                                className="
-                                    text-[11px]
-                                    text-gray-600
-                                    mt-0.5
-                                "
-                            >
+                            <p className="text-[11px] text-theme-text-secondary mt-0.5">
                                 Update your organization details and information
                             </p>
 
@@ -263,22 +235,14 @@ function EditOrganisation({ onClose }) {
                         type="button"
                         onClick={handleClose}
                         className="
-                            w-7
-                            h-7
-
-                            flex
-                            items-center
-                            justify-center
-
+                            w-7 h-7
+                            flex items-center justify-center
                             rounded-md
-
-                            text-gray-500
-
-                            hover:bg-gray-100
-                            hover:text-gray-800
-
-                            transition
-                            duration-200
+                            text-theme-text-secondary
+                            hover:bg-theme-surface-secondary
+                            hover:text-theme-text
+                            transition duration-200
+                            cursor-pointer
                         "
                     >
 
@@ -302,39 +266,18 @@ function EditOrganisation({ onClose }) {
 
                     <div className="mb-5">
 
-                        <h3
-                            className="
-                                text-[14px]
-                                font-semibold
-                                text-gray-900
-                            "
-                        >
+                        <h3 className="text-[14px] font-semibold text-theme-text">
                             Organization Logo
                         </h3>
 
-                        <p
-                            className="
-                                text-[9px]
-                                text-gray-500
-                                mt-1
-                            "
-                        >
-                            Upload your organization logo (JPG,PNG,SVG).
+                        <p className="text-[9px] text-theme-text-secondary mt-1">
+                            Upload your organization logo (JPG, PNG, SVG).
                         </p>
 
 
                         {/* LOGO + BUTTON */}
 
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-5
-
-                                mt-3
-                            "
-                        >
-
+                        <div className="flex items-center gap-5 mt-3">
 
                             {/* LOGO */}
 
@@ -348,7 +291,7 @@ function EditOrganisation({ onClose }) {
                                         rounded-full
 
                                         border
-                                        border-purple-500
+                                        border-primary
 
                                         flex
                                         items-center
@@ -356,7 +299,7 @@ function EditOrganisation({ onClose }) {
 
                                         overflow-hidden
 
-                                        bg-white
+                                        bg-theme-surface-secondary
                                     "
                                 >
 
@@ -377,7 +320,7 @@ function EditOrganisation({ onClose }) {
                                         <Building2
                                             size={32}
                                             strokeWidth={1.7}
-                                            className="text-black"
+                                            className="text-theme-text"
                                         />
 
                                     )}
@@ -385,13 +328,7 @@ function EditOrganisation({ onClose }) {
                                 </div>
 
 
-                                <p
-                                    className="
-                                        text-[9px]
-                                        text-gray-500
-                                        mt-2
-                                    "
-                                >
+                                <p className="text-[9px] text-theme-text-secondary mt-2">
                                     Current logo
                                 </p>
 
@@ -411,16 +348,16 @@ function EditOrganisation({ onClose }) {
                                     gap-2
 
                                     border
-                                    border-purple-500
+                                    border-primary
 
                                     rounded-md
 
                                     text-[9px]
-                                    text-purple-500
+                                    text-primary
 
                                     cursor-pointer
 
-                                    hover:bg-purple-50
+                                    hover:bg-primary/10
 
                                     transition
                                     duration-200
@@ -449,31 +386,13 @@ function EditOrganisation({ onClose }) {
                         FORM GRID
                     ================================================= */}
 
-                    <div
-                        className="
-                            grid
-                            grid-cols-1
-                            sm:grid-cols-2
-
-                            gap-x-5
-                            gap-y-4
-                        "
-                    >
-
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-5 gap-y-4">
 
                         {/* ORGANIZATION NAME */}
 
                         <div>
 
-                            <label
-                                className="
-                                    block
-                                    text-[10px]
-                                    font-medium
-                                    text-gray-900
-                                    mb-1.5
-                                "
-                            >
+                            <label className="block text-[10px] font-medium text-theme-text mb-1.5">
                                 Organization Name
                             </label>
 
@@ -482,38 +401,26 @@ function EditOrganisation({ onClose }) {
                                 <Building2
                                     size={14}
                                     className="
-                                        absolute
-                                        left-2
-                                        top-1/2
-                                        -translate-y-1/2
-                                        text-gray-800
+                                        absolute left-2 top-1/2 -translate-y-1/2
+                                        text-theme-text-secondary
                                     "
                                 />
 
                                 <input
                                     type="text"
                                     value={organisationName}
-                                    onChange={(e) =>
-                                        setOrganisationName(e.target.value)
-                                    }
+                                    onChange={(e) => setOrganisationName(e.target.value)}
                                     className="
                                         w-full
                                         h-[38px]
-
-                                        border
-                                        border-gray-700
-
+                                        border border-theme-border-light
                                         rounded-md
-
-                                        pl-8
-                                        pr-2
-
+                                        pl-8 pr-2
                                         text-[11px]
-                                        text-gray-800
-
+                                        text-theme-text
+                                        bg-theme-surface
                                         outline-none
-
-                                        focus:border-purple-500
+                                        focus:border-primary
                                     "
                                 />
 
@@ -526,15 +433,7 @@ function EditOrganisation({ onClose }) {
 
                         <div>
 
-                            <label
-                                className="
-                                    block
-                                    text-[10px]
-                                    font-medium
-                                    text-gray-900
-                                    mb-1.5
-                                "
-                            >
+                            <label className="block text-[10px] font-medium text-theme-text mb-1.5">
                                 Location
                             </label>
 
@@ -543,38 +442,26 @@ function EditOrganisation({ onClose }) {
                                 <MapPin
                                     size={14}
                                     className="
-                                        absolute
-                                        left-2
-                                        top-1/2
-                                        -translate-y-1/2
-                                        text-gray-800
+                                        absolute left-2 top-1/2 -translate-y-1/2
+                                        text-theme-text-secondary
                                     "
                                 />
 
                                 <input
                                     type="text"
                                     value={location}
-                                    onChange={(e) =>
-                                        setLocation(e.target.value)
-                                    }
+                                    onChange={(e) => setLocation(e.target.value)}
                                     className="
                                         w-full
                                         h-[38px]
-
-                                        border
-                                        border-gray-700
-
+                                        border border-theme-border-light
                                         rounded-md
-
-                                        pl-8
-                                        pr-2
-
+                                        pl-8 pr-2
                                         text-[11px]
-                                        text-gray-800
-
+                                        text-theme-text
+                                        bg-theme-surface
                                         outline-none
-
-                                        focus:border-purple-500
+                                        focus:border-primary
                                     "
                                 />
 
@@ -587,15 +474,7 @@ function EditOrganisation({ onClose }) {
 
                         <div>
 
-                            <label
-                                className="
-                                    block
-                                    text-[10px]
-                                    font-medium
-                                    text-gray-900
-                                    mb-1.5
-                                "
-                            >
+                            <label className="block text-[10px] font-medium text-theme-text mb-1.5">
                                 Email
                             </label>
 
@@ -604,38 +483,26 @@ function EditOrganisation({ onClose }) {
                                 <Mail
                                     size={14}
                                     className="
-                                        absolute
-                                        left-2
-                                        top-1/2
-                                        -translate-y-1/2
-                                        text-gray-800
+                                        absolute left-2 top-1/2 -translate-y-1/2
+                                        text-theme-text-secondary
                                     "
                                 />
 
                                 <input
                                     type="email"
                                     value={email}
-                                    onChange={(e) =>
-                                        setEmail(e.target.value)
-                                    }
+                                    onChange={(e) => setEmail(e.target.value)}
                                     className="
                                         w-full
                                         h-[38px]
-
-                                        border
-                                        border-gray-700
-
+                                        border border-theme-border-light
                                         rounded-md
-
-                                        pl-8
-                                        pr-2
-
+                                        pl-8 pr-2
                                         text-[11px]
-                                        text-gray-800
-
+                                        text-theme-text
+                                        bg-theme-surface
                                         outline-none
-
-                                        focus:border-purple-500
+                                        focus:border-primary
                                     "
                                 />
 
@@ -648,15 +515,7 @@ function EditOrganisation({ onClose }) {
 
                         <div>
 
-                            <label
-                                className="
-                                    block
-                                    text-[10px]
-                                    font-medium
-                                    text-gray-900
-                                    mb-1.5
-                                "
-                            >
+                            <label className="block text-[10px] font-medium text-theme-text mb-1.5">
                                 Phone
                             </label>
 
@@ -665,38 +524,26 @@ function EditOrganisation({ onClose }) {
                                 <Phone
                                     size={14}
                                     className="
-                                        absolute
-                                        left-2
-                                        top-1/2
-                                        -translate-y-1/2
-                                        text-gray-800
+                                        absolute left-2 top-1/2 -translate-y-1/2
+                                        text-theme-text-secondary
                                     "
                                 />
 
                                 <input
                                     type="text"
                                     value={phone}
-                                    onChange={(e) =>
-                                        setPhone(e.target.value)
-                                    }
+                                    onChange={(e) => setPhone(e.target.value)}
                                     className="
                                         w-full
                                         h-[38px]
-
-                                        border
-                                        border-gray-700
-
+                                        border border-theme-border-light
                                         rounded-md
-
-                                        pl-8
-                                        pr-2
-
+                                        pl-8 pr-2
                                         text-[11px]
-                                        text-gray-800
-
+                                        text-theme-text
+                                        bg-theme-surface
                                         outline-none
-
-                                        focus:border-purple-500
+                                        focus:border-primary
                                     "
                                 />
 
@@ -713,15 +560,7 @@ function EditOrganisation({ onClose }) {
 
                     <div className="mt-4">
 
-                        <label
-                            className="
-                                block
-                                text-[10px]
-                                font-medium
-                                text-gray-900
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[10px] font-medium text-theme-text mb-1.5">
                             Website
                         </label>
 
@@ -730,38 +569,26 @@ function EditOrganisation({ onClose }) {
                             <Globe
                                 size={14}
                                 className="
-                                    absolute
-                                    left-2
-                                    top-1/2
-                                    -translate-y-1/2
-                                    text-gray-800
+                                    absolute left-2 top-1/2 -translate-y-1/2
+                                    text-theme-text-secondary
                                 "
                             />
 
                             <input
                                 type="text"
                                 value={website}
-                                onChange={(e) =>
-                                    setWebsite(e.target.value)
-                                }
+                                onChange={(e) => setWebsite(e.target.value)}
                                 className="
                                     w-full
                                     h-[38px]
-
-                                    border
-                                    border-gray-700
-
+                                    border border-theme-border-light
                                     rounded-md
-
-                                    pl-8
-                                    pr-2
-
+                                    pl-8 pr-2
                                     text-[11px]
-                                    text-gray-800
-
+                                    text-theme-text
+                                    bg-theme-surface
                                     outline-none
-
-                                    focus:border-purple-500
+                                    focus:border-primary
                                 "
                             />
 
@@ -776,25 +603,11 @@ function EditOrganisation({ onClose }) {
 
                     <div className="mt-4">
 
-                        <label
-                            className="
-                                block
-                                text-[10px]
-                                font-medium
-                                text-gray-900
-                                mb-1
-                            "
-                        >
+                        <label className="block text-[10px] font-medium text-theme-text mb-1">
                             Organization Details
                         </label>
 
-                        <p
-                            className="
-                                text-[9px]
-                                text-gray-500
-                                mb-1.5
-                            "
-                        >
+                        <p className="text-[9px] text-theme-text-secondary mb-1.5">
                             Add a short description about your organization
                         </p>
 
@@ -804,30 +617,19 @@ function EditOrganisation({ onClose }) {
                             <textarea
                                 value={details}
                                 maxLength={500}
-                                onChange={(e) =>
-                                    setDetails(e.target.value)
-                                }
+                                onChange={(e) => setDetails(e.target.value)}
                                 className="
                                     w-full
                                     h-[68px]
-
                                     resize-none
-
-                                    border
-                                    border-gray-700
-
+                                    border border-theme-border-light
                                     rounded-md
-
-                                    p-2
-
-                                    pb-5
-
+                                    p-2 pb-5
                                     text-[10px]
-                                    text-gray-500
-
+                                    text-theme-text
+                                    bg-theme-surface
                                     outline-none
-
-                                    focus:border-purple-500
+                                    focus:border-primary
                                 "
                             />
 
@@ -836,12 +638,9 @@ function EditOrganisation({ onClose }) {
 
                             <span
                                 className="
-                                    absolute
-                                    right-2
-                                    bottom-1.5
-
+                                    absolute right-2 bottom-1.5
                                     text-[7px]
-                                    text-gray-500
+                                    text-theme-text-secondary
                                 "
                             >
                                 {details.length}/500
@@ -860,18 +659,11 @@ function EditOrganisation({ onClose }) {
 
                 <div
                     className="
-                        flex
-                        items-center
-                        justify-between
-
-                        px-4
-                        py-3
-
-                        border-t
-                        border-gray-200
+                        flex items-center justify-between
+                        px-4 py-3
+                        border-t border-theme-border-light
                     "
                 >
-
 
                     {/* CANCEL */}
 
@@ -880,24 +672,16 @@ function EditOrganisation({ onClose }) {
                         onClick={handleClose}
                         className="
                             h-[32px]
-
                             min-w-[86px]
-
-                            border
-                            border-purple-500
-
+                            border border-theme-border-light
                             rounded-md
-
-                            bg-white
-
+                            bg-theme-surface
                             text-[10px]
                             font-medium
-                            text-purple-500
-
-                            hover:bg-purple-50
-
-                            transition
-                            duration-200
+                            text-theme-text
+                            hover:bg-theme-surface-secondary
+                            transition duration-200
+                            cursor-pointer
                         "
                     >
                         Cancel
@@ -911,29 +695,16 @@ function EditOrganisation({ onClose }) {
                         onClick={handleSave}
                         className="
                             h-[32px]
-
                             px-3
-
-                            flex
-                            items-center
-                            justify-center
-                            gap-2
-
-                            border
-                            border-purple-500
-
+                            flex items-center justify-center gap-2
+                            bg-primary
+                            hover:bg-primaryHover
+                            text-white
                             rounded-md
-
-                            bg-white
-
                             text-[10px]
                             font-medium
-                            text-purple-500
-
-                            hover:bg-purple-50
-
-                            transition
-                            duration-200
+                            transition duration-200
+                            cursor-pointer
                         "
                     >
 

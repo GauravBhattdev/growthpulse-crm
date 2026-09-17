@@ -12,8 +12,11 @@ import {
     CreditCard,
     Mail,
     MapPin,
-    Download
+    Download,
+    Pencil
 } from "lucide-react";
+
+import { toast } from "react-toastify";
 
 import Loader from "../../components/Loader/Loader";
 
@@ -34,9 +37,42 @@ function Billing() {
     }, []);
 
 
+    // ==========================================
+    // HANDLERS
+    // ==========================================
+
+    const handleManagePlan = () => {
+        toast.success("Opening plan management...");
+    };
+
+
+    const handleCancelPlan = () => {
+        toast.warn("Are you sure you want to cancel your plan?");
+    };
+
+
+    const handleUpdate = (field) => {
+        toast.info(`Updating ${field}...`);
+    };
+
+
+    const handleDownloadInvoices = () => {
+        toast.success("Downloading invoices...");
+    };
+
+
+    const handleViewFullUsage = () => {
+        toast.info("Opening full usage report...");
+    };
+
+
     if (loading) {
 
-        return <Loader text="Loading billing..." />;
+        return (
+            <div className="min-h-screen bg-theme-page flex items-center justify-center">
+                <Loader text="Loading billing..." />
+            </div>
+        );
 
     }
 
@@ -74,23 +110,11 @@ function Billing() {
 
                 <div>
 
-                    <h1
-                        className="
-                            text-[27px]
-                            font-semibold
-                            text-theme-text
-                        "
-                    >
+                    <h1 className="text-[27px] font-semibold text-theme-text">
                         Billing
                     </h1>
 
-                    <p
-                        className="
-                            mt-1
-                            text-[13px]
-                            text-theme-text-secondary
-                        "
-                    >
+                    <p className="mt-1 text-[13px] text-theme-text-secondary">
                         Manage your subscription, payments and billing details
                     </p>
 
@@ -101,7 +125,7 @@ function Billing() {
 
             {/* ================= TOP SECTION ================= */}
 
-            <div className="grid grid-cols-2 gap-4 mt-5">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-5">
 
 
                 {/* ================= CURRENT PLAN ================= */}
@@ -109,16 +133,11 @@ function Billing() {
                 <div
                     className="
                         bg-theme-surface
-
                         border
                         border-theme-border-light
-
                         rounded-lg
-
                         shadow-sm
-
                         p-4
-
                         transition-colors
                         duration-300
                     "
@@ -132,19 +151,12 @@ function Billing() {
                             className="
                                 w-11
                                 h-11
-
                                 rounded-full
-
-                                bg-purple-100
-                                dark:bg-purple-500/10
-
-                                text-purple-600
-                                dark:text-purple-400
-
+                                bg-primary/15
+                                text-primary
                                 flex
                                 items-center
                                 justify-center
-
                                 mr-3
                             "
                         >
@@ -156,39 +168,17 @@ function Billing() {
 
                         <div>
 
-                            <p
-                                className="
-                                    text-[11px]
-                                    text-theme-text-secondary
-                                "
-                            >
+                            <p className="text-[11px] text-theme-text-secondary">
                                 Current Plan
                             </p>
 
-                            <h2
-                                className="
-                                    text-[17px]
-                                    font-semibold
-                                    text-theme-text
-                                "
-                            >
+                            <h2 className="text-[17px] font-semibold text-theme-text">
                                 Professional Plan
                             </h2>
 
-                            <p
-                                className="
-                                    text-[13px]
-                                    text-theme-text-secondary
-                                "
-                            >
+                            <p className="text-[13px] text-theme-text-secondary">
 
-                                <span
-                                    className="
-                                        font-semibold
-                                        text-[16px]
-                                        text-theme-text
-                                    "
-                                >
+                                <span className="font-semibold text-[16px] text-theme-text">
                                     ₹ 4,999
                                 </span>
 
@@ -203,143 +193,42 @@ function Billing() {
 
                     {/* Description */}
 
-                    <p
-                        className="
-                            text-[12px]
-                            text-theme-text-secondary
-                            mt-4
-                        "
-                    >
+                    <p className="text-[12px] text-theme-text-secondary mt-4">
                         All the tools you need to grow your business
                     </p>
 
 
                     {/* Features */}
 
-                    <div className="grid grid-cols-2 gap-y-3 mt-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-3 mt-4">
 
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             20 Team Members
                         </div>
 
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             Analytics & Reports
                         </div>
 
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             5,000 Leads
                         </div>
 
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             Email Support
                         </div>
 
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             Calling & Recording
                         </div>
 
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                gap-2
-
-                                text-[11px]
-                                text-theme-text-secondary
-                            "
-                        >
-                            <Check
-                                size={13}
-                                className="
-                                    text-purple-600
-                                    dark:text-purple-400
-                                "
-                            />
+                        <div className="flex items-center gap-2 text-[11px] text-theme-text-secondary">
+                            <Check size={13} className="text-primary" />
                             Custom Integration
                         </div>
 
@@ -348,24 +237,21 @@ function Billing() {
 
                     {/* Buttons */}
 
-                    <div className="flex gap-3 mt-4">
+                    <div className="flex flex-wrap gap-3 mt-4">
 
                         <button
+                            type="button"
+                            onClick={handleManagePlan}
                             className="
-                                bg-purple-600
-
+                                bg-primary
                                 text-white
-
-                                px-6
+                                px-5 sm:px-6
                                 py-2
-
                                 rounded
-
                                 text-[11px]
-
-                                hover:bg-purple-700
-
+                                hover:bg-primaryHover
                                 transition
+                                cursor-pointer
                             "
                         >
                             Manage Plan
@@ -373,24 +259,19 @@ function Billing() {
 
 
                         <button
+                            type="button"
+                            onClick={handleCancelPlan}
                             className="
                                 border
-                                border-purple-400
-
-                                text-purple-600
-                                dark:text-purple-400
-
-                                px-6
+                                border-primary
+                                text-primary
+                                px-5 sm:px-6
                                 py-2
-
                                 rounded
-
                                 text-[11px]
-
-                                hover:bg-purple-50
-                                dark:hover:bg-purple-500/10
-
+                                hover:bg-primary/10
                                 transition
+                                cursor-pointer
                             "
                         >
                             Cancel Plan
@@ -406,16 +287,11 @@ function Billing() {
                 <div
                     className="
                         bg-theme-surface
-
                         border
                         border-theme-border-light
-
                         rounded-lg
-
                         shadow-sm
-
                         p-4
-
                         transition-colors
                         duration-300
                     "
@@ -423,22 +299,11 @@ function Billing() {
 
                     <div className="flex justify-between items-center">
 
-                        <h2
-                            className="
-                                text-[12px]
-                                font-semibold
-                                text-theme-text
-                            "
-                        >
+                        <h2 className="text-[12px] font-semibold text-theme-text">
                             Usage Overview
                         </h2>
 
-                        <span
-                            className="
-                                text-[10px]
-                                text-theme-text-muted
-                            "
-                        >
+                        <span className="text-[10px] text-theme-text-muted">
                             Reset on 01 June, 2026
                         </span>
 
@@ -453,21 +318,11 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8
-                                    h-8
-
-                                    bg-purple-100
-                                    dark:bg-purple-500/10
-
-                                    text-purple-600
-                                    dark:text-purple-400
-
-                                    flex
-                                    items-center
-                                    justify-center
-
+                                    w-8 h-8
+                                    bg-primary/15
+                                    text-primary
+                                    flex items-center justify-center
                                     rounded
-
                                     mr-3
                                 "
                             >
@@ -481,46 +336,21 @@ function Billing() {
 
                                 <div className="flex justify-between">
 
-                                    <span
-                                        className="
-                                            text-[11px]
-                                            text-theme-text-secondary
-                                        "
-                                    >
+                                    <span className="text-[11px] text-theme-text-secondary">
                                         Team Members
                                     </span>
 
-                                    <span
-                                        className="
-                                            text-[9px]
-                                            text-theme-text-muted
-                                        "
-                                    >
+                                    <span className="text-[9px] text-theme-text-muted">
                                         12 / 20
                                     </span>
 
                                 </div>
 
 
-                                <div
-                                    className="
-                                        h-[5px]
-
-                                        bg-gray-200
-                                        dark:bg-gray-700
-
-                                        rounded-full
-
-                                        mt-2
-                                    "
-                                >
+                                <div className="h-[5px] bg-theme-surface-secondary rounded-full mt-2">
 
                                     <div
-                                        className="
-                                            h-full
-                                            bg-purple-600
-                                            rounded-full
-                                        "
+                                        className="h-full bg-primary rounded-full"
                                         style={{ width: "60%" }}
                                     />
 
@@ -541,21 +371,11 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8
-                                    h-8
-
-                                    bg-purple-100
-                                    dark:bg-purple-500/10
-
-                                    text-purple-600
-                                    dark:text-purple-400
-
-                                    flex
-                                    items-center
-                                    justify-center
-
+                                    w-8 h-8
+                                    bg-primary/15
+                                    text-primary
+                                    flex items-center justify-center
                                     rounded
-
                                     mr-3
                                 "
                             >
@@ -569,46 +389,21 @@ function Billing() {
 
                                 <div className="flex justify-between">
 
-                                    <span
-                                        className="
-                                            text-[11px]
-                                            text-theme-text-secondary
-                                        "
-                                    >
+                                    <span className="text-[11px] text-theme-text-secondary">
                                         Leads
                                     </span>
 
-                                    <span
-                                        className="
-                                            text-[9px]
-                                            text-theme-text-muted
-                                        "
-                                    >
+                                    <span className="text-[9px] text-theme-text-muted">
                                         2,450 / 5000
                                     </span>
 
                                 </div>
 
 
-                                <div
-                                    className="
-                                        h-[5px]
-
-                                        bg-gray-200
-                                        dark:bg-gray-700
-
-                                        rounded-full
-
-                                        mt-2
-                                    "
-                                >
+                                <div className="h-[5px] bg-theme-surface-secondary rounded-full mt-2">
 
                                     <div
-                                        className="
-                                            h-full
-                                            bg-purple-600
-                                            rounded-full
-                                        "
+                                        className="h-full bg-primary rounded-full"
                                         style={{ width: "49%" }}
                                     />
 
@@ -629,21 +424,11 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8
-                                    h-8
-
-                                    bg-purple-100
-                                    dark:bg-purple-500/10
-
-                                    text-purple-600
-                                    dark:text-purple-400
-
-                                    flex
-                                    items-center
-                                    justify-center
-
+                                    w-8 h-8
+                                    bg-primary/15
+                                    text-primary
+                                    flex items-center justify-center
                                     rounded
-
                                     mr-3
                                 "
                             >
@@ -657,46 +442,21 @@ function Billing() {
 
                                 <div className="flex justify-between">
 
-                                    <span
-                                        className="
-                                            text-[11px]
-                                            text-theme-text-secondary
-                                        "
-                                    >
+                                    <span className="text-[11px] text-theme-text-secondary">
                                         Storage
                                     </span>
 
-                                    <span
-                                        className="
-                                            text-[9px]
-                                            text-theme-text-muted
-                                        "
-                                    >
+                                    <span className="text-[9px] text-theme-text-muted">
                                         18.6 / 50GB
                                     </span>
 
                                 </div>
 
 
-                                <div
-                                    className="
-                                        h-[5px]
-
-                                        bg-gray-200
-                                        dark:bg-gray-700
-
-                                        rounded-full
-
-                                        mt-2
-                                    "
-                                >
+                                <div className="h-[5px] bg-theme-surface-secondary rounded-full mt-2">
 
                                     <div
-                                        className="
-                                            h-full
-                                            bg-purple-600
-                                            rounded-full
-                                        "
+                                        className="h-full bg-primary rounded-full"
                                         style={{ width: "37%" }}
                                     />
 
@@ -717,21 +477,11 @@ function Billing() {
 
                             <div
                                 className="
-                                    w-8
-                                    h-8
-
-                                    bg-purple-100
-                                    dark:bg-purple-500/10
-
-                                    text-purple-600
-                                    dark:text-purple-400
-
-                                    flex
-                                    items-center
-                                    justify-center
-
+                                    w-8 h-8
+                                    bg-primary/15
+                                    text-primary
+                                    flex items-center justify-center
                                     rounded
-
                                     mr-3
                                 "
                             >
@@ -745,46 +495,21 @@ function Billing() {
 
                                 <div className="flex justify-between">
 
-                                    <span
-                                        className="
-                                            text-[11px]
-                                            text-theme-text-secondary
-                                        "
-                                    >
+                                    <span className="text-[11px] text-theme-text-secondary">
                                         Calling Minutes
                                     </span>
 
-                                    <span
-                                        className="
-                                            text-[9px]
-                                            text-theme-text-muted
-                                        "
-                                    >
+                                    <span className="text-[9px] text-theme-text-muted">
                                         1250 / 5000 Min
                                     </span>
 
                                 </div>
 
 
-                                <div
-                                    className="
-                                        h-[5px]
-
-                                        bg-gray-200
-                                        dark:bg-gray-700
-
-                                        rounded-full
-
-                                        mt-2
-                                    "
-                                >
+                                <div className="h-[5px] bg-theme-surface-secondary rounded-full mt-2">
 
                                     <div
-                                        className="
-                                            h-full
-                                            bg-purple-600
-                                            rounded-full
-                                        "
+                                        className="h-full bg-primary rounded-full"
                                         style={{ width: "25%" }}
                                     />
 
@@ -798,21 +523,18 @@ function Billing() {
 
 
                     <button
+                        type="button"
+                        onClick={handleViewFullUsage}
                         className="
-                            text-purple-600
-                            dark:text-purple-400
-
+                            text-primary
                             text-[10px]
-
                             mt-3
-
-                            hover:text-purple-700
-                            dark:hover:text-purple-300
-
+                            hover:opacity-80
                             transition
+                            cursor-pointer
                         "
                     >
-                        View Full Image
+                        View Full Usage
                     </button>
 
                 </div>
@@ -822,7 +544,7 @@ function Billing() {
 
             {/* ================= BOTTOM SECTION ================= */}
 
-            <div className="grid grid-cols-2 gap-4 mt-4">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 mt-4">
 
 
                 {/* ================= BILLING INFORMATION ================= */}
@@ -830,36 +552,20 @@ function Billing() {
                 <div
                     className="
                         bg-theme-surface
-
                         border
                         border-theme-border-light
-
                         rounded-lg
-
                         shadow-sm
-
                         p-3
-
                         transition-colors
                         duration-300
                     "
                 >
 
-                    <h2
-                        className="
-                            text-[11px]
-                            font-semibold
-
-                            text-theme-text
-
-                            mb-2
-                        "
-                    >
+                    <h2 className="text-[11px] font-semibold text-theme-text mb-2">
                         Billing Information
                     </h2>
 
-
-                    {/* Plan */}
 
                     <BillingRow
                         icon={<Crown size={13} />}
@@ -868,16 +574,12 @@ function Billing() {
                     />
 
 
-                    {/* Billing Cycle */}
-
                     <BillingRow
                         icon={<CalendarDays size={13} />}
                         title="Billing Cycle"
                         value="Monthly"
                     />
 
-
-                    {/* Next Billing */}
 
                     <BillingRow
                         icon={<CalendarDays size={13} />}
@@ -886,8 +588,6 @@ function Billing() {
                     />
 
 
-                    {/* Amount */}
-
                     <BillingRow
                         icon={<IndianRupee size={13} />}
                         title="Amount"
@@ -895,45 +595,36 @@ function Billing() {
                     />
 
 
-                    {/* Payment Method */}
-
                     <BillingRow
                         icon={<CreditCard size={13} />}
                         title="Payment Method"
                         value="•••• 4242"
                         action="Update"
+                        onAction={() => handleUpdate("Payment Method")}
                     />
 
-
-                    {/* Billing Email */}
 
                     <BillingRow
                         icon={<Mail size={13} />}
                         title="Billing Email"
                         value="billing@growthpulse.com"
                         action="Update"
+                        onAction={() => handleUpdate("Billing Email")}
                     />
 
-
-                    {/* Address */}
 
                     <BillingRow
                         icon={<MapPin size={13} />}
                         title="Billing Address"
                         value={
-                            <span
-                                className="
-                                    text-[8px]
-                                    leading-3
-                                    text-theme-text-secondary
-                                "
-                            >
+                            <span className="text-[8px] leading-3 text-theme-text-secondary">
                                 GrowthPulse Technologies Pvt. Ltd.<br />
-                                123Business Park, Sector 62,<br />
+                                123 Business Park, Sector 62,<br />
                                 Noida, Uttar Pradesh - 201301, India
                             </span>
                         }
                         action="Update"
+                        onAction={() => handleUpdate("Billing Address")}
                     />
 
                 </div>
@@ -944,51 +635,21 @@ function Billing() {
                 <div
                     className="
                         bg-theme-surface
-
                         border
                         border-theme-border-light
-
                         rounded-lg
-
                         shadow-sm
-
                         p-3
-
                         transition-colors
                         duration-300
                     "
                 >
 
-                    <div
-                        className="
-                            flex
-                            justify-between
-                            items-center
+                    <div className="flex justify-between items-center mb-3">
 
-                            mb-3
-                        "
-                    >
-
-                        <h2
-                            className="
-                                text-[11px]
-                                font-semibold
-                                text-theme-text
-                            "
-                        >
+                        <h2 className="text-[11px] font-semibold text-theme-text">
                             Payment History
                         </h2>
-
-                        <span
-                            className="
-                                text-[10px]
-
-                                text-purple-600
-                                dark:text-purple-400
-                            "
-                        >
-                            Reset on 01 June, 2026
-                        </span>
 
                     </div>
 
@@ -999,24 +660,17 @@ function Billing() {
                         className="
                             grid
                             grid-cols-4
-
                             text-[9px]
-
                             text-theme-text-muted
-
                             pb-2
-
                             border-b
                             border-theme-border-light
                         "
                     >
 
                         <span>Date</span>
-
                         <span>Description</span>
-
                         <span>Amount</span>
-
                         <span>Status</span>
 
                     </div>
@@ -1037,47 +691,28 @@ function Billing() {
                             className="
                                 grid
                                 grid-cols-4
-
                                 items-center
-
                                 py-2
-
                                 border-b
                                 border-theme-border-light
-
                                 text-[9px]
-
                                 text-theme-text-secondary
                             "
                         >
 
-                            <span>
-                                {date}
-                            </span>
-
-                            <span>
-                                Professional Plan
-                            </span>
-
-                            <span>
-                                ₹ 4,999
-                            </span>
+                            <span>{date}</span>
+                            <span>Professional Plan</span>
+                            <span>₹ 4,999</span>
 
                             <span>
 
                                 <span
                                     className="
-                                        bg-green-100
-                                        dark:bg-green-500/10
-
-                                        text-green-600
-                                        dark:text-green-400
-
+                                        bg-green-500/15
+                                        text-green-500
                                         px-2
                                         py-1
-
                                         rounded
-
                                         text-[8px]
                                     "
                                 >
@@ -1096,23 +731,16 @@ function Billing() {
                     <div className="flex justify-end mt-3">
 
                         <button
+                            type="button"
+                            onClick={handleDownloadInvoices}
                             className="
-                                flex
-                                items-center
-
-                                gap-1
-
-                                text-purple-600
-                                dark:text-purple-400
-
+                                flex items-center gap-1
+                                text-primary
                                 text-[10px]
-
                                 font-medium
-
-                                hover:text-purple-700
-                                dark:hover:text-purple-300
-
+                                hover:opacity-80
                                 transition
+                                cursor-pointer
                             "
                         >
 
@@ -1131,22 +759,21 @@ function Billing() {
         </div>
 
     );
+
 }
 
 
 /* ================= BILLING ROW ================= */
 
-function BillingRow({ icon, title, value, action }) {
+function BillingRow({ icon, title, value, action, onAction }) {
 
     return (
 
         <div
             className="
                 min-h-[34px]
-
                 flex
                 items-center
-
                 border-b
                 border-theme-border-light
             "
@@ -1154,23 +781,12 @@ function BillingRow({ icon, title, value, action }) {
 
             <div
                 className="
-                    w-6
-                    h-6
-
-                    bg-purple-100
-                    dark:bg-purple-500/10
-
-                    text-purple-600
-                    dark:text-purple-400
-
+                    w-6 h-6
+                    bg-primary/15
+                    text-primary
                     rounded
-
-                    flex
-                    items-center
-                    justify-center
-
+                    flex items-center justify-center
                     mr-3
-
                     shrink-0
                 "
             >
@@ -1180,30 +796,12 @@ function BillingRow({ icon, title, value, action }) {
             </div>
 
 
-            <div
-                className="
-                    w-[125px]
-
-                    text-[10px]
-
-                    text-theme-text-secondary
-                "
-            >
+            <div className="w-[125px] text-[10px] text-theme-text-secondary">
                 {title}
             </div>
 
 
-            <div
-                className="
-                    flex-1
-
-                    text-right
-
-                    text-[10px]
-
-                    text-theme-text-secondary
-                "
-            >
+            <div className="flex-1 text-right text-[10px] text-theme-text-secondary">
                 {value}
             </div>
 
@@ -1211,21 +809,25 @@ function BillingRow({ icon, title, value, action }) {
             {action && (
 
                 <button
+                    type="button"
+                    onClick={onAction}
                     className="
                         ml-3
-
+                        flex
+                        items-center
+                        gap-1
                         text-[9px]
-
-                        text-purple-600
-                        dark:text-purple-400
-
-                        hover:text-purple-700
-                        dark:hover:text-purple-300
-
+                        text-primary
+                        hover:opacity-80
                         transition
+                        cursor-pointer
                     "
                 >
+
+                    <Pencil size={10} />
+
                     {action}
+
                 </button>
 
             )}
@@ -1233,8 +835,8 @@ function BillingRow({ icon, title, value, action }) {
         </div>
 
     );
+
 }
 
 
 export default Billing;
-

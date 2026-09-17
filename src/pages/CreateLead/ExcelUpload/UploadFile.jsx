@@ -142,21 +142,25 @@ function UploadFile({
                 HEADING
             ========================================== */}
 
-            <h3 className="
-                text-[16px]
-                font-semibold
-                text-[#222]
-            ">
+            <h3
+                className="
+                    text-[16px]
+                    font-semibold
+                    text-theme-text
+                "
+            >
                 Upload Leads File
             </h3>
 
 
-            <p className="
-                text-xs
-                text-gray-500
-                mt-1
-                mb-5
-            ">
+            <p
+                className="
+                    text-xs
+                    text-theme-text-secondary
+                    mt-1
+                    mb-5
+                "
+            >
                 Upload an Excel or CSV file containing your leads.
             </p>
 
@@ -185,8 +189,8 @@ function UploadFile({
 
                         ${
                             dragActive
-                                ? "border-[#8b3df5] bg-purple-50"
-                                : "border-gray-300 hover:border-[#8b3df5] hover:bg-gray-50"
+                                ? "border-primary bg-primary/10"
+                                : "border-theme-border-light hover:border-primary hover:bg-theme-surface-secondary"
                         }
 
                         ${
@@ -209,25 +213,29 @@ function UploadFile({
 
                     {/* UPLOAD ICON */}
 
-                    <div className="
-                        flex
-                        justify-center
-                        mb-3
-                    ">
-
-                        <div className="
-                            w-14
-                            h-14
-                            rounded-full
-                            bg-purple-100
+                    <div
+                        className="
                             flex
-                            items-center
                             justify-center
-                        ">
+                            mb-3
+                        "
+                    >
+
+                        <div
+                            className="
+                                w-14
+                                h-14
+                                rounded-full
+                                bg-primary/10
+                                flex
+                                items-center
+                                justify-center
+                            "
+                        >
 
                             <Upload
                                 size={26}
-                                className="text-[#8b3df5]"
+                                className="text-primary"
                             />
 
                         </div>
@@ -237,34 +245,40 @@ function UploadFile({
 
                     {/* TITLE */}
 
-                    <h3 className="
-                        text-sm
-                        font-medium
-                        text-gray-800
-                    ">
+                    <h3
+                        className="
+                            text-sm
+                            font-medium
+                            text-theme-text
+                        "
+                    >
                         Drag & Drop your file here
                     </h3>
 
 
                     {/* BROWSE */}
 
-                    <p className="
-                        text-xs
-                        text-gray-500
-                        mt-1
-                    ">
+                    <p
+                        className="
+                            text-xs
+                            text-theme-text-secondary
+                            mt-1
+                        "
+                    >
                         or click to browse from your computer
                     </p>
 
 
                     {/* FORMAT */}
 
-                    <p className="
-                        text-[10px]
-                        text-gray-400
-                        mt-3
-                    ">
-                       For testing: Any file is allowed
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-muted
+                            mt-3
+                        "
+                    >
+                        For testing: Any file is allowed
                     </p>
 
                 </div>
@@ -278,38 +292,48 @@ function UploadFile({
 
             {selectedFile && (
 
-                <div className="
-                    border
-                    border-gray-300
-                    rounded-lg
-                    p-4
-                    flex
-                    items-center
-                    justify-between
-                    gap-3
-                ">
-
-                    <div className="
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-lg
+                        p-4
                         flex
                         items-center
+                        justify-between
                         gap-3
-                        min-w-0
-                    ">
+                        bg-theme-surface
 
-                        <div className="
-                            w-10
-                            h-10
-                            rounded-md
-                            bg-green-100
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
                             flex
                             items-center
-                            justify-center
-                            shrink-0
-                        ">
+                            gap-3
+                            min-w-0
+                        "
+                    >
+
+                        <div
+                            className="
+                                w-10
+                                h-10
+                                rounded-md
+                                bg-green-500/15
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
 
                             <FileSpreadsheet
                                 size={21}
-                                className="text-green-600"
+                                className="text-green-500"
                             />
 
                         </div>
@@ -317,21 +341,25 @@ function UploadFile({
 
                         <div className="min-w-0">
 
-                            <p className="
-                                text-sm
-                                font-medium
-                                text-gray-800
-                                truncate
-                            ">
+                            <p
+                                className="
+                                    text-sm
+                                    font-medium
+                                    text-theme-text
+                                    truncate
+                                "
+                            >
                                 {selectedFile.name}
                             </p>
 
 
-                            <p className="
-                                text-[10px]
-                                text-gray-500
-                                mt-0.5
-                            ">
+                            <p
+                                className="
+                                    text-[10px]
+                                    text-theme-text-secondary
+                                    mt-0.5
+                                "
+                            >
                                 {(selectedFile.size / 1024).toFixed(1)} KB
                             </p>
 
@@ -349,10 +377,12 @@ function UploadFile({
                         className="
                             p-2
                             text-red-500
-                            hover:bg-red-50
+                            hover:bg-red-500/10
                             rounded-md
                             disabled:opacity-50
                             disabled:cursor-not-allowed
+                            transition
+                            cursor-pointer
                             shrink-0
                         "
                     >
@@ -370,30 +400,41 @@ function UploadFile({
                 INSTRUCTIONS
             ========================================== */}
 
-            <div className="
-                mt-5
-                bg-[#f8f7fb]
-                rounded-md
-                p-4
-            ">
+            <div
+                className="
+                    mt-5
+                    bg-theme-surface-secondary
+                    border
+                    border-theme-border-light
+                    rounded-md
+                    p-4
 
-                <h3 className="
-                    text-xs
-                    font-semibold
-                    text-gray-800
-                    mb-2
-                ">
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                <h3
+                    className="
+                        text-xs
+                        font-semibold
+                        text-theme-text
+                        mb-2
+                    "
+                >
                     Upload Instructions
                 </h3>
 
 
-                <ul className="
-                    text-[11px]
-                    text-gray-600
-                    space-y-1.5
-                    list-disc
-                    pl-4
-                ">
+                <ul
+                    className="
+                        text-[11px]
+                        text-theme-text-secondary
+                        space-y-1.5
+                        list-disc
+                        pl-4
+                    "
+                >
 
                     <li>
                         Make sure your file contains column headers.
@@ -423,9 +464,12 @@ function UploadFile({
                         gap-2
                         mt-3
                         text-[11px]
-                        text-[#8b3df5]
+                        text-primary
                         font-medium
+                        hover:opacity-80
                         disabled:opacity-50
+                        transition
+                        cursor-pointer
                     "
                 >
 

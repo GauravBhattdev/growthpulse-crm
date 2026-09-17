@@ -1,16 +1,13 @@
-import React, {
-    useEffect,
-    useRef,
-    useState
-} from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
     Bell,
-    Eye,
+    Moon,
+    Sun,
     UserRound,
     ChevronDown,
     Plus,
-    Menu
+    Menu,
 } from "lucide-react";
 
 import CreditsPopup from "../CreditsPopup/CreditsPopup";
@@ -22,28 +19,24 @@ import ProfileDropdown from "../ProfileDropdown/ProfileDropdown";
 function Header({
     onMenuClick,
     theme,
-    setTheme
+    setTheme,
 }) {
 
     // Controls notification / credits / topup popup
-    const [showPopup, setShowPopup] =
-        useState(null);
+    const [showPopup, setShowPopup] = useState(null);
 
 
     // Controls profile dropdown
-    const [showProfile, setShowProfile] =
-        useState(false);
+    const [showProfile, setShowProfile] = useState(false);
 
 
     // Reference for profile area
     const profileRef = useRef(null);
 
 
-    /*
-        =====================================================
-        CLOSE PROFILE DROPDOWN WHEN CLICKING OUTSIDE
-        =====================================================
-    */
+    // =====================================================
+    // CLOSE PROFILE DROPDOWN WHEN CLICKING OUTSIDE
+    // =====================================================
 
     useEffect(() => {
 
@@ -51,65 +44,50 @@ function Header({
 
             if (
                 profileRef.current &&
-                !profileRef.current.contains(
-                    event.target
-                )
+                !profileRef.current.contains(event.target)
             ) {
-
                 setShowProfile(false);
-
             }
 
         };
 
 
-        document.addEventListener(
-            "mousedown",
-            handleClickOutside
-        );
-
+        document.addEventListener("mousedown", handleClickOutside);
 
         return () => {
-
-            document.removeEventListener(
-                "mousedown",
-                handleClickOutside
-            );
-
+            document.removeEventListener("mousedown", handleClickOutside);
         };
 
     }, []);
 
 
-    /*
-        =====================================================
-        PROFILE CLICK
-        =====================================================
-    */
+    // =====================================================
+    // PROFILE CLICK
+    // =====================================================
 
     const handleProfileClick = () => {
-
-        setShowProfile(
-            (previous) => !previous
-        );
-
+        setShowProfile((previous) => !previous);
     };
 
 
-    /*
-        =====================================================
-        THEME TOGGLE
-    =====================================================
-    */
+    // =====================================================
+    // THEME TOGGLE
+    // =====================================================
 
     const handleThemeToggle = () => {
+        setTheme(theme === "dark" ? "light" : "dark");
+    };
 
-        setTheme(
-            theme === "dark"
-                ? "light"
-                : "dark"
-        );
 
+    // =====================================================
+    // COMBINED CREDITS BUTTON — MOBILE ONLY
+    // Shows credits count + plus icon. Tapping opens the
+    // Credits popup (info panel), not the top-up panel.
+    // =====================================================
+
+    const handleMobileCreditsClick = () => {
+        setShowPopup("credits");
+        setShowProfile(false);
     };
 
 
@@ -117,14 +95,13 @@ function Header({
 
         <header
             className="
-               
+                
 
-                min-h-[66px]
+                min-h-[60px]
+                sm:min-h-[66px]
                 w-full
 
                 bg-theme-surface
-
-                
 
                 flex
                 items-center
@@ -136,8 +113,9 @@ function Header({
 
                 box-border
 
-                gap-2
-                sm:gap-3
+                gap-1
+                sm:gap-2
+                md:gap-4
 
                 sticky
                 top-0
@@ -149,42 +127,29 @@ function Header({
             "
         >
 
-
             {/* =================================================
                 MOBILE MENU BUTTON
             ================================================= */}
 
             <button
                 type="button"
-
                 onClick={onMenuClick}
-
                 className="
                     lg:hidden
-
                     flex
                     items-center
                     justify-center
-
-                    w-9
-                    h-9
-
+                    w-9 h-9
                     rounded-md
-
                     text-theme
-
                     hover:bg-theme-surface-secondary
-
                     transition-colors
-
                     shrink-0
+                    cursor-pointer
                 "
-
                 aria-label="Open menu"
             >
-
-                <Menu size={23} />
-
+                <Menu size={22} />
             </button>
 
 
@@ -197,9 +162,9 @@ function Header({
                     flex
                     items-center
 
-                    gap-2
-                    sm:gap-3
-                    md:gap-6
+                    gap-1
+                    sm:gap-2
+                    md:gap-4
 
                     text-theme
 
@@ -209,158 +174,136 @@ function Header({
                 "
             >
 
-
-                {/* =================================================
-                    EYE / THEME BUTTON
-                ================================================= */}
+                {/* THEME TOGGLE */}
 
                 <button
                     type="button"
-
                     onClick={handleThemeToggle}
-
                     className="
                         flex
                         items-center
                         justify-center
-
-                        w-8
-                        h-8
-
-                        sm:w-9
-                        sm:h-9
-
+                        w-8 h-8
+                        sm:w-9 sm:h-9
                         rounded-md
-
                         shrink-0
-
                         text-theme
-
                         hover:bg-theme-surface-secondary
-
                         transition-all
                         duration-200
-
                         cursor-pointer
-
                         active:scale-95
                     "
-
                     aria-label={
                         theme === "dark"
                             ? "Switch to light mode"
                             : "Switch to dark mode"
                     }
-
-                    title={
-                        theme === "dark"
-                            ? "Switch to light mode"
-                            : "Switch to dark mode"
-                    }
                 >
-
-                    <Eye
-                        size={19}
-                        className="
-                            sm:w-[22px]
-                            sm:h-[22px]
-
-                            transition-transform
-                            duration-300
-
-                            hover:scale-110
-                        "
-                    />
-
+                    {theme === "dark" ? (
+                        <Sun size={19} className="sm:w-[22px] sm:h-[22px]" />
+                    ) : (
+                        <Moon size={19} className="sm:w-[22px] sm:h-[22px]" />
+                    )}
                 </button>
 
 
-                {/* =================================================
-                    BELL / NOTIFICATIONS
-                ================================================= */}
+                {/* BELL */}
 
                 <button
                     type="button"
-
                     onClick={() => {
-
-                        setShowPopup(
-                            "notifications"
-                        );
-
+                        setShowPopup("notifications");
                         setShowProfile(false);
-
                     }}
-
                     className="
                         flex
                         items-center
                         justify-center
+                        w-8 h-8
+                        sm:w-9 sm:h-9
+                        rounded-md
+                        shrink-0
+                        text-theme
+                        hover:bg-theme-surface-secondary
+                        transition-colors
+                        cursor-pointer
+                    "
+                    aria-label="Notifications"
+                >
+                    <Bell size={19} className="sm:w-[22px] sm:h-[22px]" />
+                </button>
 
-                        w-8
+
+                {/* =================================================
+                    MOBILE: COMBINED CREDITS BUTTON
+                    Shows "+ 234" — opens the Credits popup
+                    Hidden on sm+
+                ================================================= */}
+
+                <button
+                    type="button"
+                    onClick={handleMobileCreditsClick}
+                    className="
+                        sm:hidden
+                        flex
+                        items-center
+                        justify-center
+                        gap-1
+
                         h-8
+                        px-2
 
-                        sm:w-9
-                        sm:h-9
+                        bg-primary/15
+                        text-primary
+
+                        border
+                        border-primary/30
 
                         rounded-md
 
-                        shrink-0
+                        text-[11px]
+                        font-semibold
 
-                        text-theme
-
-                        hover:bg-theme-surface-secondary
-
-                        transition-colors
-
+                        whitespace-nowrap
                         cursor-pointer
+                        shrink-0
                     "
-
-                    aria-label="Notifications"
+                    aria-label="View Credits"
                 >
 
-                    <Bell
-                        size={19}
-                        className="
-                            sm:w-[22px]
-                            sm:h-[22px]
-                        "
-                    />
+                    <Plus size={13} />
+
+                    234
 
                 </button>
 
 
                 {/* =================================================
-                    ADD CREDITS
+                    DESKTOP / TABLET: ADD CREDITS BUTTON
+                    Hidden on mobile (replaced by combined button)
+                    Visible sm+
                 ================================================= */}
 
                 <button
                     type="button"
-
                     onClick={() => {
-
                         setShowPopup("topup");
-
                         setShowProfile(false);
-
                     }}
-
                     className="
-                        flex
+                        hidden
+                        sm:flex
+
                         items-center
                         justify-center
 
-                        gap-1
-                        sm:gap-2
+                        gap-2
 
-                        h-[32px]
-                        sm:h-[38px]
-
-                        px-2
-                        sm:px-4
+                        h-[38px]
+                        px-4
 
                         bg-[#4b397b]
-
                         border
                         border-[#695593]
 
@@ -368,9 +311,7 @@ function Header({
 
                         text-white
 
-                        text-[10px]
-                        sm:text-sm
-
+                        text-sm
                         font-medium
 
                         hover:bg-[#5a468d]
@@ -383,42 +324,31 @@ function Header({
 
                         shrink-0
                     "
+                    aria-label="Add Credits"
                 >
+                    <Plus size={17} />
 
-                    <Plus
-                        size={14}
-                        className="
-                            sm:w-[17px]
-                            sm:h-[17px]
-                        "
-                    />
-
-                    <span>
-                        Add Credits
-                    </span>
-
+                    <span>Add Credits</span>
                 </button>
 
 
                 {/* =================================================
-                    CREDITS
+                    DESKTOP / TABLET: CREDITS COUNT
+                    Hidden on mobile, visible sm+
                 ================================================= */}
 
                 <button
                     type="button"
-
                     onClick={() => {
-
                         setShowPopup("credits");
-
                         setShowProfile(false);
-
                     }}
-
                     className="
-                        text-[10px]
-                        sm:text-sm
+                        hidden
+                        sm:inline-flex
+                        items-center
 
+                        text-sm
                         font-medium
 
                         whitespace-nowrap
@@ -433,19 +363,15 @@ function Header({
 
                         shrink-0
                     "
+                    aria-label="View Credits"
                 >
-
-                    Credits:
-
-                    <span
-                        className="
-                            ml-1
-                            font-semibold
-                        "
-                    >
-                        234
+                    <span className="hidden md:inline">
+                        Credits:
                     </span>
 
+                    <span className="font-semibold md:ml-1">
+                        234
+                    </span>
                 </button>
 
 
@@ -455,134 +381,79 @@ function Header({
 
                 <div
                     ref={profileRef}
-
-                    className="
-                        relative
-                        shrink-0
-                    "
+                    className="relative shrink-0"
                 >
 
                     <button
                         type="button"
-
                         onClick={handleProfileClick}
-
                         className="
                             flex
                             items-center
-
                             gap-1
                             sm:gap-[10px]
-
                             text-theme
-
                             text-sm
                             sm:text-base
-
                             font-semibold
-
                             cursor-pointer
-
                             rounded-md
-
                             px-1
                             sm:px-2
-
                             py-1
-
                             hover:bg-theme-surface-secondary
-
                             transition-colors
                         "
-
                         aria-label="Open profile menu"
                     >
 
-                        {/* Profile Circle */}
-
                         <div
                             className="
-                                w-8
-                                h-8
-
-                                sm:w-10
-                                sm:h-10
-
+                                w-8 h-8
+                                sm:w-10 sm:h-10
                                 bg-theme-surface-secondary
-
                                 text-theme
-
                                 rounded-full
-
                                 flex
                                 items-center
                                 justify-center
-
                                 shrink-0
-
                                 border
                                 border-theme-border
                             "
                         >
-
                             <UserRound
                                 size={18}
-                                className="
-                                    sm:w-[23px]
-                                    sm:h-[23px]
-                                "
+                                className="sm:w-[23px] sm:h-[23px]"
                             />
-
                         </div>
 
 
-                        {/* Admin Text */}
-
-                        <span
-                            className="
-                                hidden
-                                sm:inline
-                            "
-                        >
+                        <span className="hidden sm:inline">
                             Admin
                         </span>
 
 
-                        {/* Dropdown Arrow */}
-
                         <ChevronDown
                             size={16}
-
                             className={`
+                                hidden
+                                sm:block
                                 sm:w-5
                                 sm:h-5
-
                                 transition-transform
                                 duration-200
-
-                                ${
-                                    showProfile
-                                        ? "rotate-180"
-                                        : ""
-                                }
+                                ${showProfile ? "rotate-180" : ""}
                             `}
                         />
 
                     </button>
 
 
-                    {/* =================================================
-                        PROFILE DROPDOWN
-                    ================================================= */}
-
                     {showProfile && (
-
                         <ProfileDropdown
-                            onClose={() =>
-                                setShowProfile(false)
-                            }
+                            onClose={() => setShowProfile(false)}
                         />
-
                     )}
 
                 </div>
@@ -591,47 +462,19 @@ function Header({
 
 
             {/* =================================================
-                NOTIFICATION POPUP
+                POPUPS
             ================================================= */}
 
             {showPopup === "notifications" && (
-
-                <NotificationPopup
-                    onClose={() =>
-                        setShowPopup(null)
-                    }
-                />
-
+                <NotificationPopup onClose={() => setShowPopup(null)} />
             )}
-
-
-            {/* =================================================
-                CURRENT CREDITS POPUP
-            ================================================= */}
 
             {showPopup === "credits" && (
-
-                <CreditsPopup
-                    onClose={() =>
-                        setShowPopup(null)
-                    }
-                />
-
+                <CreditsPopup onClose={() => setShowPopup(null)} />
             )}
 
-
-            {/* =================================================
-                ADD CREDITS POPUP
-            ================================================= */}
-
             {showPopup === "topup" && (
-
-                <TopUpCredits
-                    onClose={() =>
-                        setShowPopup(null)
-                    }
-                />
-
+                <TopUpCredits onClose={() => setShowPopup(null)} />
             )}
 
         </header>
@@ -642,4 +485,3 @@ function Header({
 
 
 export default Header;
-

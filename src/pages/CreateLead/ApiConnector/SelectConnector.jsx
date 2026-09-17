@@ -24,35 +24,42 @@ function SelectConnector({
 
 
     return (
+
         <div>
 
-            <h2 className="
-                text-[17px]
-                font-semibold
-                text-primary
-            ">
+            <h2
+                className="
+                    text-[17px]
+                    font-semibold
+                    text-primary
+                "
+            >
                 Select Connector
             </h2>
 
 
-            <p className="
-                text-[10px]
-                text-gray-600
-                mt-1
-                mb-3
-            ">
+            <p
+                className="
+                    text-[10px]
+                    text-theme-text-secondary
+                    mt-1
+                    mb-3
+                "
+            >
                 Choose the API or connector from which you want to import leads.
             </p>
 
 
             {/* SEARCH */}
 
-            <div className="
-                relative
-                w-full
-                max-w-[300px]
-                mb-3
-            ">
+            <div
+                className="
+                    relative
+                    w-full
+                    max-w-[300px]
+                    mb-3
+                "
+            >
 
                 <Search
                     size={14}
@@ -61,7 +68,8 @@ function SelectConnector({
                         left-2.5
                         top-1/2
                         -translate-y-1/2
-                        text-gray-500
+                        text-theme-text-secondary
+                        pointer-events-none
                     "
                 />
 
@@ -79,11 +87,16 @@ function SelectConnector({
                         pl-8
                         pr-2
                         border
-                        border-gray-300
+                        border-theme-border-light
                         rounded-md
                         text-[10px]
+                        text-theme-text
+                        bg-theme-surface
+                        placeholder:text-theme-text-muted
                         outline-none
                         focus:border-primary
+                        transition-colors
+                        duration-200
                     "
                 />
 
@@ -92,13 +105,15 @@ function SelectConnector({
 
             {/* CONNECTORS */}
 
-            <div className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-3
-                gap-2.5
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    lg:grid-cols-3
+                    gap-2.5
+                "
+            >
 
                 {filteredConnectors.map((connector) => (
 
@@ -108,10 +123,13 @@ function SelectConnector({
                             relative
                             min-h-[98px]
                             border
-                            border-gray-400
+                            border-theme-border-light
                             rounded-[7px]
                             p-2.5
-                            bg-white
+                            bg-theme-surface
+
+                            transition-colors
+                            duration-300
                         "
                     >
 
@@ -121,16 +139,18 @@ function SelectConnector({
                                 absolute
                                 top-2
                                 right-2
-                                text-gray-800
+                                text-theme-text
                             "
                         />
 
 
-                        <div className="
-                            flex
-                            items-center
-                            gap-2
-                        ">
+                        <div
+                            className="
+                                flex
+                                items-center
+                                gap-2
+                            "
+                        >
 
                             <ConnectorIcon
                                 icon={connector.icon}
@@ -139,38 +159,46 @@ function SelectConnector({
 
                             <div>
 
-                                <h3 className="
-                                    text-[11px]
-                                    font-semibold
-                                    text-gray-800
-                                ">
+                                <h3
+                                    className="
+                                        text-[11px]
+                                        font-semibold
+                                        text-theme-text
+                                    "
+                                >
                                     {connector.name}
                                 </h3>
 
 
-                                <div className="
-                                    flex
-                                    items-center
-                                    gap-1
-                                    mt-0.5
-                                ">
+                                <div
+                                    className="
+                                        flex
+                                        items-center
+                                        gap-1
+                                        mt-0.5
+                                    "
+                                >
 
-                                    <span className="
-                                        text-[7px]
-                                        text-gray-600
-                                    ">
+                                    <span
+                                        className="
+                                            text-[7px]
+                                            text-theme-text-secondary
+                                        "
+                                    >
                                         {connector.type}
                                     </span>
 
 
                                     {connector.type === "Paid" && (
-                                        <span className="
-                                            text-[6px]
-                                            px-1
-                                            rounded
-                                            bg-purple-100
-                                            text-purple-600
-                                        ">
+                                        <span
+                                            className="
+                                                text-[6px]
+                                                px-1
+                                                rounded
+                                                bg-primary/15
+                                                text-primary
+                                            "
+                                        >
                                             Paid
                                         </span>
                                     )}
@@ -182,12 +210,14 @@ function SelectConnector({
                         </div>
 
 
-                        <p className="
-                            text-[8px]
-                            text-gray-600
-                            mt-2
-                            leading-[11px]
-                        ">
+                        <p
+                            className="
+                                text-[8px]
+                                text-theme-text-secondary
+                                mt-2
+                                leading-[11px]
+                            "
+                        >
                             {connector.description}
                         </p>
 
@@ -206,6 +236,8 @@ function SelectConnector({
                                 text-[8px]
                                 rounded-sm
                                 hover:bg-primaryHover
+                                transition
+                                cursor-pointer
                             "
                         >
                             Connect
@@ -217,6 +249,7 @@ function SelectConnector({
             </div>
 
         </div>
+
     );
 }
 

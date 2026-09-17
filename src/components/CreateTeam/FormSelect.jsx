@@ -22,7 +22,7 @@ function FormSelect({
                 block
                 text-[13px]
                 font-medium
-                text-textPrimary
+                text-theme-text
                 mb-1.5
             ">
                 {label}
@@ -39,13 +39,13 @@ function FormSelect({
                         w-full
                         h-[34px]
                         border
-                        border-borderLight
+                        border-theme-border-light
                         rounded
                         px-2
                         pr-8
                         text-[12px]
-                        text-textSecondary
-                        bg-background
+                        text-theme-text
+                        bg-theme-surface
                         outline-none
                         focus:border-primary
                     "
@@ -76,7 +76,7 @@ function FormSelect({
                         top-1/2
                         -translate-y-1/2
                         pointer-events-none
-                        text-textSecondary
+                        text-theme-text-secondary
                     "
                 />
 
@@ -86,7 +86,7 @@ function FormSelect({
             {helperText && (
                 <p className="
                     text-[9px]
-                    text-textSecondary
+                    text-theme-text-secondary
                     mt-1
                 ">
                     {helperText}

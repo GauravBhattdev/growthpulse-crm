@@ -118,8 +118,8 @@ function CreateTeam({ onClose }) {
                     max-w-full
                     h-[calc(100vh-2.5rem)]
                     sm:h-[600px]
-                    bg-background
-                    text-textPrimary
+                    bg-theme-surface
+                    text-theme-text
                     shadow-2xl
                     flex
                     flex-col
@@ -171,7 +171,7 @@ function CreateTeam({ onClose }) {
                                     text-[20px]
                                     sm:text-[23px]
                                     font-semibold
-                                    text-textPrimary
+                                    text-theme-text
                                     truncate
                                 "
                             >
@@ -183,7 +183,7 @@ function CreateTeam({ onClose }) {
                                 className="
                                     text-[11px]
                                     sm:text-[13px]
-                                    text-textSecondary
+                                    text-theme-text-secondary
                                     mt-1
                                     leading-relaxed
                                 "
@@ -203,8 +203,8 @@ function CreateTeam({ onClose }) {
                             onClick={handleClose}
                             className="
                                 shrink-0
-                                text-textPrimary
-                                hover:text-textSecondary
+                                text-theme-text
+                                hover:text-theme-text-secondary
                                 transition
                                 cursor-pointer
                             "
@@ -275,7 +275,7 @@ function CreateTeam({ onClose }) {
                                         text-[12px]
                                         sm:text-[13px]
                                         font-medium
-                                        text-textPrimary
+                                        text-theme-text
                                         mb-1.5
                                     "
                                 >
@@ -289,13 +289,13 @@ function CreateTeam({ onClose }) {
                                         w-full
                                         h-[40px]
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         rounded
                                         px-2
                                         flex
                                         items-center
                                         justify-between
-                                        bg-background
+                                        bg-theme-surface
                                     "
                                 >
 
@@ -319,7 +319,7 @@ function CreateTeam({ onClose }) {
                                     <ChevronDown
                                         size={18}
                                         className="
-                                            text-textSecondary
+                                            text-theme-text-secondary
                                             shrink-0
                                         "
                                     />
@@ -343,7 +343,7 @@ function CreateTeam({ onClose }) {
                                     text-[12px]
                                     sm:text-[13px]
                                     font-medium
-                                    text-textPrimary
+                                    text-theme-text
                                     mb-1.5
                                 "
                             >
@@ -371,12 +371,14 @@ function CreateTeam({ onClose }) {
                                         w-full
                                         h-[66px]
                                         border
-                                        border-borderLight
+                                        border-theme-border-light
                                         rounded
                                         px-2
                                         py-2
                                         text-[12px]
-                                        text-textPrimary
+                                        text-theme-text
+                                        bg-theme-surface
+                                        placeholder:text-theme-text-muted
                                         outline-none
                                         resize-none
                                         focus:border-primary
@@ -391,7 +393,7 @@ function CreateTeam({ onClose }) {
                                         right-2
                                         text-[10px]
                                         sm:text-[11px]
-                                        text-textSecondary
+                                        text-theme-text-secondary
                                     "
                                 >
                                     {description.length}/150
@@ -513,8 +515,8 @@ function CreateTeam({ onClose }) {
                     className="
                         shrink-0
                         border-t
-                        border-borderLight
-                        bg-background
+                        border-theme-border-light
+                        bg-theme-surface
                         px-4
                         sm:px-6
                         py-3
@@ -537,12 +539,12 @@ function CreateTeam({ onClose }) {
                             px-3
                             sm:px-4
                             border
-                            border-borderLight
+                            border-theme-border-light
                             rounded
                             text-[11px]
                             sm:text-[12px]
-                            text-textPrimary
-                            hover:bg-gray-100
+                            text-theme-text
+                            hover:bg-theme-surface-secondary
                             transition
                             cursor-pointer
                             whitespace-nowrap

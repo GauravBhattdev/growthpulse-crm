@@ -51,19 +51,12 @@ function RecentActivity() {
                 <div
                     key={activity.id}
                     className="
-                        flex
-                        items-center
-
+                        flex items-center
                         py-3
-
-                        border-b
-                        border-theme-border-light
+                        border-b border-theme-border-light
                         last:border-b-0
-
                         min-w-0
-
-                        transition-colors
-                        duration-300
+                        transition-colors duration-300
                     "
                 >
 
@@ -71,26 +64,13 @@ function RecentActivity() {
 
                     <div
                         className="
-                            w-9
-                            h-9
-
+                            w-9 h-9
                             rounded-full
-
-                            flex
-                            items-center
-                            justify-center
-
-                            text-white
-                            text-xs
-                            font-semibold
-
-                            shrink-0
-
-                            mr-3
+                            flex items-center justify-center
+                            text-white text-xs font-semibold
+                            shrink-0 mr-3
                         "
-                        style={{
-                            backgroundColor: activity.color
-                        }}
+                        style={{ backgroundColor: activity.color }}
                     >
                         {activity.avatar}
                     </div>
@@ -98,34 +78,21 @@ function RecentActivity() {
 
                     {/* Activity Text */}
 
-                    <div
-                        className="
-                            flex-1
-                            min-w-0
-
-                            text-sm
-                            text-theme-text
-
-                            truncate
-                        "
-                    >
+                    <div className="
+                        flex-1 min-w-0
+                        text-sm text-theme-text
+                        truncate
+                    ">
                         {activity.text}
                     </div>
 
 
                     {/* Time */}
 
-                    <div
-                        className="
-                            text-xs
-                            text-theme-text-secondary
-
-                            ml-3
-
-                            whitespace-nowrap
-                            shrink-0
-                        "
-                    >
+                    <div className="
+                        text-xs text-theme-text-secondary
+                        ml-3 whitespace-nowrap shrink-0
+                    ">
                         {activity.time}
                     </div>
 

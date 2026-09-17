@@ -1,6 +1,9 @@
 import React from "react";
 
-function DashboardBox({ title, children }) {
+import { Link } from "react-router-dom";
+
+
+function DashboardBox({ title, children, action, actionTo }) {
     return (
         <div
             className="
@@ -9,14 +12,14 @@ function DashboardBox({ title, children }) {
                 border-theme-border-light
                 rounded-[8px]
 
-                min-h-[250px]
-                lg:min-h-[190px]
+                min-h-[200px]
+                lg:min-h-[180px]
 
                 w-full
                 min-w-0
 
                 p-3
-                sm:p-[18px]
+                sm:p-4
 
                 shadow-sm
 
@@ -28,31 +31,58 @@ function DashboardBox({ title, children }) {
             "
         >
 
-            {/* Box Title */}
+            {/* Box Header (Title + optional action) */}
 
-            <h2
-                className="
-                    m-0
+            <div className="flex items-center justify-between gap-2">
 
-                    text-[14px]
-                    sm:text-[15px]
+                <h2
+                    className="
+                        m-0
 
-                    font-semibold
-                    text-theme-text
+                        text-[14px]
+                        sm:text-[15px]
 
-                    truncate
-                "
-            >
-                {title}
-            </h2>
+                        font-semibold
+                        text-theme-text
+
+                        truncate
+                    "
+                >
+                    {title}
+                </h2>
+
+
+                {action && actionTo && (
+
+                    <Link
+                        to={actionTo}
+                        className="
+                            text-[12px]
+                            font-medium
+
+                            text-primary
+
+                            hover:underline
+
+                            whitespace-nowrap
+
+                            shrink-0
+                        "
+                    >
+                        {action}
+                    </Link>
+
+                )}
+
+            </div>
 
 
             {/* Box Content */}
 
             <div
                 className="
-                    mt-4
-                    sm:mt-5
+                    mt-3
+                    sm:mt-4
 
                     min-w-0
                     w-full

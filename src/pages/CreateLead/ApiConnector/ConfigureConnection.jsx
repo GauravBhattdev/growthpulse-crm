@@ -62,10 +62,12 @@ function ConfigureConnection({
         h-[35px]
         px-3
         border
-        border-gray-300
+        border-theme-border-light
         rounded-md
         text-[11px]
-        text-gray-700
+        text-theme-text
+        bg-theme-surface
+        placeholder:text-theme-text-muted
         outline-none
         focus:border-primary
     `;
@@ -80,11 +82,11 @@ function ConfigureConnection({
         h-[34px]
         px-2.5
         border
-        border-gray-300
+        border-theme-border-light
         rounded-md
-        bg-white
+        bg-theme-surface
         text-[11px]
-        text-gray-700
+        text-theme-text
         outline-none
         focus:border-primary
     `;
@@ -97,31 +99,37 @@ function ConfigureConnection({
                 HEADER
             ================================================= */}
 
-            <div className="
-                flex
-                items-start
-                justify-between
-                gap-3
-            ">
+            <div
+                className="
+                    flex
+                    items-start
+                    justify-between
+                    gap-3
+                "
+            >
 
                 {/* PAGE TITLE */}
 
                 <div>
 
-                    <h2 className="
-                        text-[17px]
-                        font-semibold
-                        text-primary
-                    ">
+                    <h2
+                        className="
+                            text-[17px]
+                            font-semibold
+                            text-primary
+                        "
+                    >
                         Configure Connection
                     </h2>
 
 
-                    <p className="
-                        text-[10px]
-                        text-gray-600
-                        mt-1
-                    ">
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-secondary
+                            mt-1
+                        "
+                    >
                         Connect your {selectedConnector} account to import leads.
                     </p>
 
@@ -132,26 +140,33 @@ function ConfigureConnection({
                     SELECTED CONNECTOR
                 ================================================= */}
 
-                <div className="
-                    w-[175px]
-                    min-h-[42px]
-                    border
-                    border-gray-400
-                    rounded-md
-                    px-2.5
-                    py-1.5
-                    flex
-                    items-center
-                    justify-between
-                ">
+                <div
+                    className="
+                        w-[175px]
+                        min-h-[42px]
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        px-2.5
+                        py-1.5
+                        flex
+                        items-center
+                        justify-between
+
+                        transition-colors
+                        duration-300
+                    "
+                >
 
                     {/* CONNECTOR INFO */}
 
-                    <div className="
-                        flex
-                        items-center
-                        gap-2
-                    ">
+                    <div
+                        className="
+                            flex
+                            items-center
+                            gap-2
+                        "
+                    >
 
                         <ConnectorIcon
                             icon={connectorIcon}
@@ -160,18 +175,23 @@ function ConfigureConnection({
 
                         <div>
 
-                            <p className="
-                                text-[9px]
-                                font-semibold
-                            ">
+                            <p
+                                className="
+                                    text-[9px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 {selectedConnector}
                             </p>
 
 
-                            <p className="
-                                text-[7px]
-                                text-gray-500
-                            ">
+                            <p
+                                className="
+                                    text-[7px]
+                                    text-theme-text-secondary
+                                "
+                            >
                                 {connectorType}
                             </p>
 
@@ -189,6 +209,7 @@ function ConfigureConnection({
                             text-[7px]
                             text-primary
                             hover:underline
+                            cursor-pointer
                         "
                     >
                         ✎ Change
@@ -203,19 +224,23 @@ function ConfigureConnection({
                 CONNECTION DETAILS
             ================================================= */}
 
-            <div className="
-                border-t
-                border-gray-300
-                mt-4
-                pt-4
-            ">
+            <div
+                className="
+                    border-t
+                    border-theme-border-light
+                    mt-4
+                    pt-4
+                "
+            >
 
-                <h3 className="
-                    text-[16px]
-                    font-semibold
-                    text-gray-800
-                    mb-3
-                ">
+                <h3
+                    className="
+                        text-[16px]
+                        font-semibold
+                        text-theme-text
+                        mb-3
+                    "
+                >
                     Connection Details
                 </h3>
 
@@ -224,28 +249,30 @@ function ConfigureConnection({
                     FORM GRID
                 ================================================= */}
 
-                <div className="
-                    grid
-                    grid-cols-1
-                    md:grid-cols-2
-                    gap-x-4
-                    gap-y-3
-                ">
+                <div
+                    className="
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        gap-x-4
+                        gap-y-3
+                    "
+                >
 
 
-                    {/* =================================================
-                        CONNECTION NAME
-                    ================================================= */}
+                    {/* CONNECTION NAME */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Connection Name
                         </label>
 
@@ -265,19 +292,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        AUTHENTICATION METHOD
-                    ================================================= */}
+                    {/* AUTHENTICATION METHOD */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Authentication Method
                         </label>
 
@@ -310,19 +337,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        CLIENT ID
-                    ================================================= */}
+                    {/* CLIENT ID */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Client ID
                         </label>
 
@@ -342,19 +369,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        CLIENT SECRET
-                    ================================================= */}
+                    {/* CLIENT SECRET */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Client Secret
                         </label>
 
@@ -374,19 +401,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        USERNAME
-                    ================================================= */}
+                    {/* USERNAME */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Username / Email
                         </label>
 
@@ -406,19 +433,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        PASSWORD
-                    ================================================= */}
+                    {/* PASSWORD */}
 
                     <div>
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             Password
                         </label>
 
@@ -438,21 +465,19 @@ function ConfigureConnection({
                     </div>
 
 
-                    {/* =================================================
-                        API URL
-                    ================================================= */}
+                    {/* API URL */}
 
-                    <div className="
-                        md:col-span-2
-                    ">
+                    <div className="md:col-span-2">
 
-                        <label className="
-                            block
-                            text-[10px]
-                            font-medium
-                            text-gray-700
-                            mb-1
-                        ">
+                        <label
+                            className="
+                                block
+                                text-[10px]
+                                font-medium
+                                text-theme-text
+                                mb-1
+                            "
+                        >
                             API URL
                         </label>
 
@@ -478,18 +503,18 @@ function ConfigureConnection({
                     TEST CONNECTION + STATUS
                 ================================================= */}
 
-                <div className="
-                    flex
-                    flex-col
-                    sm:flex-row
-                    gap-2
-                    mt-3
-                ">
+                <div
+                    className="
+                        flex
+                        flex-col
+                        sm:flex-row
+                        gap-2
+                        mt-3
+                    "
+                >
 
 
-                    {/* =================================================
-                        TEST CONNECTION BUTTON
-                    ================================================= */}
+                    {/* TEST CONNECTION BUTTON */}
 
                     <button
                         type="button"
@@ -510,6 +535,8 @@ function ConfigureConnection({
                             gap-2
                             disabled:opacity-60
                             disabled:cursor-not-allowed
+                            transition
+                            cursor-pointer
                         "
                     >
 
@@ -539,49 +566,58 @@ function ConfigureConnection({
                     </button>
 
 
-                    {/* =================================================
-                        CONNECTION STATUS
-                    ================================================= */}
+                    {/* CONNECTION STATUS */}
 
-                    <div className="
-                        flex-1
-                        min-h-[35px]
-                        border
-                        border-gray-400
-                        rounded-md
-                        px-3
-                        flex
-                        items-center
-                        gap-2
-                    ">
+                    <div
+                        className="
+                            flex-1
+                            min-h-[35px]
+                            border
+                            border-theme-border-light
+                            rounded-md
+                            px-3
+                            flex
+                            items-center
+                            gap-2
+
+                            transition-colors
+                            duration-300
+                        "
+                    >
 
                         {/* STATUS DOT */}
 
-                        <div className="
-                            w-2
-                            h-2
-                            rounded-full
-                            bg-gray-400
-                        " />
+                        <div
+                            className="
+                                w-2
+                                h-2
+                                rounded-full
+                                bg-theme-text-muted
+                            "
+                        />
 
 
                         {/* STATUS TEXT */}
 
                         <div>
 
-                            <p className="
-                                text-[9px]
-                                font-semibold
-                                text-gray-800
-                            ">
+                            <p
+                                className="
+                                    text-[9px]
+                                    font-semibold
+                                    text-theme-text
+                                "
+                            >
                                 Connection Status
                             </p>
 
 
-                            <p className="
-                                text-[7px]
-                                text-gray-500
-                            ">
+                            <p
+                                className="
+                                    text-[7px]
+                                    text-theme-text-secondary
+                                "
+                            >
                                 Not Connected
                             </p>
 

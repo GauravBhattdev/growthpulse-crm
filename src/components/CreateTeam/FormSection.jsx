@@ -16,7 +16,7 @@ function FormSection({ title, children }) {
                 <h3 className="
                     text-[13px]
                     font-semibold
-                    text-textPrimary
+                    text-theme-text
                     whitespace-nowrap
                 ">
                     {title}
@@ -25,7 +25,7 @@ function FormSection({ title, children }) {
 
                 <div className="
                     h-px
-                    bg-borderLight
+                    bg-theme-border-light
                     flex-1
                 " />
 

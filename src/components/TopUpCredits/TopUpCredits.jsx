@@ -1,9 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
   X,
   Wallet
 } from "lucide-react";
+
+import { toast } from "react-toastify";
+
+import PaymentPopup from "./PaymentPopup";
 
 
 function TopUpCredits({ onClose }) {
@@ -14,15 +18,16 @@ function TopUpCredits({ onClose }) {
 
   const [paymentMethod, setPaymentMethod] = useState("card");
 
+  const [showPaymentPopup, setShowPaymentPopup] = useState(false);
+
   // Animation states
   const [isVisible, setIsVisible] = useState(false);
   const [isClosing, setIsClosing] = useState(false);
 
+  const panelRef = useRef(null);
 
-  // ==============================
+
   // OPEN ANIMATION
-  // ==============================
-
   useEffect(() => {
 
     const timer = setTimeout(() => {
@@ -34,17 +39,56 @@ function TopUpCredits({ onClose }) {
   }, []);
 
 
-  // ==============================
   // CLOSE ANIMATION
-  // ==============================
-
   const handleClose = () => {
+
+    if (isClosing) return;
 
     setIsClosing(true);
 
     setTimeout(() => {
       onClose();
     }, 500);
+
+  };
+
+
+  // CLOSE ON OUTSIDE CLICK
+  useEffect(() => {
+
+    const handleClickOutside = (event) => {
+
+      if (showPaymentPopup) return;
+
+      if (
+        panelRef.current &&
+        !panelRef.current.contains(event.target)
+      ) {
+        handleClose();
+      }
+
+    };
+
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isClosing, showPaymentPopup]);
+
+
+  // PROCEED TO PAYMENT
+  const handleProceed = () => {
+
+    if (!selectedCredits || selectedCredits === 0) {
+      toast.error("Please select a credit package first.");
+      return;
+    }
+
+    setShowPaymentPopup(true);
 
   };
 
@@ -60,215 +104,89 @@ function TopUpCredits({ onClose }) {
       "
     >
 
-      {/* ==============================
-          ADD / MANAGE CREDITS PANEL
-      ============================== */}
-
       <div
+        ref={panelRef}
+
         className={`
           pointer-events-auto
-
           absolute
           top-10
           right-0
-
           w-full
           sm:w-[400px]
-
           max-h-[calc(100vh-2.5rem)]
-
-          bg-[#171126]
+          bg-theme-surface
           border-l
-          border-[#3d315d]
+          border-theme-border
           shadow-2xl
-          text-white
-
+          text-theme-text
           overflow-y-auto
           overflow-x-hidden
-
           transform-gpu
           transition-all
           duration-500
           ease-out
-
           origin-bottom-right
 
           ${
             isClosing
-              ? `
-                translate-x-[100%]
-                translate-y-[80px]
-                scale-90
-                rotate-6
-                opacity-0
-              `
+              ? "translate-x-[100%] translate-y-[80px] scale-90 rotate-6 opacity-0"
               : isVisible
-                ? `
-                  translate-x-0
-                  translate-y-0
-                  scale-100
-                  rotate-0
-                  opacity-100
-                `
-                : `
-                  translate-x-[100%]
-                  translate-y-[80px]
-                  scale-90
-                  rotate-6
-                  opacity-0
-                `
+                ? "translate-x-0 translate-y-0 scale-100 rotate-0 opacity-100"
+                : "translate-x-[100%] translate-y-[80px] scale-90 rotate-6 opacity-0"
           }
         `}
       >
 
-        {/* ==============================
-            HEADER
-        ============================== */}
+        {/* HEADER */}
 
-        <div
-          className="
-            flex
-            items-center
-            justify-between
+        <div className="flex items-center justify-between px-4 sm:px-5 py-4 gap-3">
 
-            px-4
-            sm:px-5
-
-            py-4
-
-            gap-3
-          "
-        >
-
-          <h2
-            className="
-              text-base
-              sm:text-lg
-              font-semibold
-              truncate
-            "
-          >
+          <h2 className="text-base sm:text-lg font-semibold truncate">
             Add / Manage Credits
           </h2>
-
-
-          {/* Close */}
 
           <button
             type="button"
             onClick={handleClose}
             className="
-              text-white
-              hover:text-gray-300
+              text-theme-text-secondary
+              hover:text-theme-text
               transition
               cursor-pointer
               shrink-0
             "
           >
-
             <X size={22} />
-
           </button>
 
         </div>
 
 
-        {/* ==============================
-            CURRENT CREDITS
-        ============================== */}
+        {/* CURRENT CREDITS */}
 
-        <div
-          className="
-            px-4
-            sm:px-5
-          "
-        >
+        <div className="px-4 sm:px-5">
 
-          <div
-            className="
-              border
-              border-[#6c637d]
-              rounded-md
-              bg-[#262236]
+          <div className="border border-theme-border rounded-md bg-theme-surface-secondary p-3 sm:p-4">
 
-              p-3
-              sm:p-4
-            "
-          >
+            <div className="flex items-center gap-3 sm:gap-4">
 
-            <div
-              className="
-                flex
-                items-center
-                gap-3
-                sm:gap-4
-              "
-            >
+              <div className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-primary flex items-center justify-center shrink-0">
 
-              {/* Wallet */}
-
-              <div
-                className="
-                  w-10
-                  h-10
-                  sm:w-12
-                  sm:h-12
-
-                  rounded-full
-                  bg-purple-600
-
-                  flex
-                  items-center
-                  justify-center
-
-                  shrink-0
-                "
-              >
-
-                <Wallet
-                  size={20}
-                  className="sm:hidden"
-                />
-
-                <Wallet
-                  size={23}
-                  className="hidden sm:block"
-                />
+                <Wallet size={20} className="sm:hidden text-white" />
+                <Wallet size={23} className="hidden sm:block text-white" />
 
               </div>
 
-
-              {/* Credit Information */}
-
               <div className="min-w-0">
 
-                <p
-                  className="
-                    text-xs
-                    sm:text-sm
-                  "
-                >
-                  Current Credits
-                </p>
+                <p className="text-xs sm:text-sm">Current Credits</p>
 
-                <p
-                  className="
-                    text-xl
-                    sm:text-2xl
-                    font-bold
-                    mt-1
-                  "
-                >
+                <p className="text-xl sm:text-2xl font-bold mt-1">
                   {currentCredits.toLocaleString()}
                 </p>
 
-                <p
-                  className="
-                    text-[9px]
-                    text-gray-400
-                    mt-1
-                  "
-                >
+                <p className="text-[9px] text-theme-text-secondary mt-1">
                   Last updated: Today
                 </p>
 
@@ -281,225 +199,71 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* ==============================
-            ADD CREDITS
-        ============================== */}
+        {/* ADD CREDITS */}
 
-        <div
-          className="
-            px-4
-            sm:px-5
+        <div className="px-4 sm:px-5 pt-5">
 
-            pt-5
-          "
-        >
-
-          <h3
-            className="
-              text-base
-              sm:text-lg
-
-              font-semibold
-              mb-4
-            "
-          >
+          <h3 className="text-base sm:text-lg font-semibold mb-4">
             Add Credits
           </h3>
 
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
 
-          {/* Credit Packages */}
+            {[500, 1000, 2500].map((amt) => (
 
-          <div
-            className="
-              grid
+              <button
+                key={amt}
+                type="button"
+                onClick={() => setSelectedCredits(amt)}
+                className={`
+                  h-[78px] sm:h-[82px]
+                  rounded-md border
+                  ${selectedCredits === amt
+                    ? "border-primary bg-primary/10"
+                    : "border-theme-border bg-theme-surface-secondary"}
+                  hover:border-primary
+                  transition
+                  cursor-pointer
+                  flex flex-col items-center justify-center
+                  min-w-0
+                `}
+              >
 
-              grid-cols-2
-              sm:grid-cols-4
+                <span className="text-sm font-semibold">
+                  +{amt.toLocaleString()}
+                </span>
 
-              gap-2
-            "
-          >
+                <span className="text-sm font-semibold">Credits</span>
 
-            {/* 500 Credits */}
+                <span className="text-xs text-theme-text-secondary mt-1">
+                  ₹ {amt.toLocaleString()}
+                </span>
 
-            <button
-              type="button"
-              onClick={() => setSelectedCredits(500)}
-              className={`
-                h-[78px]
-                sm:h-[82px]
+              </button>
 
-                rounded-md
-                border
+            ))}
 
-                ${
-                  selectedCredits === 500
-                    ? "border-purple-500 bg-purple-500/10"
-                    : "border-[#6c637d] bg-black"
-                }
-
-                hover:border-purple-400
-                transition
-                cursor-pointer
-
-                flex
-                flex-col
-                items-center
-                justify-center
-
-                min-w-0
-              `}
-            >
-
-              <span className="text-sm font-semibold">
-                +500
-              </span>
-
-              <span className="text-sm font-semibold">
-                Credits
-              </span>
-
-              <span className="text-xs text-gray-500 mt-1">
-                ₹ 500
-              </span>
-
-            </button>
-
-
-            {/* 1000 Credits */}
-
-            <button
-              type="button"
-              onClick={() => setSelectedCredits(1000)}
-              className={`
-                h-[78px]
-                sm:h-[82px]
-
-                rounded-md
-                border
-
-                ${
-                  selectedCredits === 1000
-                    ? "border-purple-500 bg-purple-500/10"
-                    : "border-[#6c637d] bg-black"
-                }
-
-                hover:border-purple-400
-                transition
-                cursor-pointer
-
-                flex
-                flex-col
-                items-center
-                justify-center
-
-                min-w-0
-              `}
-            >
-
-              <span className="text-sm font-semibold">
-                +1,000
-              </span>
-
-              <span className="text-sm font-semibold">
-                Credits
-              </span>
-
-              <span className="text-xs text-gray-500 mt-1">
-                ₹ 1,000
-              </span>
-
-            </button>
-
-
-            {/* 2500 Credits */}
-
-            <button
-              type="button"
-              onClick={() => setSelectedCredits(2500)}
-              className={`
-                h-[78px]
-                sm:h-[82px]
-
-                rounded-md
-                border
-
-                ${
-                  selectedCredits === 2500
-                    ? "border-purple-500 bg-purple-500/10"
-                    : "border-[#6c637d] bg-black"
-                }
-
-                hover:border-purple-400
-                transition
-                cursor-pointer
-
-                flex
-                flex-col
-                items-center
-                justify-center
-
-                min-w-0
-              `}
-            >
-
-              <span className="text-sm font-semibold">
-                +2,500
-              </span>
-
-              <span className="text-sm font-semibold">
-                Credits
-              </span>
-
-              <span className="text-xs text-gray-500 mt-1">
-                ₹ 2,500
-              </span>
-
-            </button>
-
-
-            {/* Custom */}
 
             <button
               type="button"
               onClick={() => setSelectedCredits(0)}
               className={`
-                h-[78px]
-                sm:h-[82px]
-
-                rounded-md
-                border
-
-                ${
-                  selectedCredits === 0
-                    ? "border-purple-500 bg-purple-500/10"
-                    : "border-[#6c637d] bg-black"
-                }
-
-                hover:border-purple-400
+                h-[78px] sm:h-[82px]
+                rounded-md border
+                ${selectedCredits === 0
+                  ? "border-primary bg-primary/10"
+                  : "border-theme-border bg-theme-surface-secondary"}
+                hover:border-primary
                 transition
                 cursor-pointer
-
-                flex
-                flex-col
-                items-center
-                justify-center
-
+                flex flex-col items-center justify-center
                 min-w-0
               `}
             >
 
-              <span className="text-sm font-semibold">
-                Custom
-              </span>
-
-              <span className="text-sm font-semibold">
-                Amount
-              </span>
-
-              <span className="text-xs text-gray-500 mt-1">
-                Other
-              </span>
+              <span className="text-sm font-semibold">Custom</span>
+              <span className="text-sm font-semibold">Amount</span>
+              <span className="text-xs text-theme-text-secondary mt-1">Other</span>
 
             </button>
 
@@ -508,196 +272,56 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* ==============================
-            PAYMENT DETAILS
-        ============================== */}
+        {/* PAYMENT DETAILS */}
 
-        <div
-          className="
-            px-4
-            sm:px-5
+        <div className="px-4 sm:px-5 pt-5">
 
-            pt-5
-          "
-        >
-
-          <h3
-            className="
-              text-base
-              sm:text-lg
-
-              font-semibold
-              mb-4
-            "
-          >
+          <h3 className="text-base sm:text-lg font-semibold mb-4">
             Payment Details
           </h3>
 
-
-          {/* Amount */}
-
           <div>
 
-            <label
-              className="
-                block
-                text-sm
-                mb-2
-              "
-            >
-              Amount
-            </label>
+            <label className="block text-sm mb-2">Amount</label>
 
-            <div
-              className="
-                h-[40px]
-
-                border
-                border-[#6c637d]
-                rounded-md
-                bg-black
-
-                flex
-                items-center
-
-                px-3
-                sm:px-4
-
-                text-gray-400
-                text-sm
-              "
-            >
-
+            <div className="h-[40px] border border-theme-border rounded-md bg-theme-surface-secondary flex items-center px-3 sm:px-4 text-theme-text-secondary text-sm">
               ₹ {selectedCredits.toLocaleString()}
-
             </div>
 
           </div>
 
 
-          {/* Payment Method */}
-
           <div className="pt-5">
 
-            <p
-              className="
-                text-sm
-                mb-4
-              "
-            >
-              Payment method
-            </p>
+            <p className="text-sm mb-4">Payment method</p>
 
+            <div className="flex items-start gap-x-4 gap-y-3 flex-wrap">
 
-            <div
-              className="
-                flex
-                items-start
+              {["card", "upi", "netbanking"].map((method) => (
 
-                gap-x-4
-                gap-y-3
+                <label
+                  key={method}
+                  className="flex items-center gap-2 text-xs sm:text-sm cursor-pointer min-w-0"
+                >
 
-                flex-wrap
-              "
-            >
+                  <input
+                    type="radio"
+                    name="paymentMethod"
+                    value={method}
+                    checked={paymentMethod === method}
+                    onChange={() => setPaymentMethod(method)}
+                    className="accent-primary shrink-0"
+                  />
 
-              {/* Card */}
+                  <span>
+                    {method === "card" && "Credit / Debit Card"}
+                    {method === "upi" && "UPI"}
+                    {method === "netbanking" && "Net banking"}
+                  </span>
 
-              <label
-                className="
-                  flex
-                  items-center
-                  gap-2
+                </label>
 
-                  text-xs
-                  sm:text-sm
-
-                  cursor-pointer
-
-                  min-w-0
-                "
-              >
-
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="card"
-                  checked={paymentMethod === "card"}
-                  onChange={() => setPaymentMethod("card")}
-                  className="accent-purple-600 shrink-0"
-                />
-
-                <span>
-                  Credit / Debit Card
-                </span>
-
-              </label>
-
-
-              {/* UPI */}
-
-              <label
-                className="
-                  flex
-                  items-center
-                  gap-2
-
-                  text-xs
-                  sm:text-sm
-
-                  cursor-pointer
-
-                  min-w-0
-                "
-              >
-
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="upi"
-                  checked={paymentMethod === "upi"}
-                  onChange={() => setPaymentMethod("upi")}
-                  className="accent-purple-600 shrink-0"
-                />
-
-                <span>
-                  UPI
-                </span>
-
-              </label>
-
-
-              {/* Net Banking */}
-
-              <label
-                className="
-                  flex
-                  items-center
-                  gap-2
-
-                  text-xs
-                  sm:text-sm
-
-                  cursor-pointer
-
-                  min-w-0
-                "
-              >
-
-                <input
-                  type="radio"
-                  name="paymentMethod"
-                  value="netbanking"
-                  checked={paymentMethod === "netbanking"}
-                  onChange={() => setPaymentMethod("netbanking")}
-                  className="accent-purple-600 shrink-0"
-                />
-
-                <span>
-                  Net banking
-                </span>
-
-              </label>
+              ))}
 
             </div>
 
@@ -706,46 +330,22 @@ function TopUpCredits({ onClose }) {
         </div>
 
 
-        {/* ==============================
-            BOTTOM BUTTONS
-        ============================== */}
+        {/* BOTTOM BUTTONS */}
 
-        <div
-          className="
-            flex
-            items-center
-
-            gap-3
-            sm:gap-5
-
-            px-4
-            sm:px-5
-
-            py-5
-          "
-        >
-
-          {/* Cancel */}
+        <div className="flex items-center gap-3 sm:gap-5 px-4 sm:px-5 py-5">
 
           <button
             type="button"
             onClick={handleClose}
             className="
               h-[40px]
-
-              px-4
-              sm:px-5
-
-              border
-              border-[#8b8498]
+              px-4 sm:px-5
+              border border-theme-border
               rounded-md
-
               text-sm
-
-              hover:bg-[#262236]
+              hover:bg-theme-surface-secondary
               transition
               cursor-pointer
-
               shrink-0
             "
           >
@@ -753,29 +353,18 @@ function TopUpCredits({ onClose }) {
           </button>
 
 
-          {/* Proceed */}
-
           <button
             type="button"
+            onClick={handleProceed}
             className="
               h-[40px]
-
-              flex-1
-              min-w-0
-
-              bg-purple-600
-              hover:bg-purple-700
-
+              flex-1 min-w-0
+              bg-primary hover:bg-primaryHover
+              text-white
               rounded-md
-
-              text-xs
-              sm:text-sm
-
-              font-medium
-
+              text-xs sm:text-sm font-medium
               transition
               cursor-pointer
-
               whitespace-nowrap
             "
           >
@@ -785,6 +374,20 @@ function TopUpCredits({ onClose }) {
         </div>
 
       </div>
+
+
+      {/* PAYMENT POPUP */}
+
+      {showPaymentPopup && (
+        <PaymentPopup
+          paymentMethod={paymentMethod}
+          amount={selectedCredits || 0}
+          onClose={() => {
+            setShowPaymentPopup(false);
+            handleClose();
+          }}
+        />
+      )}
 
     </div>
 

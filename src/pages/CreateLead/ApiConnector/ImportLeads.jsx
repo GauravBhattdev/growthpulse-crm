@@ -22,28 +22,34 @@ function ImportLeads({
                 PAGE HEADER
             ========================================= */}
 
-            <div className="
-                flex
-                items-start
-                justify-between
-                gap-3
-            ">
+            <div
+                className="
+                    flex
+                    items-start
+                    justify-between
+                    gap-3
+                "
+            >
 
                 <div>
 
-                    <h2 className="
-                        text-[17px]
-                        font-semibold
-                        text-primary
-                    ">
+                    <h2
+                        className="
+                            text-[17px]
+                            font-semibold
+                            text-primary
+                        "
+                    >
                         Import Leads
                     </h2>
 
-                    <p className="
-                        text-[10px]
-                        text-gray-600
-                        mt-1
-                    ">
+                    <p
+                        className="
+                            text-[10px]
+                            text-theme-text-secondary
+                            mt-1
+                        "
+                    >
                         Import filtered leads into your system.
                     </p>
 
@@ -52,40 +58,51 @@ function ImportLeads({
 
                 {/* CONNECTOR */}
 
-                <div className="
-                    w-[175px]
-                    min-h-[46px]
-                    border
-                    border-gray-400
-                    rounded-md
-                    px-2.5
-                    py-1.5
-                    flex
-                    items-center
-                    justify-between
-                ">
-
-                    <div className="
+                <div
+                    className="
+                        w-[175px]
+                        min-h-[46px]
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        px-2.5
+                        py-1.5
                         flex
                         items-center
-                        gap-2
-                    ">
+                        justify-between
 
-                        <div className="
-                            w-[32px]
-                            h-[32px]
-                            rounded-full
-                            bg-[#e8f7ff]
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
                             flex
                             items-center
-                            justify-center
-                        ">
+                            gap-2
+                        "
+                    >
 
-                            <span className="
-                                text-[6px]
-                                font-bold
-                                text-[#00a1e0]
-                            ">
+                        <div
+                            className="
+                                w-[32px]
+                                h-[32px]
+                                rounded-full
+                                bg-[#e8f7ff]
+                                flex
+                                items-center
+                                justify-center
+                            "
+                        >
+
+                            <span
+                                className="
+                                    text-[6px]
+                                    font-bold
+                                    text-[#00a1e0]
+                                "
+                            >
                                 salesforce
                             </span>
 
@@ -94,18 +111,22 @@ function ImportLeads({
 
                         <div>
 
-                            <p className="
-                                text-[9px]
-                                font-medium
-                                text-gray-800
-                            ">
+                            <p
+                                className="
+                                    text-[9px]
+                                    font-medium
+                                    text-theme-text
+                                "
+                            >
                                 Salesforce
                             </p>
 
-                            <p className="
-                                text-[7px]
-                                text-gray-500
-                            ">
+                            <p
+                                className="
+                                    text-[7px]
+                                    text-theme-text-secondary
+                                "
+                            >
                                 CRM
                             </p>
 
@@ -119,6 +140,8 @@ function ImportLeads({
                         className="
                             text-[7px]
                             text-primary
+                            hover:underline
+                            cursor-pointer
                         "
                     >
                         ✎ Change
@@ -133,41 +156,50 @@ function ImportLeads({
                 STATISTICS
             ========================================= */}
 
-            <div className="
-                grid
-                grid-cols-1
-                sm:grid-cols-2
-                lg:grid-cols-4
-                gap-2
-                mt-4
-            ">
+            <div
+                className="
+                    grid
+                    grid-cols-1
+                    sm:grid-cols-2
+                    lg:grid-cols-4
+                    gap-2
+                    mt-4
+                "
+            >
 
                 {/* TOTAL LEADS */}
 
-                <div className="
-                    border
-                    border-gray-400
-                    rounded-md
-                    h-[52px]
-                    px-3
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    <div className="
-                        w-8
-                        h-8
-                        rounded-full
-                        bg-purple-100
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        h-[52px]
+                        px-3
                         flex
                         items-center
-                        justify-center
-                    ">
+                        gap-2
+
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
+                            w-8
+                            h-8
+                            rounded-full
+                            bg-primary/15
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
 
                         <Users
                             size={16}
-                            className="text-purple-600"
+                            className="text-primary"
                         />
 
                     </div>
@@ -175,18 +207,22 @@ function ImportLeads({
 
                     <div>
 
-                        <p className="
-                            text-[16px]
-                            font-semibold
-                            text-gray-900
-                        ">
+                        <p
+                            className="
+                                text-[16px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             1,210
                         </p>
 
-                        <p className="
-                            text-[8px]
-                            text-gray-600
-                        ">
+                        <p
+                            className="
+                                text-[8px]
+                                text-theme-text-secondary
+                            "
+                        >
                             Total Leads
                         </p>
 
@@ -197,30 +233,37 @@ function ImportLeads({
 
                 {/* SUCCESSFULLY */}
 
-                <div className="
-                    border
-                    border-gray-400
-                    rounded-md
-                    h-[52px]
-                    px-3
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    <div className="
-                        w-8
-                        h-8
-                        rounded-full
-                        bg-green-100
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        h-[52px]
+                        px-3
                         flex
                         items-center
-                        justify-center
-                    ">
+                        gap-2
+
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
+                            w-8
+                            h-8
+                            rounded-full
+                            bg-green-500/15
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
 
                         <Check
                             size={17}
-                            className="text-green-600"
+                            className="text-green-500"
                         />
 
                     </div>
@@ -228,18 +271,22 @@ function ImportLeads({
 
                     <div>
 
-                        <p className="
-                            text-[16px]
-                            font-semibold
-                            text-gray-900
-                        ">
+                        <p
+                            className="
+                                text-[16px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             1,185
                         </p>
 
-                        <p className="
-                            text-[8px]
-                            text-gray-600
-                        ">
+                        <p
+                            className="
+                                text-[8px]
+                                text-theme-text-secondary
+                            "
+                        >
                             Successfully
                         </p>
 
@@ -250,26 +297,33 @@ function ImportLeads({
 
                 {/* SKIPPED */}
 
-                <div className="
-                    border
-                    border-gray-400
-                    rounded-md
-                    h-[52px]
-                    px-3
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    <div className="
-                        w-8
-                        h-8
-                        rounded-full
-                        bg-orange-100
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        h-[52px]
+                        px-3
                         flex
                         items-center
-                        justify-center
-                    ">
+                        gap-2
+
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
+                            w-8
+                            h-8
+                            rounded-full
+                            bg-orange-500/15
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
 
                         <AlertTriangle
                             size={17}
@@ -281,18 +335,22 @@ function ImportLeads({
 
                     <div>
 
-                        <p className="
-                            text-[16px]
-                            font-semibold
-                            text-gray-900
-                        ">
+                        <p
+                            className="
+                                text-[16px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             15
                         </p>
 
-                        <p className="
-                            text-[8px]
-                            text-gray-600
-                        ">
+                        <p
+                            className="
+                                text-[8px]
+                                text-theme-text-secondary
+                            "
+                        >
                             Skipped
                         </p>
 
@@ -303,26 +361,33 @@ function ImportLeads({
 
                 {/* FAILED */}
 
-                <div className="
-                    border
-                    border-gray-400
-                    rounded-md
-                    h-[52px]
-                    px-3
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    <div className="
-                        w-8
-                        h-8
-                        rounded-full
-                        bg-red-100
+                <div
+                    className="
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        h-[52px]
+                        px-3
                         flex
                         items-center
-                        justify-center
-                    ">
+                        gap-2
+
+                        transition-colors
+                        duration-300
+                    "
+                >
+
+                    <div
+                        className="
+                            w-8
+                            h-8
+                            rounded-full
+                            bg-red-500/15
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
 
                         <XCircle
                             size={17}
@@ -334,18 +399,22 @@ function ImportLeads({
 
                     <div>
 
-                        <p className="
-                            text-[16px]
-                            font-semibold
-                            text-gray-900
-                        ">
+                        <p
+                            className="
+                                text-[16px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
                             10
                         </p>
 
-                        <p className="
-                            text-[8px]
-                            text-gray-600
-                        ">
+                        <p
+                            className="
+                                text-[8px]
+                                text-theme-text-secondary
+                            "
+                        >
                             Failed
                         </p>
 
@@ -360,33 +429,44 @@ function ImportLeads({
                 IMPORT PROGRESS
             ========================================= */}
 
-            <div className="
-                border
-                border-gray-400
-                rounded-md
-                mt-3
-                p-2.5
-            ">
+            <div
+                className="
+                    border
+                    border-theme-border-light
+                    rounded-md
+                    mt-3
+                    p-2.5
 
-                <div className="
-                    flex
-                    items-center
-                    justify-between
-                ">
+                    transition-colors
+                    duration-300
+                "
+            >
 
-                    <p className="
-                        text-[9px]
-                        font-semibold
-                        text-gray-800
-                    ">
+                <div
+                    className="
+                        flex
+                        items-center
+                        justify-between
+                    "
+                >
+
+                    <p
+                        className="
+                            text-[9px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Import progress
                     </p>
 
-                    <p className="
-                        text-[9px]
-                        text-primary
-                        font-medium
-                    ">
+                    <p
+                        className="
+                            text-[9px]
+                            text-primary
+                            font-medium
+                        "
+                    >
                         98%
                     </p>
 
@@ -395,43 +475,53 @@ function ImportLeads({
 
                 {/* PROGRESS BAR */}
 
-                <div className="
-                    w-full
-                    h-[10px]
-                    bg-gray-200
-                    rounded-full
-                    mt-1.5
-                    overflow-hidden
-                ">
-
-                    <div className="
-                        h-full
-                        w-[98%]
-                        bg-primary
+                <div
+                    className="
+                        w-full
+                        h-[10px]
+                        bg-theme-surface-secondary
                         rounded-full
-                    " />
+                        mt-1.5
+                        overflow-hidden
+                    "
+                >
+
+                    <div
+                        className="
+                            h-full
+                            w-[98%]
+                            bg-primary
+                            rounded-full
+                        "
+                    />
 
                 </div>
 
 
-                <div className="
-                    flex
-                    items-center
-                    justify-between
-                    mt-1.5
-                ">
+                <div
+                    className="
+                        flex
+                        items-center
+                        justify-between
+                        mt-1.5
+                    "
+                >
 
-                    <p className="
-                        text-[7px]
-                        text-gray-500
-                    ">
+                    <p
+                        className="
+                            text-[7px]
+                            text-theme-text-secondary
+                        "
+                    >
                         Importing leads...(1,185 of 1,210)
                     </p>
 
-                    <p className="
-                        text-[7px]
-                        text-gray-500
-                    ">
+                    <p
+                        className="
+                            text-[7px]
+                            text-theme-text-secondary
+                        "
+                    >
                         Estimated time remaining: 00:00:05
                     </p>
 
@@ -444,29 +534,38 @@ function ImportLeads({
                 IMPORT LOG
             ========================================= */}
 
-            <div className="
-                border
-                border-gray-400
-                rounded-md
-                mt-3
-                overflow-hidden
-            ">
+            <div
+                className="
+                    border
+                    border-theme-border-light
+                    rounded-md
+                    mt-3
+                    overflow-hidden
+
+                    transition-colors
+                    duration-300
+                "
+            >
 
                 {/* LOG HEADER */}
 
-                <div className="
-                    h-[32px]
-                    px-2.5
-                    flex
-                    items-center
-                    justify-between
-                ">
+                <div
+                    className="
+                        h-[32px]
+                        px-2.5
+                        flex
+                        items-center
+                        justify-between
+                    "
+                >
 
-                    <p className="
-                        text-[9px]
-                        font-semibold
-                        text-gray-800
-                    ">
+                    <p
+                        className="
+                            text-[9px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Import Log
                     </p>
 
@@ -484,6 +583,9 @@ function ImportLeads({
                             flex
                             items-center
                             gap-1
+                            hover:bg-primary/10
+                            transition
+                            cursor-pointer
                         "
                     >
 
@@ -500,58 +602,74 @@ function ImportLeads({
 
                 <div className="overflow-x-auto">
 
-                    <table className="
-                        w-full
-                        min-w-[600px]
-                        border-collapse
-                    ">
+                    <table
+                        className="
+                            w-full
+                            min-w-[600px]
+                            border-collapse
+                        "
+                    >
 
                         <thead>
 
-                            <tr className="
-                                bg-gray-300
-                                border-t
-                                border-b
-                                border-gray-400
-                            ">
+                            <tr
+                                className="
+                                    bg-theme-surface-secondary
+                                    border-t
+                                    border-b
+                                    border-theme-border-light
+                                "
+                            >
 
-                                <th className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                    text-left
-                                    font-medium
-                                ">
+                                <th
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-left
+                                        font-medium
+                                        text-theme-text
+                                    "
+                                >
                                     Status
                                 </th>
 
-                                <th className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                    text-left
-                                    font-medium
-                                ">
+                                <th
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-left
+                                        font-medium
+                                        text-theme-text
+                                    "
+                                >
                                     Description
                                 </th>
 
-                                <th className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                    text-left
-                                    font-medium
-                                ">
+                                <th
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-left
+                                        font-medium
+                                        text-theme-text
+                                    "
+                                >
                                     Count
                                 </th>
 
-                                <th className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                    text-left
-                                    font-medium
-                                ">
+                                <th
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-left
+                                        font-medium
+                                        text-theme-text
+                                    "
+                                >
                                     Details
                                 </th>
 
@@ -564,26 +682,33 @@ function ImportLeads({
 
                             {/* SUCCESS */}
 
-                            <tr className="
-                                border-b
-                                border-gray-300
-                            ">
+                            <tr
+                                className="
+                                    border-b
+                                    border-theme-border-light
+                                "
+                            >
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                    "
+                                >
 
-                                    <div className="
-                                        flex
-                                        items-center
-                                        gap-1
-                                    ">
+                                    <div
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-1
+                                            text-theme-text
+                                        "
+                                    >
 
                                         <Check
                                             size={13}
-                                            className="text-green-600"
+                                            className="text-green-500"
                                         />
 
                                         Successfully
@@ -593,28 +718,36 @@ function ImportLeads({
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
                                     Leads Imported Successfully
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
                                     1,185
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                    "
+                                >
 
                                     <button
                                         type="button"
@@ -624,6 +757,8 @@ function ImportLeads({
                                             gap-2
                                             text-[8px]
                                             text-primary
+                                            hover:underline
+                                            cursor-pointer
                                         "
                                     >
                                         View Details
@@ -637,22 +772,29 @@ function ImportLeads({
 
                             {/* SKIPPED */}
 
-                            <tr className="
-                                border-b
-                                border-gray-300
-                            ">
+                            <tr
+                                className="
+                                    border-b
+                                    border-theme-border-light
+                                "
+                            >
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                    "
+                                >
 
-                                    <div className="
-                                        flex
-                                        items-center
-                                        gap-1
-                                    ">
+                                    <div
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-1
+                                            text-theme-text
+                                        "
+                                    >
 
                                         <AlertTriangle
                                             size={13}
@@ -666,28 +808,36 @@ function ImportLeads({
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
                                     Leads skipped due to duplicate or missing data.
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
                                     15
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                    "
+                                >
 
                                     <button
                                         type="button"
@@ -697,6 +847,8 @@ function ImportLeads({
                                             gap-2
                                             text-[8px]
                                             text-primary
+                                            hover:underline
+                                            cursor-pointer
                                         "
                                     >
                                         View Details
@@ -712,17 +864,22 @@ function ImportLeads({
 
                             <tr>
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                    "
+                                >
 
-                                    <div className="
-                                        flex
-                                        items-center
-                                        gap-1
-                                    ">
+                                    <div
+                                        className="
+                                            flex
+                                            items-center
+                                            gap-1
+                                            text-theme-text
+                                        "
+                                    >
 
                                         <XCircle
                                             size={13}
@@ -736,28 +893,36 @@ function ImportLeads({
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
-                                    Leads failed to import to errors.
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
+                                    Leads failed to import due to errors.
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                    text-[8px]
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                        text-[8px]
+                                        text-theme-text
+                                    "
+                                >
                                     10
                                 </td>
 
 
-                                <td className="
-                                    px-2
-                                    py-2
-                                ">
+                                <td
+                                    className="
+                                        px-2
+                                        py-2
+                                    "
+                                >
 
                                     <button
                                         type="button"
@@ -767,6 +932,8 @@ function ImportLeads({
                                             gap-2
                                             text-[8px]
                                             text-primary
+                                            hover:underline
+                                            cursor-pointer
                                         "
                                     >
                                         View Details
@@ -790,37 +957,48 @@ function ImportLeads({
                 SUCCESS MESSAGE
             ========================================= */}
 
-            <div className="
-                flex
-                items-center
-                justify-between
-                gap-3
-                bg-green-100
-                rounded-md
-                mt-3
-                p-3
-            ">
-
-                <div className="
+            <div
+                className="
                     flex
                     items-center
-                    gap-2
-                ">
+                    justify-between
+                    gap-3
+                    bg-green-500/15
+                    border
+                    border-theme-border-light
+                    rounded-md
+                    mt-3
+                    p-3
 
-                    <div className="
-                        w-9
-                        h-9
-                        rounded-full
-                        border-[3px]
-                        border-green-600
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                <div
+                    className="
                         flex
                         items-center
-                        justify-center
-                    ">
+                        gap-2
+                    "
+                >
+
+                    <div
+                        className="
+                            w-9
+                            h-9
+                            rounded-full
+                            border-[3px]
+                            border-green-500
+                            flex
+                            items-center
+                            justify-center
+                        "
+                    >
 
                         <Check
                             size={21}
-                            className="text-green-600"
+                            className="text-green-500"
                         />
 
                     </div>
@@ -828,19 +1006,23 @@ function ImportLeads({
 
                     <div>
 
-                        <p className="
-                            text-[9px]
-                            font-semibold
-                            text-gray-800
-                        ">
-                            Import Log
+                        <p
+                            className="
+                                text-[9px]
+                                font-semibold
+                                text-theme-text
+                            "
+                        >
+                            Import Complete
                         </p>
 
-                        <p className="
-                            text-[7px]
-                            text-gray-600
-                            mt-0.5
-                        ">
+                        <p
+                            className="
+                                text-[7px]
+                                text-theme-text-secondary
+                                mt-0.5
+                            "
+                        >
                             1,185 leads imported successfully
                         </p>
 
@@ -862,6 +1044,9 @@ function ImportLeads({
                         flex
                         items-center
                         gap-1
+                        hover:bg-primary/10
+                        transition
+                        cursor-pointer
                     "
                 >
 

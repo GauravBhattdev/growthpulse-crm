@@ -13,89 +13,78 @@ import ExcelUpload from "./ExcelUpload";
 import ApiConnector from "./ApiConnector";
 
 
-// =====================================================
-// CREATE LEAD COMPONENT
-// =====================================================
-
 function CreateLead() {
 
     const navigate = useNavigate();
 
-
-    // =====================================================
-    // ACTIVE METHOD
-    // =====================================================
-
     const [activeMethod, setActiveMethod] = useState("manual");
 
 
-    // =====================================================
-    // COMPONENT
-    // =====================================================
-
     return (
 
-        <div className="
-            w-full
-            min-h-screen
-            bg-white
-            p-4
-            sm:p-6
-            lg:p-8
-        ">
+        <div
+            className="
+                w-full
+                min-h-screen
 
+                bg-theme-page
+                text-theme-text
+
+                p-4
+                sm:p-6
+                lg:p-8
+
+                transition-colors
+                duration-300
+            "
+        >
 
             {/* =================================================
                 PAGE HEADER
             ================================================= */}
 
-            <div className="
-                flex
-                flex-col
-                lg:flex-row
-                lg:items-start
-                lg:justify-between
-                gap-5
-                mb-6
-            ">
-
-
-                {/* =================================================
-                    TITLE + BREADCRUMB
-                ================================================= */}
+            <div
+                className="
+                    flex
+                    flex-col
+                    lg:flex-row
+                    lg:items-start
+                    lg:justify-between
+                    gap-5
+                    mb-6
+                "
+            >
 
                 <div>
 
-
-                    {/* TITLE */}
-
-                    <h1 className="
-                        text-2xl
-                        sm:text-[27px]
-                        font-semibold
-                        text-[#111]
-                    ">
+                    <h1
+                        className="
+                            text-2xl
+                            sm:text-[27px]
+                            font-semibold
+                            text-theme-text
+                        "
+                    >
                         Create Lead
                     </h1>
 
 
-                    {/* BREADCRUMB */}
-
-                    <div className="
-                        flex
-                        items-center
-                        gap-3
-                        mt-2
-                        text-xs
-                        sm:text-sm
-                    ">
-
+                    <div
+                        className="
+                            flex
+                            items-center
+                            gap-3
+                            mt-2
+                            text-xs
+                            sm:text-sm
+                        "
+                    >
 
                         <button
                             type="button"
                             onClick={() => navigate("/leads")}
                             className="
-                                text-[#8b3df5]
+                                text-primary
                                 font-medium
                                 hover:underline
                             "
@@ -104,12 +93,12 @@ function CreateLead() {
                         </button>
 
 
-                        <span className="text-gray-500">
+                        <span className="text-theme-text-muted">
                             ›
                         </span>
 
 
-                        <span className="text-gray-400">
+                        <span className="text-theme-text-secondary">
                             Create Lead
                         </span>
 
@@ -118,24 +107,20 @@ function CreateLead() {
                 </div>
 
 
+                {/* METHOD SELECTION */}
 
-                {/* =================================================
-                    METHOD SELECTION
-                ================================================= */}
+                <div
+                    className="
+                        grid
+                        grid-cols-1
+                        sm:grid-cols-3
+                        gap-2
+                        w-full
+                        lg:w-auto
+                    "
+                >
 
-                <div className="
-                    grid
-                    grid-cols-1
-                    sm:grid-cols-3
-                    gap-2
-                    w-full
-                    lg:w-auto
-                ">
-
-
-                    {/* =================================================
-                        MANUAL FORM
-                    ================================================= */}
+                    {/* MANUAL FORM */}
 
                     <button
                         type="button"
@@ -149,78 +134,64 @@ function CreateLead() {
                             sm:w-[170px]
                             px-3
                             py-2
-                            bg-white
+                            bg-theme-surface
                             border
                             rounded-md
                             text-left
                             shadow-sm
                             transition-all
                             duration-200
+                            cursor-pointer
 
                             ${
                                 activeMethod === "manual"
-                                    ? "border-purple-500 shadow-md"
-                                    : "border-gray-300 hover:border-purple-300 hover:shadow-md"
+                                    ? "border-primary shadow-md"
+                                    : "border-theme-border-light hover:border-primary hover:shadow-md"
                             }
                         `}
                     >
 
-
-                        {/* RADIO */}
-
-                        <div className="
-                            w-5
-                            h-5
-                            rounded-full
-                            border-2
-                            border-purple-500
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
+                        <div
+                            className="
+                                w-5
+                                h-5
+                                rounded-full
+                                border-2
+                                border-primary
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
 
                             {activeMethod === "manual" && (
-
-                                <div className="
-                                    w-2.5
-                                    h-2.5
-                                    rounded-full
-                                    bg-[#8b3df5]
-                                " />
-
+                                <div
+                                    className="
+                                        w-2.5
+                                        h-2.5
+                                        rounded-full
+                                        bg-primary
+                                    "
+                                />
                             )}
 
                         </div>
 
 
-                        {/* ICON */}
-
                         <FileText
                             size={23}
-                            className="text-[#8b3df5] shrink-0"
+                            className="text-primary shrink-0"
                         />
 
 
-                        {/* TEXT */}
-
                         <div>
 
-                            <p className="
-                                text-sm
-                                font-medium
-                                text-gray-900
-                            ">
+                            <p className="text-sm font-medium text-theme-text">
                                 Manual Form
                             </p>
 
-
-                            <p className="
-                                text-[9px]
-                                leading-tight
-                                text-gray-500
-                                mt-0.5
-                            ">
+                            <p className="text-[9px] leading-tight text-theme-text-secondary mt-0.5">
                                 Lead added manually
                                 <br />
                                 by admin.
@@ -231,10 +202,7 @@ function CreateLead() {
                     </button>
 
 
-
-                    {/* =================================================
-                        EXCEL / UPLOAD
-                    ================================================= */}
+                    {/* EXCEL / UPLOAD */}
 
                     <button
                         type="button"
@@ -248,52 +216,50 @@ function CreateLead() {
                             sm:w-[170px]
                             px-3
                             py-2
-                            bg-white
+                            bg-theme-surface
                             border
                             rounded-md
                             text-left
                             shadow-sm
                             transition-all
                             duration-200
+                            cursor-pointer
 
                             ${
                                 activeMethod === "upload"
-                                    ? "border-purple-500 shadow-md"
-                                    : "border-gray-300 hover:border-purple-300 hover:shadow-md"
+                                    ? "border-primary shadow-md"
+                                    : "border-theme-border-light hover:border-primary hover:shadow-md"
                             }
                         `}
                     >
 
-
-                        {/* RADIO */}
-
-                        <div className="
-                            w-5
-                            h-5
-                            rounded-full
-                            border-2
-                            border-purple-500
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
+                        <div
+                            className="
+                                w-5
+                                h-5
+                                rounded-full
+                                border-2
+                                border-primary
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
 
                             {activeMethod === "upload" && (
-
-                                <div className="
-                                    w-2.5
-                                    h-2.5
-                                    rounded-full
-                                    bg-[#8b3df5]
-                                " />
-
+                                <div
+                                    className="
+                                        w-2.5
+                                        h-2.5
+                                        rounded-full
+                                        bg-primary
+                                    "
+                                />
                             )}
 
                         </div>
 
-
-                        {/* ICON */}
 
                         <CloudUpload
                             size={24}
@@ -301,28 +267,16 @@ function CreateLead() {
                         />
 
 
-                        {/* TEXT */}
-
                         <div>
 
-                            <p className="
-                                text-sm
-                                font-medium
-                                text-gray-900
-                            ">
+                            <p className="text-sm font-medium text-theme-text">
                                 Excel / Upload
                             </p>
 
-
-                            <p className="
-                                text-[9px]
-                                leading-tight
-                                text-gray-500
-                                mt-0.5
-                            ">
-                                Lead received through
+                            <p className="text-[9px] leading-tight text-theme-text-secondary mt-0.5">
+                                Upload leads via
                                 <br />
-                                website form.
+                                CSV or Excel.
                             </p>
 
                         </div>
@@ -330,10 +284,7 @@ function CreateLead() {
                     </button>
 
 
-
-                    {/* =================================================
-                        API / CONNECTOR
-                    ================================================= */}
+                    {/* API / CONNECTOR */}
 
                     <button
                         type="button"
@@ -347,52 +298,50 @@ function CreateLead() {
                             sm:w-[170px]
                             px-3
                             py-2
-                            bg-white
+                            bg-theme-surface
                             border
                             rounded-md
                             text-left
                             shadow-sm
                             transition-all
                             duration-200
+                            cursor-pointer
 
                             ${
                                 activeMethod === "api"
-                                    ? "border-purple-500 shadow-md"
-                                    : "border-gray-300 hover:border-purple-300 hover:shadow-md"
+                                    ? "border-primary shadow-md"
+                                    : "border-theme-border-light hover:border-primary hover:shadow-md"
                             }
                         `}
                     >
 
-
-                        {/* RADIO */}
-
-                        <div className="
-                            w-5
-                            h-5
-                            rounded-full
-                            border-2
-                            border-purple-500
-                            flex
-                            items-center
-                            justify-center
-                            shrink-0
-                        ">
+                        <div
+                            className="
+                                w-5
+                                h-5
+                                rounded-full
+                                border-2
+                                border-primary
+                                flex
+                                items-center
+                                justify-center
+                                shrink-0
+                            "
+                        >
 
                             {activeMethod === "api" && (
-
-                                <div className="
-                                    w-2.5
-                                    h-2.5
-                                    rounded-full
-                                    bg-[#8b3df5]
-                                " />
-
+                                <div
+                                    className="
+                                        w-2.5
+                                        h-2.5
+                                        rounded-full
+                                        bg-primary
+                                    "
+                                />
                             )}
 
                         </div>
 
-
-                        {/* ICON */}
 
                         <Link2
                             size={24}
@@ -400,28 +349,16 @@ function CreateLead() {
                         />
 
 
-                        {/* TEXT */}
-
                         <div>
 
-                            <p className="
-                                text-sm
-                                font-medium
-                                text-gray-900
-                            ">
+                            <p className="text-sm font-medium text-theme-text">
                                 API / Connector
                             </p>
 
-
-                            <p className="
-                                text-[9px]
-                                leading-tight
-                                text-gray-500
-                                mt-0.5
-                            ">
-                                Lead received through
+                            <p className="text-[9px] leading-tight text-theme-text-secondary mt-0.5">
+                                Connect via API
                                 <br />
-                                API / Connector
+                                or integration.
                             </p>
 
                         </div>
@@ -433,50 +370,34 @@ function CreateLead() {
             </div>
 
 
-
             {/* =================================================
                 ACTIVE CONTENT
             ================================================= */}
 
-            <div className="
-                w-full
-                transition-all
-                duration-300
-            ">
-
-
-                {/* =================================================
-                    MANUAL FORM
-                ================================================= */}
+            <div
+                className="
+                    w-full
+                    transition-all
+                    duration-300
+                "
+            >
 
                 {activeMethod === "manual" && (
-
                     <ManualLeadForm />
-
                 )}
 
-
-
-                {/* =================================================
-                    EXCEL / UPLOAD
-                ================================================= */}
 
                 {activeMethod === "upload" && (
-
-                    <ExcelUpload />
-
+                    <ExcelUpload
+                        onCancel={() => setActiveMethod("manual")}
+                    />
                 )}
 
 
-
-                {/* =================================================
-                    API / CONNECTOR
-                ================================================= */}
-
                 {activeMethod === "api" && (
-
-                    <ApiConnector />
-
+                    <ApiConnector
+                        onCancel={() => setActiveMethod("manual")}
+                    />
                 )}
 
             </div>

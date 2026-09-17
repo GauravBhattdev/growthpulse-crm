@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { Loader2 } from "lucide-react";
 import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
 function ManualLeadForm() {
+
+    const navigate = useNavigate();
 
     const [formData, setFormData] = useState({
         firstName: "",
@@ -71,6 +74,21 @@ function ManualLeadForm() {
 
 
     // ==============================
+    // CANCEL — back to Leads page
+    // ==============================
+
+    const handleCancel = () => {
+
+        if (loading) {
+            return;
+        }
+
+        navigate("/leads");
+
+    };
+
+
+    // ==============================
     // SUBMIT
     // ==============================
 
@@ -104,12 +122,15 @@ function ManualLeadForm() {
         h-[34px]
         px-2.5
         border
-        border-[#aaa]
+        border-theme-border-light
+        rounded
         shadow-sm
         text-[12px]
-        text-gray-700
+        text-theme-text
+        bg-theme-surface
+        placeholder:text-theme-text-muted
         outline-none
-        focus:border-[#8b3df5]
+        focus:border-primary
     `;
 
 
@@ -117,7 +138,7 @@ function ManualLeadForm() {
         block
         text-[12px]
         font-medium
-        text-black
+        text-theme-text
         mb-1
     `;
 
@@ -127,13 +148,14 @@ function ManualLeadForm() {
         h-[34px]
         px-2.5
         border
-        border-[#aaa]
+        border-theme-border-light
+        rounded
         shadow-sm
         text-[12px]
-        text-gray-700
+        text-theme-text
         outline-none
-        bg-white
-        focus:border-[#8b3df5]
+        bg-theme-surface
+        focus:border-primary
     `;
 
 
@@ -144,233 +166,209 @@ function ManualLeadForm() {
             className="
                 w-full
                 border
-                border-[#333]
+                border-theme-border-light
                 rounded-[11px]
-                bg-white
-                px-4
-                sm:px-4
-                pt-2
-                pb-3
+                bg-theme-surface
+                overflow-hidden
+
+                transition-colors
+                duration-300
             "
         >
 
             {/* ==========================================
-                BASIC INFORMATION
+                FORM BODY
             ========================================== */}
 
-            <div className="
-                flex
-                items-center
-                justify-between
-                mb-2
-            ">
+            <div className="px-4 sm:px-4 pt-3 pb-4">
 
-                <h2 className="
-                    text-[16px]
-                    font-semibold
-                    text-[#8b3df5]
-                ">
-                    Basic Information
-                </h2>
+                {/* ==========================================
+                    BASIC INFORMATION
+                ========================================== */}
 
-
-                {/* BUTTONS */}
-
-                <div className="
-                    flex
-                    items-center
-                    gap-2
-                ">
-
-                    <button
-                        type="button"
-                        onClick={handleReset}
-                        disabled={loading}
-                        className="
-                            h-[27px]
-                            px-3
-                            border
-                            border-gray-400
-                            rounded-[3px]
-                            bg-white
-                            text-[10px]
-                            text-gray-700
-                            hover:bg-gray-100
-                            disabled:opacity-50
-                            disabled:cursor-not-allowed
-                        "
-                    >
-                        Reset
-                    </button>
-
-
-                    <button
-                        type="submit"
-                        disabled={loading}
-                        className="
-                            h-[27px]
-                            px-3.5
-                            rounded-[3px]
-                            bg-[#8b3df5]
-                            text-white
-                            text-[10px]
-                            hover:bg-[#7630d8]
-                            disabled:opacity-70
-                            disabled:cursor-not-allowed
-                            flex
-                            items-center
-                            justify-center
-                            gap-1.5
-                        "
-                    >
-
-                        {loading ? (
-                            <>
-                                <Loader2
-                                    size={12}
-                                    className="animate-spin"
-                                />
-
-                                Creating...
-                            </>
-                        ) : (
-                            "Create Lead"
-                        )}
-
-                    </button>
-
-                </div>
-
-            </div>
-
-
-            {/* ==========================================
-                BASIC INFORMATION FIELDS
-            ========================================== */}
-
-            <div className="
-                grid
-                grid-cols-1
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-x-9
-                gap-y-3
-            ">
-
-                {/* FIRST NAME */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        First Name
-                    </label>
-
-                    <input
-                        type="text"
-                        name="firstName"
-                        value={formData.firstName}
-                        onChange={handleChange}
-                        placeholder="Enter first name"
-                        className={inputClass}
-                    />
-
-                </div>
-
-
-                {/* LAST NAME */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Last Name
-                    </label>
-
-                    <input
-                        type="text"
-                        name="lastName"
-                        value={formData.lastName}
-                        onChange={handleChange}
-                        placeholder="Enter last name"
-                        className={inputClass}
-                    />
-
-                </div>
-
-
-                {/* EMAIL */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Email
-                    </label>
-
-                    <input
-                        type="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        placeholder="Enter email address"
-                        className={inputClass}
-                    />
-
-                </div>
-
-
-                {/* PHONE */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Phone Number
-                    </label>
-
-                    <div className="
+                <div
+                    className="
                         flex
-                        w-full
-                        h-[34px]
-                        border
-                        border-[#aaa]
-                        shadow-sm
-                    ">
+                        items-center
+                        justify-between
+                        mb-3
+                    "
+                >
 
-                        <div className="
-                            flex
-                            items-center
-                            gap-1
-                            px-2
-                            border-r
-                            border-[#aaa]
-                            bg-white
-                            text-[12px]
-                            whitespace-nowrap
-                        ">
+                    <h2
+                        className="
+                            text-[16px]
+                            font-semibold
+                            text-primary
+                        "
+                    >
+                        Basic Information
+                    </h2>
 
-                            🇮🇳
+                </div>
 
-                            <span>
-                                +91
-                            </span>
 
-                            <span className="text-gray-600">
-                                ▾
-                            </span>
+                {/* ==========================================
+                    BASIC INFORMATION FIELDS
+                ========================================== */}
+
+                <div
+                    className="
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        lg:grid-cols-3
+                        gap-x-9
+                        gap-y-3
+                    "
+                >
+
+                    {/* FIRST NAME */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            First Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="firstName"
+                            value={formData.firstName}
+                            onChange={handleChange}
+                            placeholder="Enter first name"
+                            className={inputClass}
+                        />
+
+                    </div>
+
+
+                    {/* LAST NAME */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Last Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="lastName"
+                            value={formData.lastName}
+                            onChange={handleChange}
+                            placeholder="Enter last name"
+                            className={inputClass}
+                        />
+
+                    </div>
+
+
+                    {/* EMAIL */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Email
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            placeholder="Enter email address"
+                            className={inputClass}
+                        />
+
+                    </div>
+
+
+                    {/* PHONE */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Phone Number
+                        </label>
+
+                        <div
+                            className="
+                                flex
+                                w-full
+                                h-[34px]
+                                border
+                                border-theme-border-light
+                                rounded
+                                overflow-hidden
+                                shadow-sm
+                            "
+                        >
+
+                            <div
+                                className="
+                                    flex
+                                    items-center
+                                    gap-1
+                                    px-2
+                                    border-r
+                                    border-theme-border-light
+                                    bg-theme-surface-secondary
+                                    text-[12px]
+                                    text-theme-text
+                                    whitespace-nowrap
+                                "
+                            >
+
+                                🇮🇳
+
+                                <span>
+                                    +91
+                                </span>
+
+                                <span className="text-theme-text-secondary">
+                                    ▾
+                                </span>
+
+                            </div>
+
+                            <input
+                                type="tel"
+                                name="phone"
+                                value={formData.phone}
+                                onChange={handleChange}
+                                placeholder="Enter phone number"
+                                className="
+                                    flex-1
+                                    min-w-0
+                                    px-2
+                                    text-[12px]
+                                    text-theme-text
+                                    bg-theme-surface
+                                    placeholder:text-theme-text-muted
+                                    outline-none
+                                "
+                            />
 
                         </div>
 
+                    </div>
+
+
+                    {/* COMPANY */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Company Name
+                        </label>
+
                         <input
-                            type="tel"
-                            name="phone"
-                            value={formData.phone}
+                            type="text"
+                            name="companyName"
+                            value={formData.companyName}
                             onChange={handleChange}
-                            placeholder="Enter phone number"
-                            className="
-                                flex-1
-                                min-w-0
-                                px-2
-                                text-[12px]
-                                outline-none
-                            "
+                            placeholder="Enter Company name"
+                            className={inputClass}
                         />
 
                     </div>
@@ -378,22 +376,425 @@ function ManualLeadForm() {
                 </div>
 
 
-                {/* COMPANY */}
+                {/* ==========================================
+                    LEAD DETAILS
+                ========================================== */}
 
-                <div>
+                <h2
+                    className="
+                        text-[16px]
+                        font-semibold
+                        text-primary
+                        mt-4
+                        mb-3
+                    "
+                >
+                    Lead Details
+                </h2>
 
-                    <label className={labelClass}>
-                        Company Name
-                    </label>
 
-                    <input
-                        type="text"
-                        name="companyName"
-                        value={formData.companyName}
-                        onChange={handleChange}
-                        placeholder="Enter Company name"
-                        className={inputClass}
-                    />
+                <div
+                    className="
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        lg:grid-cols-3
+                        gap-x-9
+                        gap-y-3
+                    "
+                >
+
+                    {/* SOURCE */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Source
+                        </label>
+
+                        <select
+                            name="source"
+                            value={formData.source}
+                            onChange={handleChange}
+                            className={selectClass}
+                        >
+
+                            <option value="">
+                                Select Source
+                            </option>
+
+                            <option value="Website">
+                                Website
+                            </option>
+
+                            <option value="LinkedIn">
+                                LinkedIn
+                            </option>
+
+                            <option value="Referral">
+                                Referral
+                            </option>
+
+                            <option value="Cold Call">
+                                Cold Call
+                            </option>
+
+                            <option value="Advertisement">
+                                Advertisement
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* STATUS */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Status
+                        </label>
+
+                        <select
+                            name="status"
+                            value={formData.status}
+                            onChange={handleChange}
+                            className={selectClass}
+                        >
+
+                            <option value="New">
+                                New
+                            </option>
+
+                            <option value="Contacted">
+                                Contacted
+                            </option>
+
+                            <option value="Qualified">
+                                Qualified
+                            </option>
+
+                            <option value="Proposal">
+                                Proposal
+                            </option>
+
+                            <option value="Closed">
+                                Closed
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* LEAD OWNER */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Lead Owner
+                        </label>
+
+                        <select
+                            name="leadOwner"
+                            value={formData.leadOwner}
+                            onChange={handleChange}
+                            className={selectClass}
+                        >
+
+                            <option value="">
+                                Select lead owner
+                            </option>
+
+                            <option value="Him Mostins">
+                                Him Mostins
+                            </option>
+
+                            <option value="Virele Netkatorie">
+                                Virele Netkatorie
+                            </option>
+
+                            <option value="Linte Preddenbling">
+                                Linte Preddenbling
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* INDUSTRY */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Industry
+                        </label>
+
+                        <select
+                            name="industry"
+                            value={formData.industry}
+                            onChange={handleChange}
+                            className={selectClass}
+                        >
+
+                            <option value="">
+                                Select Industry
+                            </option>
+
+                            <option value="Technology">
+                                Technology
+                            </option>
+
+                            <option value="Finance">
+                                Finance
+                            </option>
+
+                            <option value="Healthcare">
+                                Healthcare
+                            </option>
+
+                            <option value="Education">
+                                Education
+                            </option>
+
+                            <option value="Retail">
+                                Retail
+                            </option>
+
+                            <option value="Construction">
+                                Construction
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* CHANNEL */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Channel
+                        </label>
+
+                        <input
+                            type="text"
+                            name="channel"
+                            value={formData.channel}
+                            onChange={handleChange}
+                            placeholder="Enter channel"
+                            className={inputClass}
+                        />
+
+                    </div>
+
+
+                    {/* TAGS */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Tags
+                        </label>
+
+                        <input
+                            type="text"
+                            name="tags"
+                            value={formData.tags}
+                            onChange={handleChange}
+                            placeholder="Enter tags"
+                            className={inputClass}
+                        />
+
+                        <p
+                            className="
+                                text-[9px]
+                                text-theme-text-secondary
+                                mt-0.5
+                            "
+                        >
+                            Press Enter to add multiple tags
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                {/* ==========================================
+                    ADDRESS
+                ========================================== */}
+
+                <h2
+                    className="
+                        text-[16px]
+                        font-semibold
+                        text-primary
+                        mt-4
+                        mb-3
+                    "
+                >
+                    Address
+                </h2>
+
+
+                <div
+                    className="
+                        grid
+                        grid-cols-1
+                        md:grid-cols-2
+                        lg:grid-cols-3
+                        gap-x-9
+                        gap-y-3
+                    "
+                >
+
+                    {/* ADDRESS */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            Address
+                        </label>
+
+                        <textarea
+                            name="address"
+                            value={formData.address}
+                            onChange={handleChange}
+                            placeholder="Enter Address"
+                            className="
+                                w-full
+                                h-[108px]
+                                px-2.5
+                                py-2
+                                border
+                                border-theme-border-light
+                                rounded
+                                shadow-sm
+                                text-[12px]
+                                text-theme-text
+                                bg-theme-surface
+                                placeholder:text-theme-text-muted
+                                outline-none
+                                resize-none
+                                focus:border-primary
+                            "
+                        />
+
+                    </div>
+
+
+                    {/* CITY + COUNTRY */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            City
+                        </label>
+
+                        <input
+                            type="text"
+                            name="city"
+                            value={formData.city}
+                            onChange={handleChange}
+                            placeholder="Enter city"
+                            className={inputClass}
+                        />
+
+
+                        <label
+                            className="
+                                block
+                                text-[12px]
+                                font-medium
+                                text-theme-text
+                                mt-2
+                                mb-1
+                            "
+                        >
+                            Country
+                        </label>
+
+                        <select
+                            name="country"
+                            value={formData.country}
+                            onChange={handleChange}
+                            className={selectClass}
+                        >
+
+                            <option value="">
+                                Select Country
+                            </option>
+
+                            <option value="India">
+                                India
+                            </option>
+
+                            <option value="United States">
+                                United States
+                            </option>
+
+                            <option value="United Kingdom">
+                                United Kingdom
+                            </option>
+
+                            <option value="Canada">
+                                Canada
+                            </option>
+
+                            <option value="Australia">
+                                Australia
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    {/* STATE + POSTAL CODE */}
+
+                    <div>
+
+                        <label className={labelClass}>
+                            State
+                        </label>
+
+                        <input
+                            type="text"
+                            name="state"
+                            value={formData.state}
+                            onChange={handleChange}
+                            placeholder="Enter state"
+                            className={inputClass}
+                        />
+
+
+                        <label
+                            className="
+                                block
+                                text-[12px]
+                                font-medium
+                                text-theme-text
+                                mt-2
+                                mb-1
+                            "
+                        >
+                            Postal Code
+                        </label>
+
+                        <input
+                            type="text"
+                            name="postalCode"
+                            value={formData.postalCode}
+                            onChange={handleChange}
+                            placeholder="Enter postal code"
+                            className={inputClass}
+                        />
+
+                    </div>
 
                 </div>
 
@@ -401,404 +802,134 @@ function ManualLeadForm() {
 
 
             {/* ==========================================
-                LEAD DETAILS
+                FOOTER
             ========================================== */}
 
-            <h2 className="
-                text-[16px]
-                font-semibold
-                text-[#8b3df5]
-                mt-2.5
-                mb-2
-            ">
-                Lead Details
-            </h2>
-
-
-            <div className="
-                grid
-                grid-cols-1
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-x-9
-                gap-y-3
-            ">
-
-                {/* SOURCE */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Source
-                    </label>
-
-                    <select
-                        name="source"
-                        value={formData.source}
-                        onChange={handleChange}
-                        className={selectClass}
-                    >
-
-                        <option value="">
-                            Select Source
-                        </option>
-
-                        <option value="Website">
-                            Website
-                        </option>
-
-                        <option value="LinkedIn">
-                            LinkedIn
-                        </option>
-
-                        <option value="Referral">
-                            Referral
-                        </option>
-
-                        <option value="Cold Call">
-                            Cold Call
-                        </option>
-
-                        <option value="Advertisement">
-                            Advertisement
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                {/* STATUS */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Status
-                    </label>
-
-                    <select
-                        name="status"
-                        value={formData.status}
-                        onChange={handleChange}
-                        className={selectClass}
-                    >
-
-                        <option value="New">
-                            New
-                        </option>
-
-                        <option value="Contacted">
-                            Contacted
-                        </option>
-
-                        <option value="Qualified">
-                            Qualified
-                        </option>
-
-                        <option value="Proposal">
-                            Proposal
-                        </option>
-
-                        <option value="Closed">
-                            Closed
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                {/* LEAD OWNER */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Lead Owner
-                    </label>
-
-                    <select
-                        name="leadOwner"
-                        value={formData.leadOwner}
-                        onChange={handleChange}
-                        className={selectClass}
-                    >
-
-                        <option value="">
-                            Select lead owner
-                        </option>
-
-                        <option value="Him Mostins">
-                            Him Mostins
-                        </option>
-
-                        <option value="Virele Netkatorie">
-                            Virele Netkatorie
-                        </option>
-
-                        <option value="Linte Preddenbling">
-                            Linte Preddenbling
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                {/* INDUSTRY */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Industry
-                    </label>
-
-                    <select
-                        name="industry"
-                        value={formData.industry}
-                        onChange={handleChange}
-                        className={selectClass}
-                    >
-
-                        <option value="">
-                            Select Industry
-                        </option>
-
-                        <option value="Technology">
-                            Technology
-                        </option>
-
-                        <option value="Finance">
-                            Finance
-                        </option>
-
-                        <option value="Healthcare">
-                            Healthcare
-                        </option>
-
-                        <option value="Education">
-                            Education
-                        </option>
-
-                        <option value="Retail">
-                            Retail
-                        </option>
-
-                        <option value="Construction">
-                            Construction
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                {/* CHANNEL */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Channel
-                    </label>
-
-                    <input
-                        type="text"
-                        name="channel"
-                        value={formData.channel}
-                        onChange={handleChange}
-                        placeholder="Enter lead source"
-                        className={inputClass}
-                    />
-
-                </div>
-
-
-                {/* TAGS */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Tags
-                    </label>
-
-                    <input
-                        type="text"
-                        name="tags"
-                        value={formData.tags}
-                        onChange={handleChange}
-                        placeholder="Enter tags"
-                        className={inputClass}
-                    />
-
-                    <p className="
-                        text-[9px]
-                        text-gray-500
-                        mt-0.5
-                    ">
-                        Press Enter to add multiple tags
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            {/* ==========================================
-                ADDRESS
-            ========================================== */}
-
-            <h2 className="
-                text-[16px]
-                font-semibold
-                text-[#8b3df5]
-                mt-2
-                mb-2
-            ">
-                Basic Information
-            </h2>
-
-
-            <div className="
-                grid
-                grid-cols-1
-                md:grid-cols-2
-                lg:grid-cols-3
-                gap-x-9
-                gap-y-3
-            ">
-
-                {/* ADDRESS */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        Address
-                    </label>
-
-                    <textarea
-                        name="address"
-                        value={formData.address}
-                        onChange={handleChange}
-                        placeholder="Enter Address"
+            <div
+                className="
+                    shrink-0
+
+                    border-t
+                    border-theme-border-light
+
+                    px-4
+                    sm:px-5
+                    py-3
+
+                    flex
+                    items-center
+                    justify-between
+
+                    gap-3
+
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                {/* CANCEL — LEFT */}
+
+                <button
+                    type="button"
+                    onClick={handleCancel}
+                    disabled={loading}
+                    className="
+                        h-[38px]
+                        min-w-[90px]
+                        px-4
+                        sm:px-5
+                        border
+                        border-theme-border-light
+                        rounded-md
+                        bg-theme-surface
+                        text-theme-text
+                        text-xs
+                        sm:text-sm
+                        font-semibold
+                        hover:bg-theme-surface-secondary
+                        transition
+                        disabled:opacity-50
+                        disabled:cursor-not-allowed
+                        cursor-pointer
+                    "
+                >
+                    Cancel
+                </button>
+
+
+                {/* RIGHT SIDE — RESET + CREATE */}
+
+                <div className="flex items-center gap-2">
+
+                    {/* RESET */}
+
+                    <button
+                        type="button"
+                        onClick={handleReset}
+                        disabled={loading}
                         className="
-                            w-full
-                            h-[108px]
-                            px-2.5
-                            py-2
+                            h-[38px]
+                            px-4
+                            sm:px-5
                             border
-                            border-[#aaa]
-                            shadow-sm
-                            text-[12px]
-                            outline-none
-                            resize-none
-                            focus:border-[#8b3df5]
+                            border-theme-border-light
+                            rounded-md
+                            bg-theme-surface
+                            text-theme-text
+                            text-xs
+                            sm:text-sm
+                            font-semibold
+                            hover:bg-theme-surface-secondary
+                            transition
+                            disabled:opacity-50
+                            disabled:cursor-not-allowed
+                            cursor-pointer
                         "
-                    />
-
-                </div>
-
-
-                {/* CITY + COUNTRY */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        City
-                    </label>
-
-                    <input
-                        type="text"
-                        name="city"
-                        value={formData.city}
-                        onChange={handleChange}
-                        placeholder="Enter city"
-                        className={inputClass}
-                    />
+                    >
+                        Reset
+                    </button>
 
 
-                    <label className="
-                        block
-                        text-[12px]
-                        font-medium
-                        text-black
-                        mt-2
-                        mb-1
-                    ">
-                        Country
-                    </label>
+                    {/* CREATE LEAD */}
 
-                    <select
-                        name="country"
-                        value={formData.country}
-                        onChange={handleChange}
-                        className={selectClass}
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className="
+                            h-[38px]
+                            px-4
+                            sm:px-5
+                            bg-primary
+                            text-white
+                            rounded-md
+                            text-xs
+                            sm:text-sm
+                            font-medium
+                            hover:bg-primaryHover
+                            transition
+                            disabled:opacity-70
+                            disabled:cursor-not-allowed
+                            flex
+                            items-center
+                            justify-center
+                            gap-2
+                            cursor-pointer
+                        "
                     >
 
-                        <option value="">
-                            Select Country
-                        </option>
+                        {loading ? (
+                            <>
+                                <Loader2
+                                    size={14}
+                                    className="animate-spin"
+                                />
+                                Creating...
+                            </>
+                        ) : (
+                            "Create Lead"
+                        )}
 
-                        <option value="India">
-                            India
-                        </option>
-
-                        <option value="United States">
-                            United States
-                        </option>
-
-                        <option value="United Kingdom">
-                            United Kingdom
-                        </option>
-
-                        <option value="Canada">
-                            Canada
-                        </option>
-
-                        <option value="Australia">
-                            Australia
-                        </option>
-
-                    </select>
-
-                </div>
-
-
-                {/* STATE + POSTAL CODE */}
-
-                <div>
-
-                    <label className={labelClass}>
-                        State
-                    </label>
-
-                    <input
-                        type="text"
-                        name="state"
-                        value={formData.state}
-                        onChange={handleChange}
-                        placeholder="Enter state"
-                        className={inputClass}
-                    />
-
-
-                    <label className="
-                        block
-                        text-[12px]
-                        font-medium
-                        text-black
-                        mt-2
-                        mb-1
-                    ">
-                        Postal Code
-                    </label>
-
-                    <input
-                        type="text"
-                        name="postalCode"
-                        value={formData.postalCode}
-                        onChange={handleChange}
-                        placeholder="Enter postal code"
-                        className={inputClass}
-                    />
+                    </button>
 
                 </div>
 

@@ -13,34 +13,38 @@ function ImportLeads({
 
     return (
 
-        <div className="
-            w-full
-            min-w-0
-            flex
-            flex-col
-            items-center
-            justify-center
-            text-center
-            py-8
-            sm:py-12
-        ">
+        <div
+            className="
+                w-full
+                min-w-0
+                flex
+                flex-col
+                items-center
+                justify-center
+                text-center
+                py-8
+                sm:py-12
+            "
+        >
 
             {/* Success Icon */}
 
-            <div className="
-                w-16
-                h-16
-                rounded-full
-                bg-green-100
-                flex
-                items-center
-                justify-center
-                mb-5
-            ">
+            <div
+                className="
+                    w-16
+                    h-16
+                    rounded-full
+                    bg-green-500/15
+                    flex
+                    items-center
+                    justify-center
+                    mb-5
+                "
+            >
 
                 <Check
                     size={30}
-                    className="text-green-600"
+                    className="text-green-500"
                 />
 
             </div>
@@ -48,25 +52,29 @@ function ImportLeads({
 
             {/* Heading */}
 
-            <h2 className="
-                text-lg
-                sm:text-xl
-                font-semibold
-                text-gray-800
-            ">
+            <h2
+                className="
+                    text-lg
+                    sm:text-xl
+                    font-semibold
+                    text-theme-text
+                "
+            >
                 Ready to Import
             </h2>
 
 
             {/* Description */}
 
-            <p className="
-                text-[11px]
-                sm:text-xs
-                text-gray-500
-                mt-2
-                max-w-[400px]
-            ">
+            <p
+                className="
+                    text-[11px]
+                    sm:text-xs
+                    text-theme-text-secondary
+                    mt-2
+                    max-w-[400px]
+                "
+            >
                 Your file contains 23 valid leads ready to be imported.
             </p>
 
@@ -85,7 +93,7 @@ function ImportLeads({
 
                     py-2.5
 
-                    bg-[#8B3DF5]
+                    bg-primary
 
                     text-white
 
@@ -95,12 +103,14 @@ function ImportLeads({
 
                     font-medium
 
-                    hover:bg-[#7630D8]
+                    hover:bg-primaryHover
 
                     transition
 
                     disabled:opacity-60
                     disabled:cursor-not-allowed
+
+                    cursor-pointer
 
                     inline-flex
                     items-center

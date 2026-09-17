@@ -7,27 +7,29 @@ function Stepper({
 }) {
 
     return (
-        <div className="
-            w-full
-            lg:w-[190px]
-            xl:w-[210px]
-            shrink-0
-            border
-            border-gray-300
-            rounded-[8px]
-            bg-white
-            overflow-hidden
-        ">
+
+        <div
+            className="
+                w-full
+                lg:w-[190px]
+                xl:w-[210px]
+                shrink-0
+                border
+                border-theme-border-light
+                rounded-[8px]
+                bg-theme-surface
+                overflow-hidden
+
+                transition-colors
+                duration-300
+            "
+        >
 
             <div className="relative h-full">
 
                 {/* STEPS */}
 
-                <div className="
-                    relative
-                    flex
-                    flex-col
-                ">
+                <div className="relative flex flex-col">
 
                     {steps.map((step, index) => {
 
@@ -61,11 +63,12 @@ function Stepper({
                                         text-left
                                         transition-all
                                         duration-200
+                                        cursor-pointer
 
                                         ${
                                             isActive
-                                                ? "bg-[#ead8fb]"
-                                                : "bg-white"
+                                                ? "bg-primary/10"
+                                                : "bg-theme-surface"
                                         }
                                     `}
                                 >
@@ -90,7 +93,7 @@ function Stepper({
                                             ${
                                                 isActive || isCompleted
                                                     ? "bg-primary border-primary text-white"
-                                                    : "bg-gray-400 border-gray-400 text-white"
+                                                    : "bg-theme-text-muted border-theme-text-muted text-white"
                                             }
                                         `}
                                     >
@@ -111,7 +114,7 @@ function Stepper({
                                                 ${
                                                     isActive
                                                         ? "text-primary"
-                                                        : "text-gray-800"
+                                                        : "text-theme-text"
                                                 }
                                             `}
                                         >
@@ -128,7 +131,7 @@ function Stepper({
                                                 ${
                                                     isActive
                                                         ? "text-primary"
-                                                        : "text-gray-500"
+                                                        : "text-theme-text-secondary"
                                                 }
                                             `}
                                         >
@@ -143,19 +146,23 @@ function Stepper({
                                 {/* DOTTED CONNECTOR */}
 
                                 {!isLastStep && (
-                                    <div className="
-                                        h-[18px]
-                                        flex
-                                        items-center
-                                        pl-[21px]
-                                        bg-white
-                                    ">
-                                        <div className="
-                                            h-full
-                                            border-l
-                                            border-dotted
-                                            border-gray-500
-                                        " />
+                                    <div
+                                        className="
+                                            h-[18px]
+                                            flex
+                                            items-center
+                                            pl-[21px]
+                                            bg-theme-surface
+                                        "
+                                    >
+                                        <div
+                                            className="
+                                                h-full
+                                                border-l
+                                                border-dotted
+                                                border-theme-border-light
+                                            "
+                                        />
                                     </div>
                                 )}
 
@@ -168,6 +175,7 @@ function Stepper({
             </div>
 
         </div>
+
     );
 }
 

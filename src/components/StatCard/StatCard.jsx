@@ -8,16 +8,15 @@ function StatCard({ icon, title, value, percentage }) {
                 bg-theme-surface
                 border
                 border-theme-border-light
-                rounded-[7px]
+                rounded-[8px]
 
-                min-h-[102px]
-                h-auto
+                min-h-[80px]
 
                 flex
                 items-center
 
-                p-3
-                sm:p-[14px]
+                px-3
+                py-2
 
                 shadow-sm
 
@@ -27,7 +26,7 @@ function StatCard({ icon, title, value, percentage }) {
                 transition-all
                 duration-300
 
-                hover:scale-[1.04]
+                hover:scale-[1.02]
             "
         >
 
@@ -37,9 +36,6 @@ function StatCard({ icon, title, value, percentage }) {
                 className="
                     w-9
                     h-9
-
-                    sm:w-10
-                    sm:h-10
 
                     rounded-full
 
@@ -54,7 +50,6 @@ function StatCard({ icon, title, value, percentage }) {
                     shrink-0
 
                     mr-3
-                    sm:mr-[14px]
                 "
             >
                 {icon}
@@ -70,10 +65,9 @@ function StatCard({ icon, title, value, percentage }) {
                 <p
                     className="
                         m-0
-                        mb-[3px]
+                        mb-[1px]
 
-                        text-[12px]
-                        sm:text-[13px]
+                        text-[11px]
 
                         text-theme-text-secondary
 
@@ -91,7 +85,6 @@ function StatCard({ icon, title, value, percentage }) {
                         m-0
 
                         text-[18px]
-                        sm:text-[20px]
 
                         text-theme-text
                         font-semibold
@@ -108,13 +101,12 @@ function StatCard({ icon, title, value, percentage }) {
                 <p
                     className="
                         m-0
-                        mt-[6px]
-                        sm:mt-[7px]
+
+                        mt-[2px]
 
                         text-[10px]
-                        sm:text-[11px]
 
-                        text-[#57C96A]
+                        text-green-500
 
                         whitespace-nowrap
                     "

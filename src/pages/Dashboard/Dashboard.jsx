@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 
 import {
@@ -28,11 +27,8 @@ function Dashboard() {
     useEffect(() => {
 
         const timer = setTimeout(() => {
-
             setLoading(false);
-
         }, 1500);
-
 
         return () => clearTimeout(timer);
 
@@ -42,21 +38,9 @@ function Dashboard() {
     if (loading) {
 
         return (
-
-            <div
-                className="
-                    min-h-[calc(100vh-66px)]
-                    bg-theme-page
-                    flex
-                    items-center
-                    justify-center
-                "
-            >
-
+            <div className="min-h-[calc(100vh-66px)] bg-theme-page flex items-center justify-center">
                 <Loader text="Loading dashboard..." />
-
             </div>
-
         );
 
     }
@@ -68,6 +52,7 @@ function Dashboard() {
             className="
                 w-full
                 min-h-[calc(100vh-66px)]
+
                 bg-theme-page
                 text-theme-text
 
@@ -75,89 +60,73 @@ function Dashboard() {
                 sm:px-4
                 lg:px-5
 
-                py-4
+                py-3
+                sm:py-4
+
+                transition-colors
+                duration-300
             "
         >
 
-            {/* =================================================
-                DASHBOARD HEADING
-            ================================================= */}
+            {/* DASHBOARD HEADING */}
 
             <div>
 
-                <h1
-                    className="
-                        m-0
-                        text-[27px]
-                        font-semibold
-                        text-theme-text
-                    "
-                >
+                <h1 className="m-0 text-[22px] sm:text-[27px] font-semibold text-theme-text">
                     Dashboard
                 </h1>
 
-
-                <p
-                    className="
-                        mt-[5px]
-                        mb-[18px]
-                        text-[13px]
-                        text-theme-text-secondary
-                    "
-                >
+                <p className="mt-[5px] mb-[14px] sm:mb-[18px] text-[12px] sm:text-[13px] text-theme-text-secondary">
                     Welcome Back, Admin! Here's what's happening today.
                 </p>
 
             </div>
 
 
-            {/* =================================================
-                STATISTICS CARDS
-            ================================================= */}
+            {/* STATISTICS CARDS */}
 
             <div
                 className="
                     w-full
                     grid
-                    grid-cols-1
-                    sm:grid-cols-2
+                    grid-cols-2
                     lg:grid-cols-3
                     xl:grid-cols-5
-                    gap-4
+                    gap-3 sm:gap-4
                     items-stretch
                 "
             >
 
                 <StatCard
-                    icon={<Users size={22} />}
+                    icon={<Users size={18} />}
                     title="Total Leads"
                     value="1,248"
                     percentage="12.5%"
                 />
 
                 <StatCard
-                    icon={<UserRound size={22} />}
+                    icon={<UserRound size={18} />}
                     title="New Leads"
                     value="320"
                     percentage="8.4%"
                 />
 
                 <StatCard
-                    icon={<Check size={22} />}
+                    icon={<Check size={18} />}
                     title="Qualified Leads"
                     value="348"
                     percentage="12.5%"
                 />
 
                 <StatCard
-                    icon={<BriefcaseBusiness size={22} />}
+                    icon={<BriefcaseBusiness size={18} />}
                     title="Revenue"
                     value="₹ 8.45L"
                     percentage="18.6%"
                 />
 
                 <StatCard
-                    icon={<TrendingUp size={22} />}
+                    icon={<TrendingUp size={18} />}
                     title="Conversion Lead"
                     value="31.4%"
                     percentage="4.8%"
@@ -166,9 +135,7 @@ function Dashboard() {
             </div>
 
 
-            {/* =================================================
-                CHARTS
-            ================================================= */}
+            {/* CHARTS */}
 
             <div
                 className="
@@ -177,7 +144,7 @@ function Dashboard() {
                     lg:grid-cols-2
                     xl:grid-cols-3
                     gap-4
-                    mt-[18px]
+                    mt-4
                 "
             >
 
@@ -196,9 +163,7 @@ function Dashboard() {
             </div>
 
 
-            {/* =================================================
-                RECENT SECTIONS
-            ================================================= */}
+            {/* RECENT SECTIONS */}
 
             <div
                 className="
@@ -206,7 +171,7 @@ function Dashboard() {
                     grid-cols-1
                     lg:grid-cols-2
                     gap-4
-                    mt-[18px]
+                    mt-4
                 "
             >
 
@@ -214,7 +179,7 @@ function Dashboard() {
                     <RecentLeads />
                 </DashboardBox>
 
-                <DashboardBox title="Recent Activity">
+                <DashboardBox title="Recent Activities">
                     <RecentActivity />
                 </DashboardBox>
 
@@ -228,4 +193,3 @@ function Dashboard() {
 
 
 export default Dashboard;
-

@@ -6,18 +6,16 @@ import {
     ArrowLeft
 } from "lucide-react";
 
+import { useNavigate } from "react-router-dom";
+
 import UploadFile from "./ExcelUpload/UploadFile";
-import MapFields from "./ExcelUpload/MapFields";
 import PreviewLeads from "./ExcelUpload/PreviewLeads";
 import ImportLeads from "./ExcelUpload/ImportLeads";
 
 
 function ExcelUpload() {
 
-
-    // ==========================================
-    // STATE
-    // ==========================================
+    const navigate = useNavigate();
 
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -25,38 +23,15 @@ function ExcelUpload() {
 
     const [loading, setLoading] = useState(false);
 
-    const [mapping, setMapping] = useState({
-        firstName: "First Name",
-        lastName: "Last Name",
-        email: "Email",
-        phone: "Phone",
-        company: "Company Name",
-        source: "Source",
-        status: "Status"
-    });
-
 
     // ==========================================
     // STEPS
     // ==========================================
 
     const steps = [
-        {
-            number: 1,
-            title: "Upload File"
-        },
-        {
-            number: 2,
-            title: "Map Fields"
-        },
-        {
-            number: 3,
-            title: "Preview Leads"
-        },
-        {
-            number: 4,
-            title: "Import Leads"
-        }
+        { number: 1, title: "Upload File" },
+        { number: 2, title: "Preview Leads" },
+        { number: 3, title: "Import Leads" }
     ];
 
 
@@ -66,10 +41,8 @@ function ExcelUpload() {
 
     const handleNext = () => {
 
-        if (currentStep < 4) {
-
+        if (currentStep < 3) {
             setCurrentStep(currentStep + 1);
-
         }
 
     };
@@ -82,33 +55,14 @@ function ExcelUpload() {
     const handleBack = () => {
 
         if (currentStep > 1) {
-
             setCurrentStep(currentStep - 1);
-
         }
 
     };
 
 
     // ==========================================
-    // MAPPING CHANGE
-    // ==========================================
-
-    const handleMappingChange = (field, value) => {
-
-        setMapping((previousMapping) => ({
-
-            ...previousMapping,
-
-            [field]: value
-
-        }));
-
-    };
-
-
-    // ==========================================
-    // CANCEL
+    // CANCEL — back to Leads page
     // ==========================================
 
     const handleCancel = () => {
@@ -117,9 +71,7 @@ function ExcelUpload() {
             return;
         }
 
-        setCurrentStep(1);
-
-        setSelectedFile(null);
+        navigate("/leads");
 
     };
 
@@ -132,23 +84,9 @@ function ExcelUpload() {
 
         setLoading(true);
 
-        console.log(
-            "Importing leads from:",
-            selectedFile
-        );
-
         setTimeout(() => {
-
             setLoading(false);
-
-            console.log(
-                "Leads imported successfully!"
-            );
-
-            alert(
-                "Leads imported successfully!"
-            );
-
+            alert("Leads imported successfully!");
         }, 1500);
 
     };
@@ -156,67 +94,59 @@ function ExcelUpload() {
 
     return (
 
-        <div className="
-            w-full
-            flex
-            flex-col
-            lg:flex-row
-            gap-4
-            items-stretch
-        ">
-
-
-            {/* ==========================================
-                LEFT BOX - STEP PROCESS
-            ========================================== */}
-
-            <div className="
+        <div
+            className="
                 w-full
-                lg:w-[285px]
-                xl:w-[300px]
-                shrink-0
-                border
-                border-gray-300
-                rounded-[10px]
-                bg-white
-                p-5
-            ">
+                flex
+                flex-col
+                lg:flex-row
+                gap-4
+                items-stretch
+            "
+        >
 
-                <h2 className="
-                    text-[15px]
-                    font-semibold
-                    text-gray-800
-                    mb-5
-                ">
+            {/* LEFT BOX - STEP PROCESS */}
+
+            <div
+                className="
+                    w-full
+                    lg:w-[285px]
+                    xl:w-[300px]
+                    shrink-0
+
+                    border
+                    border-theme-border-light
+                    rounded-[10px]
+                    bg-theme-surface
+
+                    p-5
+
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                <h2
+                    className="
+                        text-[15px]
+                        font-semibold
+                        text-theme-text
+                        mb-5
+                    "
+                >
                     1. Upload Process
                 </h2>
 
 
-                {/* ==========================================
-                    STEPS WITH DOTTED LINES
-                ========================================== */}
-
-                <div className="
-                    flex
-                    flex-col
-                ">
+                <div className="flex flex-col">
 
                     {steps.map((step, index) => (
 
-                        <div
-                            key={step.number}
-                            className="
-                                relative
-                            "
-                        >
-
-                            {/* STEP BUTTON */}
+                        <div key={step.number} className="relative">
 
                             <button
                                 type="button"
-                                onClick={() =>
-                                    setCurrentStep(step.number)
-                                }
+                                onClick={() => setCurrentStep(step.number)}
                                 disabled={loading}
                                 className="
                                     w-full
@@ -227,15 +157,13 @@ function ExcelUpload() {
                                     p-2
                                     rounded-md
                                     transition
-                                    hover:bg-gray-50
+                                    hover:bg-theme-surface-secondary
                                     disabled:cursor-not-allowed
+                                    cursor-pointer
                                 "
                             >
 
-                                {/* STEP CIRCLE */}
-
                                 <div className={`
-
                                     w-8
                                     h-8
                                     rounded-full
@@ -247,68 +175,57 @@ function ExcelUpload() {
                                     shrink-0
                                     relative
                                     z-10
+                                    transition-colors
+                                    duration-300
 
                                     ${
                                         currentStep >= step.number
-                                            ? "bg-[#8b3df5] text-white"
-                                            : "bg-gray-200 text-gray-500"
+                                            ? "bg-primary text-white"
+                                            : "bg-theme-surface-secondary text-theme-text-secondary"
                                     }
-
                                 `}>
 
                                     {currentStep > step.number ? (
-
                                         <Check size={14} />
-
                                     ) : (
-
                                         step.number
-
                                     )}
 
                                 </div>
 
 
-                                {/* STEP TITLE */}
-
                                 <p className={`
-
                                     text-xs
                                     font-medium
+                                    transition-colors
+                                    duration-300
 
                                     ${
                                         currentStep === step.number
-                                            ? "text-[#8b3df5]"
+                                            ? "text-primary"
                                             : currentStep > step.number
-                                            ? "text-gray-700"
-                                            : "text-gray-500"
+                                            ? "text-theme-text"
+                                            : "text-theme-text-secondary"
                                     }
-
                                 `}>
-
                                     {step.title}
-
                                 </p>
 
                             </button>
 
 
-                            {/* ==========================================
-                                DOTTED CONNECTOR
-                            ========================================== */}
-
                             {index < steps.length - 1 && (
-
-                                <div className="
-                                    absolute
-                                    left-[23px]
-                                    top-[40px]
-                                    h-[24px]
-                                    border-l-2
-                                    border-dotted
-                                    border-gray-300
-                                " />
-
+                                <div
+                                    className="
+                                        absolute
+                                        left-[23px]
+                                        top-[40px]
+                                        h-[24px]
+                                        border-l-2
+                                        border-dotted
+                                        border-theme-border-light
+                                    "
+                                />
                             )}
 
                         </div>
@@ -320,135 +237,87 @@ function ExcelUpload() {
             </div>
 
 
-            {/* ==========================================
-                RIGHT BOX - CONTENT
-            ========================================== */}
+            {/* RIGHT BOX - CONTENT + FOOTER */}
 
-            <div className="
-                flex-1
-                min-w-0
-                border
-                border-gray-300
-                rounded-[10px]
-                bg-white
-                p-5
-                sm:p-6
-                pb-24
-            ">
-
-
-                {/* ==========================================
-                    BOX HEADING
-                ========================================== */}
-
-                <h2 className="
-                    text-[15px]
-                    font-semibold
-                    text-gray-800
-                    mb-5
-                ">
-
-                    2. Upload Lead Files
-
-                </h2>
-
-
-                {/* ==========================================
-                    STEP 1
-                ========================================== */}
-
-                {currentStep === 1 && (
-
-                    <UploadFile
-
-                        selectedFile={selectedFile}
-
-                        setSelectedFile={setSelectedFile}
-
-                        loading={loading}
-
-                    />
-
-                )}
-
-
-                {/* ==========================================
-                    STEP 2
-                ========================================== */}
-
-                {currentStep === 2 && (
-
-                    <MapFields
-
-                        mapping={mapping}
-
-                        onMappingChange={
-                            handleMappingChange
-                        }
-
-                        loading={loading}
-
-                    />
-
-                )}
-
-
-                {/* ==========================================
-                    STEP 3
-                ========================================== */}
-
-                {currentStep === 3 && (
-
-                    <PreviewLeads />
-
-                )}
-
-
-                {/* ==========================================
-                    STEP 4
-                ========================================== */}
-
-                {currentStep === 4 && (
-
-                    <ImportLeads
-
-                        loading={loading}
-
-                        onImport={handleImport}
-
-                    />
-
-                )}
-
-            </div>
-
-
-            {/* ==========================================
-                FOOTER BUTTONS
-            ========================================== */}
-
-            <div className="
-                fixed
-                bottom-0
-                left-0
-                right-0
-                lg:left-[240px]
-                bg-white
-                border-t
-                border-gray-200
-                px-4
-                sm:px-6
-                py-3
-                z-40
-            ">
-
-                <div className="
+            <div
+                className="
+                    flex-1
+                    min-w-0
                     flex
-                    items-center
-                    justify-between
-                    gap-3
-                ">
+                    flex-col
 
+                    border
+                    border-theme-border-light
+                    rounded-[10px]
+                    bg-theme-surface
+
+                    transition-colors
+                    duration-300
+                "
+            >
+
+                {/* CONTENT */}
+
+                <div className="flex-1 p-5 sm:p-6">
+
+                    <h2
+                        className="
+                            text-[15px]
+                            font-semibold
+                            text-theme-text
+                            mb-5
+                        "
+                    >
+                        {currentStep}. {steps[currentStep - 1]?.title}
+                    </h2>
+
+
+                    {currentStep === 1 && (
+                        <UploadFile
+                            selectedFile={selectedFile}
+                            setSelectedFile={setSelectedFile}
+                            loading={loading}
+                        />
+                    )}
+
+
+                    {currentStep === 2 && (
+                        <PreviewLeads />
+                    )}
+
+
+                    {currentStep === 3 && (
+                        <ImportLeads
+                            loading={loading}
+                            onImport={handleImport}
+                        />
+                    )}
+
+                </div>
+
+
+                {/* FOOTER (inside the panel) */}
+
+                <div
+                    className="
+                        shrink-0
+
+                        border-t
+                        border-theme-border-light
+
+                        px-5
+                        sm:px-6
+                        py-3
+
+                        flex
+                        items-center
+                        justify-between
+                        gap-3
+
+                        transition-colors
+                        duration-300
+                    "
+                >
 
                     {/* CANCEL */}
 
@@ -461,41 +330,41 @@ function ExcelUpload() {
                             items-center
                             justify-center
                             gap-2
+
                             px-4
                             sm:px-5
                             py-2.5
+
                             min-w-[90px]
                             sm:min-w-[100px]
+
                             border
-                            border-gray-800
+                            border-theme-border-light
                             rounded-md
-                            bg-white
-                            text-gray-900
+
+                            bg-theme-surface
+                            text-theme-text
+
                             text-xs
                             sm:text-sm
                             font-semibold
-                            hover:bg-gray-100
+
+                            hover:bg-theme-surface-secondary
+
                             transition
+
                             disabled:opacity-50
                             disabled:cursor-not-allowed
+                            cursor-pointer
                         "
                     >
-
                         Cancel
-
                     </button>
 
 
                     {/* RIGHT BUTTONS */}
 
-                    <div className="
-                        flex
-                        items-center
-                        gap-2
-                    ">
-
-
-                        {/* BACK */}
+                    <div className="flex items-center gap-2">
 
                         {currentStep > 1 && (
 
@@ -511,40 +380,32 @@ function ExcelUpload() {
                                     sm:px-5
                                     py-2.5
                                     border
-                                    border-gray-300
+                                    border-theme-border-light
                                     rounded-md
                                     text-xs
-                                    text-gray-700
-                                    hover:bg-gray-100
+                                    text-theme-text
+                                    hover:bg-theme-surface-secondary
+                                    transition
                                     disabled:opacity-50
                                     disabled:cursor-not-allowed
+                                    cursor-pointer
                                 "
                             >
-
                                 <ArrowLeft size={14} />
-
-                                <span>
-                                    Back
-                                </span>
-
+                                <span>Back</span>
                             </button>
 
                         )}
 
 
-                        {/* NEXT */}
-
-                        {currentStep < 4 && (
+                        {currentStep < 3 && (
 
                             <button
                                 type="button"
                                 onClick={handleNext}
                                 disabled={
                                     loading ||
-                                    (
-                                        currentStep === 1 &&
-                                        !selectedFile
-                                    )
+                                    (currentStep === 1 && !selectedFile)
                                 }
                                 className="
                                     flex
@@ -553,23 +414,20 @@ function ExcelUpload() {
                                     px-3
                                     sm:px-5
                                     py-2.5
-                                    bg-[#8b3df5]
+                                    bg-primary
                                     text-white
                                     rounded-md
                                     text-xs
                                     font-medium
-                                    hover:bg-[#7630d8]
+                                    hover:bg-primaryHover
+                                    transition
                                     disabled:opacity-40
                                     disabled:cursor-not-allowed
+                                    cursor-pointer
                                 "
                             >
-
-                                <span>
-                                    Next
-                                </span>
-
+                                <span>Next</span>
                                 <ArrowRight size={14} />
-
                             </button>
 
                         )}

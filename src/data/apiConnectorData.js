@@ -61,7 +61,7 @@ export const connectors = [
 
 
 // =====================================================
-// STEPS
+// STEPS  (Map Fields removed — now 5 steps)
 // =====================================================
 
 export const steps = [
@@ -77,21 +77,16 @@ export const steps = [
     },
     {
         number: 3,
-        title: "Map Fields",
-        description: "Map Connector fields"
-    },
-    {
-        number: 4,
         title: "Filter Data",
         description: "Apply filters for leads"
     },
     {
-        number: 5,
+        number: 4,
         title: "Preview Leads",
         description: "Preview & verify leads"
     },
     {
-        number: 6,
+        number: 5,
         title: "Import Leads",
         description: "Import filtered leads"
     }

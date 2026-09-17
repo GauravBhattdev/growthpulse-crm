@@ -26,6 +26,9 @@ import NotFound from "./pages/NotFound/NotFound";
 // Layout
 import MainLayout from "./components/MainLayout/MainLayout";
 
+// Scroll to top on route change
+import ScrollToTop from "./components/ScrollToTop/ScrollToTop";
+
 
 function App() {
 
@@ -33,8 +36,14 @@ function App() {
 
     <BrowserRouter>
 
-      <Routes>
+      {/* =================================================
+          SCROLL TO TOP ON ROUTE CHANGE
+      ================================================= */}
 
+      <ScrollToTop />
+
+
+      <Routes>
 
         {/* ================= DEFAULT ================= */}
 
@@ -213,7 +222,6 @@ function App() {
             <NotFound />
           }
         />
-
 
       </Routes>
 

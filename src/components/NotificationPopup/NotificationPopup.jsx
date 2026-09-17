@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import {
     X,
@@ -8,9 +8,52 @@ import {
 
 function NotificationPopup({ onClose }) {
 
+    const popupRef = useRef(null);
+
+
+    /* =====================================================
+       CLOSE WHEN CLICKING OUTSIDE
+    ===================================================== */
+
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+
+            if (
+                popupRef.current &&
+                !popupRef.current.contains(event.target)
+            ) {
+
+                onClose();
+
+            }
+
+        };
+
+
+        document.addEventListener(
+            "mousedown",
+            handleClickOutside
+        );
+
+
+        return () => {
+
+            document.removeEventListener(
+                "mousedown",
+                handleClickOutside
+            );
+
+        };
+
+    }, [onClose]);
+
+
     return (
 
         <div
+            ref={popupRef}
+
             className="
                 absolute
 
@@ -18,17 +61,21 @@ function NotificationPopup({ onClose }) {
                 right-3
 
                 w-[320px]
+                max-w-[calc(100vw-24px)]
 
-                bg-[#211936]
+                bg-theme-surface
 
                 border
-                border-[#3b2d55]
+                border-theme-border
 
                 rounded-lg
 
                 shadow-xl
 
                 z-50
+
+                transition-colors
+                duration-300
             "
         >
 
@@ -46,7 +93,7 @@ function NotificationPopup({ onClose }) {
                     py-3
 
                     border-b
-                    border-[#3b2d55]
+                    border-theme-border
                 "
             >
 
@@ -62,12 +109,12 @@ function NotificationPopup({ onClose }) {
 
                     <Bell
                         size={18}
-                        className="text-white"
+                        className="text-theme-text"
                     />
 
                     <h3
                         className="
-                            text-white
+                            text-theme-text
                             text-sm
                             font-semibold
                         "
@@ -93,12 +140,14 @@ function NotificationPopup({ onClose }) {
 
                         rounded-md
 
-                        text-gray-400
+                        text-theme-text-secondary
 
-                        hover:bg-[#2b1c43]
-                        hover:text-white
+                        hover:bg-theme-surface-secondary
+                        hover:text-theme-text
 
                         transition-colors
+
+                        cursor-pointer
                     "
                     aria-label="Close notifications"
                 >
@@ -124,7 +173,7 @@ function NotificationPopup({ onClose }) {
                 <p
                     className="
                         text-sm
-                        text-gray-300
+                        text-theme-text-secondary
                     "
                 >
                     You have no new notifications.
