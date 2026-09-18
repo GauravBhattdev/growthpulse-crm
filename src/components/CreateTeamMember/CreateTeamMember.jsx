@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 import {
     X,
     ChevronDown
 } from "lucide-react";
+
+import { toast } from "react-toastify";
 
 
 function CreateTeamMember({ onClose }) {
@@ -13,6 +15,75 @@ function CreateTeamMember({ onClose }) {
     const [role, setRole] = useState("");
     const [team, setTeam] = useState("");
     const [status, setStatus] = useState("");
+
+    const panelRef = useRef(null);
+
+
+    // =================================================
+    // CLOSE ON OUTSIDE CLICK
+    // =================================================
+
+    useEffect(() => {
+
+        const handleClickOutside = (event) => {
+
+            if (
+                panelRef.current &&
+                !panelRef.current.contains(event.target)
+            ) {
+                onClose();
+            }
+
+        };
+
+
+        document.addEventListener("mousedown", handleClickOutside);
+
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+
+    }, [onClose]);
+
+
+    // =================================================
+    // CREATE
+    // =================================================
+
+    const handleCreate = () => {
+
+        if (!name.trim()) {
+            toast.error("Please enter member name.");
+            return;
+        }
+
+        if (!email.trim()) {
+            toast.error("Please enter email address.");
+            return;
+        }
+
+        if (!role) {
+            toast.error("Please select a role.");
+            return;
+        }
+
+        if (!team) {
+            toast.error("Please select a team.");
+            return;
+        }
+
+        if (!status) {
+            toast.error("Please select a status.");
+            return;
+        }
+
+        toast.success(`Team member "${name}" created successfully!`);
+
+        setTimeout(() => {
+            onClose();
+        }, 600);
+
+    };
 
 
     return (
@@ -31,19 +102,35 @@ function CreateTeamMember({ onClose }) {
             ========================== */}
 
             <div
+                ref={panelRef}
+
                 className="
                     pointer-events-auto
                     absolute
                     top-10
                     right-0
+
                     w-full
                     sm:w-[400px]
-                    h-[600px]
-                    bg-white
-                    text-black
+
+                    h-[calc(100vh-2.5rem)]
+                    sm:h-[600px]
+
+                    bg-theme-surface
+                    text-theme-text
+
+                    border-l
+                    border-theme-border
+
                     shadow-2xl
+
                     flex
                     flex-col
+
+                    overflow-hidden
+
+                    transition-colors
+                    duration-300
                 "
             >
 
@@ -58,36 +145,19 @@ function CreateTeamMember({ onClose }) {
                         pb-4
                         shrink-0
                         border-b
-                        border-gray-200
+                        border-theme-border-light
                     "
                 >
 
-                    <div
-                        className="
-                            flex
-                            items-start
-                            justify-between
-                        "
-                    >
+                    <div className="flex items-start justify-between gap-3">
 
                         <div>
 
-                            <h2
-                                className="
-                                    text-[23px]
-                                    font-semibold
-                                "
-                            >
+                            <h2 className="text-[22px] sm:text-[23px] font-semibold text-theme-text">
                                 Create Team Member
                             </h2>
 
-                            <p
-                                className="
-                                    text-[13px]
-                                    text-gray-500
-                                    mt-1
-                                "
-                            >
+                            <p className="text-[12px] sm:text-[13px] text-theme-text-secondary mt-1">
                                 Add a new member to your team
                             </p>
 
@@ -100,14 +170,16 @@ function CreateTeamMember({ onClose }) {
                             type="button"
                             onClick={onClose}
                             className="
-                                text-gray-700
-                                hover:text-black
+                                shrink-0
+                                text-theme-text-secondary
+                                hover:text-theme-text
                                 transition
                                 cursor-pointer
                             "
+                            aria-label="Close"
                         >
 
-                            <X size={24} />
+                            <X size={22} />
 
                         </button>
 
@@ -120,37 +192,17 @@ function CreateTeamMember({ onClose }) {
                     FORM
                 ========================== */}
 
-                <div
-                    className="
-                        flex-1
-                        overflow-y-auto
-                        px-6
-                        py-5
-                    "
-                >
+                <div className="flex-1 overflow-y-auto px-6 py-5">
 
                     {/* Member Information */}
 
-                    <div
-                        className="
-                            flex
-                            items-center
-                            gap-2
-                            mb-5
-                        "
-                    >
+                    <div className="flex items-center gap-2 mb-5">
 
-                        <h3
-                            className="
-                                text-[13px]
-                                font-semibold
-                                whitespace-nowrap
-                            "
-                        >
+                        <h3 className="text-[13px] font-semibold text-theme-text whitespace-nowrap">
                             Member Information
                         </h3>
 
-                        <div className="h-px bg-gray-300 flex-1"></div>
+                        <div className="h-px bg-theme-border-light flex-1" />
 
                     </div>
 
@@ -159,14 +211,7 @@ function CreateTeamMember({ onClose }) {
 
                     <div className="mb-4">
 
-                        <label
-                            className="
-                                block
-                                text-[13px]
-                                font-medium
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[12px] sm:text-[13px] font-medium text-theme-text mb-1.5">
                             Member Name
                         </label>
 
@@ -179,12 +224,16 @@ function CreateTeamMember({ onClose }) {
                                 w-full
                                 h-[36px]
                                 border
-                                border-gray-400
+                                border-theme-border-light
                                 rounded
                                 px-3
                                 text-[12px]
+                                text-theme-text
+                                bg-theme-surface
+                                placeholder:text-theme-text-muted
                                 outline-none
-                                focus:border-purple-500
+                                focus:border-primary
+                                transition-colors
                             "
                         />
 
@@ -195,14 +244,7 @@ function CreateTeamMember({ onClose }) {
 
                     <div className="mb-4">
 
-                        <label
-                            className="
-                                block
-                                text-[13px]
-                                font-medium
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[12px] sm:text-[13px] font-medium text-theme-text mb-1.5">
                             Email Address
                         </label>
 
@@ -215,12 +257,16 @@ function CreateTeamMember({ onClose }) {
                                 w-full
                                 h-[36px]
                                 border
-                                border-gray-400
+                                border-theme-border-light
                                 rounded
                                 px-3
                                 text-[12px]
+                                text-theme-text
+                                bg-theme-surface
+                                placeholder:text-theme-text-muted
                                 outline-none
-                                focus:border-purple-500
+                                focus:border-primary
+                                transition-colors
                             "
                         />
 
@@ -231,14 +277,7 @@ function CreateTeamMember({ onClose }) {
 
                     <div className="mb-4">
 
-                        <label
-                            className="
-                                block
-                                text-[13px]
-                                font-medium
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[12px] sm:text-[13px] font-medium text-theme-text mb-1.5">
                             Role
                         </label>
 
@@ -252,14 +291,17 @@ function CreateTeamMember({ onClose }) {
                                     w-full
                                     h-[36px]
                                     border
-                                    border-gray-400
+                                    border-theme-border-light
                                     rounded
                                     px-3
                                     pr-8
                                     text-[12px]
-                                    text-gray-500
-                                    bg-white
+                                    text-theme-text
+                                    bg-theme-surface
                                     outline-none
+                                    focus:border-primary
+                                    transition-colors
+                                    cursor-pointer
                                 "
                             >
 
@@ -292,6 +334,7 @@ function CreateTeamMember({ onClose }) {
                                     right-3
                                     top-1/2
                                     -translate-y-1/2
+                                    text-theme-text-secondary
                                     pointer-events-none
                                 "
                             />
@@ -305,14 +348,7 @@ function CreateTeamMember({ onClose }) {
 
                     <div className="mb-4">
 
-                        <label
-                            className="
-                                block
-                                text-[13px]
-                                font-medium
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[12px] sm:text-[13px] font-medium text-theme-text mb-1.5">
                             Team
                         </label>
 
@@ -326,14 +362,17 @@ function CreateTeamMember({ onClose }) {
                                     w-full
                                     h-[36px]
                                     border
-                                    border-gray-400
+                                    border-theme-border-light
                                     rounded
                                     px-3
                                     pr-8
                                     text-[12px]
-                                    text-gray-500
-                                    bg-white
+                                    text-theme-text
+                                    bg-theme-surface
                                     outline-none
+                                    focus:border-primary
+                                    transition-colors
+                                    cursor-pointer
                                 "
                             >
 
@@ -370,6 +409,7 @@ function CreateTeamMember({ onClose }) {
                                     right-3
                                     top-1/2
                                     -translate-y-1/2
+                                    text-theme-text-secondary
                                     pointer-events-none
                                 "
                             />
@@ -383,14 +423,7 @@ function CreateTeamMember({ onClose }) {
 
                     <div className="mb-4">
 
-                        <label
-                            className="
-                                block
-                                text-[13px]
-                                font-medium
-                                mb-1.5
-                            "
-                        >
+                        <label className="block text-[12px] sm:text-[13px] font-medium text-theme-text mb-1.5">
                             Status
                         </label>
 
@@ -404,14 +437,17 @@ function CreateTeamMember({ onClose }) {
                                     w-full
                                     h-[36px]
                                     border
-                                    border-gray-400
+                                    border-theme-border-light
                                     rounded
                                     px-3
                                     pr-8
                                     text-[12px]
-                                    text-gray-500
-                                    bg-white
+                                    text-theme-text
+                                    bg-theme-surface
                                     outline-none
+                                    focus:border-primary
+                                    transition-colors
+                                    cursor-pointer
                                 "
                             >
 
@@ -440,6 +476,7 @@ function CreateTeamMember({ onClose }) {
                                     right-3
                                     top-1/2
                                     -translate-y-1/2
+                                    text-theme-text-secondary
                                     pointer-events-none
                                 "
                             />
@@ -459,14 +496,16 @@ function CreateTeamMember({ onClose }) {
                     className="
                         shrink-0
                         border-t
-                        border-gray-300
-                        bg-white
+                        border-theme-border-light
+                        bg-theme-surface
                         px-6
                         py-3
                         flex
                         justify-end
                         items-center
                         gap-2
+                        transition-colors
+                        duration-300
                     "
                 >
 
@@ -479,12 +518,14 @@ function CreateTeamMember({ onClose }) {
                             h-[32px]
                             px-4
                             border
-                            border-gray-500
+                            border-theme-border-light
                             rounded
                             text-[12px]
-                            text-gray-800
-                            hover:bg-gray-100
+                            text-theme-text
+                            bg-theme-surface
+                            hover:bg-theme-surface-secondary
                             transition
+                            cursor-pointer
                         "
                     >
                         Cancel
@@ -495,16 +536,18 @@ function CreateTeamMember({ onClose }) {
 
                     <button
                         type="button"
+                        onClick={handleCreate}
                         className="
                             h-[32px]
                             px-4
-                            bg-purple-600
-                            hover:bg-purple-700
+                            bg-primary
+                            hover:bg-primaryHover
                             text-white
                             rounded
                             text-[12px]
                             font-medium
                             transition
+                            cursor-pointer
                         "
                     >
                         Create Team Member

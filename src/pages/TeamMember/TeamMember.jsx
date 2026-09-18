@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import {
     Search,
@@ -9,276 +9,395 @@ import {
     ChevronRight
 } from "lucide-react";
 
+import Loader from "../../components/Loader/Loader";
 import CreateTeamMember from "../../components/CreateTeamMember/CreateTeamMember";
 
-
-const members = [
-    {
-        id: 1,
-        name: "Him Mostins",
-        role: "Sales Manager",
-        team: "Sales Team",
-        leads: 128,
-        performance: 92,
-        status: "Active",
-        avatar: "HM"
-    },
-    {
-        id: 2,
-        name: "Virele Netkatorie",
-        role: "Sales Executive",
-        team: "Sales Team",
-        leads: 96,
-        performance: 87,
-        status: "Active",
-        avatar: "VN"
-    },
-    {
-        id: 3,
-        name: "Linte Preddenbling",
-        role: "Designer",
-        team: "Design Team",
-        leads: 42,
-        performance: 91,
-        status: "Active",
-        avatar: "LP"
-    },
-    {
-        id: 4,
-        name: "Rahit kumar",
-        role: "Support Executive",
-        team: "Support Team",
-        leads: 65,
-        performance: 84,
-        status: "Away",
-        avatar: "RK"
-    },
-    {
-        id: 5,
-        name: "Amit Patel",
-        role: "Marketing Manager",
-        team: "Marketing Team",
-        leads: 58,
-        performance: 78,
-        status: "Active",
-        avatar: "AP"
-    },
-    {
-        id: 6,
-        name: "Sneha Sharma",
-        role: "Developer",
-        team: "Development Team",
-        leads: 72,
-        performance: 90,
-        status: "Inactive",
-        avatar: "SS"
-    }
-];
+import {
+    members,
+    teamOptions,
+    roleOptions
+} from "../../data/teamMemberData";
 
 
 function TeamMember() {
 
+    // =================================================
+    // LOADING
+    // =================================================
+
+    const [loading, setLoading] = useState(true);
+
+
+    // =================================================
+    // POPUP
+    // =================================================
+
     const [showCreateMember, setShowCreateMember] = useState(false);
+
+
+    // =================================================
+    // FILTERS
+    // =================================================
+
+    const [searchText, setSearchText] = useState("");
+    const [teamFilter, setTeamFilter] = useState("All");
+    const [roleFilter, setRoleFilter] = useState("All");
+
+
+    // =================================================
+    // PAGINATION
+    // =================================================
+
+    const membersPerPage = 7;
+
+    const [currentPage, setCurrentPage] = useState(1);
+
+
+    // =================================================
+    // LOADER EFFECT
+    // =================================================
+
+    useEffect(() => {
+
+        const timer = setTimeout(() => {
+            setLoading(false);
+        }, 1500);
+
+        return () => clearTimeout(timer);
+
+    }, []);
+
+
+    // =================================================
+    // FILTER MEMBERS
+    // =================================================
+
+    const filteredMembers = useMemo(() => {
+
+        return members.filter((member) => {
+
+            const search = searchText.toLowerCase().trim();
+
+            const matchesSearch =
+                member.name.toLowerCase().includes(search) ||
+                member.role.toLowerCase().includes(search) ||
+                member.team.toLowerCase().includes(search);
+
+            const matchesTeam =
+                teamFilter === "All" ||
+                member.team === teamFilter;
+
+            const matchesRole =
+                roleFilter === "All" ||
+                member.role === roleFilter;
+
+            return matchesSearch && matchesTeam && matchesRole;
+
+        });
+
+    }, [searchText, teamFilter, roleFilter]);
+
+
+    // =================================================
+    // PAGINATION CALC
+    // =================================================
+
+    const totalPages = Math.max(
+        1,
+        Math.ceil(filteredMembers.length / membersPerPage)
+    );
+
+    const startIndex = (currentPage - 1) * membersPerPage;
+    const endIndex = startIndex + membersPerPage;
+
+    const currentMembers = filteredMembers.slice(startIndex, endIndex);
+
+
+    // =================================================
+    // RESET PAGE ON FILTER CHANGE
+    // =================================================
+
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [searchText, teamFilter, roleFilter]);
+
+
+    // =================================================
+    // PAGE HANDLERS
+    // =================================================
+
+    const handlePrev = () => {
+        if (currentPage > 1) setCurrentPage(currentPage - 1);
+    };
+
+    const handleNext = () => {
+        if (currentPage < totalPages) setCurrentPage(currentPage + 1);
+    };
+
+    const handlePageClick = (page) => setCurrentPage(page);
+
+
+    const pageNumbers = Array.from(
+        { length: totalPages },
+        (_, i) => i + 1
+    );
+
+
+    // =================================================
+    // STATUS COLORS
+    // =================================================
+
+    const getStatusClasses = (status) => {
+
+        if (status === "Active") return "bg-green-500/15 text-green-500";
+        if (status === "Away") return "bg-orange-500/15 text-orange-500";
+        if (status === "Inactive") return "bg-red-500/15 text-red-500";
+
+        return "bg-theme-surface-secondary text-theme-text-secondary";
+    };
+
+
+    // =================================================
+    // LOADER
+    // =================================================
+
+    if (loading) {
+
+        return (
+            <div className="min-h-screen bg-theme-page flex items-center justify-center">
+                <Loader text="Loading team members..." />
+            </div>
+        );
+
+    }
 
 
     return (
 
-        <div className="w-full min-h-screen bg-white pl-6 sm:pl-8 lg:pl-10 pt-6 sm:pt-8 lg:pt-10">
+        <div
+            className="
+                w-full
+                min-h-screen
 
-            {/* =================================
-                PAGE HEADER
-            ================================== */}
+                bg-theme-page
+                text-theme-text
 
-            <div className="flex items-start justify-between pt-3">
+                pl-6 sm:pl-8 lg:pl-10
+                pr-4 sm:pr-6 lg:pr-8
+
+                pt-6 sm:pt-8 lg:pt-10
+
+                transition-colors
+                duration-300
+            "
+        >
+
+            {/* PAGE HEADER */}
+
+            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3">
 
                 <div>
 
-                    <h1 className="text-[27px] font-semibold text-[#111]">
+                    <h1 className="text-[24px] sm:text-[27px] font-semibold text-theme-text">
                         Team Members
                     </h1>
 
-                    <p className="mt-1 text-[13px] text-[#444]">
-                        View and manage all the teams members.
+                    <p className="mt-1 text-[12px] sm:text-[13px] text-theme-text-secondary">
+                        View and manage all the team members.
                     </p>
 
                 </div>
 
 
-                {/* Create Team Member Button */}
-
                 <button
                     type="button"
                     onClick={() => setShowCreateMember(true)}
                     className="
-                        flex
-                        items-center
-                        gap-2
-                        bg-[#4b397b]
+                        flex items-center justify-center gap-2
+                        w-full sm:w-auto
+                        bg-primary hover:bg-primaryHover
                         text-white
-                        px-5
-                        py-3
+                        px-5 py-2.5
                         rounded-md
-                        text-sm
-                        font-medium
-                        hover:bg-[#3f315f]
-                        transition
-                        duration-200
+                        text-sm font-medium
+                        transition duration-200
                         cursor-pointer
                     "
                 >
-
                     + Create Team Member
-
                 </button>
 
             </div>
 
 
-            {/* =================================
-                TABLE CONTAINER
-            ================================== */}
+            {/* TABLE CONTAINER */}
 
             <div
                 className="
                     mt-4
-                    bg-white
-                    border
-                    border-[#d0d0d0]
+                    bg-theme-surface
+                    border border-theme-border-light
                     rounded-md
                     shadow-sm
                     overflow-hidden
+                    transition-colors duration-300
                 "
             >
 
-                {/* =================================
-                    FILTER / SEARCH AREA
-                ================================== */}
+                {/* FILTER / SEARCH */}
 
                 <div
                     className="
-                        flex
-                        items-center
-                        justify-between
-                        p-2
-                        border-b
-                        border-[#d0d0d0]
+                        flex flex-col md:flex-row md:items-center md:justify-between
+                        gap-3
+                        p-3
+                        border-b border-theme-border-light
                     "
                 >
 
-                    {/* Search */}
-
                     <div
                         className="
-                            flex
-                            items-center
-                            border
-                            border-[#bdbdbd]
-                            rounded
-                            h-[31px]
-                            w-[165px]
+                            flex items-center gap-2
+                            border border-theme-border-light
+                            rounded-md
+                            h-[34px]
+                            w-full md:w-[200px]
                             px-2
+                            bg-theme-surface
                         "
                     >
 
-                        <Search
-                            size={15}
-                            className="text-gray-500"
-                        />
+                        <Search size={15} className="text-theme-text-secondary shrink-0" />
 
                         <input
                             type="text"
+                            value={searchText}
+                            onChange={(e) => setSearchText(e.target.value)}
                             placeholder="Search Members..."
                             className="
                                 w-full
                                 outline-none
                                 border-none
-                                text-[11px]
-                                ml-2
-                                text-gray-700
+                                text-[12px]
+                                text-theme-text
+                                placeholder:text-theme-text-muted
+                                bg-transparent
                             "
                         />
 
                     </div>
 
 
-                    {/* Filters */}
+                    <div className="flex flex-wrap items-center gap-2">
 
-                    <div className="flex items-center gap-2">
+                        {/* TEAM */}
 
-                        {/* Team */}
+                        <div className="relative">
 
-                        <div
-                            className="
-                                flex
-                                items-center
-                                justify-between
-                                border
-                                border-[#bdbdbd]
-                                rounded
-                                h-[31px]
-                                w-[122px]
-                                px-2
-                                text-[11px]
-                                text-gray-700
-                            "
-                        >
+                            <select
+                                value={teamFilter}
+                                onChange={(e) => setTeamFilter(e.target.value)}
+                                className="
+                                    appearance-none
+                                    border border-theme-border-light
+                                    rounded-md
+                                    h-[34px]
+                                    pl-3 pr-8
+                                    text-[12px]
+                                    text-theme-text
+                                    bg-theme-surface
+                                    outline-none
+                                    focus:border-primary
+                                    cursor-pointer
+                                "
+                            >
 
-                            <span>
-                                All Teams
-                            </span>
+                                {teamOptions.map((opt) => (
+                                    <option key={opt.value} value={opt.value}>
+                                        {opt.label}
+                                    </option>
+                                ))}
 
-                            <ChevronDown size={15} />
+                            </select>
 
-                        </div>
-
-
-                        {/* Role */}
-
-                        <div
-                            className="
-                                flex
-                                items-center
-                                justify-between
-                                border
-                                border-[#bdbdbd]
-                                rounded
-                                h-[31px]
-                                w-[122px]
-                                px-2
-                                text-[11px]
-                                text-gray-700
-                            "
-                        >
-
-                            <span>
-                                All Roles
-                            </span>
-
-                            <ChevronDown size={15} />
-
-                        </div>
-
-
-                        {/* Filter button */}
-
-                        <button
-                            className="
-                                w-[31px]
-                                h-[31px]
-                                flex
-                                items-center
-                                justify-center
-                                border
-                                border-[#bdbdbd]
-                                rounded
-                                hover:bg-gray-100
-                            "
-                        >
-
-                            <SlidersHorizontal
-                                size={17}
+                            <ChevronDown
+                                size={14}
+                                className="
+                                    absolute right-2 top-1/2 -translate-y-1/2
+                                    text-theme-text-secondary
+                                    pointer-events-none
+                                "
                             />
 
+                        </div>
+
+
+                        {/* ROLE */}
+
+                        <div className="relative">
+
+                            <select
+                                value={roleFilter}
+                                onChange={(e) => setRoleFilter(e.target.value)}
+                                className="
+                                    appearance-none
+                                    border border-theme-border-light
+                                    rounded-md
+                                    h-[34px]
+                                    pl-3 pr-8
+                                    text-[12px]
+                                    text-theme-text
+                                    bg-theme-surface
+                                    outline-none
+                                    focus:border-primary
+                                    cursor-pointer
+                                "
+                            >
+
+                                {roleOptions.map((opt) => (
+                                    <option key={opt.value} value={opt.value}>
+                                        {opt.label}
+                                    </option>
+                                ))}
+
+                            </select>
+
+                            <ChevronDown
+                                size={14}
+                                className="
+                                    absolute right-2 top-1/2 -translate-y-1/2
+                                    text-theme-text-secondary
+                                    pointer-events-none
+                                "
+                            />
+
+                        </div>
+
+
+                        {/* RESET */}
+
+                        <button
+                            type="button"
+                            onClick={() => {
+                                setSearchText("");
+                                setTeamFilter("All");
+                                setRoleFilter("All");
+                            }}
+                            className="
+                                w-[34px] h-[34px]
+                                flex items-center justify-center
+                                border border-theme-border-light
+                                rounded-md
+                                text-theme-text-secondary
+                                bg-theme-surface
+                                hover:bg-theme-surface-secondary
+                                hover:text-theme-text
+                                transition
+                                cursor-pointer
+                            "
+                            title="Reset filters"
+                        >
+                            <SlidersHorizontal size={17} />
                         </button>
 
                     </div>
@@ -286,208 +405,153 @@ function TeamMember() {
                 </div>
 
 
-                {/* =================================
-                    TABLE
-                ================================== */}
+                {/* TABLE */}
 
                 <div className="overflow-x-auto">
 
-                    <table className="w-full border-collapse">
-
-                        {/* Table Header */}
+                    <table className="w-full min-w-[800px] border-collapse">
 
                         <thead>
 
-                            <tr className="bg-[#eeeeee]">
+                            <tr className="bg-primary/10">
 
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Member
-                                </th>
-
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Role
-                                </th>
-
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Team
-                                </th>
-
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Leads
-                                </th>
-
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Performance
-                                </th>
-
-                                <th className="text-left px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Status
-                                </th>
-
-                                <th className="text-center px-4 py-3 text-[12px] font-medium text-[#333]">
-                                    Action
-                                </th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Member</th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Role</th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Team</th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Leads</th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Performance</th>
+                                <th className="text-left px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Status</th>
+                                <th className="text-center px-4 py-3 text-[12px] font-semibold text-theme-text-secondary">Action</th>
 
                             </tr>
 
                         </thead>
 
 
-                        {/* Table Body */}
-
                         <tbody>
 
-                            {members.map((member) => (
+                            {currentMembers.length > 0 ? (
 
-                                <tr
-                                    key={member.id}
-                                    className="
-                                        border-t
-                                        border-[#cfcfcf]
-                                        hover:bg-gray-50
-                                    "
-                                >
+                                currentMembers.map((member) => (
 
-                                    {/* Member */}
+                                    <tr
+                                        key={member.id}
+                                        className="
+                                            border-t border-theme-border-light
+                                            hover:bg-theme-surface-secondary
+                                            transition-colors duration-200
+                                        "
+                                    >
 
-                                    <td className="px-4 py-3">
+                                        <td className="px-4 py-3">
 
-                                        <div className="flex items-center gap-3">
-
-                                            <div
-                                                className="
-                                                    w-[22px]
-                                                    h-[22px]
-                                                    rounded-full
-                                                    bg-gray-300
-                                                    flex
-                                                    items-center
-                                                    justify-center
-                                                    text-[7px]
-                                                    font-semibold
-                                                    text-gray-700
-                                                "
-                                            >
-                                                {member.avatar}
-                                            </div>
-
-                                            <span className="text-[12px] text-[#333]">
-                                                {member.name}
-                                            </span>
-
-                                        </div>
-
-                                    </td>
-
-
-                                    {/* Role */}
-
-                                    <td className="px-4 py-3 text-[12px] text-[#333]">
-                                        {member.role}
-                                    </td>
-
-
-                                    {/* Team */}
-
-                                    <td className="px-4 py-3 text-[12px] text-[#333]">
-                                        {member.team}
-                                    </td>
-
-
-                                    {/* Leads */}
-
-                                    <td className="px-4 py-3 text-[12px] text-[#333]">
-                                        {member.leads}
-                                    </td>
-
-
-                                    {/* Performance */}
-
-                                    <td className="px-4 py-3">
-
-                                        <div className="w-[82px]">
-
-                                            <div className="text-[12px] text-[#333] mb-1">
-                                                {member.performance}%
-                                            </div>
-
-                                            <div
-                                                className="
-                                                    w-full
-                                                    h-[5px]
-                                                    bg-gray-300
-                                                    rounded-full
-                                                    overflow-hidden
-                                                "
-                                            >
+                                            <div className="flex items-center gap-3">
 
                                                 <div
-                                                    className="
-                                                        h-full
-                                                        bg-green-500
+                                                    className={`
+                                                        w-[30px] h-[30px]
                                                         rounded-full
-                                                    "
-                                                    style={{
-                                                        width: `${member.performance}%`
-                                                    }}
-                                                />
+                                                        flex items-center justify-center
+                                                        text-[10px] font-semibold
+                                                        shrink-0
+                                                        ${member.avatarColor}
+                                                    `}
+                                                >
+                                                    {member.avatar}
+                                                </div>
+
+                                                <span className="text-[12px] font-medium text-theme-text">
+                                                    {member.name}
+                                                </span>
 
                                             </div>
 
-                                        </div>
-
-                                    </td>
+                                        </td>
 
 
-                                    {/* Status */}
-
-                                    <td className="px-4 py-3">
-
-                                        <span
-                                            className={`
-                                                inline-block
-                                                px-2
-                                                py-1
-                                                rounded
-                                                text-[9px]
-                                                font-medium
-                                                ${
-                                                    member.status === "Active"
-                                                        ? "bg-green-100 text-green-600"
-                                                        : member.status === "Away"
-                                                        ? "bg-orange-100 text-orange-500"
-                                                        : "bg-red-100 text-red-500"
-                                                }
-                                            `}
-                                        >
-                                            {member.status}
-                                        </span>
-
-                                    </td>
+                                        <td className="px-4 py-3 text-[12px] text-theme-text-secondary">
+                                            {member.role}
+                                        </td>
 
 
-                                    {/* Action */}
+                                        <td className="px-4 py-3 text-[12px] text-theme-text-secondary">
+                                            {member.team}
+                                        </td>
 
-                                    <td className="px-4 py-3 text-center">
 
-                                        <button
-                                            className="
-                                                text-gray-700
-                                                hover:text-black
-                                            "
-                                        >
+                                        <td className="px-4 py-3 text-[12px] font-medium text-theme-text">
+                                            {member.leads}
+                                        </td>
 
-                                            <MoreVertical
-                                                size={18}
-                                            />
 
-                                        </button>
+                                        <td className="px-4 py-3">
 
+                                            <div className="w-[82px]">
+
+                                                <div className="text-[11px] text-theme-text mb-1">
+                                                    {member.performance}%
+                                                </div>
+
+                                                <div className="w-full h-[5px] bg-theme-surface-secondary rounded-full overflow-hidden">
+
+                                                    <div
+                                                        className="h-full bg-green-500 rounded-full"
+                                                        style={{ width: `${member.performance}%` }}
+                                                    />
+
+                                                </div>
+
+                                            </div>
+
+                                        </td>
+
+
+                                        <td className="px-4 py-3">
+
+                                            <span
+                                                className={`
+                                                    inline-block px-2 py-1 rounded-full
+                                                    text-[10px] font-medium
+                                                    ${getStatusClasses(member.status)}
+                                                `}
+                                            >
+                                                {member.status}
+                                            </span>
+
+                                        </td>
+
+
+                                        <td className="px-4 py-3 text-center">
+
+                                            <button
+                                                type="button"
+                                                className="
+                                                    text-theme-text-secondary
+                                                    hover:text-theme-text
+                                                    transition
+                                                    cursor-pointer
+                                                "
+                                            >
+                                                <MoreVertical size={18} />
+                                            </button>
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            ) : (
+
+                                <tr>
+
+                                    <td colSpan="7" className="text-center py-10 text-[12px] text-theme-text-muted">
+                                        No members found
                                     </td>
 
                                 </tr>
 
-                            ))}
+                            )}
 
                         </tbody>
 
@@ -496,131 +560,128 @@ function TeamMember() {
                 </div>
 
 
-                {/* =================================
-                    PAGINATION
-                ================================== */}
+                {/* PAGINATION */}
 
                 <div
                     className="
-                        flex
-                        items-center
-                        justify-between
-                        px-5
-                        py-2
-                        border-t
-                        border-[#d0d0d0]
+                        flex flex-col sm:flex-row sm:items-center sm:justify-between
+                        gap-3
+                        px-4 sm:px-5 py-3
+                        border-t border-theme-border-light
                     "
                 >
 
-                    {/* Result count */}
+                    <p className="text-[11px] text-theme-text-secondary">
 
-                    <p className="text-[11px] text-[#444]">
-                        Showing 1 to 7 of 37 results
+                        Showing{" "}
+                        {filteredMembers.length === 0 ? 0 : startIndex + 1}
+                        {" "}to{" "}
+                        {Math.min(endIndex, filteredMembers.length)}
+                        {" "}of{" "}
+                        {filteredMembers.length} results
+
                     </p>
 
 
-                    {/* Pages */}
+                    <div className="flex items-center gap-1.5 flex-wrap">
 
-                    <div className="flex items-center gap-5">
+                        <button
+                            type="button"
+                            onClick={handlePrev}
+                            disabled={currentPage === 1}
+                            className={`
+                                w-7 h-7 flex items-center justify-center rounded-md
+                                transition cursor-pointer
+                                ${
+                                    currentPage === 1
+                                        ? "text-theme-text-muted cursor-not-allowed opacity-50"
+                                        : "text-theme-text-secondary hover:bg-theme-surface-secondary"
+                                }
+                            `}
+                        >
+                            <ChevronLeft size={14} />
+                        </button>
 
-                        <button>
 
-                            <ChevronLeft
-                                size={17}
-                                className="text-gray-700"
-                            />
+                        {pageNumbers.map((page) => (
 
+                            <button
+                                key={page}
+                                type="button"
+                                onClick={() => handlePageClick(page)}
+                                className={`
+                                    min-w-[28px] h-7 px-1.5 rounded-md
+                                    text-[11px] font-medium
+                                    transition cursor-pointer
+                                    ${
+                                        currentPage === page
+                                            ? "bg-primary text-white"
+                                            : "text-theme-text-secondary hover:bg-theme-surface-secondary"
+                                    }
+                                `}
+                            >
+                                {page}
+                            </button>
+
+                        ))}
+
+
+                        <button
+                            type="button"
+                            onClick={handleNext}
+                            disabled={currentPage === totalPages}
+                            className={`
+                                w-7 h-7 flex items-center justify-center rounded-md
+                                transition cursor-pointer
+                                ${
+                                    currentPage === totalPages
+                                        ? "text-theme-text-muted cursor-not-allowed opacity-50"
+                                        : "text-theme-text-secondary hover:bg-theme-surface-secondary"
+                                }
+                            `}
+                        >
+                            <ChevronRight size={14} />
                         </button>
 
 
                         <button
+                            type="button"
                             className="
-                                w-6
-                                h-6
-                                rounded
-                                bg-[#8b3df5]
-                                text-white
+                                ml-2
+                                flex items-center gap-2
+                                border border-theme-border-light
+                                rounded-md
+                                px-3 py-1.5
                                 text-[11px]
+                                text-theme-text-secondary
+                                bg-theme-surface
+                                hover:bg-theme-surface-secondary
+                                transition cursor-pointer
                             "
                         >
-                            1
-                        </button>
-
-
-                        <button className="text-[11px]">
-                            2
-                        </button>
-
-
-                        <button className="text-[11px]">
-                            3
-                        </button>
-
-
-                        <span className="text-[11px]">
-                            ...
-                        </span>
-
-
-                        <button className="text-[11px]">
-                            6
-                        </button>
-
-
-                        <button>
-
-                            <ChevronRight
-                                size={17}
-                                className="text-gray-700"
-                            />
-
+                            7 / Page
+                            <ChevronDown size={12} />
                         </button>
 
                     </div>
-
-
-                    {/* Rows per page */}
-
-                    <button
-                        className="
-                            flex
-                            items-center
-                            gap-2
-                            border
-                            border-gray-300
-                            rounded
-                            px-3
-                            py-2
-                            text-[11px]
-                        "
-                    >
-
-                        10 / Page
-
-                        <ChevronDown size={14} />
-
-                    </button>
 
                 </div>
 
             </div>
 
 
-            {/* =================================
-                CREATE TEAM MEMBER POPUP
-            ================================== */}
+            {/* CREATE TEAM MEMBER POPUP */}
 
             {showCreateMember && (
-
                 <CreateTeamMember
                     onClose={() => setShowCreateMember(false)}
                 />
-
             )}
 
         </div>
 
     );
+
 }
 
 
